@@ -5,10 +5,15 @@ export default defineConfig({
   title: "鱼叔前端",
   description: "前端学习过程中的笔记",
   srcDir: "./src",
+  head: [
+    ['link', {rel: 'icon', href: '/assets/fish.svg'}]
+  ],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: nav(),
-
+    search: {
+      provider: 'local'
+    },
     sidebar: [
       {
         text: 'Examples',
@@ -20,13 +25,11 @@ export default defineConfig({
     ],
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
+      { icon: 'github', link: 'https://github.com/ez3903/blog.git' }
     ],
-
-    logo: '/fish.svg'
+    logo: '/assets/fish.svg'
   }
 })
-
 
 function nav(): DefaultTheme.NavItem[] {
   return [
