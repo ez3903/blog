@@ -1,0 +1,10 @@
+on: push
+
+jobs:
+  npm-build:
+    runs-on: CentOs-7.9
+    steps:
+      - run: pwd
+      - run: npm --version
+      - run: npm install
+      - run: npm run build
