@@ -4,9 +4,8 @@ import { defineAdditionalConfig, type DefaultTheme } from 'vitepress'
 export default defineConfig({
   title: "鱼叔前端",
   description: "前端学习过程中的笔记",
-  srcDir: "./src",
   head: [
-    ['link', {rel: 'icon', href: '/assets/fish.svg'}]
+    ['link', {rel: 'icon', href: '/asset/fish.svg'}]
   ],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
@@ -14,22 +13,41 @@ export default defineConfig({
     search: {
       provider: 'local'
     },
-    sidebar: [
-      {
-        text: 'Examples',
-        items: [
-          { text: 'Markdown Examples', link: '/markdown-examples' },
-          { text: 'Runtime API Examples', link: '/api-examples' }
-        ]
-      }
-    ],
+    sidebar: sidebar(),
 
     socialLinks: [
       { icon: 'github', link: 'https://github.com/ez3903/blog.git' }
     ],
-    logo: '/assets/fish.svg'
-  }
+    logo: '/asset/fish.svg',
+    lastUpdated: {
+      text: '更新时间',
+      formatOptions: {
+        dateStyle: 'medium',
+        // timeStyle: 'medium'
+      }
+    }
+  },
+  srcDir: './docs',
 })
+
+function sidebar() :DefaultTheme.SidebarItem[] {
+  return [
+    {
+      text: 'Examples',
+      items: [
+        { text: 'Markdown Examples', link: '/examples/markdown-examples' },
+        { text: 'Runtime API Examples', link: '/examples/api-examples' }
+      ]
+    },
+    {
+      text: 'Git',
+      items: [
+        { text: 'Git基础', link: '/gitDoc/gitBase' },
+        { text: 'GitHub', link: '/gitDoc/githubD' },
+      ]
+    },
+  ]
+}
 
 function nav(): DefaultTheme.NavItem[] {
   return [

@@ -3,8 +3,8 @@
     "vitepress": "^2.0.0-alpha.12"
   },
   "scripts": {
-    "start": "vitepress dev docs",
-    "build": "vitepress build docs",
-    "preview": "vitepress preview docs"
+    "start": "vitepress dev",
+    "build": "vitepress build",
+    "preview": "vitepress preview"
   }
 }
