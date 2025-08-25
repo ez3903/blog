@@ -1,9 +1,0 @@
-on: push
-
-jobs:
-  npm-build:
-    runs-on: CentOs@v7.9
-    steps:
-      - uses: actions/checkout@v4
-      - run: npm install
-      - run: npm run build
