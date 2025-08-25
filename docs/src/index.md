@@ -3,7 +3,7 @@
 layout: home
 
 hero:
-  name: "鱼仔前端"
+  name: "鱼叔前端"
   text: "日常工作学习中记录自己的所感所想"
   tagline: 持续 探索 学习
   actions:
