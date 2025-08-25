@@ -30,7 +30,7 @@ jobs:
       
       # 步骤5： 构建项目
       - name: Build
-        run: npm build
+        run: npm run build
 
       # 步骤6： 部署到服务器
       - name: Deploy to Server
