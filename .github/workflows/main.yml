@@ -33,6 +33,20 @@ jobs:
         run: npm run build
 
       # 步骤6： 部署到服务器
+
+      # scp 安全的文件拷贝
+      # 上传 scp [localPath/file1] [user]@$[host]:[serverPath]  scp ./test/1.text root@34.121.91.128:/user/
+      # 获取 scp [user]@[host]:[serverPath/file2] [localPath]  scp root@34.121.91.128:/user/1.text ./test/
+      # scp -r ... 拷文件夹  
+      # scp -p [port] 默认ssh端口22,如果不一样这里设置
+
+      # sftp 安全的文件传输
+      # sftp user@host   先连接 
+      # sftp put         上传
+      # sftp get         获取
+      # cd/ls/pwd
+      
+      # 这里采用第三方scp工作流 appleboy/scp-action@v1 自动压缩解压
       - name: Deploy to Server
         uses: appleboy/scp-action@v1
         with:
