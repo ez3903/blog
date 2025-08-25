@@ -11,18 +11,18 @@ hero:
     alt: 背景图
   actions:
     - theme: brand
-      text: 初识Git
-      link: /gitDoc/gitBase
+      text: 前端
+      link: /fe/git
     - theme: alt
       text: API Examples
       link: /examples/api-examples
 
 features:
-  - title: Feature A 
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  - title: 软件推荐
+    details: 分享用过的各种精品软件
+  - title: 前端总结
+    details: 学习之路上的技术总结
+  - title: 探索AI
+    details: AI大模型，AI工具
 ---
 
