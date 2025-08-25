@@ -1,0 +1,44 @@
+name: Deploy to Server
+
+on: 
+  push:
+    branches:
+      - main  # main分支push时触发
+
+jobs:
+  deploy-server:
+    runs-on: ubuntu-latest
+    steps:
+      # 步骤1：检查代码
+      - uses: actions/checkout@v4  #官方checkout action, 从仓库检出代码
+
+      # 步骤2：设置Node.js环境
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      
+      # # 步骤3：安装pnpm
+      # - name: Setup pnpm
+      #   uses: pnpm/action-setup@v2
+      #   with:
+      #     version: '9.8.0'
+        
+      # 步骤4： 安装依赖
+      - name: Install Dependencies
+        run: npm install
+      
+      # 步骤5： 构建项目
+      - name: Build
+        run: npm build
+
+      # 步骤6： 部署到服务器
+      - name: Deploy to Server
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          key: ${{ secrets.SERVER_PRIVATE_KEY }}
+          port: ${{ secrets.SERVER_PORT }}
+          source: "docs/.vitepress/dist/"
+          target: "/usr/share/nginx/html/www.yushudoc.cn"
