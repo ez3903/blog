@@ -55,5 +55,5 @@ jobs:
           key: ${{ secrets.SERVER_PRIVATE_KEY }}
           port: ${{ secrets.SERVER_PORT }}
           target: "/usr/share/nginx/html/www.yushudoc.cn"
-          source: "docs/.vitepress/dist/*"
+          source: ".vitepress/dist/*"
           strip_components: 3
