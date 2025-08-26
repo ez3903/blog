@@ -14,9 +14,11 @@ export default function createSideBar() :DefaultTheme.SidebarMulti {
     'fe': [
       {
         text: '前端',
+        collapsed: true,
         items: [
-          { text: 'git', link: '/fe/git' },
-          { text: 'gitHub', link: '/fe/github' },
+          { text: '前端进阶2025', link: '/fe/studyPlan' },
+          { text: 'git基础', link: '/fe/git' },
+          { text: 'gitHub入门', link: '/fe/github' },
         ]
       },
     ]

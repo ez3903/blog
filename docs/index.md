@@ -7,12 +7,12 @@ hero:
   text: "日常工作学习中记录自己的所感所想"
   tagline: 持续 探索 学习
   image:
-    src: /asset/fish.svg
+    src: /asset/logo.svg
     alt: 背景图
   actions:
     - theme: brand
       text: 前端
-      link: /fe/git
+      link: /fe/studyPlan
     - theme: alt
       text: API Examples
       link: /examples/api-examples

@@ -6,8 +6,9 @@ export  default function createNav(): DefaultTheme.NavItem[] {
     {
       text: '前端',
       items: [
+        { text: '前端进阶2025', link: '/fe/studyPlan' },
         { text: 'git', link: '/fe/git' },
-        { text: 'GitHub', link: '/fe/github' }
+        { text: 'GitHub', link: '/fe/github' },
       ]
     },
     { 
