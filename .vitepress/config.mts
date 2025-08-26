@@ -55,6 +55,7 @@ export default defineConfig({
     outline: { label: '页面导航', level: 'deep' }
   },
   srcDir: './docs',
+  base: '/doc/',
   lastUpdated: true,
   markdown: {
     lineNumbers: true,
