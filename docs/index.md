@@ -23,6 +23,6 @@ features:
   - title: 前端总结
     details: 学习之路上的技术总结
   - title: 探索AI
-    details: AI大模型，AI工具
+    details: AI大模型，AI工具学习
 ---
 
