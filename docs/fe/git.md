@@ -2,7 +2,7 @@
 
 ## 1. git基本工作流图解
 
-![工作流](/workflow.png)
+![工作流](http://114.67.74.14/static/workflow.png)
 
 ## 2. Git 常用命令
 
@@ -85,7 +85,7 @@ git merge <branch>
 
 ### 2.5 撤销与恢复
 
-![指向示例](/headArrow.png)
+![指向示例](http://114.67.74.14/static/headArrow.png)
 
 ```bash
 # 如图示，head指向当前分支下最新一次提交，且每次提交都有对应commitId
