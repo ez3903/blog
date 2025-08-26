@@ -6,13 +6,13 @@ export default defineConfig({
   title: "鱼叔前端",
   description: "前端学习过程中的笔记",
   head: [
-    ['link', {rel: 'icon', type: 'image/svg+xml', href: '/asset/logo.svg'}]
+    ['link', {rel: 'icon', type: 'image/svg+xml', href: '/logo.svg'}]
   ],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: createNav(),
     sidebar: createSideBar(),
-    logo: '/asset/logo.svg',
+    logo: '/logo.svg',
     socialLinks: [{ icon: 'github', link: 'https://github.com/ez3903/blog.git' }],
     search: {
       provider: 'local',
