@@ -54,6 +54,7 @@ export default defineConfig({
     darkModeSwitchTitle: '切换到深色模式',
     outline: { label: '页面导航', level: 'deep' }
   },
+  base: '/doc/',
   srcDir: './docs',
   lastUpdated: true,
   markdown: {
