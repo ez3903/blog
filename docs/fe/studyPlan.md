@@ -1,7 +1,5 @@
 # 前端进阶计划（2025）
 
-
-
 ### 第一阶段：夯实基础
 
 ##### HTML/CSS 深度
@@ -9,8 +7,8 @@
 - 掌握语义化标签（`<article>`、`<section>`、`<dialog>`）和可访问性（ARIA、键盘导航）。
 - CSS 新特性：容器查询（`@container`）、级联层（`@layer`）、`:has()` 伪类。
 - 学习资源：
-  - [MDN 文档](https://link.juejin.cn?target=https%3A%2F%2Fdeveloper.mozilla.org%2Fzh-CN%2F)（权威且实时更新）
-  - [CSS Weekly](https://link.juejin.cn?target=https%3A%2F%2Fcss-weekly.com%2F)（跟踪最新 CSS 特性）
+  - [MDN 文档](https://developer.mozilla.org/zh-CN)（权威且实时更新）
+  - [CSS Weekly](https://css-weekly.com)（跟踪最新 CSS 特性）
 
 ##### JavaScript 核心
 
@@ -18,9 +16,9 @@
 - 掌握 TypeScript 高级用法：类型体操（`infer`、`模板字面量类型`）、类型安全工具（`zod`、`arktype`）。
 - 学习资源：
   - 《JavaScript 忍者秘籍（第 2 版）》
-  - TypeScript 官方文档的 [Advanced Types](https://link.juejin.cn?target=https%3A%2F%2Fwww.typescriptlang.org%2Fdocs%2Fhandbook%2Fadvanced-types.html)
+  - TypeScript 官方文档的 [Advanced Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html)
 
-------
+---
 
 ### 第二阶段：框架进阶
 
@@ -30,7 +28,7 @@
 - 新特性：React Compiler（自动记忆化）、Server Components（Next.js 15）。
 - 状态管理：Zustand（轻量级） vs Jotai（原子化） vs Redux Toolkit（复杂场景）。
 - 学习资源：
-  - [React 官方 Beta 文档](https://link.juejin.cn?target=https%3A%2F%2Fbeta.reactjs.org%2F)（2025 年已重构）
+  - [React 官方 Beta 文档](https://react.dev)（2025 年已重构）
   - Next.js Conf 2024 演讲视频（关注 Server Actions 和 Partial Prerendering）
 
 ##### Vue 生态
@@ -39,7 +37,7 @@
 - 生态工具：Nuxt 3 的 Nitro 服务端渲染、Pinia 的模块化设计。
 - 学习资源：
   - Vue Mastery 的 Advanced Components 课程
-  - [Vue RFC 讨论](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fvuejs%2Frfcs)（跟踪提案）
+  - [Vue RFC 讨论](https://github.com/vuejs/rfcs)（跟踪提案）
 
 ##### 新兴框架
 
@@ -47,7 +45,7 @@
 - Solid.js：信号（Signal）的细粒度响应式对比 React Hooks。
 - 实践：用 Svelte 5 重写一个 Todo 应用，对比 React 的性能差异。
 
-------
+---
 
 ### 第三阶段：工程化与性能
 
@@ -69,7 +67,7 @@
 - 测试策略：Vitest（单元测试） + Cypress 14（组件测试） + Playwright（E2E）。
 - 前端监控：Sentry 的 Session Replay、LogRocket 的用户行为回溯。
 
-------
+---
 
 ### 第四阶段：领域深耕
 
@@ -90,7 +88,7 @@
 - Web LLM：用 WebGPU 在浏览器运行 70 亿参数模型（如 `microsoft/phi-3-web`）。
 - AI 辅助开发：GitHub Copilot 的实时代码审查、Vercel AI SDK 的流式响应。
 
-------
+---
 
 ### 第五阶段：软技能与影响力
 
@@ -104,7 +102,7 @@
 - 主导 Code Review 规范：制定 React 组件的 TypeScript 类型约束规则。
 - 技术分享：每季度在团队内做一次“前端未来趋势”分享。
 
-------
+---
 
 ### 实践建议：2025 年可落地的项目
 
@@ -112,7 +110,7 @@
 2. 性能优化：将一个电商网站的 TTI（Time to Interactive）从 3s 优化到 1s。
 3. 跨端实验：用 Tauri 开发一个支持 Markdown 实时协作的桌面应用。
 
-------
+---
 
 ### 避坑指南
 
@@ -120,9 +118,4 @@
 - 警惕“API 陷阱”：研究 React Compiler 前，先理解为什么需要记忆化。
 - 平衡深度与广度：先在一个领域（如 React 性能）深入，再扩展到其他领域。
 
-
-
-原文作者：Junpeng23275     链接：https://juejin.cn/post/7540273891101884431
-
-
-
+原文作者：Junpeng23275 链接：https://juejin.cn/post/7540273891101884431
