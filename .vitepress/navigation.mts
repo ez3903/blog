@@ -7,6 +7,8 @@ const feMenu = {
     { text: "Git笔记", link: "/fe/git" },
     { text: "GitHub笔记", link: "/fe/github" },
     { text: "TypeScript笔记", link: "/fe/tsbj" },
+    { text: "测试笔记", link: "/fe/testbj" },
+    { text: "This指向", link: "/fe/thisbj" },
   ],
 };
 
