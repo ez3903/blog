@@ -41,9 +41,9 @@ Element plus
 ## 1.6 Vue3的使用建议
 
 - 新版本的路由(v 4.x)、开发工具和测试工具，支持 Vue 3     
-- 构建工具链：Vue CLI -> [Vite](https://vitejs.dev/)
-- 状态管理：Vuex -> [Pinia](https://pinia.vuejs.org/)
-- IDE 支持：Vetur -> [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)
+- 构建工具链：Vue CLI -\> [Vite](https://vitejs.dev/)
+- 状态管理：Vuex -\> [Pinia](https://pinia.vuejs.org/)
+- IDE 支持：Vetur -\> [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)
 - 新的命令行 TypeScript 支持：[vue-tsc](https://github.com/johnsoncodehk/volar/tree/master/vue-language-tools/vue-tsc)
 
 
@@ -51,25 +51,25 @@ Element plus
 # 2.开始使用(引入文件的方式)
 
 ```htm
-<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+\<script src="https://unpkg.com/vue@3/dist/vue.global.js"\>\</script\>
 ```
 
 每个 Vue 应用都是通过 **createApp** 函数创建一个新的 应用实例
 
-> **createApp：**
->
-> 创建一个应用实例。
->
-> 第一个参数是根组件。第二个参数可选，它是要传递给根组件的 props。
+\> **createApp：**
+\>
+\> 创建一个应用实例。
+\>
+\> 第一个参数是根组件。第二个参数可选，它是要传递给根组件的 props。
 
 ## 2.1 基本用法:
 
 ```html
-<div id="app"></div>
-<script>
+\<div id="app"\>\</div\>
+\<script\>
     const { createApp } = Vue
     const App={
-        template:`<h1>{{msg}}</h1>`,
+        template:`\<h1\>{{msg}}\</h1\>`,
         data(){
             return {
                 msg:"hello vue3!"
@@ -77,7 +77,7 @@ Element plus
         }
     }
     createApp(App).mount('#app')
-</script>
+\</script\>
 ```
 
 template可以不提供：
@@ -85,10 +85,10 @@ template可以不提供：
 当根组件没有设置 template 选项时，Vue 将自动使用容器的 innerHTML 作为模板。
 
 ```html
-<div id="app">
+\<div id="app"\>
     {{msg}}
-</div>
-<script>
+\</div\>
+\<script\>
     const { createApp } = Vue
     const App={
         data(){
@@ -98,7 +98,7 @@ template可以不提供：
         }
     }
     createApp(App).mount('#app')
-</script>
+\</script\>
 ```
 
 
@@ -126,23 +126,23 @@ app2.mount('#container-2')
 最基本的数据绑定形式是文本插值，它使用的是“Mustache”语法 (即双大括号)
 
 ```vue
-<span>Message: {{ msg }}</span>
+\<span\>Message: {{ msg }}\</span\>
 ```
 
 但是这样写有问题，就是无法识别html标签,如下
 
 ```vue
-    <div id="app">{{ msg }}</div>
-    <script>
+    \<div id="app"\>{{ msg }}\</div\>
+    \<script\>
         const { createApp, ref } = Vue
         createApp({
             data() {
                 return {
-                    msg: "<h1>hahaha</h1>"
+                    msg: "\<h1\>hahaha\</h1\>"
                 }
             }
         }).mount('#app')
-    </script>
+    \</script\>
 ```
 
 ![image-20240126162518996](http://114.67.74.14/static/vue3_assets/image-20240126162518996.png)
@@ -153,24 +153,24 @@ app2.mount('#container-2')
 
 # 3.指令
 
-> 指令由 `v-` 作为前缀，表明它们是一些由 Vue 提供的特殊 attribute
+\> 指令由 `v-` 作为前缀，表明它们是一些由 Vue 提供的特殊 attribute
 
 ## 3.1 v-html
 
 ```vue
-    <div id="app" >
-        <div v-html="msg"></div> <!--注意不要直接给容器元素加指令，因为挂载操作会替换掉里面的所有内容，包括你尝试插入的任何东西-->
-    </div>
-    <script>
+    \<div id="app" \>
+        \<div v-html="msg"\>\</div\> \<!--注意不要直接给容器元素加指令，因为挂载操作会替换掉里面的所有内容，包括你尝试插入的任何东西--\>
+    \</div\>
+    \<script\>
         const { createApp, ref } = Vue
         createApp({
             data() {
                 return {
-                    msg: "<h1>hahaha</h1>"
+                    msg: "\<h1\>hahaha\</h1\>"
                 }
             }
         }).mount('#app')
-    </script>
+    \</script\>
 ```
 
 ## 3.2 v-text 
@@ -181,13 +181,13 @@ app2.mount('#container-2')
 
 ### 3.3.1 基本使用
 
-> 动态的绑定一个或多个 attribute，也可以是组件的 prop。
+\> 动态的绑定一个或多个 attribute，也可以是组件的 prop。
 
 ```vue
-    <div id="app" >
-        <div v-bind:class="a" v-bind:id="b"></div>
-    </div>
-    <script>
+    \<div id="app" \>
+        \<div v-bind:class="a" v-bind:id="b"\>\</div\>
+    \</div\>
+    \<script\>
         const { createApp, ref } = Vue
         createApp({
             data() {
@@ -197,7 +197,7 @@ app2.mount('#container-2')
                 }
             }
         }).mount('#app')
-    </script>
+    \</script\>
 ```
 
 关于缩写：
@@ -205,28 +205,28 @@ app2.mount('#container-2')
 1.v-bind可以省略为：
 
 ```
-			<div :id="b"></div>
+			\<div :id="b"\>\</div\>
 ```
 
 2.当 attribute 和绑定的值同名时，值可以省略 ==3.4版本新增==
 
 ```html
-<div 	:id></div>
+\<div 	:id\>\</div\>
 或者
-<div v-bind:id></div>
+\<div v-bind:id\>\</div\>
 ```
 
 ### 3.3.2 同时绑定多个属性
 
 ```vue
-    <div id="app" >
-        <div v-bind="{id:a,class:b}"></div>
-      	<!--
+    \<div id="app" \>
+        \<div v-bind="{id:a,class:b}"\>\</div\>
+      	\<!--
 						缩写形式
-					 <div :="{id:a,class:b}"></div>
-				-->
-    </div>
-    <script>
+					 \<div :="{id:a,class:b}"\>\</div\>
+				--\>
+    \</div\>
+    \<script\>
         const { createApp, ref } = Vue
         createApp({
             data() {
@@ -236,41 +236,41 @@ app2.mount('#container-2')
                 }
             }
         }).mount('#app')
-    </script>
+    \</script\>
 ```
 
 ### 3.3.3 class的绑定
 
-> 1.绑定到字符串
+\> 1.绑定到字符串
 
-> 2.绑定到对象
+\> 2.绑定到对象
 
 ```vue
-<div :class="{ active: isActive }"></div>    
+\<div :class="{ active: isActive }"\>\</div\>    
 isActive是布尔值
 ```
 
-> 3.绑定到数组
+\> 3.绑定到数组
 
 ```vue
-<div :class="[activeClass, errorClass]"></div>
+\<div :class="[activeClass, errorClass]"\>\</div\>
  activeClass是字符串名字
 ```
 
 ### 3.3.4 style的绑定
 
-> 1.绑定到字符串
+\> 1.绑定到字符串
 
-> 2.绑定到对象
+\> 2.绑定到对象
 
 ```vue
-<div :style="{ color: activeColor, fontSize: fontSize + 'px' }"></div>
+\<div :style="{ color: activeColor, fontSize: fontSize + 'px' }"\>\</div\>
 ```
 
-> 3.绑定到数组
+\> 3.绑定到数组
 
 ```vue
-<div :style="[baseStyles, overridingStyles]"></div>
+\<div :style="[baseStyles, overridingStyles]"\>\</div\>
 ```
 
 
@@ -278,57 +278,57 @@ isActive是布尔值
 ### 3.3.4 动态属性绑定
 
 ```vue
-<!-- 动态 attribute 名 -->
-<button v-bind:[key]="value"></button>
+\<!-- 动态 attribute 名 --\>
+\<button v-bind:[key]="value"\>\</button\>
 ```
 
 
 
 ## 3.4 v-on
 
-> 给元素绑定事件监听器
+\> 给元素绑定事件监听器
 
 ```vue
-<!-- 方法处理函数 -->
-<button v-on:click="doThis"></button>
+\<!-- 方法处理函数 --\>
+\<button v-on:click="doThis"\>\</button\>
 
-<!-- 动态事件 -->
-<button v-on:[event]="doThis"></button>
+\<!-- 动态事件 --\>
+\<button v-on:[event]="doThis"\>\</button\>
 
-<!-- 内联声明 -->
-<button v-on:click="doThat('hello', $event)"></button>
+\<!-- 内联声明 --\>
+\<button v-on:click="doThat('hello', $event)"\>\</button\>
 
-<!-- 缩写 -->
-<button @click="doThis"></button>
+\<!-- 缩写 --\>
+\<button @click="doThis"\>\</button\>
 
-<!-- 使用缩写的动态事件 -->
-<button @[event]="doThis"></button>
+\<!-- 使用缩写的动态事件 --\>
+\<button @[event]="doThis"\>\</button\>
 
-<!-- 停止传播 -->
-<button @click.stop="doThis"></button>
+\<!-- 停止传播 --\>
+\<button @click.stop="doThis"\>\</button\>
 
-<!-- 阻止默认事件 -->
-<button @click.prevent="doThis"></button>
+\<!-- 阻止默认事件 --\>
+\<button @click.prevent="doThis"\>\</button\>
 
-<!-- 不带表达式地阻止默认事件 -->
-<form @submit.prevent></form>
+\<!-- 不带表达式地阻止默认事件 --\>
+\<form @submit.prevent\>\</form\>
 
-<!-- 链式调用修饰符 -->
-<button @click.stop.prevent="doThis"></button>
+\<!-- 链式调用修饰符 --\>
+\<button @click.stop.prevent="doThis"\>\</button\>
 
-<!-- 按键用于 keyAlias 修饰符-->
-<input @keyup.enter="onEnter" />
+\<!-- 按键用于 keyAlias 修饰符--\>
+\<input @keyup.enter="onEnter" /\>
 
-<!-- 点击事件将最多触发一次 -->
-<button v-on:click.once="doThis"></button>
+\<!-- 点击事件将最多触发一次 --\>
+\<button v-on:click.once="doThis"\>\</button\>
 
-<!-- 对象语法 -->
-<button v-on="{ mousedown: doThis, mouseup: doThat }"></button>
+\<!-- 对象语法 --\>
+\<button v-on="{ mousedown: doThis, mouseup: doThat }"\>\</button\>
 ```
 
 
 
-> 事件修饰符
+\> 事件修饰符
 
 - `.stop` - 调用 `event.stopPropagation()`。
 - `.prevent` - 调用 `event.preventDefault()`。
@@ -343,97 +343,97 @@ isActive是布尔值
 
 
 
-> 事件对象的处理
->
-> 有时我们需要在内联事件处理器中访问原生 DOM 事件。你可以向该处理器方法传入一个特殊的 `$event` 变量，或者使用内联箭头函数：
+\> 事件对象的处理
+\>
+\> 有时我们需要在内联事件处理器中访问原生 DOM 事件。你可以向该处理器方法传入一个特殊的 `$event` 变量，或者使用内联箭头函数：
 
-> $event是关键字，不能叫别的名字
+\> $event是关键字，不能叫别的名字
 
 ```vue
-<!-- 使用特殊的 $event 变量 -->
-<button @click="warn('Form cannot be submitted yet.', $event)">
+\<!-- 使用特殊的 $event 变量 --\>
+\<button @click="warn('Form cannot be submitted yet.', $event)"\>
   Submit
-</button>
+\</button\>
 
-<!-- 使用内联箭头函数 -->
-<button @click="(event) => warn('Form cannot be submitted yet.', event)">
+\<!-- 使用内联箭头函数 --\>
+\<button @click="(event) =\> warn('Form cannot be submitted yet.', event)"\>
   Submit
-</button>
+\</button\>
 ```
 
 
 
 ## 3.5 v-if
 
-> 基本使用
+\> 基本使用
 
 ```vue
-<div v-if="type === 'A'">
+\<div v-if="type === 'A'"\>
   A
-</div>
-<div v-else-if="type === 'B'">
+\</div\>
+\<div v-else-if="type === 'B'"\>
   B
-</div>
-<div v-else-if="type === 'C'">
+\</div\>
+\<div v-else-if="type === 'C'"\>
   C
-</div>
-<div v-else>
+\</div\>
+\<div v-else\>
   Not A/B/C
-</div>
+\</div\>
 ```
 
-> 也可以在template上使用
+\> 也可以在template上使用
 
 ```vue
-<template v-if="ok">
-  <h1>Title</h1>
-  <p>Paragraph 1</p>
-  <p>Paragraph 2</p>
-</template>
+\<template v-if="ok"\>
+  \<h1\>Title\</h1\>
+  \<p\>Paragraph 1\</p\>
+  \<p\>Paragraph 2\</p\>
+\</template\>
 ```
 
 ## 3.6 v-show
 
 不同之处在于 `v-show` 会在 DOM 渲染中保留该元素；`v-show` 仅切换了该元素上名为 `display` 的 CSS 属性。
 
-v-show 不支持在 \<template\> 元素上使用
+v-show 不支持在 \\<template\\> 元素上使用
 
 ## 3.7 v-for
 
-> 循环对象
+\> 循环对象
 
 ```vue
-<li v-for="(value, key, index) in myObject">
+\<li v-for="(value, key, index) in myObject"\>
   {{ index }}. {{ key }}: {{ value }}
-</li>
+\</li\>
 ```
 
-> 循环数组
+\> 循环数组
 
 ```tsx
-<li v-for="(item, index) in items">
+\<li v-for="(item, index) in items"\>
   {{ index }} - {{ item.message }}
-</li>
+\</li\>
 
 const items = ref([{ message: 'Foo' }, { message: 'Bar' }])
 
 ```
 
-> 循环整数
+\> 循环整数
 
 ```tsx
-<span v-for="n in 10">{{ n }}</span>
+\<span v-for="n in 10"\>{{ n }}\</span\>
 ```
 
-> template上使用v-for
+\> template上使用v-for
 
 ```vue
-<ul>
-  <template v-for="item in items">
-    <li>{{ item.msg }}</li>
-    <li class="divider" role="presentation"></li>
-  </template>
-</ul>
+\<ul\>
+  \<template v-for="item in items"\>
+    \<li\>{{ item.msg }}\</li\>
+    \<li class="divider" role="presentation"\>\</li\>
+  \</template\>
+\</ul\>
 ```
 
 ⚠️==同时使用 `v-if` 和 `v-for` 是**不推荐的**==
@@ -441,34 +441,34 @@ const items = ref([{ message: 'Foo' }, { message: 'Bar' }])
 当它们同时存在于一个节点上时，`v-if` 比 `v-for` 的优先级更高。这意味着 `v-if` 的条件将无法访问到 `v-for` 作用域内定义的变量别名：
 
 ```vue
-<!--
+\<!--
  这会抛出一个错误，因为属性 todo 此时
  没有在该实例上定义
--->
-<li v-for="todo in todos" v-if="!todo.isComplete">
+--\>
+\<li v-for="todo in todos" v-if="!todo.isComplete"\>
   {{ todo.name }}
-</li>
+\</li\>
 ```
 
 ✅推荐做法
 
 ```vue
-<template v-for="todo in todos">
-  <li v-if="!todo.isComplete">
+\<template v-for="todo in todos"\>
+  \<li v-if="!todo.isComplete"\>
     {{ todo.name }}
-  </li>
-</template>
+  \</li\>
+\</template\>
 ```
 
 ==[推荐](https://cn.vuejs.org/style-guide/rules-essential.html#use-keyed-v-for)在任何可行的时候为 `v-for` 提供一个 `key` attribute==
 
-> 为什么要给key？
+\> 为什么要给key？
 
 
 
 
 
-> 关于数组变化的更改
+\> 关于数组变化的更改
 
 1.直接通过角标更改数组是没问题的
 
@@ -492,44 +492,44 @@ const items = ref([{ message: 'Foo' }, { message: 'Bar' }])
 this.items= this.items.slice(1,3)
 ```
 
-> 对于对象的更改可以直接修改属性，添加属性都是没问题的
+\> 对于对象的更改可以直接修改属性，添加属性都是没问题的
 
 ## 3.8 v-model
 
 ```vue
-<input v-model="text">
+\<input v-model="text"\>
 ```
 
 **特殊的**
 
-> 单一的复选框，绑定布尔类型值
+\> 单一的复选框，绑定布尔类型值
 
 ```vue
-<input type="checkbox" id="checkbox" v-model="checked" />
-<label for="checkbox">{{ checked }}</label>
+\<input type="checkbox" id="checkbox" v-model="checked" /\>
+\<label for="checkbox"\>{{ checked }}\</label\>
 ```
 
 ![image-20240711152645429](http://114.67.74.14/static/vue3_assets/image-20240711152645429.png)
 
-> 多个复选框绑定到同一个数组或[集合](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set)的值
+\> 多个复选框绑定到同一个数组或[集合](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set)的值
 
 ![image-20240711152719423](http://114.67.74.14/static/vue3_assets/image-20240711152719423.png)
 
-> 单选按钮绑定到选中项的值
+\> 单选按钮绑定到选中项的值
 
 ![image-20240711152941501](http://114.67.74.14/static/vue3_assets/image-20240711152941501.png)
 
-> 下拉选择框绑定到选中项option的值
+\> 下拉选择框绑定到选中项option的值
 
 ![image-20240716184142791](http://114.67.74.14/static/vue3_assets/image-20240716184142791.png)
 
-> 特殊的对于复选框我们可以手动更改选中它时候的值
+\> 特殊的对于复选框我们可以手动更改选中它时候的值
 
 ```vue
-<input type="checkbox" v-model="toggle" true-value="yes" false-value="no" />
+\<input type="checkbox" v-model="toggle" true-value="yes" false-value="no" /\>
 ```
 
-> true-value 和 false-value 是 Vue 特有的 attributes，仅支持和 v-model 配套使用。这里 toggle 属性的值会在选中时被设为 'yes'，取消选择时设为 'no'。你同样可以通过 v-bind 将其绑定为其他动态值：
+\> true-value 和 false-value 是 Vue 特有的 attributes，仅支持和 v-model 配套使用。这里 toggle 属性的值会在选中时被设为 'yes'，取消选择时设为 'no'。你同样可以通过 v-bind 将其绑定为其他动态值：
 
 
 
@@ -537,40 +537,40 @@ this.items= this.items.slice(1,3)
 
 ### 修饰符：
 
-> .lazy
+\> .lazy
 
 默认情况下，v-model 会在每次 input 事件后更新数据 (IME 拼字阶段的状态例外)。你可以添加 lazy 修饰符来改为在每次 change 事件后更新数据：
 
 ```vue
-<!-- 在 "change" 事件后同步更新而不是 "input" -->
-<input v-model.lazy="msg" />
+\<!-- 在 "change" 事件后同步更新而不是 "input" --\>
+\<input v-model.lazy="msg" /\>
 ```
 
-> .number
+\> .number
 
 如果你想让用户输入自动转换为数字，你可以在 v-model 后添加 .number 修饰符来管理输入：
 
 ```vue
-<input v-model.number="age" />如果该值无法被 parseFloat() 处理，那么将返回原始值。
+\<input v-model.number="age" /\>如果该值无法被 parseFloat() 处理，那么将返回原始值。
 ```
 
 number 修饰符会在输入框有 type="number" 时自动启用。
 
-> .trim
+\> .trim
 
 如果你想要默认自动去除用户输入内容中两端的空格，你可以在 v-model 后添加 .trim 修饰符：
 
 ```vue
-<input v-model.trim="msg" />
+\<input v-model.trim="msg" /\>
 ```
 
 
 
 # 4.计算属性computed
 
-> 计算属性值会基于其响应式依赖被缓存。一个计算属性仅会在其响应式依赖更新时才重新计算
+\> 计算属性值会基于其响应式依赖被缓存。一个计算属性仅会在其响应式依赖更新时才重新计算
 
-> 计算属性的值不要直接改
+\> 计算属性的值不要直接改
 
 ```js
 export default {
@@ -595,11 +595,11 @@ export default {
 # 5.侦听器watch
 
 ```vue
-<template>
-  <h1>{{ a }}</h1>
-  <button @click="fn">按钮</button>
-</template>
-<script>
+\<template\>
+  \<h1\>{{ a }}\</h1\>
+  \<button @click="fn"\>按钮\</button\>
+\</template\>
+\<script\>
 export default {
   data() {
     return {
@@ -618,7 +618,7 @@ export default {
     }
   }
 }
-</script>
+\</script\>
 ```
 
 `watch` 默认是浅层的：被侦听的属性，仅在被赋新值时，才会触发回调函数——而嵌套属性的变化不会触发。如果想侦听所有嵌套的变更，你需要深层侦听器：
@@ -662,24 +662,24 @@ app.mount('#app');
 组件在使用的时候用驼峰式
 
 ```html
-<!DOCTYPE html>
-<html lang="en">
+\<!DOCTYPE html\>
+\<html lang="en"\>
 
-<head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-</head>
+\<head\>
+    \<meta charset="UTF-8"\>
+    \<title\>Document\</title\>
+    \<script src="https://unpkg.com/vue@3/dist/vue.global.js"\>\</script\>
+\</head\>
 
-<body>
-    <div id="app">
-       <p>{{msg}}</p>
-       <C hild/>
-    </div>
-    <script>
+\<body\>
+    \<div id="app"\>
+       \<p\>{{msg}}\</p\>
+       \<C hild/\>
+    \</div\>
+    \<script\>
         const { createApp } = Vue
         const Child={
-            template:`<h1>{{msg}}</h1>`,
+            template:`\<h1\>{{msg}}\</h1\>`,
             data(){
                 return {
                     msg:"我是子组件"
@@ -698,26 +698,26 @@ app.mount('#app');
             }
         }
         createApp(App).mount('#app')
-    </script>
-</body>
+    \</script\>
+\</body\>
 
-</html>
+\</html\>
 ```
 
 ## 3.组件之间的传值
 
-> 父传子通过props
+\> 父传子通过props
 
 ```html
-    <div id="app">
-       <p>{{msg}}</p>
-       <child :a="msg"/>
-    </div>
-    <script>
+    \<div id="app"\>
+       \<p\>{{msg}}\</p\>
+       \<child :a="msg"/\>
+    \</div\>
+    \<script\>
         const { createApp } = Vue
         const Child={
             props:["a"],
-            template:`<h1>{{msg}}{{a}}</h1>`,
+            template:`\<h1\>{{msg}}{{a}}\</h1\>`,
             data(){
                 return {
                     msg:"我是子组件"
@@ -736,21 +736,21 @@ app.mount('#app');
             }
         }
         createApp(App).mount('#app')
-    </script>
+    \</script\>
 ```
 
-> 子传父通过自定义事件
+\> 子传父通过自定义事件
 
 ```html
-    <div id="app">
-       <p>我是父组件{{msg}}</p>
-       <child @fn="change"/>
-    </div>
-    <script>
+    \<div id="app"\>
+       \<p\>我是父组件{{msg}}\</p\>
+       \<child @fn="change"/\>
+    \</div\>
+    \<script\>
         const { createApp } = Vue
         const Child={
             props:["a"],
-            template:`<h1 @click="handle">我是子组件</h1>`,
+            template:`\<h1 @click="handle"\>我是子组件\</h1\>`,
             data(){
                 return {
                     msg:"我是子组件的数据"
@@ -779,7 +779,7 @@ app.mount('#app');
             }
         }
         createApp(App).mount('#app')
-    </script>
+    \</script\>
 ```
 
 
@@ -789,25 +789,25 @@ app.mount('#app');
 既然组件可以写成双标签，我们就希望可以在组件内写点东西如
 
 ```vue
-<my-child>hello vue3</my-child>
+\<my-child\>hello vue3\</my-child\>
 ```
 
 但是这种写法肯定不生效，因为my-child组件本身就代表着一大段的html结构，这时候就需要用到插槽
 
-> 1.插槽的基本使用
+\> 1.插槽的基本使用
 
 ```html
-    <div id="app">
-       <p>{{msg}}</p>
-       <child> <h1>hello vue3</h1></child>
-    </div>
-    <script>
+    \<div id="app"\>
+       \<p\>{{msg}}\</p\>
+       \<child\> \<h1\>hello vue3\</h1\>\</child\>
+    \</div\>
+    \<script\>
         const { createApp } = Vue
         const Child={
-            template:`<h1>
-                 <slot></slot>
+            template:`\<h1\>
+                 \<slot\>\</slot\>
                 我是子组件     
-                </h1>`,
+                \</h1\>`,
         }
         const App = {
             data() {
@@ -820,21 +820,21 @@ app.mount('#app');
             }
         }
         createApp(App).mount('#app')
-    </script>
+    \</script\>
 ```
 
 slot里也可以写内容，这会在组件调用时候如果没有传入具体的内容，那么就会使用slot里的默认内容
 
 ```js
         const Child={
-            template:`<h1>
-                 <slot>8888</slot>
+            template:`\<h1\>
+                 \<slot\>8888\</slot\>
                 我是子组件     
-                </h1>`,
+                \</h1\>`,
         }
 ```
 
-> 2.具名插槽
+\> 2.具名插槽
 
 可以定义多个插槽，将组建标签内的不同内容渲染到不同的位置上
 
@@ -843,27 +843,27 @@ slot里也可以写内容，这会在组件调用时候如果没有传入具体�
 默认没给名字的插槽，他的名字叫default
 
 ```html
-    <div id="app">
-       <p>{{msg}}</p>
-       <child> 
-            <!--v-slot:before可以简写为 #before-->
-            <template v-slot:before>
-                <h1 >hello vue3</h1>
-            </template>
-            <template v-slot:after>
-                <h1 >hahahaha</h1>
-            </template>
+    \<div id="app"\>
+       \<p\>{{msg}}\</p\>
+       \<child\> 
+            \<!--v-slot:before可以简写为 #before--\>
+            \<template v-slot:before\>
+                \<h1 \>hello vue3\</h1\>
+            \</template\>
+            \<template v-slot:after\>
+                \<h1 \>hahahaha\</h1\>
+            \</template\>
            
-        </child>
-    </div>
-    <script>
+        \</child\>
+    \</div\>
+    \<script\>
         const { createApp } = Vue
         const Child={
-            template:`<h1>
-                 <slot name="before"></slot>
+            template:`\<h1\>
+                 \<slot name="before"\>\</slot\>
                 我是子组件     
-                <slot name="after"></slot>
-                </h1>`,
+                \<slot name="after"\>\</slot\>
+                \</h1\>`,
         }
         const App = {
             data() {
@@ -876,10 +876,10 @@ slot里也可以写内容，这会在组件调用时候如果没有传入具体�
             }
         }
         createApp(App).mount('#app')
-    </script>
+    \</script\>
 ```
 
-> 3.条件插槽
+\> 3.条件插槽
 
 有的时候我们通过插槽是否存在来渲染某些内容。
 
@@ -888,46 +888,46 @@ slot里也可以写内容，这会在组件调用时候如果没有传入具体�
 这种方法可以避免渲染空的HTML标签，优化DOM结构，并且让页面更加整洁。使用条件插槽也有助于提升页面的性能，避免处理不必要的渲染计算。
 
 ```html
-<!DOCTYPE html>
-<html lang="en">
+\<!DOCTYPE html\>
+\<html lang="en"\>
 
-<head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <style>
+\<head\>
+    \<meta charset="UTF-8"\>
+    \<title\>Document\</title\>
+    \<script src="https://unpkg.com/vue@3/dist/vue.global.js"\>\</script\>
+    \<style\>
         .before{color: red;}
         .after {color: blue;}
-    </style>
-</head>
+    \</style\>
+\</head\>
 
-<body>
-    <div id="app">
-       <p>{{msg}}</p>
-       <child> 
-            <template v-slot:before>
-                <h1 >hello vue3</h1>
-            </template>
-            <template v-slot:after>
-                <h1 >hahahaha</h1>
-            </template>
+\<body\>
+    \<div id="app"\>
+       \<p\>{{msg}}\</p\>
+       \<child\> 
+            \<template v-slot:before\>
+                \<h1 \>hello vue3\</h1\>
+            \</template\>
+            \<template v-slot:after\>
+                \<h1 \>hahahaha\</h1\>
+            \</template\>
            
-        </child>
-    </div>
-    <script>
+        \</child\>
+    \</div\>
+    \<script\>
         const { createApp } = Vue
         const Child={
-            template:`<h1>
-                <div v-if="$slots.before" class="before">
-                     <slot name="before"></slot>    
-                </div>
+            template:`\<h1\>
+                \<div v-if="$slots.before" class="before"\>
+                     \<slot name="before"\>\</slot\>    
+                \</div\>
                 
                 我是子组件 
-                <div v-if="$slots.after" class="after">
-                     <slot name="after"></slot>    
-                </div>    
+                \<div v-if="$slots.after" class="after"\>
+                     \<slot name="after"\>\</slot\>    
+                \</div\>    
                
-                </h1>`,
+                \</h1\>`,
         }
         const App = {
             data() {
@@ -940,28 +940,28 @@ slot里也可以写内容，这会在组件调用时候如果没有传入具体�
             }
         }
         createApp(App).mount('#app')
-    </script>
-</body>
+    \</script\>
+\</body\>
 
-</html>
+\</html\>
 ```
 
-> 4.动态插槽
+\> 4.动态插槽
 
 ```vue
-<base-layout>
-  <template v-slot:[dynamicSlotName]>
+\<base-layout\>
+  \<template v-slot:[dynamicSlotName]\>
     ...
-  </template>
+  \</template\>
 
-  <!-- 缩写为 -->
-  <template #[dynamicSlotName]>
+  \<!-- 缩写为 --\>
+  \<template #[dynamicSlotName]\>
     ...
-  </template>
-</base-layout>
+  \</template\>
+\</base-layout\>
 ```
 
-> 5.作用域插槽
+\> 5.作用域插槽
 
 如下图，在插槽中直接访问组件内部的a，是访问不到的，因为这里属于父组件的作用域
 
@@ -983,7 +983,7 @@ slot里也可以写内容，这会在组件调用时候如果没有传入具体�
 
 # 7.脚手架创建项目
 
-> **1.vue-cli**
+\> **1.vue-cli**
 
 对于 Vue 3，应该使用 npm 上可用的 Vue CLI v4.5 作为 @vue/cli
 
@@ -995,9 +995,9 @@ npm install -g @vue/cli
 yarn global add @vue/cli
 ```
 
-> **2.vite**( vue 官方推荐)
->
-> 我们现在推荐[Vite](https://vitejs.dev/)作为 Vue 3 项目的新构建工具链。Vite是一个新的构建工具，提供极快的服务器启动和热更新性能。它最初是由 Vue 团队创建的，但现在是一个跨框架工具
+\> **2.vite**( vue 官方推荐)
+\>
+\> 我们现在推荐[Vite](https://vitejs.dev/)作为 Vue 3 项目的新构建工具链。Vite是一个新的构建工具，提供极快的服务器启动和热更新性能。它最初是由 Vue 团队创建的，但现在是一个跨框架工具
 
 Vite 是一个 web 开发构建工具，由于其原生 ES 模块导入方式，可以实现闪电般的冷服务器启动。
 
@@ -1042,36 +1042,36 @@ App.vue文件里的内容我们可能暂时看不懂，我们可以自己新建�
 
 # 8.组合式API(Composition API)
 
-> Vue 的组件可以按两种不同的风格书写：**选项式 API** 和**组合式 API**。
->
-> 我们之前所用的方式就是选项式api，在vue3中依旧可以正常使用，但是更推荐使用组合式api
+\> Vue 的组件可以按两种不同的风格书写：**选项式 API** 和**组合式 API**。
+\>
+\> 我们之前所用的方式就是选项式api，在vue3中依旧可以正常使用，但是更推荐使用组合式api
 
 
 
 ## 1.setup选项
 
->  setup是vue3新增的生命周期函数 
->
-> setup位于beforeCreate之前,用于代替created 和beforeCreate。
->
-> 由于setup函数执行的时候项目还没有进行初始化，所以不能访问data或methods中的数据
->
-> console.log(this)显示为undefind。
+\>  setup是vue3新增的生命周期函数 
+\>
+\> setup位于beforeCreate之前,用于代替created 和beforeCreate。
+\>
+\> 由于setup函数执行的时候项目还没有进行初始化，所以不能访问data或methods中的数据
+\>
+\> console.log(this)显示为undefind。
 
 vue3和vue2不同的地方就是不必写 data、methods、等代码块了，所有的东西都可以在 setup 中返回
 
 
 
-> **1.setup 可以返回两种值：**
+\> **1.setup 可以返回两种值：**
 
 1.返回对象： 对象中的属性、方法都可以直接在模板中使用（重点） 
 
 ```vue
-<template>
- 	<h1>{{msg}}</h1>
- 	<button @click="fn">更改</button>
-</template>
-<script>
+\<template\>
+ 	\<h1\>{{msg}}\</h1\>
+ 	\<button @click="fn"\>更改\</button\>
+\</template\>
+\<script\>
 export default {
   name: 'App',
   setup(){
@@ -1084,38 +1084,38 @@ export default {
     }
   }
 }
-</script>
+\</script\>
 ```
 
 2.返回渲染函数：  可以自定义渲染内容（其实也就是 render 函数）注意：渲染函数优先级还高，他会替换掉模板中的其他内容（了解）
 
 ```vue
-<template>
- 	<h1>{{msg}}</h1>
- 	<button @click="fn">更改</button>
-</template>
-<script>
+\<template\>
+ 	\<h1\>{{msg}}\</h1\>
+ 	\<button @click="fn"\>更改\</button\>
+\</template\>
+\<script\>
 import { h } from 'vue';
 
 export default {
   name: 'App',
   setup(){
-    return ()=>h("h1","我是自定义内容")
+    return ()=\>h("h1","我是自定义内容")
   }
 }
-</script>
+\</script\>
 ```
 
 
 
->  **2.在vue2的配置中可读取到vue3配置中的属性和方法** 
+\>  **2.在vue2的配置中可读取到vue3配置中的属性和方法** 
 
 ```vue
-<template>
- <h1>{{msg}}</h1>
- <button @click="tips">更改</button>
-</template>
-<script>
+\<template\>
+ \<h1\>{{msg}}\</h1\>
+ \<button @click="tips"\>更改\</button\>
+\</template\>
+\<script\>
 export default {
   name: 'App',
   data(){
@@ -1139,21 +1139,21 @@ export default {
     }
   }
 }
-</script>
+\</script\>
 
-<style>
-</style>
+\<style\>
+\</style\>
 
 ```
 
->  **3.在vue3的配置中不能读取vue2配置中的属性和方法** 
+\>  **3.在vue3的配置中不能读取vue2配置中的属性和方法** 
 
 ```vue
-<template>
- <h1>{{msg}}</h1>
- <button @click="fn">更改</button>
-</template>
-<script>
+\<template\>
+ \<h1\>{{msg}}\</h1\>
+ \<button @click="fn"\>更改\</button\>
+\</template\>
+\<script\>
 export default {
   name: 'App',
   data(){
@@ -1171,12 +1171,12 @@ export default {
     }
   }
 }
-</script>
+\</script\>
 ```
 
 
 
-> 4.setup的参数： 第一个参数props
+\> 4.setup的参数： 第一个参数props
 
 想一下，我们一般在组件中读取父组件传过来的数据都是使用this.属性名来读取props，但是在setup函数中访问不到this，是不是就意味着拿不到属性。所以我们可以通过setup的第一个参数来获取属性
 
@@ -1196,11 +1196,11 @@ export default {
 ==App.vue==
 
 ```vue
-<template>
-    <h1>{{ msg }}</h1>
-    <child title="666666"></child>
-</template>
-<script>
+\<template\>
+    \<h1\>{{ msg }}\</h1\>
+    \<child title="666666"\>\</child\>
+\</template\>
+\<script\>
 import Child from "./Child.vue"
 export default {
     setup() {
@@ -1216,19 +1216,19 @@ export default {
         Child
     }
 }
-</script>
+\</script\>
 ```
 
 ==Child.vue==
 
 ```vue
-<template>
-    <div>
+\<template\>
+    \<div\>
         我是子组件
-    </div>
-</template>
+    \</div\>
+\</template\>
 
-<script>
+\<script\>
 export default {
     props:["title"],
     setup (props) {//注意
@@ -1236,7 +1236,7 @@ export default {
         return {}
     }
 }
-</script>
+\</script\>
 ```
 
 ==请注意如果你解构了 props 对象，解构出的变量将会丢失响应性。因此我们推荐通过 props.xxx 的形式来使用其中的 props。==
@@ -1245,7 +1245,7 @@ export default {
 
 
 
-> 第二个参数 context   主要包含attr  slots emit
+\> 第二个参数 context   主要包含attr  slots emit
 
 该上下文对象是非响应式的，可以安全地解构：
 
@@ -1277,32 +1277,32 @@ export default {
 - slots
 
 ```vue
-<!--App.vue-->
-<template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App">
-    <template v-slot:before>
-      <h1 >before</h1>
-    </template>
-    <template v-slot:after>
-      <h1 >after</h1>
-    </template>
-  </HelloWorld>
-</template>
-<!--HelloWorld.vue-->
+\<!--App.vue--\>
+\<template\>
+  \<img alt="Vue logo" src="./assets/logo.png"\>
+  \<HelloWorld msg="Welcome to Your Vue.js App"\>
+    \<template v-slot:before\>
+      \<h1 \>before\</h1\>
+    \</template\>
+    \<template v-slot:after\>
+      \<h1 \>after\</h1\>
+    \</template\>
+  \</HelloWorld\>
+\</template\>
+\<!--HelloWorld.vue--\>
 
-<template>
-    <div>
-        <slot name="before"></slot>
+\<template\>
+    \<div\>
+        \<slot name="before"\>\</slot\>
         我是子组件
-        <slot name="after"></slot>
-    </div>
-</template>
-<script>
+        \<slot name="after"\>\</slot\>
+    \</div\>
+\</template\>
+\<script\>
   setup(props,context){
      console.log(99,context.slots.before())//返回元素对象
   }
-</script>
+\</script\>
 ```
 
 
@@ -1320,7 +1320,7 @@ export default {
   }
 
 //HelloWorld.vue
-<HelloWorld msg="Welcome to Your Vue.js App" @myfn="fn"/>
+\<HelloWorld msg="Welcome to Your Vue.js App" @myfn="fn"/\>
 ```
 
 
@@ -1336,11 +1336,11 @@ export default {
 下面的案例中，我们想修改age，页面是不会有变化的，因为age此时并不是一个响应式数据
 
 ```vue
-<template>
- 	<h1>{{age}}</h1>
- 	<button @click="fn">更改</button>
-</template>
-<script>
+\<template\>
+ 	\<h1\>{{age}}\</h1\>
+ 	\<button @click="fn"\>更改\</button\>
+\</template\>
+\<script\>
 export default {
   name: 'App',
   setup(){
@@ -1354,25 +1354,25 @@ export default {
     }
   }
 }
-</script>
+\</script\>
 ```
 
 那么如何把一个非响应式数据设置成响应式数据呢？
 
-> 使用 ref 对 age 进行包装
->
-> 修改时使用 变量名.value 的语法
+\> 使用 ref 对 age 进行包装
+\>
+\> 修改时使用 变量名.value 的语法
 
-> ### ref():
->
-> 接受一个内部值，返回一个响应式的、可更改的 ref 对象，此对象只有一个指向其内部值的属性 .value。
+\> ### ref():
+\>
+\> 接受一个内部值，返回一个响应式的、可更改的 ref 对象，此对象只有一个指向其内部值的属性 .value。
 
 ```vue
-<template>
-     <h1>{{age}}</h1> <!--在模板中使用 ref 时，我们不需要附加 .value，ref 会自动解包->
-     <button @click="fn">更改</button>
-</template>
-<script>
+\<template\>
+     \<h1\>{{age}}\</h1\> \<!--在模板中使用 ref 时，我们不需要附加 .value，ref 会自动解包-\>
+     \<button @click="fn"\>更改\</button\>
+\</template\>
+\<script\>
 import { ref } from 'vue';
 export default {
   name: 'App',
@@ -1388,7 +1388,7 @@ export default {
     }
   }
 }
-</script>
+\</script\>
 
 ```
 
@@ -1410,17 +1410,17 @@ export default {
 
 
 
-> 对于引用数据类型来说，用ref来包裹是否可以呢？经过验证也是可以的
->
-> 如果将一个对象赋值给 ref，那么这个对象将通过 [reactive()](https://cn.vuejs.org/api/reactivity-core.html#reactive) 转为具有深层次响应式的对象。
+\> 对于引用数据类型来说，用ref来包裹是否可以呢？经过验证也是可以的
+\>
+\> 如果将一个对象赋值给 ref，那么这个对象将通过 [reactive()](https://cn.vuejs.org/api/reactivity-core.html#reactive) 转为具有深层次响应式的对象。
 
 ```vue
-<template>
- <h1>{{person.name}}</h1>
- <h1>{{person.age}}</h1>
- <button @click="fn">更改</button>
-</template>
-<script>
+\<template\>
+ \<h1\>{{person.name}}\</h1\>
+ \<h1\>{{person.age}}\</h1\>
+ \<button @click="fn"\>更改\</button\>
+\</template\>
+\<script\>
 import { ref } from 'vue';
 export default {
   name: 'App',
@@ -1435,23 +1435,23 @@ export default {
     }
   }
 }
-</script>
+\</script\>
 ```
 
 
 
-> **Ref 会使它的值具有深层响应性**
->
-> 即使改变嵌套对象或数组时，变化也会被检测到
+\> **Ref 会使它的值具有深层响应性**
+\>
+\> 即使改变嵌套对象或数组时，变化也会被检测到
 
 ==App.vue==
 
 ```vue
-<template>
-    <h1>{{obj}}</h1> 
-    <button @click="changeName">更改</button>
-</template>
-<script>
+\<template\>
+    \<h1\>{{obj}}\</h1\> 
+    \<button @click="changeName"\>更改\</button\>
+\</template\>
+\<script\>
 import { ref } from 'vue';
 export default {
 
@@ -1468,12 +1468,12 @@ export default {
    }
  }
 }
-</script>
+\</script\>
 ```
 
 
 
-> **ref函数总结**
+\> **ref函数总结**
 
 - 接收的数据可以是基本类型，也可以是对象类型。
 - 对象类型的数据：内部“求助”了Vue3.0的一个新函数---**reactive函数。**
@@ -1486,20 +1486,20 @@ export default {
 
 ## 3.reactive
 
->  reactive参数必须是对象(json/arr)
->
->  - 在Vue2中响应式数据是通过defineProperty来实现的.
->  - 而在Vue3响应式数据是通过ES6的Proxy来实现的
->  - reactive默认也是深度监听
+\>  reactive参数必须是对象(json/arr)
+\>
+\>  - 在Vue2中响应式数据是通过defineProperty来实现的.
+\>  - 而在Vue3响应式数据是通过ES6的Proxy来实现的
+\>  - reactive默认也是深度监听
 
 ```vue
-<template>
- <h1>{{person.name}}</h1>
- <h1>{{like}}</h1>
- <button @click="fn">更改</button>
- <button @click="fn2">更改爱好</button>
-</template>
-<script>
+\<template\>
+ \<h1\>{{person.name}}\</h1\>
+ \<h1\>{{like}}\</h1\>
+ \<button @click="fn"\>更改\</button\>
+ \<button @click="fn2"\>更改爱好\</button\>
+\</template\>
+\<script\>
 import { reactive } from 'vue';
 export default {
   name: 'App',
@@ -1518,14 +1518,14 @@ export default {
     }
   }
 }
-</script>
+\</script\>
 
 
 ```
 
 
 
-> **ref与reactive的对比**
+\> **ref与reactive的对比**
 
 - **从定义数据角度对比：**
 
@@ -1552,24 +1552,24 @@ reactive能做的ref都能做，ref能做的，reactive有可能做不了，如�
 
 所以官方更推荐使用ref
 
-> 推荐使用ref的三个理由
+\> 推荐使用ref的三个理由
 
 **1.`reactive`有限的值类型**
 
 **2.替换整个对象的时候reactive会丢失响应式**
 
 ```vue
-<template>
-  <div>
-    <h1>我是根组件</h1>
-    <div>{{ a }}</div>
-    <div>{{ b }}</div>
-    <button @click="changeA">changeA</button>
-    <button @click="changeB">changeB</button>
-  </div>
-</template>
+\<template\>
+  \<div\>
+    \<h1\>我是根组件\</h1\>
+    \<div\>{{ a }}\</div\>
+    \<div\>{{ b }}\</div\>
+    \<button @click="changeA"\>changeA\</button\>
+    \<button @click="changeB"\>changeB\</button\>
+  \</div\>
+\</template\>
 
-<script>
+\<script\>
 import { ref,reactive } from 'vue';
 import Child from './Child.vue';
 export default {
@@ -1589,10 +1589,10 @@ export default {
     }
   }
 };
-</script>
+\</script\>
 ```
 
-> 为什么ref直接赋值不会丢失响应式，而reactive会丢失?
+\> 为什么ref直接赋值不会丢失响应式，而reactive会丢失?
 
 **ref 和整体赋值**
 ref 用于处理基本数据类型，但也可以用来包裹对象，使其成为响应式的。关键点在于，ref 返回的是一个响应式对象，这个对象有一个 .value 属性指向原始数据。当你通过 ref 包裹一个对象，然后更新它的 .value 属性，如 a.value = { name: "小1" }，Vue 能够追踪到 .value 属性的更改。通过这种方式，即使你替换了整个对象，新的对象依然会被 ref 包裹，保持响应式。
@@ -1609,17 +1609,17 @@ reactive 直接将一个对象转换成响应式对象，而不是像 ref 那样
 Vue 官方推荐使用 ref 处理解构问题时，并不是说 ref 在所有场合下都能保持响应性，而是其在特定场合（如处理基本类型数据或作为组件间数据传递的媒介）时更简单或直接。但对于对象类型，解构后依旧会导致响应性丢失。
 
 ```vue
-<template>
-  <div>
-    <h1>我是根组件</h1>
-    <div>{{ a }}</div>
-    <div>{{ b }}</div>
-    <button @click="changeA">changeA</button>
-    <button @click="changeB">changeB</button>
-  </div>
-</template>
+\<template\>
+  \<div\>
+    \<h1\>我是根组件\</h1\>
+    \<div\>{{ a }}\</div\>
+    \<div\>{{ b }}\</div\>
+    \<button @click="changeA"\>changeA\</button\>
+    \<button @click="changeB"\>changeB\</button\>
+  \</div\>
+\</template\>
 
-<script>
+\<script\>
 import { ref, reactive } from 'vue';
 import Child from './Child.vue';
 export default {
@@ -1641,25 +1641,25 @@ export default {
     }
   }
 };
-</script>
+\</script\>
 ```
 
 
 
 ## 4.关于ref自动解包的场景
 
-> 一个 ref 会在作为响应式对象的属性被访问或修改时自动解包
+\> 一个 ref 会在作为响应式对象的属性被访问或修改时自动解包
 
 ```vue
-<template>
-  <div>
-    <h1>我是根组件</h1>
-    <div>{{ state }}</div>
-    <button @click="fn">changeA</button>
-  </div>
-</template>
+\<template\>
+  \<div\>
+    \<h1\>我是根组件\</h1\>
+    \<div\>{{ state }}\</div\>
+    \<button @click="fn"\>changeA\</button\>
+  \</div\>
+\</template\>
 
-<script>
+\<script\>
 import { ref, reactive } from 'vue';
 export default {
   setup() {
@@ -1674,7 +1674,7 @@ export default {
     }
   }
 };
-</script>
+\</script\>
 ```
 
 ==只有当嵌套在一个深层响应式对象内时，才会发生 ref 解包。当其作为[浅层响应式对象](https://cn.vuejs.org/api/reactivity-advanced.html#shallowreactive)的属性被访问时不会解包。==
@@ -1687,7 +1687,7 @@ const object = { id: ref(1) } //这种情况不是响应式对象，不会自动
 
 ## 5.shallowRef()
 
-> shallowRef 是一个用于创建一个简单的 ref 对象的函数，它可以管理一个基本数据类型的响应式状态。与 ref 函数不同的是，shallowRef 不会对属性进行深度观察。这意味着，当 shallowRef 用于对象或数组时，它只会观察对象或数组本身的变化，而不会观察其内部属性或元素的变化。
+\> shallowRef 是一个用于创建一个简单的 ref 对象的函数，它可以管理一个基本数据类型的响应式状态。与 ref 函数不同的是，shallowRef 不会对属性进行深度观察。这意味着，当 shallowRef 用于对象或数组时，它只会观察对象或数组本身的变化，而不会观察其内部属性或元素的变化。
 
 ```js
 import { shallowRef } from 'vue';
@@ -1712,12 +1712,12 @@ export default {
 我们知道,用reactive包裹数据，如果修改对象中的对象信息也是能更新视图的，因为默认是深度监听，如下
 
 ```vue
-<template>
-  <h1>{{name}} {{age}} {{hobby}}</h1>
-  <button @click="name='小红'">改名字</button>
-  <button @click="hobby.player='james'">改爱好</button>
-</template>
-<script>
+\<template\>
+  \<h1\>{{name}} {{age}} {{hobby}}\</h1\>
+  \<button @click="name='小红'"\>改名字\</button\>
+  \<button @click="hobby.player='james'"\>改爱好\</button\>
+\</template\>
+\<script\>
 import {reactive, toRefs} from "vue"
 export default {
   name: "App",
@@ -1735,22 +1735,22 @@ export default {
     }
   },
 };
-</script>
+\</script\>
 ```
 
 那这样又有一个问题，在我们的程序中当数据过于复杂并且我们没有这种递归监听的需求时，这样的操作是很消耗性能的
 
 所以VUE还给我们提供的非递归监听的API：
 
-> **shallowReactive,只监听第一层数据的变化**
+\> **shallowReactive,只监听第一层数据的变化**
 
 ```vue
-<template>
-  <h1>{{name}} {{age}} {{hobby}}</h1>
-  <button @click="name='小红'">改名字</button>
-  <button @click="hobby.player='james'">改爱好</button>
-</template>
-<script>
+\<template\>
+  \<h1\>{{name}} {{age}} {{hobby}}\</h1\>
+  \<button @click="name='小红'"\>改名字\</button\>
+  \<button @click="hobby.player='james'"\>改爱好\</button\>
+\</template\>
+\<script\>
 
 import {shallowReactive,toRefs} from "vue"
 export default {
@@ -1769,7 +1769,7 @@ export default {
     }
   },
 };
-</script>
+\</script\>
 ```
 
 
@@ -1778,19 +1778,19 @@ export default {
 
 强制触发依赖于一个[浅层 ref](https://cn.vuejs.org/api/reactivity-advanced.html#shallowref) 的副作用，这通常在对浅引用的内部值进行深度变更后使用
 
-> 我们知道只有当value发生改变时shallowRef声明的变量才会在视图上进行更新
->
-> 而triggerRef的作用则是手动执行与 shallowRef 关联的任何副作用，强制更新视图。
+\> 我们知道只有当value发生改变时shallowRef声明的变量才会在视图上进行更新
+\>
+\> 而triggerRef的作用则是手动执行与 shallowRef 关联的任何副作用，强制更新视图。
 
 ==谁还没点特殊情况呀，减肥说我不吃我不吃，今天菜不错，我破例吃一顿吧==
 
 ```vue
-<template>
-  <div>{{ state }}</div>
-  <button @click="shallowRefChange">改变</button>
-</template>
+\<template\>
+  \<div\>{{ state }}\</div\>
+  \<button @click="shallowRefChange"\>改变\</button\>
+\</template\>
 
-<script>
+\<script\>
 import { shallowRef,triggerRef } from 'vue'
 export default {
   name: 'App',
@@ -1808,7 +1808,7 @@ export default {
     }
   },
 }
-</script>
+\</script\>
 
 ```
 
@@ -1816,9 +1816,9 @@ export default {
 
 ## 7.readonly 和shallowReadonly() 
 
-> **readonly** 是将通过ref 或reactive定义好的数据进行拷贝后变为仅可读的数据，不可进行修改，即无响应
->
-> 接受一个对象 (不论是响应式还是普通的) 或是一个 ref，返回一个原值的只读代理
+\> **readonly** 是将通过ref 或reactive定义好的数据进行拷贝后变为仅可读的数据，不可进行修改，即无响应
+\>
+\> 接受一个对象 (不论是响应式还是普通的) 或是一个 ref，返回一个原值的只读代理
 
 
 
@@ -1830,13 +1830,13 @@ export default {
 
 
 ```vue
-<template>
-  <div>{{ original }} {{copy}}</div>
-  <button @click="original.count++">改变1</button>
-  <button @click="copy.count++">改变2</button>
-</template>
+\<template\>
+  \<div\>{{ original }} {{copy}}\</div\>
+  \<button @click="original.count++"\>改变1\</button\>
+  \<button @click="copy.count++"\>改变2\</button\>
+\</template\>
 
-<script>
+\<script\>
 import {reactive,readonly } from 'vue'
 export default {
   name: 'App',
@@ -1849,20 +1849,20 @@ export default {
     }
   },
 }
-</script>
+\</script\>
 
 ```
 
-> 只读代理是深层的：对任何嵌套属性的访问都将是只读的。
+\> 只读代理是深层的：对任何嵌套属性的访问都将是只读的。
 
 ```vue
-<template>
-  <div>{{ original }} {{ copy }}</div>
-  <button @click="original.a.b++">改变1</button>
-  <button @click="copy.a.b++">改变2</button>
-</template>
+\<template\>
+  \<div\>{{ original }} {{ copy }}\</div\>
+  \<button @click="original.a.b++"\>改变1\</button\>
+  \<button @click="copy.a.b++"\>改变2\</button\>
+\</template\>
 
-<script>
+\<script\>
 import { reactive, readonly } from "vue";
 export default {
   name: "App",
@@ -1880,21 +1880,21 @@ export default {
     };
   },
 };
-</script>
+\</script\>
 
 ```
 
-> shallowReadonly:和 `readonly()` 不同，这里没有深层级的转换：只有根层级的属性变为了只读
+\> shallowReadonly:和 `readonly()` 不同，这里没有深层级的转换：只有根层级的属性变为了只读
 
 ```vue
-<template>
-  <div>{{ original }} {{ copy }}</div>
-  <button @click="original.a.b++">改变1</button>
-  <button @click="copy.a.b++">改变2</button>
-  <!-- <button @click="copy.count++">改变2</button> 不行  -->
-</template>
+\<template\>
+  \<div\>{{ original }} {{ copy }}\</div\>
+  \<button @click="original.a.b++"\>改变1\</button\>
+  \<button @click="copy.a.b++"\>改变2\</button\>
+  \<!-- \<button @click="copy.count++"\>改变2\</button\> 不行  --\>
+\</template\>
 
-<script>
+\<script\>
 import { reactive, shallowReadonly } from "vue";
 export default {
   name: "App",
@@ -1912,7 +1912,7 @@ export default {
     };
   },
 };
-</script>
+\</script\>
 
 ```
 
@@ -1924,7 +1924,7 @@ export default {
 
 ### 1.isRef()
 
-> **isRef** 检查一个对象是否为 `ref` 包装过的对象
+\> **isRef** 检查一个对象是否为 `ref` 包装过的对象
 
 ```js
  let a=ref(0)
@@ -1962,9 +1962,9 @@ increment(number) // number 现在为 2
 
 ### 2.unref()
 
-> **unref**  如果参数是一个 ref 则返回它的 value，否则返回参数本身。
->
-> unref()：是 val = isRef(val) ? val.value : val 的语法糖。
+\> **unref**  如果参数是一个 ref 则返回它的 value，否则返回参数本身。
+\>
+\> unref()：是 val = isRef(val) ? val.value : val 的语法糖。
 
 ```js
 let a=ref(0)
@@ -1979,18 +1979,18 @@ console.log(unref(a))//0
 
 ### 3.toRef和toRefs
 
-> **toRef 和 toRefs**
+\> **toRef 和 toRefs**
 
 之前我们取出对象的属性可能会比较麻烦，所以很多人可能觉得，直接将对象的属性值取出来赋给一个新的属性名
 
 不就可以了，如下
 
 ```vue
-<template>
-    <h1 @click="changeName">{{name}} {{age}}  {{person.name}} </h1>
-</template>
+\<template\>
+    \<h1 @click="changeName"\>{{name}} {{age}}  {{person.name}} \</h1\>
+\</template\>
 
-<script>
+\<script\>
 import { reactive } from 'vue'
 
 export default {
@@ -2013,21 +2013,21 @@ export default {
     }
   }
 }
-</script>
+\</script\>
 
-<style scoped>
+\<style scoped\>
 
-</style>
+\</style\>
 
 ```
 
-> 但是上面这种情况当我们去修改person.name的时候会发现页面没有变化
->
-> 为什么没有变化，因为我们return的数据已经是一份新数据了，并不是原来那份数据了
+\> 但是上面这种情况当我们去修改person.name的时候会发现页面没有变化
+\>
+\> 为什么没有变化，因为我们return的数据已经是一份新数据了，并不是原来那份数据了
 
 
 
-> **toRef**:处理单个属性
+\> **toRef**:处理单个属性
 
 语法：
 
@@ -2036,10 +2036,10 @@ toRef(操作对象, 对象属性)
 ```
 
 ```vue
-<template>
-    <h1 @click="changeName">{{names}} {{age}}  {{person.name}} </h1>
-</template>
-<script>
+\<template\>
+    \<h1 @click="changeName"\>{{names}} {{age}}  {{person.name}} \</h1\>
+\</template\>
+\<script\>
 import { reactive,toRef } from 'vue'
 
 export default {
@@ -2063,11 +2063,11 @@ export default {
     }
   }
 }
-</script>
+\</script\>
 
-<style scoped>
+\<style scoped\>
 
-</style>
+\</style\>
 
 ```
 
@@ -2079,22 +2079,22 @@ export default {
 
 
 
-> **toRefs**:处理整个对象
->
-> 1.toRefs 函数将每个属性包装为 Ref 对象，并返回一个新的对象，该对象具有与原始对象相同的属性结构，但每个属性的值都是 Ref 对象
->
-> 2.toRefs其实就是将对象中的每一个属性都使用ref处理
+\> **toRefs**:处理整个对象
+\>
+\> 1.toRefs 函数将每个属性包装为 Ref 对象，并返回一个新的对象，该对象具有与原始对象相同的属性结构，但每个属性的值都是 Ref 对象
+\>
+\> 2.toRefs其实就是将对象中的每一个属性都使用ref处理
 
 toRefs的类型：
 
 ```ts
-function toRefs<T extends object>(
+function toRefs\<T extends object\>(
   object: T
 ): {
-  [K in keyof T]: ToRef<T[K]>
+  [K in keyof T]: ToRef\<T[K]\>
 }
 
-type ToRef = T extends Ref ? T : Ref<T>
+type ToRef = T extends Ref ? T : Ref\<T\>
 ```
 
 
@@ -2102,11 +2102,11 @@ type ToRef = T extends Ref ? T : Ref<T>
 
 
 ```vue
-<template>
-  <h1 @click="changeName">{{obj}} {{age}}  {{person.name}} </h1>
-</template>
+\<template\>
+  \<h1 @click="changeName"\>{{obj}} {{age}}  {{person.name}} \</h1\>
+\</template\>
 
-<script>
+\<script\>
 import { reactive,toRefs } from 'vue'
 export default {
 setup(){
@@ -2128,17 +2128,17 @@ setup(){
   }
 }
 }
-</script>
+\</script\>
 ```
 
 或者如下写法也可以：
 
 ```vue
-<template>
-    <h1 @click="changeName">{{name}} {{age}} </h1>
-</template>
+\<template\>
+    \<h1 @click="changeName"\>{{name}} {{age}} \</h1\>
+\</template\>
 
-<script>
+\<script\>
 import { reactive,toRefs} from 'vue'
 
 export default {
@@ -2157,7 +2157,7 @@ export default {
     }
   }
 }
-</script>
+\</script\>
 ```
 
 关于为什么直接解构之后数据就不是响应式的了，下面的案例可以解释
@@ -2174,18 +2174,18 @@ export default {
 
 ### 4.toValue()
 
-> 将值、refs 或 getters 规范化为值。这与 unref() 类似，不同的是此函数也会规范化 getter 函数。
->
-> 如果参数是一个 getter，它将会被调用并且返回它的返回值。
->
-> ("getters" 通常是指计算属性 (computed properties))
+\> 将值、refs 或 getters 规范化为值。这与 unref() 类似，不同的是此函数也会规范化 getter 函数。
+\>
+\> 如果参数是一个 getter，它将会被调用并且返回它的返回值。
+\>
+\> ("getters" 通常是指计算属性 (computed properties))
 
 ```js
 let num = toRef(1)
 function changeName() {
   console.log(num) //RefImpl {__v_isShallow: false, dep: undefined, __v_isRef: true, _rawValue: 1, _value: 1}
   console.log(toValue(num)) // 1
-  console.log(toValue(() => 1)) // 1
+  console.log(toValue(() =\> 1)) // 1
 }
 ```
 
@@ -2193,7 +2193,7 @@ function changeName() {
 
 ### 5.isProxy
 
-> 检查一个对象是否是由 reactive()、readonly()、shallowReactive() 或 shallowReadonly() 创建的代理。
+\> 检查一个对象是否是由 reactive()、readonly()、shallowReactive() 或 shallowReadonly() 创建的代理。
 
 ```js
 import { reactive, readonly, isProxy } from 'vue';
@@ -2209,7 +2209,7 @@ console.log(isProxy(a));//false  ref不是基于proxy的
 
 ### 6.isReactive()
 
-> 检查一个对象是否是由 reactive() 或 shallowReactive() 创建的代理。
+\> 检查一个对象是否是由 reactive() 或 shallowReactive() 创建的代理。
 
 ```js
 const obj = reactive({ name: 'John', age: 25 });
@@ -2226,7 +2226,7 @@ console.log(isReactive(b));//true
 
 ### 7.isReadonly()
 
-> 检查传入的值是否为只读对象
+\> 检查传入的值是否为只读对象
 
 ```js
 const obj = reactive({ name: 'John', age: 25 });
@@ -2241,11 +2241,11 @@ console.log(isReadonly(b));//true
 
 ### 8.toRaw和markRaw
 
-> **toRaw**
->
-> 根据一个 Vue 创建的代理返回其原始对象。
->
-> toRaw() 可以返回由 reactive()、readonly()、shallowReactive() 或者 shallowReadonly() 创建的代理对应的原始对象。
+\> **toRaw**
+\>
+\> 根据一个 Vue 创建的代理返回其原始对象。
+\>
+\> toRaw() 可以返回由 reactive()、readonly()、shallowReactive() 或者 shallowReadonly() 创建的代理对应的原始对象。
 
 ```js
 const foo = {}
@@ -2254,7 +2254,7 @@ const reactiveFoo = reactive(foo)
 console.log(toRaw(reactiveFoo) === foo) // true
 ```
 
-> **markRaw**标记一个对象,使其永远不会再成为响应式对象。
+\> **markRaw**标记一个对象,使其永远不会再成为响应式对象。
 
 ```js
 const foo = markRaw({})
@@ -2273,16 +2273,16 @@ console.log(isReactive(bar.foo)) // false
 但是呢？个别属性是不需要响应式的。比如爱好
 
 ```vue
-<template>
-    <div>
-        <p> 姓名： {{person.name}}</p> 
-        <p> 性别： {{person.sex}}</p> 
-        <p> 爱好： {{person.likes}}</p> 
-        <el-button @click="change">按钮</el-button>
-    </div>
-</template>
+\<template\>
+    \<div\>
+        \<p\> 姓名： {{person.name}}\</p\> 
+        \<p\> 性别： {{person.sex}}\</p\> 
+        \<p\> 爱好： {{person.likes}}\</p\> 
+        \<el-button @click="change"\>按钮\</el-button\>
+    \</div\>
+\</template\>
 
-<script lang="ts" setup>
+\<script lang="ts" setup\>
 import { reactive,markRaw } from 'vue'
 let person:any = reactive({
     name: "杨光",
@@ -2293,12 +2293,12 @@ let person:any = reactive({
 // 但是我们使用markRaw包裹后这个likes属性值是不具有响应式的
     person.likes = markRaw(likes);
 // 因此试图是不会更新的
-var change = () => {
+var change = () =\> {
     person.likes[0]= '我要吃饭';
     person.likes[1]= '我要睡觉';
     console.log(person.likes);
 };
-</script>
+\</script\>
 
 ```
 
@@ -2310,9 +2310,9 @@ var change = () => {
 
 ## 9.生命周期钩子
 
-> 因为 `setup` 是围绕 `beforeCreate` 和 `created` 生命周期钩子运行的，所以不需要显式地定义它们。
->
-> 换句话说，在这些钩子中编写的任何代码都应该直接在 `setup` 函数中编写。
+\> 因为 `setup` 是围绕 `beforeCreate` 和 `created` 生命周期钩子运行的，所以不需要显式地定义它们。
+\>
+\> 换句话说，在这些钩子中编写的任何代码都应该直接在 `setup` 函数中编写。
 
 除了beforecate和created(它们被setup方法本身所取代)，我们可以在setup方法中访问的API生命周期钩子有9个选项:
 
@@ -2345,7 +2345,7 @@ var change = () => {
 
 ```js
 setup(){
-    onMounted(()=>{
+    onMounted(()=\>{
       console.log("onmounted")
     })
   }
@@ -2353,29 +2353,29 @@ setup(){
 
 
 
-> onUnmounted有什么用？
+\> onUnmounted有什么用？
 
 比如我们在Demo组件中有一个定时器
 
 ==Demo.vue==
 
 ```vue
-<template>
-    <div>
+\<template\>
+    \<div\>
         我是demo组件{{count}}
-    </div>
-</template>
-<script>
+    \</div\>
+\</template\>
+\<script\>
 import { onUnmounted,ref } from 'vue';
 export default {
     setup () {
         let count=ref(0);
-        setInterval(()=>{
+        setInterval(()=\>{
             count.value++
             console.log(count.value++)
         },1000)
 
-        onUnmounted(()=>{
+        onUnmounted(()=\>{
             console.log("组件卸载")
         })
         return {
@@ -2383,22 +2383,22 @@ export default {
         }
     }
 }
-</script>
+\</script\>
 
-<style  scoped>
+\<style  scoped\>
 
-</style>
+\</style\>
 ```
 
 ==App.vue==:我们会发现我们将组件卸载了，但是Demo组件的定时器还在运行，这个时候就需要卸载的时候清除定时器
 
 ```vue
-<template>
-  <demo v-if="show"></demo>
-  <button @click="hide">卸载</button>
-</template>
+\<template\>
+  \<demo v-if="show"\>\</demo\>
+  \<button @click="hide"\>卸载\</button\>
+\</template\>
 
-<script>
+\<script\>
 import Demo from "./Demo.vue"
 import {ref} from "vue"
 export default {
@@ -2416,7 +2416,7 @@ export default {
     }
   } 
 }
-</script>
+\</script\>
 
 
 ```
@@ -2424,7 +2424,7 @@ export default {
 只需要在Demo.vue做如下修改就好了
 
 ```js
-onUnmounted(()=>{
+onUnmounted(()=\>{
             console.log("组件卸载");
             clearInterval(timer)
  })
@@ -2434,19 +2434,19 @@ onUnmounted(()=>{
 
 ## 10.computed用法
 
-> 接受一个 getter 函数，返回一个只读的响应式 [ref](https://cn.vuejs.org/api/reactivity-core.html#ref) 对象
+\> 接受一个 getter 函数，返回一个只读的响应式 [ref](https://cn.vuejs.org/api/reactivity-core.html#ref) 对象
 
 ==所以在js中访问计算属性也需要加.value==
 
 首先在vue3中继续采用vue2的写法依旧是没问题的,但是我们不推荐
 
-> Vue2中的计算属性写法
+\> Vue2中的计算属性写法
 
 ```vue
-<template>
-  <h1 >{{c}}</h1>
-</template>
-<script>
+\<template\>
+  \<h1 \>{{c}}\</h1\>
+\</template\>
+\<script\>
   computed:{
     c(){
       return this.a+this.b
@@ -2459,16 +2459,16 @@ onUnmounted(()=>{
       a,b
     }
   },
-</script>
+\</script\>
 ```
 
-> Vue3中计算属性的写法
+\> Vue3中计算属性的写法
 
 ```vue
-<template>
-  <h1 @click="changeA">{{c}}</h1>
-</template>
-<script>
+\<template\>
+  \<h1 @click="changeA"\>{{c}}\</h1\>
+\</template\>
+\<script\>
 import {ref,computed} from "vue";
 export default {
   name: 'App',
@@ -2476,7 +2476,7 @@ export default {
     let a=ref("hello")
     let b=ref("world")
     //计算属性
-    let c=computed(() => a.value+b.value)
+    let c=computed(() =\> a.value+b.value)
 	//修改a，c发生变化，说明计算属性生效
     function changeA(){
       a.value="byebye"
@@ -2488,18 +2488,18 @@ export default {
   },
  
 }
-</script>
+\</script\>
 ```
 
-> 默认情况下我们的computed是只读的，也就是不允许更改的
->
-> 但是我们可以通过配置get set函数使计算属性可更改
+\> 默认情况下我们的computed是只读的，也就是不允许更改的
+\>
+\> 但是我们可以通过配置get set函数使计算属性可更改
 
 ```vue
-<template>
-  <h1 @click="changeA">{{c}}</h1>
-</template>
-<script>
+\<template\>
+  \<h1 @click="changeA"\>{{c}}\</h1\>
+\</template\>
+\<script\>
 import {ref,computed} from "vue";
 export default {
   name: 'App',
@@ -2508,10 +2508,10 @@ export default {
     let b=ref("world")
     //计算属性
     let c=computed({
-      get:()=>{
+      get:()=\>{
         return a.value+b.value
       },
-      set:(value)=>{
+      set:(value)=\>{
        b.value=value
       }
     })
@@ -2525,7 +2525,7 @@ export default {
   },
  
 }
-</script>
+\</script\>
 ```
 
 
@@ -2536,41 +2536,41 @@ export default {
 
 ## 11.watch用法
 
-> **watch可以监听哪些数据？**
->
-> 1. ref定义的响应式数据 （默认浅层监听）
-> 2. reactive定义的响应式数据 （默认深度监听）
-> 3. 监听一个计算属性 （因为计算属性本质上也是一个ref定义的数据）也是浅层监听
+\> **watch可以监听哪些数据？**
+\>
+\> 1. ref定义的响应式数据 （默认浅层监听）
+\> 2. reactive定义的响应式数据 （默认深度监听）
+\> 3. 监听一个计算属性 （因为计算属性本质上也是一个ref定义的数据）也是浅层监听
 
 
 
-> 1.使用ref监听基本类型的数据
+\> 1.使用ref监听基本类型的数据
 
 ```js
 const index = ref(0);
-watch(index,(newValue,oldValue)=>{
+watch(index,(newValue,oldValue)=\>{
   console.log("新值是"+newValue, "旧址是"+oldValue);
 })
 ```
 
-> 2.使用ref监听多个基本类型的数据
+\> 2.使用ref监听多个基本类型的数据
 
 ```js
 let index = ref(0);
 let num = ref(0)
-watch([index,num],(newValue,oldValue)=>{
+watch([index,num],(newValue,oldValue)=\>{
   console.log("新值是"+newValue, "旧址是"+oldValue); //返回的是一个数组
 })
 ```
 
-> 3.使用reactive监听对象 默认是深度监听
+\> 3.使用reactive监听对象 默认是深度监听
 
 ```vue
-<template>
-  <h1 @click="ChangeP">{{person.name}}</h1>
-  <h1>{{person.age}}</h1>
-</template>
-<script>
+\<template\>
+  \<h1 @click="ChangeP"\>{{person.name}}\</h1\>
+  \<h1\>{{person.age}}\</h1\>
+\</template\>
+\<script\>
 import {reactive,watch} from "vue";
 export default {
   name: 'App',
@@ -2580,7 +2580,7 @@ export default {
       age:18,
       sex:"男"
     })
-    watch(person,(newValue,oldValue)=>{
+    watch(person,(newValue,oldValue)=\>{
       //在嵌套的属性变更时触发
 			// 注意：`newValue` 此处和 `oldValue` 是相等的
   		// 因为它们是同一个对象！
@@ -2594,10 +2594,10 @@ export default {
     }
   },
 }
-</script>
+\</script\>
 ```
 
-> 4.使用reactive监听对象中的某个属性 默认是浅层监听
+\> 4.使用reactive监听对象中的某个属性 默认是浅层监听
 
 ```javascript
 const person = reactive({
@@ -2605,7 +2605,7 @@ const person = reactive({
    age:18,
    sex:"男"
 })
-watch(()=>person.name,(newValue,oldValue)=>{
+watch(()=\>person.name,(newValue,oldValue)=\>{
   console.log(newValue,oldValue);
 })
 ```
@@ -2617,17 +2617,17 @@ watch(()=>person.name,(newValue,oldValue)=>{
 如果想监听对象中的多个属性，写成数组的形式
 
 ```js
-  watch([()=>person.name,()=>person.age],(newValue,oldValue)=>{
+  watch([()=\>person.name,()=\>person.age],(newValue,oldValue)=\>{
     console.log(newValue,oldValue);
   })
 
 ```
 
-> 5.使用ref监听引用类型的数据,只修改属性不会触发监听，因为默认是浅层监听
+\> 5.使用ref监听引用类型的数据,只修改属性不会触发监听，因为默认是浅层监听
 
 ```javascript
     let arr=ref({name:"小明"});
-    watch(arr,()=>{
+    watch(arr,()=\>{
       console.log("触发了")
     })
     function fn(){
@@ -2639,7 +2639,7 @@ watch(()=>person.name,(newValue,oldValue)=>{
 
 ```js
     let arr=ref({name:"小明"});
-    watch(arr,()=>{
+    watch(arr,()=\>{
       console.log("触发了")
     })
     function fn(){
@@ -2651,7 +2651,7 @@ watch(()=>person.name,(newValue,oldValue)=>{
 
 ```js
     let arr=ref({name:"小明"});
-    watch(arr,()=>{
+    watch(arr,()=\>{
       console.log("触发了")
     },{
       deep:true //开启深度监听
@@ -2665,7 +2665,7 @@ watch(()=>person.name,(newValue,oldValue)=>{
 
 ```js
     let arr=ref({name:"小明"});
-    watch(arr.value,()=>{
+    watch(arr.value,()=\>{
       console.log("触发了")
     })
     function fn(){
@@ -2689,7 +2689,7 @@ Proxy(Object) {name: '小明'}
 
 
 
-> watch监听计算属性
+\> watch监听计算属性
 
 我们知道，因为computed也是基于ref的所以应该也是浅层监听，但是下面的修改却可以触发watch
 
@@ -2697,18 +2697,18 @@ Proxy(Object) {name: '小明'}
     const firstName = ref('John');
     const lastName = ref('Doe');
     
-    const fullName = computed(() => {
+    const fullName = computed(() =\> {
       return {
         first: firstName.value,
         last: lastName.value,
       };
     });
 
-    watch(fullName, (newVal, oldVal) => {
+    watch(fullName, (newVal, oldVal) =\> {
       console.log('Watched changes:', newVal,oldVal);
     });
 
-    const fn = () => {
+    const fn = () =\> {
       firstName.value = 'Jane';
     };
 ```
@@ -2719,12 +2719,12 @@ Proxy(Object) {name: '小明'}
 
 
 
-> 6.watch的第三个参数
+\> 6.watch的第三个参数
 
 加上 immediate 参数，就可以让侦听器立即执行操作
 
 ```js
-watch(num, (newVal, oldVal) => {
+watch(num, (newVal, oldVal) =\> {
         console.log("新值：", newVal, "   旧值：", oldVal)
       }, {
         immediate: true
@@ -2737,9 +2737,9 @@ watch(num, (newVal, oldVal) => {
 
 ## 12.watchEffect
 
->  立即运行一个函数，同时响应式地追踪其依赖，并在依赖更改时重新执行。 
->
-> 默认开启了immediate
+\>  立即运行一个函数，同时响应式地追踪其依赖，并在依赖更改时重新执行。 
+\>
+\> 默认开启了immediate
 
 **基本用法**
 
@@ -2748,25 +2748,25 @@ import { ref, watchEffect } from 'vue';
 
 const count = ref(0);
 //每次 count.value 改变，watchEffect 会自动运行一次，输出新的 count 值。
-watchEffect(() => {
+watchEffect(() =\> {
   console.log(`count is ${count.value}`);
 });
 ```
 
-> watch：既要指明监视的属性，也要指明监视的回调。
->
-> watchEffect：不用指明监视哪个属性，监视的回调中用到哪个属性，那就监视哪个属性。
+\> watch：既要指明监视的属性，也要指明监视的回调。
+\>
+\> watchEffect：不用指明监视哪个属性，监视的回调中用到哪个属性，那就监视哪个属性。
 
-> watchEffect有点像computed：
->
-> - 但computed注重的计算出来的值（回调函数的返回值），所以必须要写返回值。
-> - 而watchEffect更注重的是过程（回调函数的函数体），所以不用写返回值。
+\> watchEffect有点像computed：
+\>
+\> - 但computed注重的计算出来的值（回调函数的返回值），所以必须要写返回值。
+\> - 而watchEffect更注重的是过程（回调函数的函数体），所以不用写返回值。
 
 ```vue
-<template>
-  <h1 @click="ChangeP">{{person.name}} {{person.age}}</h1>
-</template>
-<script>
+\<template\>
+  \<h1 @click="ChangeP"\>{{person.name}} {{person.age}}\</h1\>
+\</template\>
+\<script\>
 import {reactive,watch, watchEffect} from "vue";
 export default {
   name: 'App',
@@ -2781,11 +2781,11 @@ export default {
         player:"kobe"
       }
     })
-    watch(person,(newValue,oldValue)=>{
+    watch(person,(newValue,oldValue)=\>{
       console.log(newValue,oldValue);
     },{deep:true})
 
-    watchEffect(()=>{
+    watchEffect(()=\>{
         //修改name的时候函数会执行，修改age就不会执行
       console.log("watchEffect",person.name)
     })
@@ -2798,7 +2798,7 @@ export default {
   },
  
 }
-</script>
+\</script\>
 
 
 ```
@@ -2811,27 +2811,27 @@ export default {
 
 
 
-> 停止监听
+\> 停止监听
 
 如果你需要手动停止 `watchEffect`，你可以存储它的返回值并调用它。这样可以在组件销毁或特定条件下停止侦听：
 
 ```vue
-<template>
-  <div>
+\<template\>
+  \<div\>
     {{ count }}
-    <button @click="fn">按钮</button>
-    <button @click="count++">按钮2</button>
-  </div>
-</template>
+    \<button @click="fn"\>按钮\</button\>
+    \<button @click="count++"\>按钮2\</button\>
+  \</div\>
+\</template\>
 
-<script>
+\<script\>
 
 import { ref, watchEffect } from 'vue';
 
 export default {
   setup() {
     const count = ref(0);
-    const stopWatching = watchEffect(() => {
+    const stopWatching = watchEffect(() =\> {
       console.log(`count is ${count.value}`);
     });
 
@@ -2842,31 +2842,31 @@ export default {
     return { count,fn }
   }
 }
-</script>
+\</script\>
 ```
 
 此代码将在 5 秒后停止对 `count.value` 的侦听。
 
-> 清理副作用
+\> 清理副作用
 
 `watchEffect` 的回调函数可以返回一个清理函数，这个函数会在回调函数重新执行之前或侦听器停止监听时执行，用于清理或撤销之前的副作用（如取消定时器或事件监听器）：
 
 ```vue
-<template>
-  <div>
+\<template\>
+  \<div\>
     {{ count }}
-    <button @click="fn">按钮</button>
-    <button @click="count++">按钮2</button>
-  </div>
-</template>
-<script>
+    \<button @click="fn"\>按钮\</button\>
+    \<button @click="count++"\>按钮2\</button\>
+  \</div\>
+\</template\>
+\<script\>
 import { ref, watchEffect } from 'vue';
 export default {
   setup() {
     const count = ref(0);
-    const stopWatching = watchEffect((onInvalidate) => {
+    const stopWatching = watchEffect((onInvalidate) =\> {
       console.log(`count is ${count.value}`);
-      onInvalidate(()=>{
+      onInvalidate(()=\>{
         console.log(222)
       })
     });
@@ -2877,7 +2877,7 @@ export default {
     return { count,fn }
   }
 }
-</script>
+\</script\>
 ```
 
 ## 13.vscode设置自动补全ref的value属性
@@ -2889,29 +2889,29 @@ export default {
 ## 14.购物车综合案例实战
 
 ```vue
-<template>
-  <div >
-    <ul>
-      <li v-for="(item,index) in products" :key="item.id">
-        <input type="checkbox" v-model="item.checked"/>
-        <span>{{ item.name }}</span>
-        <span>{{ item.price }}</span>
-        <button @click="add(index)">+</button>
-        <a>{{ item.count }}</a>
-        <button @click="minus(index)">-</button>
-        <button @click="del(index)">delete</button>
-      </li>
-    </ul>
-    <div>
-       <input type="checkbox" v-model="isAllSel" @change="handleChange">
-       <span>已选({{ selNum }})</span>
-       <span>总价¥：{{ totalPrice }}</span>
-       <button :disabled="!selNum">结算</button>
-    </div>
-  </div>
-</template>
+\<template\>
+  \<div \>
+    \<ul\>
+      \<li v-for="(item,index) in products" :key="item.id"\>
+        \<input type="checkbox" v-model="item.checked"/\>
+        \<span\>{{ item.name }}\</span\>
+        \<span\>{{ item.price }}\</span\>
+        \<button @click="add(index)"\>+\</button\>
+        \<a\>{{ item.count }}\</a\>
+        \<button @click="minus(index)"\>-\</button\>
+        \<button @click="del(index)"\>delete\</button\>
+      \</li\>
+    \</ul\>
+    \<div\>
+       \<input type="checkbox" v-model="isAllSel" @change="handleChange"\>
+       \<span\>已选({{ selNum }})\</span\>
+       \<span\>总价¥：{{ totalPrice }}\</span\>
+       \<button :disabled="!selNum"\>结算\</button\>
+    \</div\>
+  \</div\>
+\</template\>
 
-<script>
+\<script\>
 import {ref,onMounted,computed,watch} from "vue";
 export default {
   setup() {
@@ -2922,48 +2922,48 @@ export default {
       {id:1004,name:"口红",price:200},
     ])
    
-    onMounted(()=>{
-      products.value.forEach(item=>{
+    onMounted(()=\>{
+      products.value.forEach(item=\>{
         item.count=1;
         item.checked=false;
       })
       console.log(products.value)
     })
     //点+号
-    const add=(index)=>{
+    const add=(index)=\>{
       products.value[index].count++
     }
     //点-号
-    const minus=(index)=>{
+    const minus=(index)=\>{
       let num= products.value[index].count
       console.log(num)
-      if(num>1){
+      if(num\>1){
         //num-- 这里写成num--是绝对不行的
         products.value[index].count--;
       }
     }
     //已选商品数量
-   let selNum=computed(()=>products.value.filter(item=>item.checked).length)
-   //let isAllSel=computed(()=>selNum.value==products.value.length)
+   let selNum=computed(()=\>products.value.filter(item=\>item.checked).length)
+   //let isAllSel=computed(()=\>selNum.value==products.value.length)
 
    //定义全选按钮双向绑定的数据
    let isAllSel=ref(false);
   //监听全选按钮，如果打勾就让商品全选，否则就全取消
   //这样不行的原因是如果商品有一个取消勾选，判断不是全选，会把其他商品勾选的全取消
-  //  watch(isAllSel,()=>{
+  //  watch(isAllSel,()=\>{
   //    if(isAllSel.value){
-  //     products.value.forEach(item=>item.checked=true)
+  //     products.value.forEach(item=\>item.checked=true)
   //    }else{
-  //     products.value.forEach(item=>item.checked=false)
+  //     products.value.forEach(item=\>item.checked=false)
   //    }
   //  })
     //给全选的input添加一个事件，
-    const handleChange=()=>{
-      products.value.forEach(item=>item.checked=isAllSel.value)
+    const handleChange=()=\>{
+      products.value.forEach(item=\>item.checked=isAllSel.value)
     }
 
    //监听每一个数据的checked属性
-   watch(() => products.value.map(product => product.checked),()=>{
+   watch(() =\> products.value.map(product =\> product.checked),()=\>{
       if(selNum.value==products.value.length){
         isAllSel.value=true
       }else{
@@ -2972,15 +2972,15 @@ export default {
    })
 
    //总价
-   const totalPrice=computed(()=>{
+   const totalPrice=computed(()=\>{
       let total=0
-      products.value.filter(item=>item.checked).forEach((i)=>{
+      products.value.filter(item=\>item.checked).forEach((i)=\>{
         total+=i.count*i.price
       });
       return total
    })
    //删除功能
-   const del=(index)=>{
+   const del=(index)=\>{
     products.value.splice(index,1)
    }
 
@@ -2989,11 +2989,11 @@ export default {
    }
   },
 };
-</script>
-<style scoped>
+\</script\>
+\<style scoped\>
 span,button{margin: 0 10px;width: 100px;display: inline-block;}
 
-</style>
+\</style\>
 
 ```
 
@@ -3005,21 +3005,21 @@ span,button{margin: 0 10px;width: 100px;display: inline-block;}
 
 ## 1.基本用法 
 
-> “组合式函数”(Composables) 是一个利用 Vue 组合式 API 来封装和复用**有状态逻辑**的函数。
->
-> 组合式函数约定用驼峰命名法命名，并以“use”作为开头。
+\> “组合式函数”(Composables) 是一个利用 Vue 组合式 API 来封装和复用**有状态逻辑**的函数。
+\>
+\> 组合式函数约定用驼峰命名法命名，并以“use”作为开头。
 
-> **和 React Hooks 的对比**
->
-> 如果你有 React 的开发经验，你可能注意到组合式函数和自定义 React hooks 非常相似。组合式 API 的一部分灵感正来自于 React hooks，Vue 的组合式函数也的确在逻辑组合能力上与 React hooks 相近。然而，Vue 的组合式函数是基于 Vue 细粒度的响应性系统，这和 React hooks 的执行模型有本质上的不同。这一话题在组合式 API 的常见问题中有更细致的讨论。
+\> **和 React Hooks 的对比**
+\>
+\> 如果你有 React 的开发经验，你可能注意到组合式函数和自定义 React hooks 非常相似。组合式 API 的一部分灵感正来自于 React hooks，Vue 的组合式函数也的确在逻辑组合能力上与 React hooks 相近。然而，Vue 的组合式函数是基于 Vue 细粒度的响应性系统，这和 React hooks 的执行模型有本质上的不同。这一话题在组合式 API 的常见问题中有更细致的讨论。
 
 目前我们如果想实现一个功能，就需要在setup中定义响应式数据，方法，生命周期，计算属性侦听器等，如下
 
 ```vue
-<template>
-  <h1 @click="changeCount">{{count}} {{salary}}</h1>
-</template>
-<script>
+\<template\>
+  \<h1 @click="changeCount"\>{{count}} {{salary}}\</h1\>
+\</template\>
+\<script\>
 import {computed, onMounted, ref} from "vue"
 export default {
   name: 'App',
@@ -3028,16 +3028,16 @@ export default {
     function changeCount(){
       count.value+=100;
     }  
-    onMounted(()=>{
+    onMounted(()=\>{
       changeCount();
     })
-   let salary=computed(()=>count.value+"元")
+   let salary=computed(()=\>count.value+"元")
     return{
       count,changeCount,salary
     }
   }  
 }
-</script>
+\</script\>
 ```
 
 但是如果都在setup里面写的话，就会像直接在script标签里写那样，所有逻辑都写在setup里面，很乱，并且没办法复用
@@ -3056,10 +3056,10 @@ function useCount(){
     function changeCount(){
         count.value+=100;
     }  
-    onMounted(()=>{
+    onMounted(()=\>{
         changeCount();
     })
-    let salary=computed(()=>count.value+"元")
+    let salary=computed(()=\>count.value+"元")
 
     return{count,changeCount,salary}
 }
@@ -3071,10 +3071,10 @@ export default useCount
 ==App.vue==
 
 ```vue
-<template>
-  <h1 @click="changeCount">{{count}} {{salary}}</h1>
-</template>
-<script>
+\<template\>
+  \<h1 @click="changeCount"\>{{count}} {{salary}}\</h1\>
+\</template\>
+\<script\>
 import useCount from './count';
 export default {
     setup () {
@@ -3084,7 +3084,7 @@ export default {
       }
     }
 }
-</script>
+\</script\>
 ```
 
 
@@ -3098,10 +3098,10 @@ export default {
 ==App.vue==
 
 ```vue
-<template>
-  <div>{{data}}</div>
-</template>
-<script>
+\<template\>
+  \<div\>{{data}}\</div\>
+\</template\>
+\<script\>
 import axios from "axios";
 import { ref } from "vue";
 export default {
@@ -3111,7 +3111,7 @@ export default {
       method: "get",
       url: "http://localhost:8080/a",
     })
-      .then((res) => {
+      .then((res) =\> {
         console.log(res)
         data.value = res.data;
       })
@@ -3120,19 +3120,19 @@ export default {
       }
   },
 };
-</script>
+\</script\>
 ```
 
 ==mock.js==
 
 ```js
 import Mock from "mockjs"
-Mock.mock("http://localhost:8080/a","get",()=>{
+Mock.mock("http://localhost:8080/a","get",()=\>{
     return{
         msg:"我是a接口的数据"
     }
 })
-Mock.mock("http://localhost:8080/b","get",()=>{
+Mock.mock("http://localhost:8080/b","get",()=\>{
     return{
         msg:"我是b接口的数据"
     }
@@ -3154,7 +3154,7 @@ function useAxios(){
       method: "get",
       url: "http://localhost:8080/a",
     })
-      .then((res) => {
+      .then((res) =\> {
         console.log(res)
         data.value = res.data;
       })
@@ -3170,10 +3170,10 @@ export default useAxios
 ==App.vue==
 
 ```vue
-<template>
-  <div>{{data}}</div>
-</template>
-<script>
+\<template\>
+  \<div\>{{data}}\</div\>
+\</template\>
+\<script\>
 import useAxios from "./count"
 export default {
   setup() {
@@ -3183,7 +3183,7 @@ export default {
    }
   },
 };
-</script>
+\</script\>
 ```
 
 
@@ -3199,7 +3199,7 @@ import axios from "axios";
 import { ref, onMounted,isRef, watchEffect,unref } from "vue";
 function useAxios(city) {
     let data = ref(null);
-    onMounted(() => {
+    onMounted(() =\> {
         function changeCity() {
             axios({
                 method: "get",
@@ -3208,7 +3208,7 @@ function useAxios(city) {
                     key: "580fd476df08d90a38d46b4d6b80537e",
                     city:unref(city)
                 }
-            }).then(res => {
+            }).then(res =\> {
                 console.log(res);
                 data.value = res //如果数据用reactive定义，这里这样写就会导致不是响应式
             })
@@ -3231,14 +3231,14 @@ export default useAxios
 
 ```vue
 //App.vue
-<template>
-  <div>
-    <h1>我是根组件</h1>
-    <div>{{ data }}</div>
-    <input type="text" v-model.lazy="city">
-  </div>
-</template>
-<script>
+\<template\>
+  \<div\>
+    \<h1\>我是根组件\</h1\>
+    \<div\>{{ data }}\</div\>
+    \<input type="text" v-model.lazy="city"\>
+  \</div\>
+\</template\>
+\<script\>
 import { ref } from 'vue';
 import useAxios from "./useAxios.js"
 export default {
@@ -3250,7 +3250,7 @@ export default {
     }
   }
 };
-</script>
+\</script\>
 ```
 
 
@@ -3275,24 +3275,24 @@ Vue 2 的用户可能会对 mixins 选项比较熟悉。它也让我们能够把
 
 # 10.customRef
 
-> customRef 可以用来创建一个自定义的 ref，并对其依赖项跟踪和更新触发进行显式控制。它需要一个工厂函数，该函数接收 track 和 trigger 函数作为参数，并且应该返回一个带有 get 和 set 的对象。
->
-> 其实大致意思就是，我们可以按照自己的业务需求去自定义封装一个 ref 对象，在其内部可以使用 get 和 set去跟踪或更新数据，有点计算属性内味了哈~
+\> customRef 可以用来创建一个自定义的 ref，并对其依赖项跟踪和更新触发进行显式控制。它需要一个工厂函数，该函数接收 track 和 trigger 函数作为参数，并且应该返回一个带有 get 和 set 的对象。
+\>
+\> 其实大致意思就是，我们可以按照自己的业务需求去自定义封装一个 ref 对象，在其内部可以使用 get 和 set去跟踪或更新数据，有点计算属性内味了哈~
 
 ```vue
-<template>
-    <h1 @click="changeName">{{a}} </h1>
-    <input type="text" v-model="a">
-    <button @click="changeA">改a</button>
-</template>
-<script>
+\<template\>
+    \<h1 @click="changeName"\>{{a}} \</h1\>
+    \<input type="text" v-model="a"\>
+    \<button @click="changeA"\>改a\</button\>
+\</template\>
+\<script\>
 import {customRef} from 'vue'
 
 export default {
   name: 'HelloWorld',
   setup(){
     function _ref(value){
-       return customRef((track,trigger)=>{
+       return customRef((track,trigger)=\>{
             return{
               get(){
                 track()//追踪当前数据的变化
@@ -3315,7 +3315,7 @@ export default {
     }
   }
 }
-</script>
+\</script\>
 ```
 
 这样我们基本实现了一个跟ref功能一样的自定义ref，但是如果是一模一样的我们没有必要去自己自定义
@@ -3323,19 +3323,19 @@ export default {
 比如我们不希望数据更新那么频繁，比如防抖
 
 ```vue
-<template>
-    <h1 @click="changeName">{{count}} </h1>
-    <button @click="changeCount">添加商品数量</button>
-</template>
+\<template\>
+    \<h1 @click="changeName"\>{{count}} \</h1\>
+    \<button @click="changeCount"\>添加商品数量\</button\>
+\</template\>
 
-<script>
+\<script\>
 import {customRef} from 'vue'
 export default {
   name: 'HelloWorld',
   setup(){
     function _ref(value){
        let timeout
-       return customRef((track,trigger)=>{
+       return customRef((track,trigger)=\>{
             return{
               get(){
                 track()//追踪当前数据的变化
@@ -3343,7 +3343,7 @@ export default {
               },
               set(val){
                 clearTimeout(timeout)
-                timeout=setTimeout(()=>{
+                timeout=setTimeout(()=\>{
                   value=val;
                   trigger()//触发响应,即更新界面
                 },1000)
@@ -3360,7 +3360,7 @@ export default {
     }
   }
 }
-</script>
+\</script\>
 ```
 
 
@@ -3369,20 +3369,20 @@ export default {
 
 # 12.provide和 inject(依赖注入)
 
-> 在父子组件传递数据时，通常使用的是 props 和 emit，父传子时，使用的是 props，如果是父组件传孙组件时，就需要先传给子组件，子组件再传给孙组件，如果多个子组件或多个孙组件使用时，就需要传很多次，会很麻烦。
->
-> 像这种情况，可以使用 provide 和 inject 解决这种问题，不论组件嵌套多深，父组件都可以为所有子组件或孙组件提供数据，父组件使用 provide 提供数据，子组件或孙组件 inject 注入数据。同时兄弟组件之间传值更方便。
+\> 在父子组件传递数据时，通常使用的是 props 和 emit，父传子时，使用的是 props，如果是父组件传孙组件时，就需要先传给子组件，子组件再传给孙组件，如果多个子组件或多个孙组件使用时，就需要传很多次，会很麻烦。
+\>
+\> 像这种情况，可以使用 provide 和 inject 解决这种问题，不论组件嵌套多深，父组件都可以为所有子组件或孙组件提供数据，父组件使用 provide 提供数据，子组件或孙组件 inject 注入数据。同时兄弟组件之间传值更方便。
 
-> 如果父组件链上多个组件对同一个 key 提供了值，那么离得更近的组件将会“覆盖”链上更远的组件所提供的值。如果没有能通过 key 匹配到值，`inject()` 将返回 `undefined`
+\> 如果父组件链上多个组件对同一个 key 提供了值，那么离得更近的组件将会“覆盖”链上更远的组件所提供的值。如果没有能通过 key 匹配到值，`inject()` 将返回 `undefined`
 
 ==父组件==
 
 ```vue
-<!--App.vue-->
-<template>
-  <hello-world></hello-world>
-</template>
-<script>
+\<!--App.vue--\>
+\<template\>
+  \<hello-world\>\</hello-world\>
+\</template\>
+\<script\>
 import HelloWorld from "./components/HelloWorld.vue"
 import { provide } from "vue";
 export default {
@@ -3392,20 +3392,20 @@ export default {
     provide("msg","我是父组件的数据")
   },
 };
-</script>
+\</script\>
 
 ```
 
 ==子组件==
 
 ```vue
-<!--HelloWorld.vue-->
-<template>
-   <h1>我是子组件</h1>
-   <grand-son></grand-son>
-</template>
+\<!--HelloWorld.vue--\>
+\<template\>
+   \<h1\>我是子组件\</h1\>
+   \<grand-son\>\</grand-son\>
+\</template\>
 
-<script>
+\<script\>
 import { inject } from 'vue'
 import GrandSon from "./GrandSon.vue"
 
@@ -3418,20 +3418,20 @@ export default {
    console.log("子组件",info)
   },
 }
-</script>
+\</script\>
 ```
 
 ==孙子组件==
 
 ```vue
-<!--grandson.vue-->
-<template>
-    <div>
+\<!--grandson.vue--\>
+\<template\>
+    \<div\>
         我是孙子组件
-    </div>
-</template>
+    \</div\>
+\</template\>
 
-<script>
+\<script\>
 import { inject } from 'vue';
 export default {
     setup () {
@@ -3439,19 +3439,19 @@ export default {
        console.log("孙子组件",info)
     }
 }
-</script>
+\</script\>
 
 ```
 
 当然也可以传递响应式的值，并且子组件修改数据的时候其他组件也会更新
 
 ```vue
-<!--App.vue-->
-<template>
-  <h1 @click="change">我是父组件: {{person}}</h1>
-  <hello-world></hello-world>
-</template>
-<script>
+\<!--App.vue--\>
+\<template\>
+  \<h1 @click="change"\>我是父组件: {{person}}\</h1\>
+  \<hello-world\>\</hello-world\>
+\</template\>
+\<script\>
 import HelloWorld from "./components/HelloWorld.vue"
 import { provide, reactive } from "vue";
 export default {
@@ -3472,14 +3472,14 @@ export default {
     }
   },
 };
-</script>
-<!--HelloWorld.vue-->
-<template>
-   <h1 @click="change">我是子组件 {{info}}</h1>
-   <grand-son></grand-son>
-</template>
+\</script\>
+\<!--HelloWorld.vue--\>
+\<template\>
+   \<h1 @click="change"\>我是子组件 {{info}}\</h1\>
+   \<grand-son\>\</grand-son\>
+\</template\>
 
-<script>
+\<script\>
 import { inject } from 'vue'
 import GrandSon from "./GrandSon.vue"
 export default {
@@ -3496,14 +3496,14 @@ export default {
    }
   },
 }
-</script>
-<!--grandSon.vue-->
-<template>
-    <div>
+\</script\>
+\<!--grandSon.vue--\>
+\<template\>
+    \<div\>
         我是孙子组件 {{info}}
-    </div>
-</template>
-<script>
+    \</div\>
+\</template\>
+\<script\>
 import { inject } from 'vue';
 export default {
     setup () {
@@ -3514,7 +3514,7 @@ export default {
        }
     }
 }
-</script>
+\</script\>
 
 ```
 
@@ -3553,30 +3553,30 @@ setup(){
 
 # 13.属性的透传
 
-> 当一个组件以单个元素为根作渲染时，透传的 attribute 会自动被添加到根元素上
+\> 当一个组件以单个元素为根作渲染时，透传的 attribute 会自动被添加到根元素上
 
 当我使用一个组件，直接给组件身上加class或者id属性或者style属性
 
 ```vue
-<!--父组件-->
-<template>
-  <div>
-    <h1>我是根组件</h1>
-    <Child class="box" id="box" style="color: red;"/>
-  </div>
-</template>
-<script>
+\<!--父组件--\>
+\<template\>
+  \<div\>
+    \<h1\>我是根组件\</h1\>
+    \<Child class="box" id="box" style="color: red;"/\>
+  \</div\>
+\</template\>
+\<script\>
 import Child from './Child.vue';
 export default {
   components: {
     Child
   },
 };
-</script>
-<!--子组件-->
-<template>
-  <div>我是一个子组件</div>
-</template>
+\</script\>
+\<!--子组件--\>
+\<template\>
+  \<div\>我是一个子组件\</div\>
+\</template\>
 ```
 
 最终结果：我们会发现我们没有定义props接收这个属性，但是子组件也能正常使用。
@@ -3585,23 +3585,23 @@ export default {
 
 
 
-> 如果一个子组件的根元素已经有了 `class` 或 `style` attribute，它会和从父组件上继承的值合并
+\> 如果一个子组件的根元素已经有了 `class` 或 `style` attribute，它会和从父组件上继承的值合并
 
 
 
-> 同样的规则也适用于 `v-on` 事件监听器：
+\> 同样的规则也适用于 `v-on` 事件监听器：
 
 
 
-> 禁用透传
+\> 禁用透传
 
 ```vue
-<script setup>
+\<script setup\>
 defineOptions({
   inheritAttrs: false
 })
 // ...setup 逻辑
-</script>
+\</script\>
 ```
 
 
@@ -3609,10 +3609,10 @@ defineOptions({
 ## 多根节点的透传
 
 ```vue
-<template>
-  <div >我是一个子组件</div>
-  <div  v-bind="$attrs">我也是一个子组件</div>
-</template>
+\<template\>
+  \<div \>我是一个子组件\</div\>
+  \<div  v-bind="$attrs"\>我也是一个子组件\</div\>
+\</template\>
 ```
 
 
@@ -3620,14 +3620,14 @@ defineOptions({
 ## 在 JavaScript 中访问透传 Attributes
 
 ```vue
-<script setup>
+\<script setup\>
 import { useAttrs } from 'vue'
 
 const attrs = useAttrs()
-</script>
+\</script\>
 ```
 
-如果没有使用 `<script setup>`，`attrs` 会作为 `setup()` 上下文对象的一个属性暴露：
+如果没有使用 `\<script setup\>`，`attrs` 会作为 `setup()` 上下文对象的一个属性暴露：
 
 ```javascript
 export default {
@@ -3641,42 +3641,42 @@ export default {
 ==注意：多根节点的组件，Vue 3 默认不支持将从父组件传入的所有属性默认传递到所有根节点，如果非要支持，需要配合attrs属性实现==
 
 ```vue
-<!--父组件-->
-<template>
-  <div>
-    <Child id="aa" class="bb" style="width:100px"/>
-  </div>
-</template>
-<script >
+\<!--父组件--\>
+\<template\>
+  \<div\>
+    \<Child id="aa" class="bb" style="width:100px"/\>
+  \</div\>
+\</template\>
+\<script \>
 import Child from './Child.vue';
 export default {
   components:{
     Child
   }
 }
-</script>
+\</script\>
 
 ```
 
 ```vue
-<!--子组件-->
-<template>
-  <h1 :id="attrsForFirstRoot.id" :class="attrsForFirstRoot.class">我是子组件</h1>
-  <h1 :style="attrsForSecondRoot.style">123123</h1>
-</template>
+\<!--子组件--\>
+\<template\>
+  \<h1 :id="attrsForFirstRoot.id" :class="attrsForFirstRoot.class"\>我是子组件\</h1\>
+  \<h1 :style="attrsForSecondRoot.style"\>123123\</h1\>
+\</template\>
 
-<script>
+\<script\>
 import { computed } from 'vue';
 export default {
   setup(props, { attrs }) {
-    const attrsForFirstRoot = computed(() => {
+    const attrsForFirstRoot = computed(() =\> {
       return {
         id: attrs.id,
         class: attrs.class
       };
     });
 
-    const attrsForSecondRoot = computed(() => {
+    const attrsForSecondRoot = computed(() =\> {
       return {
         style: attrs.style
       };
@@ -3686,29 +3686,29 @@ export default {
     }
   }
 }
-</script>
+\</script\>
 ```
 
 
 
 # 14.动态组件
 
-1. **`<component>` 标签**: `<component>` 是一个内置的组件，它使用 `:is` 属性来决定要渲染哪个组件。
+1. **`\<component\>` 标签**: `\<component\>` 是一个内置的组件，它使用 `:is` 属性来决定要渲染哪个组件。
 2. **`:is` 属性**: `:is` 可以绑定到一个局部组件、全局组件或组件的名称字符串。根据 `:is` 的值变化，Vue 将在同一位置动态地加载和卸载不同的组件。
 
 **基本用法**
 
 ```vue
-<template>
-  <div>
-    <button @click="currentComponent = 'HomeComponent'">Home</button>
-    <button @click="currentComponent = 'AboutComponent'">About</button>
+\<template\>
+  \<div\>
+    \<button @click="currentComponent = 'HomeComponent'"\>Home\</button\>
+    \<button @click="currentComponent = 'AboutComponent'"\>About\</button\>
     
-    <component :is="currentComponent"></component>
-  </div>
-</template>
+    \<component :is="currentComponent"\>\</component\>
+  \</div\>
+\</template\>
 
-<script>
+\<script\>
 import HomeComponent from './HomeComponent.vue';
 import AboutComponent from './AboutComponent.vue';
 
@@ -3723,18 +3723,18 @@ export default {
     };
   }
 }
-</script>
+\</script\>
 ```
 
 # 15.KeepAlive
 
-`<keep-alive>` 是一个内置组件，用于缓存组件实例而非销毁它们。这在进行组件切换时非常有用，特别是在需要保持组件状态或避免重复渲染开销的场景中。使用 `<keep-alive>` 可以保持组件的状态或避免重新执行初始化操作。
+`\<keep-alive\>` 是一个内置组件，用于缓存组件实例而非销毁它们。这在进行组件切换时非常有用，特别是在需要保持组件状态或避免重复渲染开销的场景中。使用 `\<keep-alive\>` 可以保持组件的状态或避免重新执行初始化操作。
 
 ```vue
-<!-- 非活跃的组件将会被缓存！ -->
-<KeepAlive>
-  <component :is="activeComponent" />
-</KeepAlive>
+\<!-- 非活跃的组件将会被缓存！ --\>
+\<KeepAlive\>
+  \<component :is="activeComponent" /\>
+\</KeepAlive\>
 ```
 
 关于include和exclude关键字
@@ -3747,51 +3747,51 @@ export default {
 案例
 
 ```vue
-<!-- UserProfile.vue -->
-<template>
-  <div>User Profile</div>
-</template>
+\<!-- UserProfile.vue --\>
+\<template\>
+  \<div\>User Profile\</div\>
+\</template\>
 
-<script>
+\<script\>
 export default {
   name: 'UserProfile'
 }
-</script>
+\</script\>
 
-<!-- Settings.vue -->
-<template>
-  <div>Settings</div>
-</template>
+\<!-- Settings.vue --\>
+\<template\>
+  \<div\>Settings\</div\>
+\</template\>
 
-<script>
+\<script\>
 export default {
   name: 'Settings'
 }
-</script>
+\</script\>
 
-<!-- TodoList.vue -->
-<template>
-  <div>Todo List</div>
-</template>
+\<!-- TodoList.vue --\>
+\<template\>
+  \<div\>Todo List\</div\>
+\</template\>
 
-<script>
+\<script\>
 export default {
   name: 'TodoList'
 }
-</script>
+\</script\>
 ```
 
 ```vue
-<template>
-  <keep-alive :include="['UserProfile', 'Settings']" :exclude="'TodoList'">
-    <component :is="currentComponent" />
-  </keep-alive>
-  <button @click="currentComponent = 'UserProfile'">User Profile</button>
-  <button @click="currentComponent = 'Settings'">Settings</button>
-  <button @click="currentComponent = 'TodoList'">Todo List</button>
-</template>
+\<template\>
+  \<keep-alive :include="['UserProfile', 'Settings']" :exclude="'TodoList'"\>
+    \<component :is="currentComponent" /\>
+  \</keep-alive\>
+  \<button @click="currentComponent = 'UserProfile'"\>User Profile\</button\>
+  \<button @click="currentComponent = 'Settings'"\>Settings\</button\>
+  \<button @click="currentComponent = 'TodoList'"\>Todo List\</button\>
+\</template\>
 
-<script>
+\<script\>
 import UserProfile from './UserProfile.vue'
 import Settings from './Settings.vue'
 import TodoList from './TodoList.vue'
@@ -3808,41 +3808,41 @@ export default {
     }
   }
 }
-</script>
+\</script\>
 ```
 
-> **正则表达式的使用**
+\> **正则表达式的使用**
 
 如果组件较多，可以使用正则表达式来简化这些属性的使用。例如，如果你想缓存所有以`Profile` 结尾的组件，可以用：
 
 ```vue
-<keep-alive :include="/.*Profile$/">
-    <component :is="currentComponent" />
-</keep-alive>
+\<keep-alive :include="/.*Profile$/"\>
+    \<component :is="currentComponent" /\>
+\</keep-alive\>
 ```
 
-> **缓存实例的生命周期**
+\> **缓存实例的生命周期**
 
-当一个组件实例从 DOM 上移除但因为被 `<KeepAlive>` 缓存而仍作为组件树的一部分时，它将变为**不活跃**状态而不是被卸载。当一个组件实例作为缓存树的一部分插入到 DOM 中时，它将重新**被激活**。
+当一个组件实例从 DOM 上移除但因为被 `\<KeepAlive\>` 缓存而仍作为组件树的一部分时，它将变为**不活跃**状态而不是被卸载。当一个组件实例作为缓存树的一部分插入到 DOM 中时，它将重新**被激活**。
 
 一个持续存在的组件可以通过 [`onActivated()`](https://cn.vuejs.org/api/composition-api-lifecycle.html#onactivated) 和 [`onDeactivated()`](https://cn.vuejs.org/api/composition-api-lifecycle.html#ondeactivated) 注册相应的两个状态的生命周期钩子：
 
 vue
 
 ```vue
-<script setup>
+\<script setup\>
 import { onActivated, onDeactivated } from 'vue'
 
-onActivated(() => {
+onActivated(() =\> {
   // 调用时机为首次挂载
   // 以及每次从缓存中被重新插入时
 })
 
-onDeactivated(() => {
+onDeactivated(() =\> {
   // 在从 DOM 上移除、进入缓存
   // 以及组件卸载时调用
 })
-</script>
+\</script\>
 ```
 
 请注意：
@@ -3851,18 +3851,18 @@ onDeactivated(() => {
 
 # 16.自定义指令
 
-在 `<script setup>` 中，任何以 `v` 开头的驼峰式命名的变量都可以被用作一个自定义指令。
+在 `\<script setup\>` 中，任何以 `v` 开头的驼峰式命名的变量都可以被用作一个自定义指令。
 
 **简单的自定义指令示例，该指令的功能是使用 JavaScript 自动聚焦到某个元素上**
 
 ```vue
-<template>
-  <div>
-    <h1>我是根组件</h1>
-    <input type="text" v-focus>
-  </div>
-</template>
-<script>
+\<template\>
+  \<div\>
+    \<h1\>我是根组件\</h1\>
+    \<input type="text" v-focus\>
+  \</div\>
+\</template\>
+\<script\>
 const focus = {
   mounted(el) {
     el.focus();
@@ -3873,10 +3873,10 @@ export default {
     focus
   }
 };
-</script>
+\</script\>
 ```
 
-> 关于自定义指令的注册
+\> 关于自定义指令的注册
 
 ### 1.全局注册
 
@@ -3908,7 +3908,7 @@ export default {
 
 
 
-在没有使用 `<script setup>` 的情况下，自定义指令需要通过 `directives` 选项注册：
+在没有使用 `\<script setup\>` 的情况下，自定义指令需要通过 `directives` 选项注册：
 
 ```vue
 export default {
@@ -3965,19 +3965,19 @@ const myDirective = {
 - `vnode`：代表绑定元素的底层 VNode。
 - `prevVnode`：代表之前的渲染中指令所绑定元素的 VNode。仅在 `beforeUpdate` 和 `updated` 钩子中可用。
 
-> 使用自定义指令控制元素的显示与隐藏案例
+\> 使用自定义指令控制元素的显示与隐藏案例
 
 ```vue
-<template>
-  <div>
-    <button @click="isVisible = !isVisible">Toggle Div</button>
-    <div v-toggle="isVisible">
+\<template\>
+  \<div\>
+    \<button @click="isVisible = !isVisible"\>Toggle Div\</button\>
+    \<div v-toggle="isVisible"\>
       Look at me! I can be shown or hidden.
-    </div>
-  </div>
-</template>
+    \</div\>
+  \</div\>
+\</template\>
 
-<script>
+\<script\>
 const Toggle = {
   created(el, binding) {
     // 设置元素的初始可见状态
@@ -4000,27 +4000,27 @@ export default {
     Toggle
   }
 };
-</script>
+\</script\>
 ```
 
 
 
-# 17.单文件组件 \<script setup>
+# 17.单文件组件 \\<script setup\>
 
-> 在 <script> 代码块上添加 setup属性，里面的代码会被编译成组件 setup() 函数的内容
+\> 在 \<script\> 代码块上添加 setup属性，里面的代码会被编译成组件 setup() 函数的内容
 
-当使用 <script setup> 的时候，任何在 <script setup> 声明的顶层的绑定 (包括变量，函数声明，以及 import 导入的内容) 都能在模板中直接使用：
+当使用 \<script setup\> 的时候，任何在 \<script setup\> 声明的顶层的绑定 (包括变量，函数声明，以及 import 导入的内容) 都能在模板中直接使用：
 
 ```vue
-<template>
-  <h1 @click="b">{{a}}</h1>
-</template>
-<script setup>
+\<template\>
+  \<h1 @click="b"\>{{a}}\</h1\>
+\</template\>
+\<script setup\>
   const a=10
   function b(){
     console.log(123)
   }
-</script>
+\</script\>
 ```
 
 
@@ -4028,23 +4028,23 @@ export default {
 ## 1.属性方法无需返回
 
 ```vue
-<template>
-  <div>
-    <h2 @click="ageInc">{{ name }} is {{ age }}</h2>
-  </div>
-</template>
+\<template\>
+  \<div\>
+    \<h2 @click="ageInc"\>{{ name }} is {{ age }}\</h2\>
+  \</div\>
+\</template\>
 
-<script setup>
+\<script setup\>
 import { ref } from 'vue';
 
 const name = ref('CoCoyY1')
 const age = ref(18)
 
-const ageInc = () => {
+const ageInc = () =\> {
   age.value++
 }
 
-</script>
+\</script\>
 
 ```
 
@@ -4052,54 +4052,54 @@ const ageInc = () => {
 
 ## 2.自动注册子组件
 
-<script setup> 范围里的值也能被直接作为自定义组件的标签名使用：
+\<script setup\> 范围里的值也能被直接作为自定义组件的标签名使用：
 
 ```vue
-<script setup>
+\<script setup\>
 import MyComponent from './MyComponent.vue'
-</script>
+\</script\>
 
-<template>
-  <MyComponent />
-</template>
+\<template\>
+  \<MyComponent /\>
+\</template\>
 ```
 
 
 
 ## 3.动态组件
 
-> 由于组件是通过变量引用而不是基于字符串组件名注册的，
->
-> 在 <script setup> 中要使用动态组件的时候，应该使用动态的 :is 来绑定
+\> 由于组件是通过变量引用而不是基于字符串组件名注册的，
+\>
+\> 在 \<script setup\> 中要使用动态组件的时候，应该使用动态的 :is 来绑定
 
 ```vue
-<template>
-    <div>
-        <component :is="GrandSon"></component>
-    </div>
-</template>
+\<template\>
+    \<div\>
+        \<component :is="GrandSon"\>\</component\>
+    \</div\>
+\</template\>
 
-<script setup>
+\<script setup\>
  //import HelloWorld from './components/HelloWorld.vue';
  import GrandSon from "./components/GrandSon.vue"
-</script>
+\</script\>
 ```
 
 ## 4.自定义指令
 
-本地的自定义指令在 `<script setup>` 中不需要显式注册，但他们必须遵循 `vNameOfDirective` 这样的命名规范：
+本地的自定义指令在 `\<script setup\>` 中不需要显式注册，但他们必须遵循 `vNameOfDirective` 这样的命名规范：
 
 ```vue
-<script setup>
+\<script setup\>
 const vMyDirective = {
-  beforeMount: (el) => {
+  beforeMount: (el) =\> {
     // 在元素上做些操作
   }
 }
-</script>
-<template>
-  <h1 v-my-directive>This is a Heading</h1>
-</template>
+\</script\>
+\<template\>
+  \<h1 v-my-directive\>This is a Heading\</h1\>
+\</template\>
 ```
 
 ## 5.useAttrs
@@ -4107,45 +4107,45 @@ const vMyDirective = {
 之前讲的属性的透传，可以使用useAttrs获取
 
 ```javascript
-<script setup>
+\<script setup\>
 import { useAttrs } from 'vue'
 
 const attrs = useAttrs()
-</script>
+\</script\>
 ```
 
 ## 6.defineProps
 
-- `defineProps` 和 `defineEmits` 都是只能在 `<script setup>` 中使用的**编译器宏**。他们不需要导入，且会随着 `<script setup>` 的处理过程一同被编译掉。
+- `defineProps` 和 `defineEmits` 都是只能在 `\<script setup\>` 中使用的**编译器宏**。他们不需要导入，且会随着 `\<script setup\>` 的处理过程一同被编译掉。
 
 `defineProps` 接收与 `props` 选项相同的值，
 
 ```vue
-<!--App.vue-->
-<template>
-  <div>
-    <h2 >我是父组件！</h2>
-   <my-child msg="hello"></my-child>
-  </div>
-</template>
+\<!--App.vue--\>
+\<template\>
+  \<div\>
+    \<h2 \>我是父组件！\</h2\>
+   \<my-child msg="hello"\>\</my-child\>
+  \</div\>
+\</template\>
 
-<script setup>
+\<script setup\>
 
 import MyChild from "./MyChild.vue"
-</script>
+\</script\>
 
 
-<!--MyChild.vue-->
-<template>
-  <h1>我是子组件 {{props.msg}}</h1>
-</template>
+\<!--MyChild.vue--\>
+\<template\>
+  \<h1\>我是子组件 {{props.msg}}\</h1\>
+\</template\>
 
-<script setup>
+\<script setup\>
 
 const props=defineProps({
   msg:String
 })
-</script>
+\</script\>
 
 ```
 
@@ -4216,28 +4216,28 @@ defineProps({
 ## 7.defineEmits
 
 ```vue
-<!--App.vue-->
-<template>
-  <div>
-    <h2 >我是父组件！</h2>
-   <my-child msg="hello" @fn="change"></my-child>
-  </div>
-</template>
+\<!--App.vue--\>
+\<template\>
+  \<div\>
+    \<h2 \>我是父组件！\</h2\>
+   \<my-child msg="hello" @fn="change"\>\</my-child\>
+  \</div\>
+\</template\>
 
-<script setup>
+\<script setup\>
 
 import MyChild from "./MyChild.vue"
 function change(){
   alert(123)
 }
-</script>
+\</script\>
 
-<!--MyChild.vue-->
-<template>
-  <h1 @click="a">我是子组件 {{props.msg}}</h1>
-</template>
+\<!--MyChild.vue--\>
+\<template\>
+  \<h1 @click="a"\>我是子组件 {{props.msg}}\</h1\>
+\</template\>
 
-<script setup>
+\<script setup\>
 
 const props=defineProps({
   msg:String
@@ -4248,26 +4248,26 @@ const emit=defineEmits(["fn","fn2"])
 function a(){
   emit("fn")
 }
-</script>
+\</script\>
 ```
 
 ## 8.defineExpose
 
-> **补充前置知识：关于ref获取组件对象**
->
-> Vue3 中通过 ref 访问元素节点与 Vue2 不太一样，在 Vue3 中我们是没有 this 的，所以当然也没有 this.$refs。想要获取 ref，我们只能通过声明变量的方式。
+\> **补充前置知识：关于ref获取组件对象**
+\>
+\> Vue3 中通过 ref 访问元素节点与 Vue2 不太一样，在 Vue3 中我们是没有 this 的，所以当然也没有 this.$refs。想要获取 ref，我们只能通过声明变量的方式。
 
 ```vue
-<template>
-  <div ref="hello">hello</div>
-</template>
-<script setup>
+\<template\>
+  \<div ref="hello"\>hello\</div\>
+\</template\>
+\<script setup\>
 import { onMounted} from "vue";
 const hello = ref(null);
-onMounted(() => {
-  console.log(hello.value); // <div>hello</div>
+onMounted(() =\> {
+  console.log(hello.value); // \<div\>hello\</div\>
 });
-</script>
+\</script\>
 ```
 
 上段代码中我们同样给 div 元素添加了 ref 属性，为了获取到这个元素，我们声明了一个与 ref 属性名称相同的变量 hello，然后我们通过 hello.value 的形式便获取到了该 div 元素。
@@ -4283,14 +4283,14 @@ onMounted(() => {
 以前我们父组件调用子组件的方式是这么写的
 
 ```vue
-<!--父组件-->
-<template>
-  <div>
-    <HelloWorld ref="child" />
-    <button @click="change">按钮</button>
-  </div>
-</template>
-<script >
+\<!--父组件--\>
+\<template\>
+  \<div\>
+    \<HelloWorld ref="child" /\>
+    \<button @click="change"\>按钮\</button\>
+  \</div\>
+\</template\>
+\<script \>
 import HelloWorld from "./components/HelloWorld.vue";
 export default {
   components: {
@@ -4302,15 +4302,15 @@ export default {
     }
   }
 };
-</script>
-<!----------------------子组件-------------------------------->
-<template>
-    <div>
-        <h1 >我是子组件</h1>
-    </div>
-</template>
+\</script\>
+\<!----------------------子组件--------------------------------\>
+\<template\>
+    \<div\>
+        \<h1 \>我是子组件\</h1\>
+    \</div\>
+\</template\>
 
-<script>
+\<script\>
 export default {
     methods:{
         fn(){
@@ -4318,22 +4318,22 @@ export default {
         }
     }
 }
-</script>
+\</script\>
 
 ```
 
-> 但是子组件是<script setup>时，父组件直接调用就会提示方法未定义。官网有这么一句话：使用 <script setup> 的组件是默认关闭的，也即通过模板 ref 或者 $parent 链获取到的组件的公开实例，不会暴露任何在 <script setup> 中声明的绑定。因此，父组件是不能直接访问子组件的方法。需要子组件手动的抛出才行。
+\> 但是子组件是\<script setup\>时，父组件直接调用就会提示方法未定义。官网有这么一句话：使用 \<script setup\> 的组件是默认关闭的，也即通过模板 ref 或者 $parent 链获取到的组件的公开实例，不会暴露任何在 \<script setup\> 中声明的绑定。因此，父组件是不能直接访问子组件的方法。需要子组件手动的抛出才行。
 
 此时只需要子组件做如下修改，父组件就可以正常调用
 
 ```vue
-<template>
-    <div>
-        <h1 >我是子组件</h1>
-    </div>
-</template>
+\<template\>
+    \<div\>
+        \<h1 \>我是子组件\</h1\>
+    \</div\>
+\</template\>
 
-<script setup>
+\<script setup\>
 import { ref } from 'vue';
 let a=ref(100)
 function fn(){
@@ -4342,19 +4342,19 @@ function fn(){
 defineExpose({
     fn,a
 })
-</script>
+\</script\>
 ```
 
 ```vue
-<!--父组件-->
-<template>
-  <div>
-    <HelloWorld ref="child" />
-    <button @click="change">按钮</button>
-  </div>
-</template>
+\<!--父组件--\>
+\<template\>
+  \<div\>
+    \<HelloWorld ref="child" /\>
+    \<button @click="change"\>按钮\</button\>
+  \</div\>
+\</template\>
 
-<script >
+\<script \>
 import HelloWorld from "./components/HelloWorld.vue";
 export default {
   components: {
@@ -4367,9 +4367,9 @@ export default {
     }
   }
 };
-</script>
-<!----------------------------vue3写法---------------------------------------->
-<script setup>
+\</script\>
+\<!----------------------------vue3写法----------------------------------------\>
+\<script setup\>
 import HelloWorld from "./components/HelloWorld.vue";
 import { ref} from 'vue'
 const child = ref(null);
@@ -4377,12 +4377,12 @@ const child = ref(null);
         child.value.fn()
     }
 
-</script>
+\</script\>
 ```
 
 ## 9.defineModel
 
-> `defineModel`是一个宏，所以不需要从vue中`import`导入，直接使用就可以了。这个宏可以用来声明一个双向绑定 prop，通过父组件的 `v-model` 来使用。
+\> `defineModel`是一个宏，所以不需要从vue中`import`导入，直接使用就可以了。这个宏可以用来声明一个双向绑定 prop，通过父组件的 `v-model` 来使用。
 
 https://www.cnblogs.com/heavenYJJ/p/18006048
 
@@ -4396,15 +4396,15 @@ https://www.cnblogs.com/heavenYJJ/p/18006048
 因此，`v-model` 会自动绑定到名为 `modelValue` 的 prop，并且会监听名为 `update:modelValue` 的事件，以实现双向绑定的效果。
 
 ```vue
-<!--父组件-->
-<template>
-  <div>
-    <Child v-model="inputValue" />
-    <p>Input Value: {{ inputValue }}</p>
-  </div>
-</template>
+\<!--父组件--\>
+\<template\>
+  \<div\>
+    \<Child v-model="inputValue" /\>
+    \<p\>Input Value: {{ inputValue }}\</p\>
+  \</div\>
+\</template\>
 
-<script>
+\<script\>
 import Child from './Child.vue';
 
 export default {
@@ -4417,52 +4417,52 @@ export default {
     };
   }
 };
-</script>
+\</script\>
 
-<!--子组件-->
-<template>
-  <input :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" />
-  <h1>我是子组件{{ modelValue }}</h1>
-</template>
+\<!--子组件--\>
+\<template\>
+  \<input :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" /\>
+  \<h1\>我是子组件{{ modelValue }}\</h1\>
+\</template\>
 
-<script setup>
+\<script setup\>
 defineProps(["modelValue"])
-</script>
+\</script\>
 ```
 
 有了defineModel后直接修改子组件的代码
 
 ```vue
-<template>
-  <input v-model="model" />
-</template>
+\<template\>
+  \<input v-model="model" /\>
+\</template\>
 
-<script setup >
+\<script setup \>
 const model = defineModel();
-</script>
+\</script\>
 ```
 
-> `defineModel`的返回值是一个`ref`，我们可以在子组件中修改`model`变量的值，并且父组件中的`inputValue`变量的值也会同步更新，这样就可以实现双向绑定。
+\> `defineModel`的返回值是一个`ref`，我们可以在子组件中修改`model`变量的值，并且父组件中的`inputValue`变量的值也会同步更新，这样就可以实现双向绑定。
 
 defineModel其实就是在子组件内定义了一个叫model的ref变量和modelValue的props，并且watch了props中的modelValue。当props中的modelValue的值改变后会同步更新model变量的值。并且当在子组件内改变model变量的值后会抛出update:modelValue事件，父组件收到这个事件后就会更新父组件中对应的变量值。
 
-> 那既然defineModel是定义一个属性，那么这个属性能否像props那样设置属性呢
+\> 那既然defineModel是定义一个属性，那么这个属性能否像props那样设置属性呢
 
 ```js
 const model = defineModel({ type: String, default: "20" });//也是可以的，和props的类型规定是一样的
 ```
 
-> 那如果有多个双向绑定呢
+\> 那如果有多个双向绑定呢
 
 ```vue
-<template>
-  <div>
-    <Child v-model:aa="inputValue1" />
-    <Child v-model:bb="inputValue2" />
-  </div>
-</template>
+\<template\>
+  \<div\>
+    \<Child v-model:aa="inputValue1" /\>
+    \<Child v-model:bb="inputValue2" /\>
+  \</div\>
+\</template\>
 
-<script>
+\<script\>
 import Child from './Child.vue';
 
 export default {
@@ -4476,35 +4476,35 @@ export default {
     };
   }
 };
-</script>
-<!--子组件-->
-<template>
-  <input v-model="model1" />
-  <h1>我是子组件model1{{ model1 }}</h1>
-  <input v-model="model2" />
-  <h1>我是子组件model2{{ model2 }}</h1>
-</template>
+\</script\>
+\<!--子组件--\>
+\<template\>
+  \<input v-model="model1" /\>
+  \<h1\>我是子组件model1{{ model1 }}\</h1\>
+  \<input v-model="model2" /\>
+  \<h1\>我是子组件model2{{ model2 }}\</h1\>
+\</template\>
 
-<script setup >
+\<script setup \>
 const model1 = defineModel("aa");
 const model2 = defineModel("bb");
     // 或者：声明带选项的 "count" prop
 const count = defineModel("count", { type: Number, default: 0 })
-</script>
+\</script\>
 ```
 
 
 
 ## 10.defineComponent
 
-> vue3中，新增了 defineComponent ，它并没有实现任何的逻辑，只是对setup函数进行封装，返回options的对象，它的存在是完全让传入的整个对象获得对应的类型，它的存在就是完全为了服务 TypeScript 而存在的，在TypeScript下，给予了组件 正确的参数类型推断
+\> vue3中，新增了 defineComponent ，它并没有实现任何的逻辑，只是对setup函数进行封装，返回options的对象，它的存在是完全让传入的整个对象获得对应的类型，它的存在就是完全为了服务 TypeScript 而存在的，在TypeScript下，给予了组件 正确的参数类型推断
 
 ```vue
-<template>
-  <div @click="change">{{ str }}</div>
+\<template\>
+  \<div @click="change"\>{{ str }}\</div\>
   
-</template>
-<script>
+\</template\>
+\<script\>
   import { ref, defineComponent } from 'vue'
   export default defineComponent({
     created(){
@@ -4520,7 +4520,7 @@ const count = defineModel("count", { type: Number, default: 0 })
       }
     }
   })
-</script>
+\</script\>
 
 ```
 
@@ -4528,17 +4528,17 @@ const count = defineModel("count", { type: Number, default: 0 })
 
 # 18.Teleport(瞬移组件)
 
-> `<Teleport>` 是一个内置组件，它可以将一个组件内部的一部分模板“传送”到该组件的 DOM 结构外层的位置去。
+\> `\<Teleport\>` 是一个内置组件，它可以将一个组件内部的一部分模板“传送”到该组件的 DOM 结构外层的位置去。
 
 最简单用法
 
 ```vue
-<template>
-  <div>hello</div>
-  <teleport to="body">
-    <div class="modal">我是一个弹窗</div>
-  </teleport>
-</template>
+\<template\>
+  \<div\>hello\</div\>
+  \<teleport to="body"\>
+    \<div class="modal"\>我是一个弹窗\</div\>
+  \</teleport\>
+\</template\>
 ```
 
 审查元素可以发现，我们的modal添加了body下而不是app下
@@ -4546,10 +4546,10 @@ const count = defineModel("count", { type: Number, default: 0 })
 ![image-20220827225629966](http://114.67.74.14/static/vue3_assets/image-20220827225629966.png)
 
 ```vue
-<!--可以用其他的css选择器-->
-<teleport to="#some-id" />
-<teleport to=".some-class" />
-<teleport to="[data-teleport]" />
+\<!--可以用其他的css选择器--\>
+\<teleport to="#some-id" /\>
+\<teleport to=".some-class" /\>
+\<teleport to="[data-teleport]" /\>
 ```
 
 # 19.跨域问题
@@ -4581,7 +4581,7 @@ const count = defineModel("count", { type: Number, default: 0 })
          '/api': {
            target: 'https://api.jisuapi.com/tv',
            changeOrigin: true,
-           rewrite: (path) => path.replace(/^\/api/, '')
+           rewrite: (path) =\> path.replace(/^\/api/, '')
          }
        }
      }
@@ -4603,7 +4603,7 @@ const count = defineModel("count", { type: Number, default: 0 })
 
 1.vue3组件可以包含多个根节点， vue2只能包含一个根节点
 
-2.vue3组合式api,新增<script setup>语法糖
+2.vue3组合式api,新增\<script setup\>语法糖
 
 3.vue3新增teleport组件
 
@@ -4629,7 +4629,7 @@ https://router.vuejs.org/zh/
 
 安装
 
-> npm install vue-router@4
+\> npm install vue-router@4
 
 
 
@@ -4661,7 +4661,7 @@ export default vueRouter
 
 ==main.js==
 
-> 注册路由插件
+\> 注册路由插件
 
 ```js
 import router from "./router/index"
@@ -4687,36 +4687,36 @@ app.mount('#app')
 
 ==解决方案==
 
-> 解决:
->
-> 关闭 JavaScript 的验证启用，在 VSCode 的 settings.json 文件，增加 JSON 格式代码：
->
-> （MAC 通过 command + P 搜索 settings.json 或 在[vscode](https://link.zhihu.com/?target=https%3A//so.csdn.net/so/search%3Fq%3Dvscode%26spm%3D1001.2101.3001.7020)中Crtl+shift+P，输入setting.json）
->
-> 在代码中输入`"javascript.validate.enable": false`即可解决
+\> 解决:
+\>
+\> 关闭 JavaScript 的验证启用，在 VSCode 的 settings.json 文件，增加 JSON 格式代码：
+\>
+\> （MAC 通过 command + P 搜索 settings.json 或 在[vscode](https://link.zhihu.com/?target=https%3A//so.csdn.net/so/search%3Fq%3Dvscode%26spm%3D1001.2101.3001.7020)中Crtl+shift+P，输入setting.json）
+\>
+\> 在代码中输入`"javascript.validate.enable": false`即可解决
 
 ## 2.router-view和router-link
 
-> 组件 RouterView 和 RouterLink 都是全局注册的，因此它们不需要在组件模板中导入。但你也可以通过局部导入它们，例如 import { RouterLink } from 'vue-router'。
->
-> 在模板中，组件的名字可以是 PascalCase 风格或 kebab-case 风格的。Vue 的模板编译器支持两种格式，因此 <RouterView> 和 <router-view> 通常是等效的。此时应该遵循你自己项目中使用的约定。
+\> 组件 RouterView 和 RouterLink 都是全局注册的，因此它们不需要在组件模板中导入。但你也可以通过局部导入它们，例如 import { RouterLink } from 'vue-router'。
+\>
+\> 在模板中，组件的名字可以是 PascalCase 风格或 kebab-case 风格的。Vue 的模板编译器支持两种格式，因此 \<RouterView\> 和 \<router-view\> 通常是等效的。此时应该遵循你自己项目中使用的约定。
 
 ![image-20240718192159381](http://114.67.74.14/static/vue3_assets/image-20240718192159381.png)
 
-> 关于router-link的使用
+\> 关于router-link的使用
 
-`<RouterLink>` 的基本用法相对简单，以下是几个示例和说明：
+`\<RouterLink\>` 的基本用法相对简单，以下是几个示例和说明：
 
 1. **链接到路径**： 直接使用 `to` 属性指定要导航到的路由路径。
 
    ```
-   <RouterLink to="/about">About Us</RouterLink>Copy
+   \<RouterLink to="/about"\>About Us\</RouterLink\>Copy
    ```
 
 2. **使用路由名称**： 如果你在路由配置中使用了命名路由，可以通过传递一个对象到 `to` 属性来指定路由的 `name`。
 
    ```
-   <RouterLink :to="{ name: 'user', params: { userId: 123 }}">User Profile</RouterLink>Copy
+   \<RouterLink :to="{ name: 'user', params: { userId: 123 }}"\>User Profile\</RouterLink\>Copy
    ```
 
    这里 `name` 对应路由配置中的路由名称，`params` 对应路由参数。
@@ -4724,7 +4724,7 @@ app.mount('#app')
 3. **带查询参数的链接**： 向 `to` 属性的对象中添加 `query` 属性，来指定URL的查询参数。
 
    ```
-   <RouterLink :to="{ name: 'search', query: { keyword: 'vue' }}">Search</RouterLink>Copy
+   \<RouterLink :to="{ name: 'search', query: { keyword: 'vue' }}"\>Search\</RouterLink\>Copy
    ```
 
    上面的链接会生成URL，如 `/search?keyword=vue`。
@@ -4750,14 +4750,14 @@ $route表示当前路由对象：
 要对同一个组件中参数的变化做出响应的话，你可以简单地 watch $route 对象上的任意属性，在这个场景中，就是 $route.params ：
 
 ```vue
-<script setup>
+\<script setup\>
 import { watch } from 'vue'
 import { useRoute } from 'vue-router'
 const route = useRoute()
-watch(() => route.params.id, (newId, oldId) => {
+watch(() =\> route.params.id, (newId, oldId) =\> {
   // 对路由变化做出响应...
 })
-</script>
+\</script\>
 ```
 
 使用组件的onUpdated钩子也可以监测到动态路由部分的变化，但是不推荐
@@ -4770,7 +4770,7 @@ watch(() => route.params.id, (newId, oldId) => {
 
 **因为我们在 setup 里面没有访问 this，所以我们不能直接访问 this.$router 或 this.$route。作为替代，我们使用 useRouter 和 useRoute 函数：**
 
-> 通过调用useRouter获取路由对象
+\> 通过调用useRouter获取路由对象
 
 ```js
 const router = useRouter()
@@ -4790,13 +4790,13 @@ router.push({ path: '/register', query: { plan: 'private' } })
 router.push({ path: '/about', hash: '#team' })
 ```
 
-> 替换当前位置
+\> 替换当前位置
 
 它的作用类似于 `router.push`，唯一不同的是，它在导航时不会向 history 添加新记录，正如它的名字所暗示的那样——它取代了当前的条目。
 
 | 声明式                            | 编程式                |
 | :-------------------------------- | :-------------------- |
-| `<router-link :to="..." replace>` | `router.replace(...)` |
+| `\<router-link :to="..." replace\>` | `router.replace(...)` |
 
 也可以直接在传递给 `router.push` 的 `to` 参数中增加一个属性 `replace: true` ：
 
@@ -4822,13 +4822,13 @@ const routes = [
     children: [
       {
         // 当 /user/profile 匹配成功
-        // UserProfile 将被渲染到 User 的 <router-view> 内部
+        // UserProfile 将被渲染到 User 的 \<router-view\> 内部
         path: 'profile',
         component: UserProfile,
       },
       {
         // 当 /user/posts 匹配成功
-        // UserPosts 将被渲染到 User 的 <router-view> 内部
+        // UserPosts 将被渲染到 User 的 \<router-view\> 内部
         path: 'posts',
         component: UserPosts,
       },
@@ -4849,7 +4849,7 @@ const routes = [
 
 ## 7.重定向和别名
 
-> 重定向
+\> 重定向
 
 重定向也是通过 `routes` 配置来完成，下面例子是从 `/home` 重定向到 `/`：
 
@@ -4867,7 +4867,7 @@ const routes = [{ path: '/home', redirect: { name: 'homepage' } }]
 
 在写 `redirect` 的时候，可以省略 `component` 配置，因为它从来没有被直接访问过，所以没有组件要渲染。唯一的例外是[嵌套路由](https://router.vuejs.org/zh/guide/essentials/nested-routes.html)：如果一个路由记录有 `children` 和 `redirect` 属性，它也应该有 `component` 属性。
 
-> 别名
+\> 别名
 
 ```js
 const routes = [{ path: '/', component: Homepage, alias: '/home' }]
@@ -4947,9 +4947,9 @@ export default router;
 **vue-router 3.x**
 
 ```vue
-  <keep-alive>
-      <router-view></router-view>
-   </keep-alive>
+  \<keep-alive\>
+      \<router-view\>\</router-view\>
+   \</keep-alive\>
 ```
 
 
@@ -4963,24 +4963,24 @@ export default router;
 正确写法
 
 ```vue
-<router-view v-slot="{ Component }">
-  <keep-alive>
-    <component :is="Component" :key="$route.name" v-if="$route.meta.keepAlive" />
-  </keep-alive>
-  <component :is="Component" :key="$route.name" v-if="!$route.meta.keepAlive" />
-</router-view>
+\<router-view v-slot="{ Component }"\>
+  \<keep-alive\>
+    \<component :is="Component" :key="$route.name" v-if="$route.meta.keepAlive" /\>
+  \</keep-alive\>
+  \<component :is="Component" :key="$route.name" v-if="!$route.meta.keepAlive" /\>
+\</router-view\>
 ```
 
 在 `v-slot` 后面的对象包含以下属性:
 
-- `Component`: 这是一个通过命名插槽将匹配到的组件传递给插槽的属性。你可以在模板中使用 `Component` 属性来渲染匹配到的组件。例如，`<component :is="Component" />` 将会渲染匹配到的组件。
+- `Component`: 这是一个通过命名插槽将匹配到的组件传递给插槽的属性。你可以在模板中使用 `Component` 属性来渲染匹配到的组件。例如，`\<component :is="Component" /\>` 将会渲染匹配到的组件。
 - `route`: 这是当前路由的信息对象。它具有以下属性：
   - `path`: 当前路由的路径。
   - `params`: 一个对象，包含动态路径参数和其对应的值。
   - `query`: 一个对象，包含查询参数和其对应的值。
   - `hash`: URL 中的 hash 部分。
 - `router`: 这是 Vue Router 的实例，它提供了一些实用方法和属性，例如 `router.push()` 和 `router.go()`。
-- `slotProps`: 这是 `<router-view>` 组件内部的插槽属性对象。它可以包含一些额外的属性，它们是为特定路由设置的属性。通常，你可以在路由配置中使用 `meta` 属性来定义这些属性。
+- `slotProps`: 这是 `\<router-view\>` 组件内部的插槽属性对象。它可以包含一些额外的属性，它们是为特定路由设置的属性。通常，你可以在路由配置中使用 `meta` 属性来定义这些属性。
 
 ## 11.配合组合式api
 
@@ -5001,12 +5001,12 @@ export default {
 
 ## 12.导航守卫
 
-> 全局前置守卫
+\> 全局前置守卫
 
 ```js
 const router = createRouter({ ... })
 
-router.beforeEach((to, from) => {
+router.beforeEach((to, from) =\> {
   // ...
   // 返回 false 以取消导航
   return false
@@ -5029,7 +5029,7 @@ const router = createRouter({
   ]
 });
 
- router.beforeEach(async (to, from) => {
+ router.beforeEach(async (to, from) =\> {
    if (
      // 检查用户是否已登录
      !isAuthenticated &&
@@ -5042,8 +5042,8 @@ const router = createRouter({
  })
 ```
 
-> 全局解析守卫
->
+\> 全局解析守卫
+\>
 
 这个守卫在所有组件内守卫和异步路由组件被解析后执行，但是在导航被确认之前运行。这意味着所有的异步操作（比如数据获取或异步组件解析）都已完成。``
 
@@ -5056,7 +5056,7 @@ const router = createRouter({
   routes,
 });
 
-router.beforeResolve(async (to, from) => {
+router.beforeResolve(async (to, from) =\> {
   // 你可以在这里加入你的逻辑
   // 例如，检查用户权限，或者再次确认已加载所有内容
   console.log('beforeResolve guard');
@@ -5066,24 +5066,24 @@ router.beforeResolve(async (to, from) => {
 export default router;
 ```
 
-> 全局后置钩子
+\> 全局后置钩子
 
 和守卫不同的是，这些钩子不会接受 `next` 函数也不会改变导航本身,并且不需要返回值
 
 ```js
-router.afterEach((to, from) => {
+router.afterEach((to, from) =\> {
   sendToAnalytics(to.fullPath)
 })
 ```
 
-> 路由独享的守卫
+\> 路由独享的守卫
 
 ```JS
 const routes = [
   {
     path: '/users/:id',
     component: UserDetails,
-    beforeEnter: (to, from) => {
+    beforeEnter: (to, from) =\> {
       // reject the navigation
       return false
     },
@@ -5112,10 +5112,10 @@ const routes = [
 
 示例中的 `beforeEnter` 在 `/user/list` 和 `/user/details` 之间移动时不会被调用，因为它们共享相同的父级路由。如果我们直接将 `beforeEnter` 守卫放在 `details` 路由上，那么在这两个路由之间移动时就会被调用。
 
-> 组件内的守卫
+\> 组件内的守卫
 
 ```VUE
-<script>
+\<script\>
 export default {
   beforeRouteEnter(to, from) {
     // 在渲染该组件的对应路由被验证前调用
@@ -5133,7 +5133,7 @@ export default {
     // 与 `beforeRouteUpdate` 一样，它可以访问组件实例 `this`
   },
 }
-</script>
+\</script\>
 ```
 
 **完整的导航解析流程**
@@ -5154,26 +5154,26 @@ export default {
 新增了两个组合式函数，作为导航守卫
 
 ```vue
-<template>
-    <div>
-        <h1 @click="go">我是about</h1>
-    </div>
-</template>
+\<template\>
+    \<div\>
+        \<h1 @click="go"\>我是about\</h1\>
+    \</div\>
+\</template\>
 
-<script setup>
+\<script setup\>
 import { useRoute, useRouter,onBeforeRouteLeave,onBeforeRouteUpdate } from 'vue-router'
 
-onBeforeRouteLeave((to,from)=>{
+onBeforeRouteLeave((to,from)=\>{
     console.log(99,to,from)
 })
-onBeforeRouteUpdate((to,from)=>{
+onBeforeRouteUpdate((to,from)=\>{
     console.log("更新了",to,from)
 })
-</script>
+\</script\>
 
-<style lang="scss" scoped>
+\<style lang="scss" scoped\>
 
-</style>
+\</style\>
 ```
 
 ## 13.路由元信息
@@ -5196,7 +5196,7 @@ const routes = [
       path: '/about', component: About,meta:{msg:"about"},
       children:[
         {
-          path:"aa",component:()=>import("@/components/HelloWorld.vue"),meta:{msg:"about3"}
+          path:"aa",component:()=\>import("@/components/HelloWorld.vue"),meta:{msg:"about3"}
         }
       ]
     },
@@ -5206,7 +5206,7 @@ let vueRouter=createRouter({
     routes,
     history: createWebHashHistory(), 
 })
-vueRouter.beforeEach((to, from) => {
+vueRouter.beforeEach((to, from) =\> {
 
  console.log(to.meta)
 })
@@ -5221,8 +5221,8 @@ export default vueRouter
 ```js
 import { createRouter, createWebHistory } from 'vue-router';
 
-const Home = () => import('@/components/Home.vue');
-const About = () => import('@/components/About.vue');
+const Home = () =\> import('@/components/Home.vue');
+const About = () =\> import('@/components/About.vue');
 
 const routes = [
   { path: '/', name: 'Home', component: Home },
@@ -5243,8 +5243,8 @@ router.addRoute({ path: '/about', name: 'About', component: About });Copy
 
 ```js
 function addAdminRoutes() {
-  const AdminPanel = () => import('@/components/AdminPanel.vue');
-  const UserList = () => import('@/components/UserList.vue');
+  const AdminPanel = () =\> import('@/components/AdminPanel.vue');
+  const UserList = () =\> import('@/components/UserList.vue');
   
   router.addRoute({ path: '/admin', name: 'Admin', component: AdminPanel });
   router.addRoute({ path: '/users', name: 'Users', component: UserList });
@@ -5260,8 +5260,8 @@ if (user.isLoggedIn && user.isAdministrator) {
 你还可以向已有的命名路由添加子路由。例如，将子路由添加到一个名为 `Account` 的父路由：
 
 ```js
-const UserSettings = () => import('@/components/UserSettings.vue');
-const UserOrders = () => import('@/components/UserOrders.vue');
+const UserSettings = () =\> import('@/components/UserSettings.vue');
+const UserOrders = () =\> import('@/components/UserOrders.vue');
 
 router.addRoute('Account', { path: 'settings', name: 'Settings', component: UserSettings });
 router.addRoute('Account', { path: 'orders', name: 'Orders', component: UserOrders });
@@ -5321,13 +5321,13 @@ createApp(App).use(router).use(pinia).mount('#app')
 
 ## 3.创建store
 
-> 创建store
+\> 创建store
 
 - `defineStore()` 的第二个参数可接受两类值：Setup 函数或 Option 对象。
 
 - `state` 是 store 的数据 (`data`)，`getters` 是 store 的计算属性 (`computed`)，而 `actions` 则是方法 (`methods`)。
 
-> 1.**Option Store**
+\> 1.**Option Store**
 
 *src-store-index.js*
 
@@ -5335,7 +5335,7 @@ createApp(App).use(router).use(pinia).mount('#app')
 import { defineStore } from 'pinia'
 //1.定义store
 export const useStore=defineStore("main",{ //第一个参数是应用程序中 store 的唯一 id,
-    state: () => { //// 推荐使用 完整类型推断的箭头函数
+    state: () =\> { //// 推荐使用 完整类型推断的箭头函数
         return {
             num:0
         }
@@ -5345,12 +5345,12 @@ export const useStore=defineStore("main",{ //第一个参数是应用程序中 s
 })
 ```
 
-> 2.**Setup Store**
+\> 2.**Setup Store**
 
 ```js
-export const useCounterStore = defineStore('counter', () => {
+export const useCounterStore = defineStore('counter', () =\> {
   const count = ref(0)
-  const doubleCount = computed(() => count.value * 2)
+  const doubleCount = computed(() =\> count.value * 2)
   function increment() {
     count.value++
   }
@@ -5365,7 +5365,7 @@ export const useCounterStore = defineStore('counter', () => {
 - `computed()` 就是 `getters`
 - `function()` 就是 `actions`
 
-> 关于store的定义
+\> 关于store的定义
 
 你可以定义任意多的 store，但为了让使用 pinia 的益处最大化 (比如允许构建工具自动进行代码分割以及 TypeScript 推断)，**你应该在不同的文件中去定义 store**。
 
@@ -5379,17 +5379,17 @@ export const useCounterStore = defineStore('counter', () => {
 ==App.vue==
 
 ```vue
-<template>
-   <h1>hello vue3</h1>
-   <h1>{{ store.num }}</h1>
+\<template\>
+   \<h1\>hello vue3\</h1\>
+   \<h1\>{{ store.num }}\</h1\>
    
-</template>
-<script setup>
+\</template\>
+\<script setup\>
 import { useStore } from './store';
 
 const store=useStore();
 console.log(store.num)
-</script>
+\</script\>
 
 ```
 
@@ -5398,7 +5398,7 @@ console.log(store.num)
 为了从 store 中提取属性时保持其响应性，你需要使用 `storeToRefs()`。它将为每一个响应式属性创建引用。当你只使用 store 的状态而不调用任何 action 时，它会非常有用。请注意，你可以直接从 store 中解构 action，因为它们也被绑定到 store 上：
 
 ```vue
-<script setup>
+\<script setup\>
 import { storeToRefs } from 'pinia'
 const store = useCounterStore()
 // `name` 和 `doubleCount` 是响应式的 ref
@@ -5407,7 +5407,7 @@ const store = useCounterStore()
 const { name, doubleCount } = storeToRefs(store)
 // 作为 action 的 increment 可以直接解构
 const { increment } = store
-</script>
+\</script\>
 ```
 
 ## 4.修改数据
@@ -5415,12 +5415,12 @@ const { increment } = store
 pinia的数据可以直接改
 
 ```vue
-<template>
-   <h1>hello vue3</h1>
-    <h1 @click="change">{{ store.num }}</h1>
+\<template\>
+   \<h1\>hello vue3\</h1\>
+    \<h1 @click="change"\>{{ store.num }}\</h1\>
    
-</template>
-<script setup>
+\</template\>
+\<script setup\>
 import { useStore } from './store';
 
 const store=useStore();
@@ -5428,15 +5428,15 @@ function change(){
   store.num++
 }
 console.log(store.num)
-</script>
+\</script\>
 ```
 
 对象形式的数据也可以直接改
 
 ```vue
-<!-------------------------store --------------------->
+\<!-------------------------store ---------------------\>
 export const useStore=defineStore("main",{
-    state: () => {
+    state: () =\> {
         return {
             num:0,
             obj:{
@@ -5451,13 +5451,13 @@ export const useStore=defineStore("main",{
     },
     actions:{}
 })
-<!------------------------------->
-<template>
-  <h1>hello vue3</h1>
-  <h1 @click="change">{{ store.num }} {{ store.obj }}</h1>
-  <button @click="reset">重置</button>
-</template>
-<script setup>
+\<!-------------------------------\>
+\<template\>
+  \<h1\>hello vue3\</h1\>
+  \<h1 @click="change"\>{{ store.num }} {{ store.obj }}\</h1\>
+  \<button @click="reset"\>重置\</button\>
+\</template\>
+\<script setup\>
 import { useStore } from './store';
 
 const store = useStore();
@@ -5472,7 +5472,7 @@ function reset() {
   store.$reset()
 }
 console.log(store.num)
-</script>
+\</script\>
 ```
 
 
@@ -5492,7 +5492,7 @@ function change() {
 
 ```js
 function change() {
- store.$patch((state)=>{
+ store.$patch((state)=\>{
    state.num++;
    state.obj.name="小红"
  })
@@ -5502,12 +5502,12 @@ function change() {
 ## 5.重置数据
 
 ```vue
-<template>
-  <h1>hello vue3</h1>
-  <h1 @click="change">{{ store.num }}</h1>
-  <button @click="reset">重置</button>
-</template>
-<script setup>
+\<template\>
+  \<h1\>hello vue3\</h1\>
+  \<h1 @click="change"\>{{ store.num }}\</h1\>
+  \<button @click="reset"\>重置\</button\>
+\</template\>
+\<script setup\>
 import { useStore } from './store';
 
 const store = useStore();
@@ -5519,7 +5519,7 @@ function reset() {
   store.$reset()
 }
 console.log(store.num)
-</script>
+\</script\>
 ```
 
 
@@ -5532,7 +5532,7 @@ console.log(store.num)
 import { defineStore } from 'pinia'
 //1.定义store
 export const useStore=defineStore("main",{
-    state: () => {
+    state: () =\> {
         return {
             num:0,
             obj:{
@@ -5549,7 +5549,7 @@ export const useStore=defineStore("main",{
         changeFn(){ //注意不能使用箭头函数定义，
             this.num++;
             this.obj.name="小强"
-            /*this.$patch((state)=>{
+            /*this.$patch((state)=\>{
                 state.num++;
                 state.obj.name="小红555"
               })
@@ -5563,12 +5563,12 @@ export const useStore=defineStore("main",{
 ==App.vue==
 
 ```vue
-<template>
-  <h1>hello vue3</h1>
-  <h1 @click="change">{{ store.num }} {{ store.obj }}</h1>
-  <button @click="reset">重置</button>
-</template>
-<script setup>
+\<template\>
+  \<h1\>hello vue3\</h1\>
+  \<h1 @click="change"\>{{ store.num }} {{ store.obj }}\</h1\>
+  \<button @click="reset"\>重置\</button\>
+\</template\>
+\<script setup\>
 import { useStore } from './store';
 
 const store = useStore();
@@ -5583,7 +5583,7 @@ function reset() {
   store.$reset()
 }
 console.log(store.num)
-</script>
+\</script\>
 ```
 
 

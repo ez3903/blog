@@ -59,12 +59,12 @@ const routes: RouteRecordRaw[]=[
     {
         path:'/',
         name:"Home",
-        component:()=>import("../views/Home.vue")
+        component:()=\>import("../views/Home.vue")
     },
     {
         path:'/about',
         name:"about",
-        component:()=>import("../views/About.vue")
+        component:()=\>import("../views/About.vue")
     }
 ]
 const router = createRouter({
@@ -90,9 +90,9 @@ app.mount('#app')
 ==App.vue==
 
 ```vue
-<template>
-	<RouterView/>
-</template>
+\<template\>
+	\<RouterView/\>
+\</template\>
 
 ```
 
@@ -153,17 +153,17 @@ const routes: RouteRecordRaw[] =[
     {
         path:"/",
         name:"Home",
-        component:()=>import("@/layouts/DefaultLayout.vue")
+        component:()=\>import("@/layouts/DefaultLayout.vue")
     },
     {
         path: '/login',
         name: 'Login',
-        component: () => import("@/views/Login.vue")
+        component: () =\> import("@/views/Login.vue")
     },
     {
         path: '/:pathMatch(.*)*',
         name: 'NotFound',
-        component: () => import("@/views/NotFound.vue")
+        component: () =\> import("@/views/NotFound.vue")
     },
 ]
 
@@ -192,21 +192,21 @@ export default router;
 ## 2.基础逻辑处理
 
 ```vue
-<el-form :model="ruleForm" label="用户名" :rules="rules"  ref="formRef">
-     <el-form-item prop="username">
-         <el-input v-model="ruleForm.username" placeholder="请输入用户名" prefix-icon="User"/>
-     </el-form-item>
-     <el-form-item prop="password">
-         <el-input v-model="ruleForm.password" placeholder="请输入密码" prefix-icon="Lock"/>
-     </el-form-item>
-     <el-form-item>
-         <el-button type="primary" style="width: 100%;" >登录</el-button>
-     </el-form-item>
- </el-form>
+\<el-form :model="ruleForm" label="用户名" :rules="rules"  ref="formRef"\>
+     \<el-form-item prop="username"\>
+         \<el-input v-model="ruleForm.username" placeholder="请输入用户名" prefix-icon="User"/\>
+     \</el-form-item\>
+     \<el-form-item prop="password"\>
+         \<el-input v-model="ruleForm.password" placeholder="请输入密码" prefix-icon="Lock"/\>
+     \</el-form-item\>
+     \<el-form-item\>
+         \<el-button type="primary" style="width: 100%;" \>登录\</el-button\>
+     \</el-form-item\>
+ \</el-form\>
 ```
 
 ```vue
-<script lang="ts" setup>
+\<script lang="ts" setup\>
 import { reactive } from "vue";
 import type { FormRules } from 'element-plus'
 import logo from "@/assets/logo.png"
@@ -218,8 +218,8 @@ const ruleForm: RuleForm = reactive({ //reactive官网有明确说明，不推�
   username: "",
   password: ""
 })
-const formRef = ref<FormInstance>();
-const rules = reactive<FormRules<RuleForm>>({
+const formRef = ref\<FormInstance\>();
+const rules = reactive\<FormRules\<RuleForm\>\>({
   username: [
     { required: true, message: '请输入用户名', trigger: 'blur' },
     { min: 3, max: 8, message: '用户名要求3到8位字符', trigger: 'blur' },
@@ -228,14 +228,14 @@ const rules = reactive<FormRules<RuleForm>>({
     { required: true, message: '请输入密码', trigger: 'blur' },
   ],
 })
-</script>
+\</script\>
 ```
 
 **登录按钮事件**:
 
 ```ts
 function handleLogin() {
-  formRef.value?.validate(async (valid: boolean) => { //?.可选链操作符 
+  formRef.value?.validate(async (valid: boolean) =\> { //?.可选链操作符 
    console.log(valid)
   })
 }
@@ -243,13 +243,13 @@ function handleLogin() {
 
 关于可选链操作符：
 
-> 可选链操作符 (`?.`) 是 JavaScript 中提供的一种简洁安全的访问嵌套属性的方法。使用可选链操作符的目的是避免在访问链中任意为 `null` 或 `undefined` 的情况引发运行时错误。
+\> 可选链操作符 (`?.`) 是 JavaScript 中提供的一种简洁安全的访问嵌套属性的方法。使用可选链操作符的目的是避免在访问链中任意为 `null` 或 `undefined` 的情况引发运行时错误。
 
 ```js
 someObject?.someProperty
 ```
 
-> 这段代码会安全地尝试访问 `someObject` 的 `someProperty` 属性。如果 `someObject` 是 `null` 或 `undefined`，则整个表达式会返回 `undefined`，而不会抛出异常。
+\> 这段代码会安全地尝试访问 `someObject` 的 `someProperty` 属性。如果 `someObject` 是 `null` 或 `undefined`，则整个表达式会返回 `undefined`，而不会抛出异常。
 
 **关于rules校验规则**
 
@@ -269,7 +269,7 @@ someObject?.someProperty
 ```ts
 import { defineStore } from 'pinia';
 export const useUserStore=defineStore("user",{
-    state:()=>({
+    state:()=\>({
         token:null,
         roles:[],
         username:""
@@ -485,7 +485,7 @@ const menulist2 = [
     },
 ]
 //登录接口
-Mock.mock('https://www.demo.com/login', 'post', (options: any) => {
+Mock.mock('https://www.demo.com/login', 'post', (options: any) =\> {
   const { username, password } = JSON.parse(options.body);
   if (username === 'admin' && password === 'admin666') {
     return {
@@ -531,7 +531,7 @@ Mock.mock('https://www.demo.com/login', 'post', (options: any) => {
 ==src-vite-env.d.ts==
 
 ```ts
-/// <reference types="vite/client" />
+/// \<reference types="vite/client" /\>
 declare module "mockjs"  
 ```
 
@@ -545,7 +545,7 @@ import "./mock/index";
 
 
 
-> 创建api文件夹用来存放项目的所有api接口调用文件
+\> 创建api文件夹用来存放项目的所有api接口调用文件
 
 ## 4.axios二次封装
 
@@ -568,12 +568,12 @@ const service: AxiosInstance = axios.create({
 });
 // 请求拦截器
 service.interceptors.request.use(
-    (config: InternalAxiosRequestConfig) => { 
+    (config: InternalAxiosRequestConfig) =\> { 
         // 可以在这里添加认证 token
         // config.headers['Authorization'] = 'Bearer ' + getToken();
         return config;
     },
-    (error: AxiosError) => {
+    (error: AxiosError) =\> {
         // 请求错误处理
         ElNotification({
             title: 'Error',
@@ -585,7 +585,7 @@ service.interceptors.request.use(
 );
 // 响应拦截器
 service.interceptors.response.use(
-    (response: AxiosResponse) => {
+    (response: AxiosResponse) =\> {
         const res = response.data;
         if (res.code !== 200) {
             // 根据实际业务修改状态码不是 200 时的逻辑
@@ -599,7 +599,7 @@ service.interceptors.response.use(
             return res;
         }
     },
-    (error: AxiosError) => {
+    (error: AxiosError) =\> {
         ElNotification({
             title: 'Error',
             message: 'Response Error: ' + error.message,
@@ -624,12 +624,12 @@ interface ResponseData{
     message: string;
   }
 // 封装GET方法
-function get(url: string, params?: any): Promise<ResponseData> {
+function get(url: string, params?: any): Promise\<ResponseData\> {
     return service.get(url,{params} );
   }
   
   // 封装POST方法
-  function post(url: string, data?: any): Promise<ResponseData> {
+  function post(url: string, data?: any): Promise\<ResponseData\> {
     return service.post(url, data);
   }
   
@@ -653,7 +653,7 @@ interface LoginParams {
     password: string
 }
 
-function loginApi(data:LoginParams):Promise<any>{
+function loginApi(data:LoginParams):Promise\<any\>{
     return post(Api.Login,data)
 }  
   
@@ -673,7 +673,7 @@ interface LoginParams {
     password: string
 }
 export const useUserStore=defineStore("user",{
-    state:()=>({
+    state:()=\>({
         token:null,
         roles:[],
         username:""
@@ -701,7 +701,7 @@ interface LoginParams {
     password: string
 }
 export const useUserStore=defineStore("user",{
-    state:()=>({
+    state:()=\>({
         token:sessionStorage.getItem('token') || null,
         roles: sessionStorage.getItem('roles') ? JSON.parse(localStorage.getItem('roles')!) : [],
         username:sessionStorage.getItem("username") || "",
@@ -734,7 +734,7 @@ export const useUserStore=defineStore("user",{
 ```ts
 const userStore = useUserStore();
 function handleLogin() {
-  formRef.value?.validate(async (valid: boolean) => { //?.可选链操作符 
+  formRef.value?.validate(async (valid: boolean) =\> { //?.可选链操作符 
     if(valid){
       userStore.login(ruleForm)
     }
@@ -751,7 +751,7 @@ function handleLogin() {
 import { useRouter } from "vue-router";
 const router = useRouter()
 function handleLogin() {
-  formRef.value?.validate( (valid: boolean) => { //?.可选链操作符 
+  formRef.value?.validate( (valid: boolean) =\> { //?.可选链操作符 
     if(valid){
       userStore.login(ruleForm);
       router.push("/")
@@ -785,7 +785,7 @@ function handleLogin() {
 ```ts
 import router from "./index";
 import { useUserStore } from "../store/auth";
-router.beforeEach((to, from) => {
+router.beforeEach((to, from) =\> {
     const userStore = useUserStore();
     const isLogin = userStore.token;
     // 用户未登录的情况
@@ -817,19 +817,19 @@ import "@/router/guard"
 直接复制element plus中的布局容器
 
 ```vue
- <el-container>
-      <el-aside width="200px">Aside</el-aside>
-      <el-container>
-        <el-header>Header</el-header>
-        <el-main>Main</el-main>
-      </el-container>
-    </el-container>
+ \<el-container\>
+      \<el-aside width="200px"\>Aside\</el-aside\>
+      \<el-container\>
+        \<el-header\>Header\</el-header\>
+        \<el-main\>Main\</el-main\>
+      \</el-container\>
+    \</el-container\>
 ```
 
 加点样式:
 
 ```vue
-<style lang="less" scoped>
+\<style lang="less" scoped\>
   .el-aside{
     height: 100vh;;
     box-shadow: 10px 0 8px -2px rgba(0, 0, 0, 0.2);
@@ -842,7 +842,7 @@ import "@/router/guard"
     height: 80vh;
     overflow: auto;
   }
-</style>
+\</style\>
 ```
 
 # 11.开发侧边栏组件
@@ -852,45 +852,45 @@ import "@/router/guard"
 直接去element plus官网中复制的现成代码，删掉了group,其他不变
 
 ```vue
-<template>
-    <el-menu active-text-color="#ffd04b" background-color="#545c64" class="el-menu-vertical-demo" default-active="2"
-        text-color="#fff">
-        <el-sub-menu index="1">
-            <template #title>
-                <el-icon>
-                    <location />
-                </el-icon>
-                <span>Navigator One</span>
-            </template>
-            <el-menu-item index="1-1">item one</el-menu-item>
-            <el-menu-item index="1-2">item two</el-menu-item>
-            <el-menu-item index="1-3">item three</el-menu-item>
+\<template\>
+    \<el-menu active-text-color="#ffd04b" background-color="#545c64" class="el-menu-vertical-demo" default-active="2"
+        text-color="#fff"\>
+        \<el-sub-menu index="1"\>
+            \<template #title\>
+                \<el-icon\>
+                    \<location /\>
+                \</el-icon\>
+                \<span\>Navigator One\</span\>
+            \</template\>
+            \<el-menu-item index="1-1"\>item one\</el-menu-item\>
+            \<el-menu-item index="1-2"\>item two\</el-menu-item\>
+            \<el-menu-item index="1-3"\>item three\</el-menu-item\>
 
-            <el-sub-menu index="1-4">
-                <template #title>item four</template>
-                <el-menu-item index="1-4-1">item one</el-menu-item>
-            </el-sub-menu>
-        </el-sub-menu>
-        <el-menu-item index="2">
-            <el-icon><document /></el-icon>
-            <span>Navigator Two</span>
-        </el-menu-item>
-        <el-menu-item index="3" disabled>
-            <el-icon>
-                <document />
-            </el-icon>
-            <span>Navigator Three</span>
-        </el-menu-item>
-        <el-menu-item index="4">
-            <el-icon>
-                <setting />
-            </el-icon>
-            <span>Navigator Four</span>
-        </el-menu-item>
-    </el-menu>
-</template>
-<script>
-</script>
+            \<el-sub-menu index="1-4"\>
+                \<template #title\>item four\</template\>
+                \<el-menu-item index="1-4-1"\>item one\</el-menu-item\>
+            \</el-sub-menu\>
+        \</el-sub-menu\>
+        \<el-menu-item index="2"\>
+            \<el-icon\>\<document /\>\</el-icon\>
+            \<span\>Navigator Two\</span\>
+        \</el-menu-item\>
+        \<el-menu-item index="3" disabled\>
+            \<el-icon\>
+                \<document /\>
+            \</el-icon\>
+            \<span\>Navigator Three\</span\>
+        \</el-menu-item\>
+        \<el-menu-item index="4"\>
+            \<el-icon\>
+                \<setting /\>
+            \</el-icon\>
+            \<span\>Navigator Four\</span\>
+        \</el-menu-item\>
+    \</el-menu\>
+\</template\>
+\<script\>
+\</script\>
 ```
 
 然后去主页面引入菜单组件即可
@@ -898,12 +898,12 @@ import "@/router/guard"
 ==DefaultLayout.vue==
 
 ```vue
-<el-aside width="200px">
-      <Menu></Menu>
- </el-aside>
-<script lang="ts" setup>
+\<el-aside width="200px"\>
+      \<Menu\>\</Menu\>
+ \</el-aside\>
+\<script lang="ts" setup\>
 import Menu from '../components/NavMenu/Menu.vue';
-</script>
+\</script\>
 ```
 
 如果报错,因为TypeScript 并不知道如何理解 `.vue` 文件，因此需要这样一个声明
@@ -913,7 +913,7 @@ import Menu from '../components/NavMenu/Menu.vue';
 去全局类型声明文件中设置一下即可
 
 ```ts
-/// <reference types="vite/client" />
+/// \<reference types="vite/client" /\>
 declare module "mockjs"
 declare module '*.vue' {
     import { ComponentOptions } from 'vue'
@@ -933,51 +933,51 @@ declare module '*.vue' {
 ==components-navMenu-Menu.vue==
 
 ```vue
-<script setup lang="ts">
+\<script setup lang="ts"\>
 import { useUserStore } from '@/store/auth';
 const userStore = useUserStore();
 console.log(userStore.menu)
-</script>
+\</script\>
 ```
 
 
 
-> **对菜单数据进行递归操作**
+\> **对菜单数据进行递归操作**
 
 ==components-navMenu-MenuItem.vue==
 
 ```vue
-<template>
-    <el-sub-menu v-if="item.children" :index="item.url">
-        <template #title>
-            <el-icon>
-                <document />
-            </el-icon>
-            <span>{{ item.name }}</span>
-        </template>
-        <my-menu v-for="child in item.children" :key="child.url" :item="child"></my-menu>
-    </el-sub-menu>
-    <el-menu-item v-else :index="item.url">
-        <el-icon>
-            <document />
-        </el-icon>
-        <span>{{ item.name }}</span>
-    </el-menu-item>
-</template>
+\<template\>
+    \<el-sub-menu v-if="item.children" :index="item.url"\>
+        \<template #title\>
+            \<el-icon\>
+                \<document /\>
+            \</el-icon\>
+            \<span\>{{ item.name }}\</span\>
+        \</template\>
+        \<my-menu v-for="child in item.children" :key="child.url" :item="child"\>\</my-menu\>
+    \</el-sub-menu\>
+    \<el-menu-item v-else :index="item.url"\>
+        \<el-icon\>
+            \<document /\>
+        \</el-icon\>
+        \<span\>{{ item.name }}\</span\>
+    \</el-menu-item\>
+\</template\>
 
-<script lang="ts">
+\<script lang="ts"\>
 import { defineComponent, PropType } from 'vue';
 import  { MenuItem as MenuItemType } from "../../types/user/index"; //这里换成@符号会有bug，先不换了
 export default defineComponent({
     name: 'MyMenu', // 你可以给组件起一个名字
     props: {
         item: {
-            type: Object as PropType<MenuItemType>, //使用 TypeScript 的 PropType 来指定 item 的具体类型为 MenuItemType
+            type: Object as PropType\<MenuItemType\>, //使用 TypeScript 的 PropType 来指定 item 的具体类型为 MenuItemType
             required: true
         }
     }
 });
-</script>
+\</script\>
 ```
 
 然后Menu.vue组件中调用
@@ -985,52 +985,52 @@ export default defineComponent({
 ==components-navMenu-Menu.vue==
 
 ```vue
-<template>
-    <el-menu >
-        <menu-item v-for="item in menuItems" :key="item.url" :item="item"></menu-item>
-    </el-menu>
-</template>
+\<template\>
+    \<el-menu \>
+        \<menu-item v-for="item in menuItems" :key="item.url" :item="item"\>\</menu-item\>
+    \</el-menu\>
+\</template\>
 
-<script setup lang="ts">
+\<script setup lang="ts"\>
 import { useUserStore } from '@/store/auth';
 import MenuItem from './MenuItem.vue';
 const userStore = useUserStore();
 const menuItems=userStore.menu
 
-</script>
+\</script\>
 ```
 
 ## 2.将图标字符串转为图标组件
 
-因为element plus中 <el-icon>中放的是图标组件，虽然我们全局注册了，但是因为后端返回给我们的是字符串，没办法直接用，
+因为element plus中 \<el-icon\>中放的是图标组件，虽然我们全局注册了，但是因为后端返回给我们的是字符串，没办法直接用，
 
 所以使用component组件解决
 
 ```vue
-<component :is="item.icon" />
+\<component :is="item.icon" /\>
 ```
 
 ## 3.优化侧边栏样式
 
 ```vue
-<template>
-    <div class="logo">
-        <img :src="logo" width="34px" height="34px" />
-        <h1>动力港</h1>
-    </div>
-    <el-menu>
-        <menu-item v-for="item in menuItems" :key="item.url" :item="item"></menu-item>
-    </el-menu>
-</template>
-<script setup lang="ts">
+\<template\>
+    \<div class="logo"\>
+        \<img :src="logo" width="34px" height="34px" /\>
+        \<h1\>动力港\</h1\>
+    \</div\>
+    \<el-menu\>
+        \<menu-item v-for="item in menuItems" :key="item.url" :item="item"\>\</menu-item\>
+    \</el-menu\>
+\</template\>
+\<script setup lang="ts"\>
 import { useUserStore } from '@/store/auth';
 import logo from "@/assets/logo.png"
 import MenuItem from './MenuItem.vue';
 const userStore = useUserStore();
 const menuItems = userStore.menu
 
-</script>
-<style scoped lang="less">
+\</script\>
+\<style scoped lang="less"\>
   .logo{
     display: flex;justify-content: center;height: 50px;align-items: center;padding:10px 0; 
     img{margin-left: -10px;}
@@ -1040,7 +1040,7 @@ const menuItems = userStore.menu
   .el-menu{
     border-right: none; 
   }
-</style>
+\</style\>
 ```
 
 修改高亮样式
@@ -1048,13 +1048,13 @@ const menuItems = userStore.menu
 ==MenuItem.vue==
 
 ```vue
-<style scoped lang="less">
+\<style scoped lang="less"\>
 .is-active{background-color: rgb(34 , 136, 255);color: #fff !important;}
-.is-active>div span{color: #fff }
+.is-active\>div span{color: #fff }
 .el-menu-item:hover{
     background-color: rgb(34 , 136, 255) !important;color: #fff !important;
 }
-</style>
+\</style\>
 ```
 
 隐藏滚动条
@@ -1073,52 +1073,52 @@ const menuItems = userStore.menu
 
 # 12.创建路由页面
 
-数据看板：() => import("@/views/dashboard/DashBoard.vue")
+数据看板：() =\> import("@/views/dashboard/DashBoard.vue")
 
-充电站监控：() => import("@/views/chargingstation/Monitor.vue")
+充电站监控：() =\> import("@/views/chargingstation/Monitor.vue")
 
-营收统计：() => import("@/views/chargingstation/Revenue.vue")
+营收统计：() =\> import("@/views/chargingstation/Revenue.vue")
 
-充电桩管理：() => import("@/views/chargingstation/Fault.vue")
+充电桩管理：() =\> import("@/views/chargingstation/Fault.vue")
 
-电子地图：() => import("@/views/Map/ElectronicMap.vue")
+电子地图：() =\> import("@/views/Map/ElectronicMap.vue")
 
-订单管理：() => import("@/views/operations/Orders.vue")
+订单管理：() =\> import("@/views/operations/Orders.vue")
 
-订单详情：() => import("@/views/operations/Detail.vue")
+订单详情：() =\> import("@/views/operations/Detail.vue")
 
-计费管理：() => import("@/views/operations/Total.vue")
+计费管理：() =\> import("@/views/operations/Total.vue")
 
-报警管理：() => import("@/views/alarm/Alarm.vue")
+报警管理：() =\> import("@/views/alarm/Alarm.vue")
 
-会员卡管理：() => import("@/views/equipment/Equipment.vue")
+会员卡管理：() =\> import("@/views/equipment/Equipment.vue")
 
-招商管理：() => import("@/views/document/Document.vue")
+招商管理：() =\> import("@/views/document/Document.vue")
 
-系统设置： () => import("@/views/system/System.vue")
+系统设置： () =\> import("@/views/system/System.vue")
 
-个人中心：() => import("@/views/personal/Personal.vue")
+个人中心：() =\> import("@/views/personal/Personal.vue")
 
 
 
-然后添加二级路由的<RouterView>
+然后添加二级路由的\<RouterView\>
 
 ==layouts-DefaultLayout.vue==
 
 ```vue
-<template>
-    <el-container>
-        <el-aside width="200px">
-            <Menu></Menu>
-        </el-aside>
-        <el-container>
-            <el-header>Header</el-header>
-            <el-main>
-              <RouterView/>
-            </el-main>
-        </el-container>
-    </el-container>
-</template>
+\<template\>
+    \<el-container\>
+        \<el-aside width="200px"\>
+            \<Menu\>\</Menu\>
+        \</el-aside\>
+        \<el-container\>
+            \<el-header\>Header\</el-header\>
+            \<el-main\>
+              \<RouterView/\>
+            \</el-main\>
+        \</el-container\>
+    \</el-container\>
+\</template\>
 ```
 
 隐藏订单详情菜单
@@ -1133,7 +1133,7 @@ const menuItems = userStore.menu
 
 
 
-> 页面级权限控制常见的两种思路：
+\> 页面级权限控制常见的两种思路：
 
 1.前端不默认创建完整路由表，后端返回权限名称，前端静态路由表中每一项都设置该路由表所需的权限，然后循环路由表，筛选出来该权限名称所拥有的路由表，通过addRoute方法动态添加路由，生成实际路由表
 
@@ -1147,7 +1147,7 @@ const menuItems = userStore.menu
  {
      path: "/system",
      name: "system",
-     component: () => import("@/views/system/System.vue"),   
+     component: () =\> import("@/views/system/System.vue"),   
      meta: {
          needAuth: ["admin", "manager"]
      }           
@@ -1155,7 +1155,7 @@ const menuItems = userStore.menu
  {
      path: "/system",
      name: "system",
-     component: () => import("@/views/system/System.vue"),   
+     component: () =\> import("@/views/system/System.vue"),   
      meta: {
          needAuth: ["admin", "manager"]
      }           
@@ -1173,36 +1173,36 @@ const menuItems = userStore.menu
 ==components-TopHeader-TopHeader.vue==
 
 ```vue
-<template>
-    <div class="header">
-        <div class="personal">
-            <el-badge is-dot class="item">
-                <el-icon size="20">
-                    <Bell />
-                </el-icon>
-            </el-badge>
-            <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" />
-            <el-dropdown :hide-on-click="false" @command="handleCommand">
-                <span class="el-dropdown-link">
+\<template\>
+    \<div class="header"\>
+        \<div class="personal"\>
+            \<el-badge is-dot class="item"\>
+                \<el-icon size="20"\>
+                    \<Bell /\>
+                \</el-icon\>
+            \</el-badge\>
+            \<el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" /\>
+            \<el-dropdown :hide-on-click="false" @command="handleCommand"\>
+                \<span class="el-dropdown-link"\>
                     欢迎你，{{ username }}
-                    <el-icon class="el-icon--right"><arrow-down /></el-icon>
-                </span>
-                <template #dropdown>
-                    <el-dropdown-menu>
-                        <el-dropdown-item icon="User" command="user">个人中心</el-dropdown-item>
-                        <el-dropdown-item icon="SwitchButton" command="logout">退出登录</el-dropdown-item>
-                    </el-dropdown-menu>
-                </template>
+                    \<el-icon class="el-icon--right"\>\<arrow-down /\>\</el-icon\>
+                \</span\>
+                \<template #dropdown\>
+                    \<el-dropdown-menu\>
+                        \<el-dropdown-item icon="User" command="user"\>个人中心\</el-dropdown-item\>
+                        \<el-dropdown-item icon="SwitchButton" command="logout"\>退出登录\</el-dropdown-item\>
+                    \</el-dropdown-menu\>
+                \</template\>
 
 
 
-            </el-dropdown>
-        </div>
+            \</el-dropdown\>
+        \</div\>
 
-    </div>
-</template>
+    \</div\>
+\</template\>
 
-<script setup lang="ts">
+\<script setup lang="ts"\>
 import { useUserStore } from "@/store/auth.ts"
 import { storeToRefs } from "pinia";
 import {useRouter} from "vue-router"
@@ -1217,8 +1217,8 @@ function handleCommand(command:string) {
         router.push("/login")
     }
 }
-</script>
-<style lang="less">
+\</script\>
+\<style lang="less"\>
 .header {
     background-color: white;
     height: 60px;
@@ -1240,7 +1240,7 @@ function handleCommand(command:string) {
         }
     }
 }
-</style>
+\</style\>
 ```
 
 ==store-auth.ts==
@@ -1266,56 +1266,56 @@ actions中添加logout
 ==layouts-DefaultLayout.vue==
 
 ```vue
-<template>
-  <el-container>
-    <el-aside width="200px">
-      <Menu></Menu>
-    </el-aside>
-    <el-container>
-      <el-header>
-        <TopHeader />
-      </el-header>
-      <el-main>
-        <el-tabs 
+\<template\>
+  \<el-container\>
+    \<el-aside width="200px"\>
+      \<Menu\>\</Menu\>
+    \</el-aside\>
+    \<el-container\>
+      \<el-header\>
+        \<TopHeader /\>
+      \</el-header\>
+      \<el-main\>
+        \<el-tabs 
             v-model="activeName" 
             class="demo-tabs" 
             closable
             @tab-click="handleClick"
             @tab-remove="remove"
-        >
-            <el-tab-pane label="User" name="first">
-              <template #label>
-                <span class="custom-tabs-label">
-                  <el-icon><calendar /></el-icon>
-                  <span>Route</span>
-                </span>
-              </template>
+        \>
+            \<el-tab-pane label="User" name="first"\>
+              \<template #label\>
+                \<span class="custom-tabs-label"\>
+                  \<el-icon\>\<calendar /\>\</el-icon\>
+                  \<span\>Route\</span\>
+                \</span\>
+              \</template\>
               route的内容
-            </el-tab-pane>
-            <el-tab-pane label="Config" name="second">Config</el-tab-pane>
-            <el-tab-pane label="Role" name="third">Role</el-tab-pane>
-            <el-tab-pane label="Task" name="fourth">Task</el-tab-pane>
-          </el-tabs>
-        <RouterView />
-      </el-main>
-    </el-container>
-  </el-container>
-</template>
-<script setup lang="ts">
+            \</el-tab-pane\>
+            \<el-tab-pane label="Config" name="second"\>Config\</el-tab-pane\>
+            \<el-tab-pane label="Role" name="third"\>Role\</el-tab-pane\>
+            \<el-tab-pane label="Task" name="fourth"\>Task\</el-tab-pane\>
+          \</el-tabs\>
+        \<RouterView /\>
+      \</el-main\>
+    \</el-container\>
+  \</el-container\>
+\</template\>
+\<script setup lang="ts"\>
 import { ref } from 'vue'
 import Menu from "@/components/navMenu/Menu.vue"
 import TopHeader from "@/components/TopHeader/TopHeader.vue"
 import type { TabsPaneContext } from 'element-plus'
 const activeName = ref('first')
-const handleClick=(tab: TabsPaneContext, event: Event)=>{
+const handleClick=(tab: TabsPaneContext, event: Event)=\>{
   console.log(tab, event)
   }
-  const remove=(panelName:string)=>{
+  const remove=(panelName:string)=\>{
     console.log(panelName)
   }
-</script>
+\</script\>
 
-<style lang="less" scoped>
+\<style lang="less" scoped\>
 .el-aside {
   height: 100vh;
   ;
@@ -1331,7 +1331,7 @@ const handleClick=(tab: TabsPaneContext, event: Event)=>{
   height: 80vh;
   overflow: auto;
 }
-</style>
+\</style\>
 ```
 
 然后创建单独的组件
@@ -1341,35 +1341,35 @@ const handleClick=(tab: TabsPaneContext, event: Event)=>{
 将这些内容全部复制到该组件下
 
 ```vue
-<template>
-    <el-tabs v-model="activeName" class="demo-tabs" closable @tab-click="handleClick" @tab-remove="remove">
-        <el-tab-pane label="User" name="first">
-            <template #label>
-                <span class="custom-tabs-label">
-                    <el-icon>
-                        <calendar />
-                    </el-icon>
-                    <span>Route</span>
-                </span>
-            </template>
+\<template\>
+    \<el-tabs v-model="activeName" class="demo-tabs" closable @tab-click="handleClick" @tab-remove="remove"\>
+        \<el-tab-pane label="User" name="first"\>
+            \<template #label\>
+                \<span class="custom-tabs-label"\>
+                    \<el-icon\>
+                        \<calendar /\>
+                    \</el-icon\>
+                    \<span\>Route\</span\>
+                \</span\>
+            \</template\>
             route的内容
-        </el-tab-pane>
-        <el-tab-pane label="Config" name="second">Config</el-tab-pane>
-        <el-tab-pane label="Role" name="third">Role</el-tab-pane>
-        <el-tab-pane label="Task" name="fourth">Task</el-tab-pane>
-    </el-tabs>
-</template>
-<script setup lang="ts">
+        \</el-tab-pane\>
+        \<el-tab-pane label="Config" name="second"\>Config\</el-tab-pane\>
+        \<el-tab-pane label="Role" name="third"\>Role\</el-tab-pane\>
+        \<el-tab-pane label="Task" name="fourth"\>Task\</el-tab-pane\>
+    \</el-tabs\>
+\</template\>
+\<script setup lang="ts"\>
 import { ref } from "vue"
 import type { TabsPaneContext } from 'element-plus'
 const activeName = ref('first')
-const handleClick = (tab: TabsPaneContext, event: Event) => {
+const handleClick = (tab: TabsPaneContext, event: Event) =\> {
     console.log(tab, event)
 }
-const remove = (panelName: string) => {
+const remove = (panelName: string) =\> {
     console.log(panelName)
 }
-</script>
+\</script\>
 ```
 
 那么问题来了，应该有几个tab-pane呢，应该是点击一次菜单，就应该多一个，默认有dashboard一个,所以此时我们创建store，存储所点击的菜单项
@@ -1380,10 +1380,10 @@ const remove = (panelName: string) => {
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import type{MenuItem} from "@/types/user"
-export const useTabsStore = defineStore("tabs",()=>{
-    const tabs = ref<MenuItem[]>([{ name: "数据看板", path: "/dashboard", icon: "DataLine" }]);
-    const addTab = (name: string, path: string, icon: string) => {
-        if (!tabs.value.some(tab => tab.path === path)) {
+export const useTabsStore = defineStore("tabs",()=\>{
+    const tabs = ref\<MenuItem[]\>([{ name: "数据看板", path: "/dashboard", icon: "DataLine" }]);
+    const addTab = (name: string, path: string, icon: string) =\> {
+        if (!tabs.value.some(tab =\> tab.path === path)) {
             tabs.value.push({ name, path, icon });
         }
     }
@@ -1396,10 +1396,10 @@ DefaultLayout.vue文件引入TabsLayout
 ==DefaultLayout.vue==
 
 ```vue
-<el-main>
-    <TabsLayout/>
-    <!-- <RouterView /> -->
-</el-main>
+\<el-main\>
+    \<TabsLayout/\>
+    \<!-- \<RouterView /\> --\>
+\</el-main\>
 ```
 
 ```ts
@@ -1421,14 +1421,14 @@ console.log(88,tabs.value) //这里验证，确实可以拿到store中的数据
 ==components-NavMenu-MenuItem.vue==
 
 ```vue
- <el-menu-item v-else :index="item.url" @click="add(item.name, item.url, item.icon)" v-show="!(item.name == '订单详情')">
-        <el-icon>
-            <component :is="item.icon" />
-        </el-icon>
-        <span>{{ item.name }}</span>
-    </el-menu-item>
+ \<el-menu-item v-else :index="item.url" @click="add(item.name, item.url, item.icon)" v-show="!(item.name == '订单详情')"\>
+        \<el-icon\>
+            \<component :is="item.icon" /\>
+        \</el-icon\>
+        \<span\>{{ item.name }}\</span\>
+    \</el-menu-item\>
 
-<script lang="ts">
+\<script lang="ts"\>
 import { defineComponent, PropType } from 'vue';
 import { MenuItem as MenuItemType } from "../../types/user/index";
 import { useTabsStore } from '@/store/tabs';
@@ -1436,7 +1436,7 @@ export default defineComponent({
     name: 'MyMenu', // 你可以给组件起一个名字
     props: {
         item: {
-            type: Object as PropType<MenuItemType>,
+            type: Object as PropType\<MenuItemType\>,
             required: true
         }
     },
@@ -1449,61 +1449,61 @@ export default defineComponent({
         return {add }
     }
 });
-</script>
+\</script\>
 ```
 
 ==layouts-TabsLayout.vue==
 
 ```vue
-<template>
-    <el-tabs v-model="activeName" class="demo-tabs" type="card" closable @tab-click="handleClick" @tab-remove="remove">
-        <el-tab-pane 
+\<template\>
+    \<el-tabs v-model="activeName" class="demo-tabs" type="card" closable @tab-click="handleClick" @tab-remove="remove"\>
+        \<el-tab-pane 
             v-for="item in tabs"
             :key="item.name"
             :label="item.name"
             :name="item.name"
-        >
-            <template #label>
-                <span class="custom-tabs-label">
-                    <el-icon>
-                        <component :is="item.icon" />
-                    </el-icon>
-                    <span>&nbsp;{{ item.name }}</span>
-                </span>
-            </template>
+        \>
+            \<template #label\>
+                \<span class="custom-tabs-label"\>
+                    \<el-icon\>
+                        \<component :is="item.icon" /\>
+                    \</el-icon\>
+                    \<span\>&nbsp;{{ item.name }}\</span\>
+                \</span\>
+            \</template\>
             route的内容
-        </el-tab-pane>
-    </el-tabs>
-</template>
-<style lang="less" scoped>
+        \</el-tab-pane\>
+    \</el-tabs\>
+\</template\>
+\<style lang="less" scoped\>
  .demo-tabs {
   ::v-deep  .is-active{color: white !important;background-color: #5696ff;}
   }
-</style>
+\</style\>
 ```
 
-将<RouterView>挪到tabs中
+将\<RouterView\>挪到tabs中
 
 很多同学的想法肯定是像下面这样加
 
 ![image-20241019133130266](http://114.67.74.14/static/vue_project_assetsimage-20241019133130266.png)
 
-但是这样你想想，会渲染几个<RouterView>,很明显，循环执行了几次，就会有几个RouterView
+但是这样你想想，会渲染几个\<RouterView\>,很明显，循环执行了几次，就会有几个RouterView
 
 我们可以在dashboard页面验证一下
 
 ==views-dashboard-DashBoard.vue==
 
 ```vue
-<template>
+\<template\>
     数据看板
-</template>
-<script setup>
+\</template\>
+\<script setup\>
 import {onMounted} from "vue"
-    onMounted(()=>{
+    onMounted(()=\>{
         console.log(888) //会发现，有几个选项卡就会执行几次
     })
-</script>
+\</script\>
 ```
 
 所以我们把RouterView拿到tabs的外面去，如下
@@ -1520,15 +1520,15 @@ store设置一个currentTab，用来保存当前高亮/选中的tab,再添加一
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import type{MenuItem} from "@/types/user"
-export const useTabsStore = defineStore("tabs",()=>{
-    const tabs = ref<MenuItem[]>([{ name: "数据看板", url: "/dashboard", icon: "DataLine" }]);
-    const currentTab = ref<{ name: string; url: string }>({ name: "数据看板", url: "/dashboard" });
-    const addTab = (name: string, url: string, icon: string) => {
-        if (!tabs.value.some(tab => tab.url === url)) {
+export const useTabsStore = defineStore("tabs",()=\>{
+    const tabs = ref\<MenuItem[]\>([{ name: "数据看板", url: "/dashboard", icon: "DataLine" }]);
+    const currentTab = ref\<{ name: string; url: string }\>({ name: "数据看板", url: "/dashboard" });
+    const addTab = (name: string, url: string, icon: string) =\> {
+        if (!tabs.value.some(tab =\> tab.url === url)) {
             tabs.value.push({ name, url, icon });
         }
     }
-    const setCurrentTab = (name: string, path: string) => {
+    const setCurrentTab = (name: string, path: string) =\> {
         currentTab.value = { name, path }
        
     }
@@ -1539,9 +1539,9 @@ export const useTabsStore = defineStore("tabs",()=>{
 ==layouts-TabsLayout.vue==
 
 ```vue
-<el-tabs v-model="currentTab.name" > 更改双向绑定
+\<el-tabs v-model="currentTab.name" \> 更改双向绑定
     
-<script setup lang="ts">
+\<script setup lang="ts"\>
 import { ref } from "vue"
 import type { TabsPaneContext } from 'element-plus'
 import {useTabsStore} from "@/store/tabs.ts"
@@ -1551,14 +1551,14 @@ const tabsStore = useTabsStore();
 const router=useRouter();
 const {tabs,currentTab}=storeToRefs(tabsStore);//添加解构赋值
 const {setCurrentTab}=tabsStore;//因为是方法，不需要响应式，单独解构
-const handleClick = (tab: TabsPaneContext, event: Event) => {
+const handleClick = (tab: TabsPaneContext, event: Event) =\> {
     router.push(tabs.value[tab.index].url) //路由跳转
     setCurrentTab(tabs.value[tab.index].name,tabs.value[tab.index].url) //设置当前
 }
-const remove = (panelName: string) => {
+const remove = (panelName: string) =\> {
     console.log(panelName)
 }
-</script>
+\</script\>
 ```
 
 ==components-navMenu-MenuItem.vue==
@@ -1618,16 +1618,16 @@ setCurrentTab(name,url)
 ==store-tabs.ts==
 
 ```ts
-    const removeTab = (name: string) => {
+    const removeTab = (name: string) =\> {
         // 删除指定路径的选项卡
-        tabs.value = tabs.value.filter(tab => tab.name !== name)
+        tabs.value = tabs.value.filter(tab =\> tab.name !== name)
     }
 ```
 
 ==layouts-TabsLayout.vue==
 
 ```ts
-const remove = (panelName: string) => {
+const remove = (panelName: string) =\> {
     removeTab(panelName);
 }
 ```
@@ -1641,23 +1641,23 @@ tabs.ts做如下修改
 ==store-tabs.ts==
 
 ```ts
-    const removeTab = (name: string) => {
+    const removeTab = (name: string) =\> {
         //如果删除的是高亮的
         if (currentTab.value.name === name){
-            const currentIndex = tabs.value.findIndex(tab => tab.name === name);
+            const currentIndex = tabs.value.findIndex(tab =\> tab.name === name);
              // 如果被移除的标签是当前标签，更新当前标签为前面一个标签
              currentTab.value = tabs.value[currentIndex - 1]; 
         }
 
         // 删除指定路径的选项卡
-        tabs.value = tabs.value.filter(tab => tab.name !== name)
+        tabs.value = tabs.value.filter(tab =\> tab.name !== name)
     }
 ```
 
 ==layouts-TabsLayout.vue==并将路由跳转过去
 
 ```ts
-const remove = (panelName: string) => {
+const remove = (panelName: string) =\> {
     removeTab(panelName);
     router.push(currentTab.value.url)
 }
@@ -1668,7 +1668,7 @@ const remove = (panelName: string) => {
 还是会有bug,如下优化
 
 ```ts
-const remove = (panelName: string) => {
+const remove = (panelName: string) =\> {
 
     if(currentTab.value.name==panelName){
         //如果点击的是高亮的
@@ -1687,10 +1687,10 @@ const remove = (panelName: string) => {
 ==store-tabs.ts==
 
 ```ts
-    const removeTab = (name: string) => {
+    const removeTab = (name: string) =\> {
         //如果删除的是高亮的
         if (currentTab.value.name === name){
-            const currentIndex = tabs.value.findIndex(tab => tab.name === name);
+            const currentIndex = tabs.value.findIndex(tab =\> tab.name === name);
              // 如果被移除的标签是当前标签，更新当前标签为前面一个标签
              if(currentIndex!=0){
                 currentTab.value = tabs.value[currentIndex - 1]; 
@@ -1700,7 +1700,7 @@ const remove = (panelName: string) => {
         }
 
         // 删除指定路径的选项卡
-        tabs.value = tabs.value.filter(tab => tab.name !== name)
+        tabs.value = tabs.value.filter(tab =\> tab.name !== name)
     }
 ```
 
@@ -1709,127 +1709,127 @@ const remove = (panelName: string) => {
 ## 1.设备运行状态模块开发
 
 ```vue
-<template>
-    <el-row :gutter="20">
-        <el-col :span="18">
-            <el-card>
-                <div class="title">
-                    <h3>今日设备运行状态</h3>
-                    <p>更新时间：2024年8月31日</p>
-                    <el-icon color="#86909c" style="margin-left: 5px;">
-                        <Refresh />
-                    </el-icon>
-                </div>
-                <div class="equipment">
-                    <div class="item">
-                        <h4>充电桩使用率</h4>
-                        <img :src="flash" alt="" class="mb mt">
-                        <h1>72 / 95</h1>
-                        <div class="statistic-card">
-                            <el-statistic :value="9">
-                                <template #title>
-                                    <div style="display: inline-flex; align-items: center">
+\<template\>
+    \<el-row :gutter="20"\>
+        \<el-col :span="18"\>
+            \<el-card\>
+                \<div class="title"\>
+                    \<h3\>今日设备运行状态\</h3\>
+                    \<p\>更新时间：2024年8月31日\</p\>
+                    \<el-icon color="#86909c" style="margin-left: 5px;"\>
+                        \<Refresh /\>
+                    \</el-icon\>
+                \</div\>
+                \<div class="equipment"\>
+                    \<div class="item"\>
+                        \<h4\>充电桩使用率\</h4\>
+                        \<img :src="flash" alt="" class="mb mt"\>
+                        \<h1\>72 / 95\</h1\>
+                        \<div class="statistic-card"\>
+                            \<el-statistic :value="9"\>
+                                \<template #title\>
+                                    \<div style="display: inline-flex; align-items: center"\>
                                         异常设备
-                                        <el-tooltip effect="dark"
+                                        \<el-tooltip effect="dark"
                                             content="Number of users who logged into the product in one day"
-                                            placement="top">
-                                            <el-icon style="margin-left: 4px" :size="12">
-                                                <Warning />
-                                            </el-icon>
-                                        </el-tooltip>
-                                    </div>
-                                </template>
-                            </el-statistic>
-                            <div class="statistic-footer">
-                                <div class="footer-item">
-                                    <span>相较昨日</span>
-                                    <span class="green">
+                                            placement="top"\>
+                                            \<el-icon style="margin-left: 4px" :size="12"\>
+                                                \<Warning /\>
+                                            \</el-icon\>
+                                        \</el-tooltip\>
+                                    \</div\>
+                                \</template\>
+                            \</el-statistic\>
+                            \<div class="statistic-footer"\>
+                                \<div class="footer-item"\>
+                                    \<span\>相较昨日\</span\>
+                                    \<span class="green"\>
                                         24%
-                                        <el-icon color="green">
-                                            <CaretTop />
-                                        </el-icon>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <h4>充电柜使用率</h4>
-                        <img :src="flash2" alt="" class="mb mt">
-                        <h1>655 / 1233</h1>
-                        <div class="statistic-card">
-                            <el-statistic :value="22">
-                                <template #title>
-                                    <div style="display: inline-flex; align-items: center">
+                                        \<el-icon color="green"\>
+                                            \<CaretTop /\>
+                                        \</el-icon\>
+                                    \</span\>
+                                \</div\>
+                            \</div\>
+                        \</div\>
+                    \</div\>
+                    \<div class="item"\>
+                        \<h4\>充电柜使用率\</h4\>
+                        \<img :src="flash2" alt="" class="mb mt"\>
+                        \<h1\>655 / 1233\</h1\>
+                        \<div class="statistic-card"\>
+                            \<el-statistic :value="22"\>
+                                \<template #title\>
+                                    \<div style="display: inline-flex; align-items: center"\>
                                         异常设备
-                                        <el-tooltip effect="dark"
+                                        \<el-tooltip effect="dark"
                                             content="Number of users who logged into the product in one day"
-                                            placement="top">
-                                            <el-icon style="margin-left: 4px" :size="12">
-                                                <Warning />
-                                            </el-icon>
-                                        </el-tooltip>
-                                    </div>
-                                </template>
-                            </el-statistic>
-                            <div class="statistic-footer">
-                                <div class="footer-item">
-                                    <span>相较昨日</span>
-                                    <span class="green">
+                                            placement="top"\>
+                                            \<el-icon style="margin-left: 4px" :size="12"\>
+                                                \<Warning /\>
+                                            \</el-icon\>
+                                        \</el-tooltip\>
+                                    \</div\>
+                                \</template\>
+                            \</el-statistic\>
+                            \<div class="statistic-footer"\>
+                                \<div class="footer-item"\>
+                                    \<span\>相较昨日\</span\>
+                                    \<span class="green"\>
                                         24%
-                                        <el-icon color="red">
-                                            <CaretTop />
-                                        </el-icon>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <h4>充电站使用率</h4>
-                        <img :src="flash3" alt="" class="mb mt">
+                                        \<el-icon color="red"\>
+                                            \<CaretTop /\>
+                                        \</el-icon\>
+                                    \</span\>
+                                \</div\>
+                            \</div\>
+                        \</div\>
+                    \</div\>
+                    \<div class="item"\>
+                        \<h4\>充电站使用率\</h4\>
+                        \<img :src="flash3" alt="" class="mb mt"\>
 
-                        <h1>2263 / 3398</h1>
-                        <div class="statistic-card">
-                            <el-statistic :value="47">
-                                <template #title>
-                                    <div style="display: inline-flex; align-items: center">
+                        \<h1\>2263 / 3398\</h1\>
+                        \<div class="statistic-card"\>
+                            \<el-statistic :value="47"\>
+                                \<template #title\>
+                                    \<div style="display: inline-flex; align-items: center"\>
                                         异常设备
-                                        <el-tooltip effect="dark"
+                                        \<el-tooltip effect="dark"
                                             content="Number of users who logged into the product in one day"
-                                            placement="top">
-                                            <el-icon style="margin-left: 4px" :size="12">
-                                                <Warning />
-                                            </el-icon>
-                                        </el-tooltip>
-                                    </div>
-                                </template>
-                            </el-statistic>
-                            <div class="statistic-footer">
-                                <div class="footer-item">
-                                    <span>相较昨日</span>
-                                    <span class="green">
+                                            placement="top"\>
+                                            \<el-icon style="margin-left: 4px" :size="12"\>
+                                                \<Warning /\>
+                                            \</el-icon\>
+                                        \</el-tooltip\>
+                                    \</div\>
+                                \</template\>
+                            \</el-statistic\>
+                            \<div class="statistic-footer"\>
+                                \<div class="footer-item"\>
+                                    \<span\>相较昨日\</span\>
+                                    \<span class="green"\>
                                         24%
-                                        <el-icon color="green">
-                                            <CaretTop />
-                                        </el-icon>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </el-card>
-        </el-col>
-        <el-col :span="6"></el-col>
-    </el-row>
-</template>
-<script setup>
+                                        \<el-icon color="green"\>
+                                            \<CaretTop /\>
+                                        \</el-icon\>
+                                    \</span\>
+                                \</div\>
+                            \</div\>
+                        \</div\>
+                    \</div\>
+                \</div\>
+            \</el-card\>
+        \</el-col\>
+        \<el-col :span="6"\>\</el-col\>
+    \</el-row\>
+\</template\>
+\<script setup\>
 import flash from "@/assets/flash.png"
 import flash2 from "@/assets/flash2.png"
 import flash3 from "@/assets/flash3.png"
-</script>
-<style lang="less" scoped>
+\</script\>
+\<style lang="less" scoped\>
 .title {
     display: flex;
     align-items: flex-end;
@@ -1869,46 +1869,46 @@ import flash3 from "@/assets/flash3.png"
 
     }
 }
-</style>
+\</style\>
 ```
 
 ## 2.常用功能页面开发
 
 ```vue
-            <el-card class="mt">
-                <template #header>
-                    <div class="card-header">
-                        <h1>常用功能</h1>
-                    </div>
-                </template>
-                <div class="quick mt mb">
-                    <div :span="4">
-                        <img :src="repair">
-                        <p>设备维修</p>
-                    </div>
-                    <div :span="4">
-                        <img :src="daily">
-                        <p>每日日报</p>
-                    </div>
-                    <div :span="4">
-                        <img :src="progress">
-                        <p>任务进度</p>
-                    </div>
-                    <div :span="4">
-                        <img :src="total">
-                        <p>营收占比</p>
-                    </div>
-                    <div :span="4">
-                        <img :src="money">
-                        <p>营收统计</p>
-                    </div>
-                    <div :span="4">
-                        <img :src="remain">
-                        <p>待办事项</p>
-                    </div>
-                </div>
-            </el-card>
-<script>
+            \<el-card class="mt"\>
+                \<template #header\>
+                    \<div class="card-header"\>
+                        \<h1\>常用功能\</h1\>
+                    \</div\>
+                \</template\>
+                \<div class="quick mt mb"\>
+                    \<div :span="4"\>
+                        \<img :src="repair"\>
+                        \<p\>设备维修\</p\>
+                    \</div\>
+                    \<div :span="4"\>
+                        \<img :src="daily"\>
+                        \<p\>每日日报\</p\>
+                    \</div\>
+                    \<div :span="4"\>
+                        \<img :src="progress"\>
+                        \<p\>任务进度\</p\>
+                    \</div\>
+                    \<div :span="4"\>
+                        \<img :src="total"\>
+                        \<p\>营收占比\</p\>
+                    \</div\>
+                    \<div :span="4"\>
+                        \<img :src="money"\>
+                        \<p\>营收统计\</p\>
+                    \</div\>
+                    \<div :span="4"\>
+                        \<img :src="remain"\>
+                        \<p\>待办事项\</p\>
+                    \</div\>
+                \</div\>
+            \</el-card\>
+\<script\>
 import flash from "@/assets/flash.png"
 import flash2 from "@/assets/flash2.png"
 import flash3 from "@/assets/flash3.png"
@@ -1918,8 +1918,8 @@ import remain from "@/assets/remain.png"
 import total from "@/assets/total.png"
 import money from "@/assets/money.png"
 import daily from "@/assets/daily.png"
-</script>
-<style>
+\</script\>
+\<style\>
 	.quick {
     padding: 0 40px;
     margin-top: 30px;
@@ -1931,7 +1931,7 @@ import daily from "@/assets/daily.png"
         color: #333;
     }
 }
-</style>
+\</style\>
 ```
 
 ## 3.使用echarts
@@ -1949,27 +1949,27 @@ import * as echarts from 'echarts';
 添加一个card
 
 ```vue
- <el-card class="mt">
-                <template #header>
-                    <div class="card-header">
-                        <h1>能源统计</h1>
-                    </div>
-                </template>
-                <el-row>
-                    <el-col :span="6">
-                        <div ref="chartRef2" style="width: 100%; height: 400px;margin-top: -40px"></div>
-                    </el-col>
-                    <el-col :span="18">
-                        <div ref="chartRef" style="width: 100%; height: 400px;"></div>
-                    </el-col>
-                </el-row>
-  </el-card>
+ \<el-card class="mt"\>
+                \<template #header\>
+                    \<div class="card-header"\>
+                        \<h1\>能源统计\</h1\>
+                    \</div\>
+                \</template\>
+                \<el-row\>
+                    \<el-col :span="6"\>
+                        \<div ref="chartRef2" style="width: 100%; height: 400px;margin-top: -40px"\>\</div\>
+                    \</el-col\>
+                    \<el-col :span="18"\>
+                        \<div ref="chartRef" style="width: 100%; height: 400px;"\>\</div\>
+                    \</el-col\>
+                \</el-row\>
+  \</el-card\>
 ```
 
 如下这样写刚好报错，因为我们的图标需要用到dom实例，但是现在是在setup生命周期里的，所以需要在挂载完毕的时候渲染图表
 
 ```vue
-<script setup>
+\<script setup\>
 import * as echarts from 'echarts';
 import {ref} from "vue"
 const chartRef = ref(null)
@@ -1995,13 +1995,13 @@ myChart.setOption({
   ]
 });
 
-</script>
+\</script\>
 ```
 
 改成下面的写法才可生效
 
 ```vue
-<script setup> 
+\<script setup\> 
 import * as echarts from 'echarts';
 import { ref } from "vue"
 import { onMounted } from "vue"
@@ -2009,7 +2009,7 @@ const chartRef = ref(null)
 const chartRef2 = ref(null)
 // 基于准备好的dom，初始化echarts实例
 
-onMounted(() => {
+onMounted(() =\> {
     var myChart = echarts.init(chartRef.value);
     // 绘制图表
     myChart.setOption({
@@ -2030,7 +2030,7 @@ onMounted(() => {
         ]
     });
 })
-</script>
+\</script\>
 ```
 
 ## 4.解决窗口变化echarts适配问题
@@ -2038,7 +2038,7 @@ onMounted(() => {
 添加resize事件
 
 ```ts
-onMounted(()=>{
+onMounted(()=\>{
     // 基于准备好的dom，初始化echarts实例
 var myChart = echarts.init(chartRef.value);
 // 绘制图表
@@ -2057,7 +2057,7 @@ myChart.setOption({
     }
   ]
 });
-const resizeChart = () => {
+const resizeChart = () =\> {
     myChart.resize();
     };
 window.addEventListener('resize', resizeChart);
@@ -2084,23 +2084,23 @@ hooks-useChart.ts
 
 import { ref, onMounted, onBeforeUnmount, Ref,markRaw  } from 'vue';
 import * as echarts from 'echarts';
-export function useChart(chartRef: Ref<HTMLElement | null>, initialOptions: any){
-    const chartInstance = ref<echarts.ECharts | null>(null);
+export function useChart(chartRef: Ref\<HTMLElement | null\>, initialOptions: any){
+    const chartInstance = ref\<echarts.ECharts | null\>(null);
     const chartOptions = ref(initialOptions);
-    const initChart = () => {
+    const initChart = () =\> {
         if (chartRef.value) {
              chartInstance.value =echarts.init(chartRef.value);
              chartInstance.value.setOption(chartOptions.value);
         }
     };
-    const resizeChart = () => {
+    const resizeChart = () =\> {
         chartInstance.value?.resize();
     };
-    onMounted(() => {
+    onMounted(() =\> {
         initChart();
         window.addEventListener('resize', resizeChart);
     });
-    onBeforeUnmount(() => {
+    onBeforeUnmount(() =\> {
         window.removeEventListener('resize', resizeChart);
         if (chartInstance.value) {
             chartInstance.value.dispose();//dispose 方法的作用是释放图表实例所占用的资源，以便在不再需要图表时清理内存
@@ -2159,7 +2159,7 @@ const chartOptions = {
     tooltip: {
         trigger: 'axis',
         formatter: function (params) {
-            return params[0].name + '<br/>' + params[0].seriesName + ': ' + params[0].value + 'KW';
+            return params[0].name + '\<br/\>' + params[0].seriesName + ': ' + params[0].value + 'KW';
         }
     },
     legend: {
@@ -2233,7 +2233,7 @@ const chartOptions = {
 
 ```ts
 //echarts图表数据接口
-Mock.mock("https://www.demo.com/chartData",'get',()=>{
+Mock.mock("https://www.demo.com/chartData",'get',()=\>{
   return {
     code: 200,
     message: '登陆成功',
@@ -2256,7 +2256,7 @@ enum Api {
     chartData = '/chartData',
   }
 
-  function chartDataApi():Promise<any>{
+  function chartDataApi():Promise\<any\>{
     return get(Api.chartData)
 }  
   
@@ -2271,7 +2271,7 @@ export {chartDataApi}
 import {chartDataApi} from "@/api/dashboard"
 import { reactive } from "vue"
 const chartRef = ref(null)
-const setChartData=async ()=>{
+const setChartData=async ()=\>{
     const chartOptions = reactive({
     title: {
         text: '电量统计',
@@ -2280,7 +2280,7 @@ const setChartData=async ()=>{
     tooltip: {
         trigger: 'axis',
         formatter: function (params) {
-            return params[0].name + '<br/>' + params[0].seriesName + ': ' + params[0].value + 'KW';
+            return params[0].name + '\<br/\>' + params[0].seriesName + ': ' + params[0].value + 'KW';
         }
     },
     legend: {
@@ -2348,11 +2348,11 @@ const setChartData=async ()=>{
     ]
 });
     const res=await chartDataApi();
-    for(let i=0;i<res.data.list.length;i++){
+    for(let i=0;i\<res.data.list.length;i++){
         chartOptions.series[i].name=res.data.list[i].name
         chartOptions.series[i].data=res.data.list[i].data
     }
-    chartOptions.legend.data=res.data.list.map(item=>item.name)  
+    chartOptions.legend.data=res.data.list.map(item=\>item.name)  
     return chartOptions
 }
 
@@ -2365,11 +2365,11 @@ useChart(chartRef,setChartData)
 
 import { ref, onMounted, onBeforeUnmount, Ref,markRaw  } from 'vue';
 import * as echarts from 'echarts';
-export function useChart(chartRef: Ref<HTMLElement | null>, setChartData: any){
+export function useChart(chartRef: Ref\<HTMLElement | null\>, setChartData: any){
 
-    const chartInstance = ref<echarts.ECharts | null>(null);
+    const chartInstance = ref\<echarts.ECharts | null\>(null);
     //const chartOptions = ref(initialOptions);
-    const initChart =async () => {
+    const initChart =async () =\> {
         if (chartRef.value) {
              chartInstance.value =markRaw(echarts.init(chartRef.value));
              const options=await setChartData()
@@ -2377,14 +2377,14 @@ export function useChart(chartRef: Ref<HTMLElement | null>, setChartData: any){
         }
         
     };
-    const resizeChart = () => {
+    const resizeChart = () =\> {
         chartInstance.value?.resize();
     };
-    onMounted(() => {
+    onMounted(() =\> {
         initChart();
         window.addEventListener('resize', resizeChart);
     });
-    onBeforeUnmount(() => {
+    onBeforeUnmount(() =\> {
         window.removeEventListener('resize', resizeChart);
         if (chartInstance.value) {
             chartInstance.value.dispose();
@@ -2407,7 +2407,7 @@ const options = {
 
     tooltip: {
         trigger: 'item',
-        formatter: '{a} <br/>{b}: {c} %'
+        formatter: '{a} \<br/\>{b}: {c} %'
     },
     series: [
         {
@@ -2458,10 +2458,10 @@ enum Api {
     chartData2 = '/chartData2',
   }
 
- function chartDataApi():Promise<any>{
+ function chartDataApi():Promise\<any\>{
     return get(Api.chartData)
 }  
-function chartDataApi2():Promise<any>{
+function chartDataApi2():Promise\<any\>{
     return get(Api.chartData2)
 }  
 export {chartDataApi,chartDataApi2}
@@ -2471,7 +2471,7 @@ export {chartDataApi,chartDataApi2}
 
 ```ts
 ////echarts图表数据接口2 饼图
-Mock.mock("https://www.demo.com/chartData2",'get',()=>{
+Mock.mock("https://www.demo.com/chartData2",'get',()=\>{
   return {
     code: 200,
     message: '操作成功',
@@ -2489,7 +2489,7 @@ Mock.mock("https://www.demo.com/chartData2",'get',()=>{
 Dashboard.vue
 
 ```ts
-const setChartData2=async ()=>{
+const setChartData2=async ()=\>{
     const chartOptions=reactive({
     legend: {
         top: 'bottom',
@@ -2498,7 +2498,7 @@ const setChartData2=async ()=>{
 
     tooltip: {
         trigger: 'item',
-        formatter: '{a} <br/>{b}: {c} %'
+        formatter: '{a} \<br/\>{b}: {c} %'
     },
     series: [
         {
@@ -2547,14 +2547,14 @@ useChart(chartRef2,setChartData2)
 ## 7.雷达图
 
 ```vue
-  <el-card>
-                <template #header>
-                    <div class="card-header">
-                        <h1>设备总览</h1>
-                    </div>
-                </template>
-                <div ref="chartRef3" style="width: 100%; height: 240px;"></div>
-            </el-card>
+  \<el-card\>
+                \<template #header\>
+                    \<div class="card-header"\>
+                        \<h1\>设备总览\</h1\>
+                    \</div\>
+                \</template\>
+                \<div ref="chartRef3" style="width: 100%; height: 240px;"\>\</div\>
+            \</el-card\>
 ```
 
 
@@ -2563,7 +2563,7 @@ useChart(chartRef2,setChartData2)
 
 ```ts
 //echarts图表数据接口3 雷达图
-Mock.mock("https://www.demo.com/chartData3",'get',()=>{
+Mock.mock("https://www.demo.com/chartData3",'get',()=\>{
   return {
     code: 200,
     message: '操作成功',
@@ -2577,13 +2577,13 @@ Mock.mock("https://www.demo.com/chartData3",'get',()=>{
 api
 
 ```ts
-function chartDataApi3():Promise<any>{
+function chartDataApi3():Promise\<any\>{
     return get(Api.chartData3)
 }  
 ```
 
 ```ts
-const setChartData3 = async () => {
+const setChartData3 = async () =\> {
     const chartOptions = reactive({
     radar: {
         // shape: 'circle',
@@ -2619,93 +2619,93 @@ const setChartData3 = async () => {
 ## 8.营收统计表开发
 
 ```vue
- <el-card class="mt">
-                <template #header>
-                    <div class="card-header">
-                        <h1>营收统计表</h1>
-                    </div>
-                </template>
-                <ul class="ranking-list">
-                    <li class="ranking-item">
-                        <span class="rank" style="background-color:rgb(103, 194, 58);color: #fff ;">1</span>
-                        <span class="store-name">广州</span>
+ \<el-card class="mt"\>
+                \<template #header\>
+                    \<div class="card-header"\>
+                        \<h1\>营收统计表\</h1\>
+                    \</div\>
+                \</template\>
+                \<ul class="ranking-list"\>
+                    \<li class="ranking-item"\>
+                        \<span class="rank" style="background-color:rgb(103, 194, 58);color: #fff ;"\>1\</span\>
+                        \<span class="store-name"\>广州\</span\>
 
-                        <span class="sales">52,457</span>
-                        <span style="margin-left: 50px;">
+                        \<span class="sales"\>52,457\</span\>
+                        \<span style="margin-left: 50px;"\>
                             24%
-                            <el-icon color="green">
-                                <CaretTop />
-                            </el-icon>
-                        </span>
-                    </li>
-                    <li class="ranking-item">
-                        <span class="rank" style="background-color:rgb(64, 158, 255) ;color: #fff ;">2</span>
-                        <span class="store-name">上海</span>
-                        <span class="sales">323,234</span>
-                        <span style="margin-left: 50px;">
+                            \<el-icon color="green"\>
+                                \<CaretTop /\>
+                            \</el-icon\>
+                        \</span\>
+                    \</li\>
+                    \<li class="ranking-item"\>
+                        \<span class="rank" style="background-color:rgb(64, 158, 255) ;color: #fff ;"\>2\</span\>
+                        \<span class="store-name"\>上海\</span\>
+                        \<span class="sales"\>323,234\</span\>
+                        \<span style="margin-left: 50px;"\>
                             24%
-                            <el-icon color="red">
-                                <CaretBottom />
-                            </el-icon>
-                        </span>
-                    </li>
-                    <li class="ranking-item">
-                        <span class="rank" style="background-color:rgb(230, 162, 60) ;color: #fff ;">3</span>
-                        <span class="store-name">佛山</span>
-                        <span class="sales">192,255</span>
-                        <span style="margin-left: 50px;">
+                            \<el-icon color="red"\>
+                                \<CaretBottom /\>
+                            \</el-icon\>
+                        \</span\>
+                    \</li\>
+                    \<li class="ranking-item"\>
+                        \<span class="rank" style="background-color:rgb(230, 162, 60) ;color: #fff ;"\>3\</span\>
+                        \<span class="store-name"\>佛山\</span\>
+                        \<span class="sales"\>192,255\</span\>
+                        \<span style="margin-left: 50px;"\>
                             24%
-                            <el-icon color="red">
-                                <CaretBottom />
-                            </el-icon>
-                        </span>
-                    </li>
-                    <li class="ranking-item">
-                        <span class="rank">4</span>
-                        <span class="store-name">珠海</span>
-                        <span class="sales">17,540</span>
-                        <span style="margin-left: 50px;">
+                            \<el-icon color="red"\>
+                                \<CaretBottom /\>
+                            \</el-icon\>
+                        \</span\>
+                    \</li\>
+                    \<li class="ranking-item"\>
+                        \<span class="rank"\>4\</span\>
+                        \<span class="store-name"\>珠海\</span\>
+                        \<span class="sales"\>17,540\</span\>
+                        \<span style="margin-left: 50px;"\>
                             24%
-                            <el-icon color="green">
-                                <CaretTop />
-                            </el-icon>
-                        </span>
-                    </li>
-                    <li class="ranking-item">
-                        <span class="rank">5</span>
-                        <span class="store-name">深圳</span>
-                        <span class="sales">662,337</span>
-                        <span style="margin-left: 50px;">
+                            \<el-icon color="green"\>
+                                \<CaretTop /\>
+                            \</el-icon\>
+                        \</span\>
+                    \</li\>
+                    \<li class="ranking-item"\>
+                        \<span class="rank"\>5\</span\>
+                        \<span class="store-name"\>深圳\</span\>
+                        \<span class="sales"\>662,337\</span\>
+                        \<span style="margin-left: 50px;"\>
                             24%
-                            <el-icon color="red">
-                                <CaretBottom />
-                            </el-icon>
-                        </span>
-                    </li>
-                    <li class="ranking-item">
-                        <span class="rank">6</span>
-                        <span class="store-name">厦门</span>
-                        <span class="sales">22,941</span>
-                        <span style="margin-left: 50px;">
+                            \<el-icon color="red"\>
+                                \<CaretBottom /\>
+                            \</el-icon\>
+                        \</span\>
+                    \</li\>
+                    \<li class="ranking-item"\>
+                        \<span class="rank"\>6\</span\>
+                        \<span class="store-name"\>厦门\</span\>
+                        \<span class="sales"\>22,941\</span\>
+                        \<span style="margin-left: 50px;"\>
                             24%
-                            <el-icon color="green">
-                                <CaretTop />
-                            </el-icon>
-                        </span>
-                    </li>
-                    <li class="ranking-item">
-                        <span class="rank">7</span>
-                        <span class="store-name">长沙</span>
-                        <span class="sales">565,221</span>
-                        <span style="margin-left: 50px;">
+                            \<el-icon color="green"\>
+                                \<CaretTop /\>
+                            \</el-icon\>
+                        \</span\>
+                    \</li\>
+                    \<li class="ranking-item"\>
+                        \<span class="rank"\>7\</span\>
+                        \<span class="store-name"\>长沙\</span\>
+                        \<span class="sales"\>565,221\</span\>
+                        \<span style="margin-left: 50px;"\>
                             24%
-                            <el-icon color="green">
-                                <CaretTop />
-                            </el-icon>
-                        </span>
-                    </li>
-                </ul>
-            </el-card>
+                            \<el-icon color="green"\>
+                                \<CaretTop /\>
+                            \</el-icon\>
+                        \</span\>
+                    \</li\>
+                \</ul\>
+            \</el-card\>
 ```
 
 ```css
@@ -2754,31 +2754,31 @@ const setChartData3 = async () => {
 ## 9.故障报警
 
 ```vue
-<el-card class="mt">
-                <template #header>
-                    <div class="card-header">
-                        <h1>故障报警</h1>
-                    </div>
-                </template>
-                <el-timeline style="max-width: 600px">
-                    <el-timeline-item timestamp="2018/4/12" placement="top" :hollow="true" type="danger">
-                        <el-card>
-                            <h4>矿业北路通讯中断</h4>
-                        </el-card>
-                    </el-timeline-item>
-                    <el-timeline-item timestamp="2018/4/3" placement="top" :hollow="true" type="warning">
-                        <el-card>
-                            <h4>黄河南路超出服务区域</h4>               
-                        </el-card>
-                    </el-timeline-item>
-                    <el-timeline-item timestamp="2018/4/2" placement="top" :hollow="true" type="danger">
-                        <el-card>
-                            <h4>6号机组异常断电</h4>
+\<el-card class="mt"\>
+                \<template #header\>
+                    \<div class="card-header"\>
+                        \<h1\>故障报警\</h1\>
+                    \</div\>
+                \</template\>
+                \<el-timeline style="max-width: 600px"\>
+                    \<el-timeline-item timestamp="2018/4/12" placement="top" :hollow="true" type="danger"\>
+                        \<el-card\>
+                            \<h4\>矿业北路通讯中断\</h4\>
+                        \</el-card\>
+                    \</el-timeline-item\>
+                    \<el-timeline-item timestamp="2018/4/3" placement="top" :hollow="true" type="warning"\>
+                        \<el-card\>
+                            \<h4\>黄河南路超出服务区域\</h4\>               
+                        \</el-card\>
+                    \</el-timeline-item\>
+                    \<el-timeline-item timestamp="2018/4/2" placement="top" :hollow="true" type="danger"\>
+                        \<el-card\>
+                            \<h4\>6号机组异常断电\</h4\>
 
-                        </el-card>
-                    </el-timeline-item>
-                </el-timeline>
-            </el-card>
+                        \</el-card\>
+                    \</el-timeline-item\>
+                \</el-timeline\>
+            \</el-card\>
 ```
 
 # 17.充电站监控页面开发
@@ -2788,69 +2788,69 @@ const setChartData3 = async () => {
 ## 1.顶部静态结构开发
 
 ```vue
-<template>
-    <el-card>
-        <el-row :gutter="20">
-            <el-col :span="6">
-                <el-input v-model="formParams.input" placeholder="请输入站点名称、id">
-                    <template #append>
-                        <el-select v-model="select" style="width: 115px">
-                            <el-option label="按名称查询" value="name" />
-                            <el-option label="按ID查询" value="id" />
-                        </el-select>
-                    </template>
-                </el-input>
-            </el-col>
-            <el-col :span="6">
-                <el-select v-model="formParams.value" placeholder="充电站状态">
-                    <el-option :value="1" label="全部"></el-option>
-                    <el-option :value="2" label="使用中"></el-option>
-                    <el-option :value="3" label="空闲中"></el-option>
-                    <el-option :value="4" label="维护中"></el-option>
-                    <el-option :value="5" label="待维修"></el-option>
-                </el-select>
-            </el-col>
-            <el-col :span="6">
-                <el-button type="primary">查询</el-button>
-                <el-button>重置</el-button>
-            </el-col>
-        </el-row>
-    </el-card>
-	<el-card class="mt">
-            <el-row>
-                <el-col :span="6">
-                    <el-statistic title="累计充电量(度)" :value="268900" />
-                </el-col>
-                <el-col :span="6">
-                    <el-statistic title="累计充电次数(次)" :value="1389"></el-statistic>
-                </el-col>
-                <el-col :span="6">
-                    <el-statistic title="服务区域(个)" :value="88" />
-                </el-col>
-                <el-col :span="6">
-                    <el-statistic title="累计效益(元)" :value="5622178">
-                    </el-statistic>
-                </el-col>
-            </el-row>
-        </el-card>
- 		 <el-card class="mt">
-            <el-button type="primary" >
-                <el-icon style="margin-right: 5px;">
-                    <Plus />
-                </el-icon>
+\<template\>
+    \<el-card\>
+        \<el-row :gutter="20"\>
+            \<el-col :span="6"\>
+                \<el-input v-model="formParams.input" placeholder="请输入站点名称、id"\>
+                    \<template #append\>
+                        \<el-select v-model="select" style="width: 115px"\>
+                            \<el-option label="按名称查询" value="name" /\>
+                            \<el-option label="按ID查询" value="id" /\>
+                        \</el-select\>
+                    \</template\>
+                \</el-input\>
+            \</el-col\>
+            \<el-col :span="6"\>
+                \<el-select v-model="formParams.value" placeholder="充电站状态"\>
+                    \<el-option :value="1" label="全部"\>\</el-option\>
+                    \<el-option :value="2" label="使用中"\>\</el-option\>
+                    \<el-option :value="3" label="空闲中"\>\</el-option\>
+                    \<el-option :value="4" label="维护中"\>\</el-option\>
+                    \<el-option :value="5" label="待维修"\>\</el-option\>
+                \</el-select\>
+            \</el-col\>
+            \<el-col :span="6"\>
+                \<el-button type="primary"\>查询\</el-button\>
+                \<el-button\>重置\</el-button\>
+            \</el-col\>
+        \</el-row\>
+    \</el-card\>
+	\<el-card class="mt"\>
+            \<el-row\>
+                \<el-col :span="6"\>
+                    \<el-statistic title="累计充电量(度)" :value="268900" /\>
+                \</el-col\>
+                \<el-col :span="6"\>
+                    \<el-statistic title="累计充电次数(次)" :value="1389"\>\</el-statistic\>
+                \</el-col\>
+                \<el-col :span="6"\>
+                    \<el-statistic title="服务区域(个)" :value="88" /\>
+                \</el-col\>
+                \<el-col :span="6"\>
+                    \<el-statistic title="累计效益(元)" :value="5622178"\>
+                    \</el-statistic\>
+                \</el-col\>
+            \</el-row\>
+        \</el-card\>
+ 		 \<el-card class="mt"\>
+            \<el-button type="primary" \>
+                \<el-icon style="margin-right: 5px;"\>
+                    \<Plus /\>
+                \</el-icon\>
                 新增充电站
-            </el-button>
-        </el-card>
-</template>
+            \</el-button\>
+        \</el-card\>
+\</template\>
 
-<script setup lang="ts">
+\<script setup lang="ts"\>
 import { ref,reactive } from 'vue'
 const formParams = reactive({
     input: "",
     value: 1
 })
 const select = ref("name")
-</script>
+\</script\>
 ```
 
 
@@ -2859,9 +2859,9 @@ const select = ref("name")
 
 了解为基础表格结构之后，开发接口，获取表格数据
 
-> **mock接口开发：略，参见源文件**
+\> **mock接口开发：略，参见源文件**
 
-> **api文件封装**
+\> **api文件封装**
 
 ==api-chargingstation.ts==
 
@@ -2887,7 +2887,7 @@ export {listApi}
 ==views-chargingstation-Monitor.vue==
 
 ```vue
-<script setup lang="ts">
+\<script setup lang="ts"\>
 import { ref, reactive,onMounted } from 'vue'
 import { listApi } from "@/api/chargingstation"
 const formParams = reactive({
@@ -2895,60 +2895,60 @@ const formParams = reactive({
     value: 1
 })
 const select = ref("name")
-const loadData = async () => {
+const loadData = async () =\> {
     const res = await listApi({page:1,pageSize:10,status:1});
     console.log(res)
 
 }
-onMounted(() => {
+onMounted(() =\> {
     loadData()
 })
 
-</script>
+\</script\>
 ```
 
-> 添加table静态结构和分页静态结构
+\> 添加table静态结构和分页静态结构
 
 ```vue
-<el-table :data="tableData" style="width: 100%"  v-loading="loading">
-            <el-table-column type="index" width="60" label="序号" />
-            <el-table-column prop="name" label="站点名称" width="200" />
-            <el-table-column prop="id" label="站点id" />
-            <el-table-column prop="city" label="所属城市" />
-            <el-table-column prop="fast" label="快充数" />
-            <el-table-column prop="slow" label="慢充数" />
-            <el-table-column prop="status" label="状态">
-                <template #default="scope">
-                    <el-tag v-if="scope.row.status == 2" type="primary">使用中</el-tag>
-                    <el-tag v-else-if="scope.row.status == 3" type="success">空闲中</el-tag>
-                    <el-tag v-else-if="scope.row.status == 4" type="warning">维护中</el-tag>
-                    <el-tag v-else-if="scope.row.status == 5" type="danger">待维修</el-tag>
-                </template>
-            </el-table-column>
-            <el-table-column prop="now" label="正在充电" />
-            <el-table-column prop="fault" label="故障数" />
-            <el-table-column prop="person" label="站点负责人" />
-            <el-table-column prop="tel" label="负责人电话" />
-            <el-table-column label="操作" width="200">
-                <template #default="scope">
-                    <el-button type="primary" size="small">编辑</el-button>
-                    <el-popconfirm title="确定要删除吗" >
-                        <template #reference>
-                            <el-button type="danger" size="small">删除</el-button>
-                        </template>
-                    </el-popconfirm>
-                </template>
-            </el-table-column>
-        </el-table>
-		<el-pagination class="fr mt mb" v-model:current-page="pageInfo.page" v-model:page-size="pageInfo.pageSize"
+\<el-table :data="tableData" style="width: 100%"  v-loading="loading"\>
+            \<el-table-column type="index" width="60" label="序号" /\>
+            \<el-table-column prop="name" label="站点名称" width="200" /\>
+            \<el-table-column prop="id" label="站点id" /\>
+            \<el-table-column prop="city" label="所属城市" /\>
+            \<el-table-column prop="fast" label="快充数" /\>
+            \<el-table-column prop="slow" label="慢充数" /\>
+            \<el-table-column prop="status" label="状态"\>
+                \<template #default="scope"\>
+                    \<el-tag v-if="scope.row.status == 2" type="primary"\>使用中\</el-tag\>
+                    \<el-tag v-else-if="scope.row.status == 3" type="success"\>空闲中\</el-tag\>
+                    \<el-tag v-else-if="scope.row.status == 4" type="warning"\>维护中\</el-tag\>
+                    \<el-tag v-else-if="scope.row.status == 5" type="danger"\>待维修\</el-tag\>
+                \</template\>
+            \</el-table-column\>
+            \<el-table-column prop="now" label="正在充电" /\>
+            \<el-table-column prop="fault" label="故障数" /\>
+            \<el-table-column prop="person" label="站点负责人" /\>
+            \<el-table-column prop="tel" label="负责人电话" /\>
+            \<el-table-column label="操作" width="200"\>
+                \<template #default="scope"\>
+                    \<el-button type="primary" size="small"\>编辑\</el-button\>
+                    \<el-popconfirm title="确定要删除吗" \>
+                        \<template #reference\>
+                            \<el-button type="danger" size="small"\>删除\</el-button\>
+                        \</template\>
+                    \</el-popconfirm\>
+                \</template\>
+            \</el-table-column\>
+        \</el-table\>
+		\<el-pagination class="fr mt mb" v-model:current-page="pageInfo.page" v-model:page-size="pageInfo.pageSize"
                 :page-sizes="[10, 20, 30, 40]" :background="true" layout="total, sizes, prev, pager, next, jumper"
-                :total="totals" @size-change="handleSizeChange" @current-change="handleCurrentChange" />
+                :total="totals" @size-change="handleSizeChange" @current-change="handleCurrentChange" /\>
 ```
 
 对应的ts
 
 ```vue
-<script setup lang="ts">
+\<script setup lang="ts"\>
 import { ref, reactive, onMounted } from 'vue'
 import { listApi } from "@/api/chargingstation"
 const formParams = reactive({
@@ -2963,38 +2963,38 @@ const pageInfo = reactive({
     page: 1,
     pageSize: 10
 })
-const loadData = async () => {
+const loadData = async () =\> {
     loading.value = true
     const {data:{list,total}} = await listApi({ ...pageInfo, [select.value]: formParams.input, status: formParams.value });
     totals.value = total
     tableData.value = list
     loading.value = false
 }
-onMounted(() => {
+onMounted(() =\> {
     loadData()
 })
-const handleSizeChange = (size: number) => {
+const handleSizeChange = (size: number) =\> {
     pageInfo.pageSize = size
     loadData()
 }
-const handleCurrentChange = (page: number) => {
+const handleCurrentChange = (page: number) =\> {
     pageInfo.page = page;
     loadData()
 }
-</script>
+\</script\>
 ```
 
 ## 3.查询重置功能
 
 ```vue
- <el-button type="primary" @click="loadData">查询</el-button>
- <el-button @click="handleReset">重置</el-button>
+ \<el-button type="primary" @click="loadData"\>查询\</el-button\>
+ \<el-button @click="handleReset"\>重置\</el-button\>
 ```
 
 重置：
 
 ```ts
-const handleReset = () => {
+const handleReset = () =\> {
     pageInfo.page = 1;
     pageInfo.pageSize = 10;
     formParams.input = ""
@@ -3010,69 +3010,69 @@ const handleReset = () => {
 ==views-chargingstation-components-StationForm.vue==
 
 ```vue
-<template>
-    <el-dialog title="编辑站点信息" :model-value="true">
-        <el-form :model="ruleForm" label-width="120" :rules="rules" ref="formRef">
-            <el-row>
-                <el-col :span="12">
-                    <el-form-item label="站点名称：" prop="name">
-                        <el-input v-model="ruleForm.name" />
-                    </el-form-item>
-                    <el-form-item label="站点id：" prop="id">
-                        <el-input v-model="ruleForm.id" :disabled="disabled" />
-                    </el-form-item>
-                    <el-form-item label="所属城市：" prop="city">
-                        <el-input v-model="ruleForm.city" />
-                    </el-form-item>
-                    <el-form-item label="站点负责人：" prop="person">
-                        <el-input v-model="ruleForm.person" />
-                    </el-form-item>
-                    <el-form-item label="负责人电话：" prop="tel">
-                        <el-input v-model="ruleForm.tel" />
-                    </el-form-item>
-                </el-col>
-                <el-col :span="12">
-                    <el-form-item label="快充数：" prop="fast">
-                        <el-input v-model="ruleForm.fast" />
-                    </el-form-item>
-                    <el-form-item label="慢充数：" prop="slow">
-                        <el-input v-model="ruleForm.slow" />
-                    </el-form-item>
-                    <el-form-item label="充电站状态：" prop="status">
-                        <el-select v-model="ruleForm.status" placeholder="充电站状态" :disabled="disabled">
-                            <el-option :value="1" label="全部"></el-option>
-                            <el-option :value="2" label="使用中"></el-option>
-                            <el-option :value="3" label="空闲中"></el-option>
-                            <el-option :value="4" label="维护中"></el-option>
-                            <el-option :value="5" label="待维修"></el-option>
-                        </el-select>
-                    </el-form-item>
-                    <el-form-item label="正在充电：" prop="now">
-                        <el-input v-model="ruleForm.now" :disabled="disabled" />
-                    </el-form-item>
-                    <el-form-item label="故障数：" prop="fault">
-                        <el-input v-model="ruleForm.fault" :disabled="disabled" />
-                    </el-form-item>
-                </el-col>
-            </el-row>
-        </el-form>
+\<template\>
+    \<el-dialog title="编辑站点信息" :model-value="true"\>
+        \<el-form :model="ruleForm" label-width="120" :rules="rules" ref="formRef"\>
+            \<el-row\>
+                \<el-col :span="12"\>
+                    \<el-form-item label="站点名称：" prop="name"\>
+                        \<el-input v-model="ruleForm.name" /\>
+                    \</el-form-item\>
+                    \<el-form-item label="站点id：" prop="id"\>
+                        \<el-input v-model="ruleForm.id" :disabled="disabled" /\>
+                    \</el-form-item\>
+                    \<el-form-item label="所属城市：" prop="city"\>
+                        \<el-input v-model="ruleForm.city" /\>
+                    \</el-form-item\>
+                    \<el-form-item label="站点负责人：" prop="person"\>
+                        \<el-input v-model="ruleForm.person" /\>
+                    \</el-form-item\>
+                    \<el-form-item label="负责人电话：" prop="tel"\>
+                        \<el-input v-model="ruleForm.tel" /\>
+                    \</el-form-item\>
+                \</el-col\>
+                \<el-col :span="12"\>
+                    \<el-form-item label="快充数：" prop="fast"\>
+                        \<el-input v-model="ruleForm.fast" /\>
+                    \</el-form-item\>
+                    \<el-form-item label="慢充数：" prop="slow"\>
+                        \<el-input v-model="ruleForm.slow" /\>
+                    \</el-form-item\>
+                    \<el-form-item label="充电站状态：" prop="status"\>
+                        \<el-select v-model="ruleForm.status" placeholder="充电站状态" :disabled="disabled"\>
+                            \<el-option :value="1" label="全部"\>\</el-option\>
+                            \<el-option :value="2" label="使用中"\>\</el-option\>
+                            \<el-option :value="3" label="空闲中"\>\</el-option\>
+                            \<el-option :value="4" label="维护中"\>\</el-option\>
+                            \<el-option :value="5" label="待维修"\>\</el-option\>
+                        \</el-select\>
+                    \</el-form-item\>
+                    \<el-form-item label="正在充电：" prop="now"\>
+                        \<el-input v-model="ruleForm.now" :disabled="disabled" /\>
+                    \</el-form-item\>
+                    \<el-form-item label="故障数：" prop="fault"\>
+                        \<el-input v-model="ruleForm.fault" :disabled="disabled" /\>
+                    \</el-form-item\>
+                \</el-col\>
+            \</el-row\>
+        \</el-form\>
 
-        <template #footer>
-            <div class="dialog-footer">
-                <el-button>取消</el-button>
-                <el-button type="primary" >
+        \<template #footer\>
+            \<div class="dialog-footer"\>
+                \<el-button\>取消\</el-button\>
+                \<el-button type="primary" \>
                     确认
-                </el-button>
-            </div>
-        </template>
-    </el-dialog>
-</template>
+                \</el-button\>
+            \</div\>
+        \</template\>
+    \</el-dialog\>
+\</template\>
 
-<script setup lang="ts">
+\<script setup lang="ts"\>
 import { ref,reactive} from 'vue'
 import type { FormRules } from 'element-plus'
 import type {RowType} from "../../../types/station"
-const ruleForm = ref<RowType>({
+const ruleForm = ref\<RowType\>({
     name: "",
     id: "",
     city: "",
@@ -3085,7 +3085,7 @@ const ruleForm = ref<RowType>({
     tel: ""
 })
 const disabled = ref(false)
-const rules = reactive<FormRules<RowType>>({
+const rules = reactive\<FormRules\<RowType\>\>({
     name: [
         { required: true, message: '站点名称不能为空', trigger: 'blur' },
     ],
@@ -3117,7 +3117,7 @@ const rules = reactive<FormRules<RowType>>({
         { required: true, message: '故障数量不能为空', trigger: 'blur' },
     ]
 })
-</script>
+\</script\>
 ```
 
 ## 5.实现弹窗的开关功能
@@ -3125,7 +3125,7 @@ const rules = reactive<FormRules<RowType>>({
 父组件中：
 
 ```vue
-<StationForm :dialog-visible="visible"></StationForm>
+\<StationForm :dialog-visible="visible"\>\</StationForm\>
 ```
 
 ```ts
@@ -3134,10 +3134,10 @@ const visible = ref(false)
 
 子组件中:
 
-> 这里没有选择使用v-model是因为这个数据是父组件传来的，不要双向绑定
+\> 这里没有选择使用v-model是因为这个数据是父组件传来的，不要双向绑定
 
 ```vue
- <el-dialog :model-value="dialogVisible" :title="title" @close="handleCancel">
+ \<el-dialog :model-value="dialogVisible" :title="title" @close="handleCancel"\>
 ```
 
 ```ts
@@ -3149,33 +3149,33 @@ const props = defineProps({
 })
 ```
 
-> 打开：
+\> 打开：
 
 ==父组件==
 
 ```vue
- <el-button type="primary" size="small" @click="edit(scope.row)">编辑</el-button>
+ \<el-button type="primary" size="small" @click="edit(scope.row)"\>编辑\</el-button\>
 ```
 
 ```ts
 import type { RowType } from '@/types/station';
-const edit = (row: RowType) => {
+const edit = (row: RowType) =\> {
     visible.value = true;
 }
 ```
 
-> 关闭：
+\> 关闭：
 
 ==子组件==
 
 ```vue
- <el-dialog title="编辑站点信息" :model-value="dialogVisible" @close="handleCancel"> 
-<el-button @click="handleCancel">取消</el-button>
+ \<el-dialog title="编辑站点信息" :model-value="dialogVisible" @close="handleCancel"\> 
+\<el-button @click="handleCancel"\>取消\</el-button\>
 ```
 
 ```ts
 const emit = defineEmits(["close"])
-const handleCancel = () => {
+const handleCancel = () =\> {
     emit("close")
 }
 ```
@@ -3183,13 +3183,13 @@ const handleCancel = () => {
 ==父组件：==
 
 ```vue
-  <StationForm  :dialog-visible="visible"  @close="visible = false"></StationForm>
+  \<StationForm  :dialog-visible="visible"  @close="visible = false"\>\</StationForm\>
 ```
 
 现在有个小问题，如果你验证未通过直接关掉，下次打开会发现那个提示还在，可以通过下面设置解决
 
 ```vue
- <el-dialog title="编辑站点信息" :model-value="dialogVisible" @close="handleCancel" destroy-on-close>
+ \<el-dialog title="编辑站点信息" :model-value="dialogVisible" @close="handleCancel" destroy-on-close\>
 ```
 
 ## 6.实现编辑功能带入数据
@@ -3202,8 +3202,8 @@ const handleCancel = () => {
 import { defineStore } from "pinia";
 import { ref } from "vue"
 import { RowType } from "@/types/station";
-export const useStationStore = defineStore("station", () => {
-    const rowData = ref<RowType>({
+export const useStationStore = defineStore("station", () =\> {
+    const rowData = ref\<RowType\>({
         name: "",
         id: "",
         city: "",
@@ -3216,7 +3216,7 @@ export const useStationStore = defineStore("station", () => {
         tel: ""
     });
 
-    const setRowData = (row: RowType) => {
+    const setRowData = (row: RowType) =\> {
         rowData.value = row
         console.log("store",rowData.value)
     }
@@ -3234,7 +3234,7 @@ import { useStationStore } from "@/stores/station";
 const stationStore = useStationStore()
 const { setRowData } = stationStore
 const visible = ref(false)
-const edit = (row: RowType) => {
+const edit = (row: RowType) =\> {
     setRowData(row)
     visible.value = true;
 }
@@ -3247,18 +3247,18 @@ import { useStationStore } from "@/store/station";
 import { storeToRefs } from 'pinia';
 const stationStore = useStationStore();
 const { rowData } = storeToRefs(stationStore);
-watch(() => props.dialogVisible, () => {
+watch(() =\> props.dialogVisible, () =\> {
     // 等待 DOM 更新
     ruleForm.value = rowData.value
 })
 ```
 
-> 有某些数据不能改，所以设置下
+\> 有某些数据不能改，所以设置下
 
 ==子组件==
 
 ```ts
-watch(() => props.dialogVisible, () => {
+watch(() =\> props.dialogVisible, () =\> {
     // 等待 DOM 更新
     disabled.value = true
     ruleForm.value = rowData.value
@@ -3268,16 +3268,16 @@ watch(() => props.dialogVisible, () => {
 ## 7.新增充电站
 
 ```vue
- <el-button type="primary" @click="handleAdd">
-            <el-icon style="margin-right: 5px;">
-                <Plus />
-            </el-icon>
+ \<el-button type="primary" @click="handleAdd"\>
+            \<el-icon style="margin-right: 5px;"\>
+                \<Plus /\>
+            \</el-icon\>
             新增充电站
-        </el-button>
+        \</el-button\>
 ```
 
 ```ts
-const handleAdd = () => {
+const handleAdd = () =\> {
     setRowData({
         name: "",
         id: "",
@@ -3294,15 +3294,15 @@ const handleAdd = () => {
 }
 ```
 
-> 取消禁用状态，动态设置标题
+\> 取消禁用状态，动态设置标题
 
 ```vue
- <el-dialog :title="title" :model-value="dialogVisible" @close="handleCancel" destroy-on-close>
+ \<el-dialog :title="title" :model-value="dialogVisible" @close="handleCancel" destroy-on-close\>
 ```
 
 ```ts
 const title = ref("")
-watch(() => props.dialogVisible, () => {
+watch(() =\> props.dialogVisible, () =\> {
     // 等待 DOM 更新
     if (rowData.value.name) { //表示编辑
         title.value = "编辑充电站信息"
@@ -3327,7 +3327,7 @@ watch(() => props.dialogVisible, () => {
 
 ```ts
 //新增/编辑充电站
-Mock.mock("https://www.demo.com/station/edit", 'post', (options: any) => {
+Mock.mock("https://www.demo.com/station/edit", 'post', (options: any) =\> {
   const res: any = JSON.parse(options.body);
   console.log("新增/编辑充电站接口收到数据："res)
   return {
@@ -3358,7 +3358,7 @@ enum Api {
     return post(Api.List,data)
 }  
 
-function editApi(data:RowType):Promise<any>{
+function editApi(data:RowType):Promise\<any\>{
     return post(Api.Edit,data)
   }
   
@@ -3368,14 +3368,14 @@ export {listApi,editApi}
 ==子组件==
 
 ```vue
-<el-button type="primary" @click="handleConfirm">
+\<el-button type="primary" @click="handleConfirm"\>
                     确认
-                </el-button>
+                \</el-button\>
 ```
 
 ```ts
-const handleConfirm = () => {
-    formRef.value?.validate(async (valid: boolean) => {
+const handleConfirm = () =\> {
+    formRef.value?.validate(async (valid: boolean) =\> {
         if (valid) {
             //调用接口
             const res = await editApi(ruleForm.value);
@@ -3397,7 +3397,7 @@ const handleConfirm = () => {
 ==父组件==
 
 ```vue
- <StationForm :dialog-visible="visible" @close="visible = false" @reload="loadData"></StationForm>
+ \<StationForm :dialog-visible="visible" @close="visible = false" @reload="loadData"\>\</StationForm\>
 ```
 
 ## 9.删除充电站
@@ -3406,7 +3406,7 @@ const handleConfirm = () => {
 
 ```ts
 //删除充电站接口
-Mock.mock("https://www.demo.com/station/delete", "post", (options: any) => {
+Mock.mock("https://www.demo.com/station/delete", "post", (options: any) =\> {
   console.log(88, JSON.parse(options.body))
   return {
     code: 200,
@@ -3436,10 +3436,10 @@ enum Api {
   function listApi(data:ListType){
     return post(Api.List,data)
 }  
-function editApi(data:RowType):Promise<any>{
+function editApi(data:RowType):Promise\<any\>{
     return post(Api.Edit,data)
   }
-  function deleteApi(id:string):Promise<any>{
+  function deleteApi(id:string):Promise\<any\>{
     return post(Api.Delete,{id})
   }
 export {listApi,editApi,deleteApi}
@@ -3450,13 +3450,13 @@ export {listApi,editApi,deleteApi}
 ==父组件==
 
 ```vue
- <el-popconfirm title="确定要删除吗"  @confirm="handleDelete(scope.row.id)">
+ \<el-popconfirm title="确定要删除吗"  @confirm="handleDelete(scope.row.id)"\>
 ```
 
 ```ts
 import { ElMessage } from 'element-plus'
 import { listApi,deleteApi } from "@/api/chargingstation"
-const handleDelete = async (id: string) => {
+const handleDelete = async (id: string) =\> {
     const res = await deleteApi(id);
     if (res.code == 200) { }
     ElMessage({
@@ -3472,105 +3472,105 @@ const handleDelete = async (id: string) => {
 ## 1.静态结构
 
 ```vue
- <el-row :gutter="20">
-            <el-col :span="4">
-                <el-card>
-                    <div class="title">
-                        <div class="round">
-                            <el-icon>
-                                <Document />
-                            </el-icon>
-                        </div>
-                        <h4>今日总收入 (元)</h4>
-                    </div>
-                    <div class="total mt">
-                        <h1>239,824</h1>
-                        <div class="percent">-21%</div>
-                    </div>
-                </el-card>
-            </el-col>
-            <el-col :span="4">
-                <el-card>
-                    <div class="title">
-                        <div class="round">
-                            <el-icon>
-                                <Document />
-                            </el-icon>
-                        </div>
-                        <h4>本月总收入 (万元)</h4>
-                    </div>
-                    <div class="total mt">
-                        <h1>2,924</h1>
-                        <div class="percent">-21%</div>
-                    </div>
-                </el-card>
-            </el-col>
-            <el-col :span="4">
-                <el-card>
-                    <div class="title">
-                        <div class="round">
-                            <el-icon>
-                                <Document />
-                            </el-icon>
-                        </div>
-                        <h4>会员卡储值金额 (元)</h4>
-                    </div>
-                    <div class="total mt">
-                        <h1>239,824</h1>
-                        <div class="percent">-21%</div>
-                    </div>
-                </el-card>
-            </el-col>
-            <el-col :span="4">
-                <el-card>
-                    <div class="title">
-                        <div class="round">
-                            <el-icon>
-                                <Document />
-                            </el-icon>
-                        </div>
-                        <h4>服务费总金额 (元)</h4>
-                    </div>
-                    <div class="total mt">
-                        <h1>239,824</h1>
-                        <div class="percent">-21%</div>
-                    </div>
-                </el-card>
-            </el-col>
-            <el-col :span="4">
-                <el-card>
-                    <div class="title">
-                        <div class="round">
-                            <el-icon>
-                                <Document />
-                            </el-icon>
-                        </div>
-                        <h4>停车费总金额 (元)</h4>
-                    </div>
-                    <div class="total mt">
-                        <h1>239,824</h1>
-                        <div class="percent">-21%</div>
-                    </div>
-                </el-card>
-            </el-col>
-            <el-col :span="4">
-                <el-card>
-                    <div class="title">
-                        <div class="round">
-                            <el-icon>
-                                <Document />
-                            </el-icon>
-                        </div>
-                        <h4>电费总金额 (元)</h4>
-                    </div>
-                    <div class="total mt">
-                        <h1>239,824</h1>
-                        <div class="percent">-21%</div>
-                    </div>
-                </el-card>
-            </el-col>
-        </el-row>
-<style lang="less" scoped>
+ \<el-row :gutter="20"\>
+            \<el-col :span="4"\>
+                \<el-card\>
+                    \<div class="title"\>
+                        \<div class="round"\>
+                            \<el-icon\>
+                                \<Document /\>
+                            \</el-icon\>
+                        \</div\>
+                        \<h4\>今日总收入 (元)\</h4\>
+                    \</div\>
+                    \<div class="total mt"\>
+                        \<h1\>239,824\</h1\>
+                        \<div class="percent"\>-21%\</div\>
+                    \</div\>
+                \</el-card\>
+            \</el-col\>
+            \<el-col :span="4"\>
+                \<el-card\>
+                    \<div class="title"\>
+                        \<div class="round"\>
+                            \<el-icon\>
+                                \<Document /\>
+                            \</el-icon\>
+                        \</div\>
+                        \<h4\>本月总收入 (万元)\</h4\>
+                    \</div\>
+                    \<div class="total mt"\>
+                        \<h1\>2,924\</h1\>
+                        \<div class="percent"\>-21%\</div\>
+                    \</div\>
+                \</el-card\>
+            \</el-col\>
+            \<el-col :span="4"\>
+                \<el-card\>
+                    \<div class="title"\>
+                        \<div class="round"\>
+                            \<el-icon\>
+                                \<Document /\>
+                            \</el-icon\>
+                        \</div\>
+                        \<h4\>会员卡储值金额 (元)\</h4\>
+                    \</div\>
+                    \<div class="total mt"\>
+                        \<h1\>239,824\</h1\>
+                        \<div class="percent"\>-21%\</div\>
+                    \</div\>
+                \</el-card\>
+            \</el-col\>
+            \<el-col :span="4"\>
+                \<el-card\>
+                    \<div class="title"\>
+                        \<div class="round"\>
+                            \<el-icon\>
+                                \<Document /\>
+                            \</el-icon\>
+                        \</div\>
+                        \<h4\>服务费总金额 (元)\</h4\>
+                    \</div\>
+                    \<div class="total mt"\>
+                        \<h1\>239,824\</h1\>
+                        \<div class="percent"\>-21%\</div\>
+                    \</div\>
+                \</el-card\>
+            \</el-col\>
+            \<el-col :span="4"\>
+                \<el-card\>
+                    \<div class="title"\>
+                        \<div class="round"\>
+                            \<el-icon\>
+                                \<Document /\>
+                            \</el-icon\>
+                        \</div\>
+                        \<h4\>停车费总金额 (元)\</h4\>
+                    \</div\>
+                    \<div class="total mt"\>
+                        \<h1\>239,824\</h1\>
+                        \<div class="percent"\>-21%\</div\>
+                    \</div\>
+                \</el-card\>
+            \</el-col\>
+            \<el-col :span="4"\>
+                \<el-card\>
+                    \<div class="title"\>
+                        \<div class="round"\>
+                            \<el-icon\>
+                                \<Document /\>
+                            \</el-icon\>
+                        \</div\>
+                        \<h4\>电费总金额 (元)\</h4\>
+                    \</div\>
+                    \<div class="total mt"\>
+                        \<h1\>239,824\</h1\>
+                        \<div class="percent"\>-21%\</div\>
+                    \</div\>
+                \</el-card\>
+            \</el-col\>
+        \</el-row\>
+\<style lang="less" scoped\>
 .title {
     display: flex;
     align-items: center;
@@ -3610,7 +3610,7 @@ const handleDelete = async (id: string) => {
         line-height: 20px;
     }
 }
-</style>
+\</style\>
 ```
 
 封装一个千分位分隔的功能
@@ -3634,7 +3634,7 @@ function formatNumberToThousands(num: number): string {
     let formattedInteger = "";
     
     // 反向遍历整数部分
-    for (let i = integerPart.length - 1; i >= 0; i--) { //2345   i=3
+    for (let i = integerPart.length - 1; i \>= 0; i--) { //2345   i=3
         // 将字符添加到格式化结果中   2345.7
         formattedInteger = integerPart[i] + formattedInteger;//5+""
         
@@ -3654,9 +3654,9 @@ export default formatNumberToThousands
 ## 2.图表开发
 
 ```vue
-<el-card class="mt">
-            <div ref="chartRef" style="width: 100%; height: 240px;"></div>
-        </el-card>
+\<el-card class="mt"\>
+            \<div ref="chartRef" style="width: 100%; height: 240px;"\>\</div\>
+        \</el-card\>
 ```
 
 图表接口
@@ -3665,7 +3665,7 @@ export default formatNumberToThousands
 
 ```ts
 //营收统计图表
-Mock.mock("https://www.demo.com/revenueChart", "get", () => {
+Mock.mock("https://www.demo.com/revenueChart", "get", () =\> {
   return {
     code: 200,
     success: true,
@@ -3710,11 +3710,11 @@ enum Api {
     return post(Api.List,data)
 }  
 
-function editApi(data:RowType):Promise<any>{
+function editApi(data:RowType):Promise\<any\>{
     return post(Api.Edit,data)
   }
 
-  function deleteApi(id:string):Promise<any>{
+  function deleteApi(id:string):Promise\<any\>{
     return post(Api.Delete,{id})
   }
   function chartApi(){
@@ -3730,7 +3730,7 @@ import { chartApi } from "@/api/chargingstation"
 import { reactive,ref } from "vue";
 import { useChart } from "@/hooks/useChart.ts"
 const chartRef=ref(null)
-const setChartData = async () => {
+const setChartData = async () =\> {
     const chartOptions = reactive({
         tooltip: {
             trigger: 'axis'
@@ -3777,11 +3777,11 @@ const setChartData = async () => {
         ]
     });
     const res = await chartApi();
-    for (let i = 0; i < res.data.list.length; i++) {
+    for (let i = 0; i \< res.data.list.length; i++) {
         chartOptions.series[i].name = res.data.list[i].name
         chartOptions.series[i].data = res.data.list[i].data
     }
-    chartOptions.legend.data = res.data.list.map((item:any) => item.name)
+    chartOptions.legend.data = res.data.list.map((item:any) =\> item.name)
     return chartOptions
 }
 
@@ -3801,7 +3801,7 @@ api
 ```ts
   Revenue="/revenueList",
 
-function revenueApi(data:any):Promise<any>{
+function revenueApi(data:any):Promise\<any\>{
   return post(Api.Revenue,data)
 }
 ```
@@ -3809,37 +3809,37 @@ function revenueApi(data:any):Promise<any>{
 
 
 ```vue
- <el-card class="mt">
-            <el-input v-model="input" style="max-width: 400px" placeholder="输入站点名称筛选">
-                <template #append>
-                    <el-button :icon="Search" @click="loadData"/>
-                </template>
-            </el-input>
-            <el-table :data="tableData" class="mt" v-loading="loading">
-                <el-table-column type="index" width="60" label="序号" />
-                <el-table-column prop="name" label="充电站名称"  />
-                <el-table-column prop="id" label="充电站id"  />
-                <el-table-column prop="city" label="所属城市"  />
-                <el-table-column prop="count" label="充电桩总量(个)"  />
-                <el-table-column prop="day" label="单日总收入(元)" sortable>
-                    <template #default="scope">
-                        <span>{{ scope.row.day}}</span>
-                        <el-tag class="ml" :type="scope.row.percent>0?'success':'danger'" >{{ scope.row.percent>0?"+"+scope.row.percent+"%":scope.row.percent+"%" }}</el-tag>
-                    </template>
-                </el-table-column>
-                <el-table-column prop="month" label="月度总收入(元)" >
-                    <template #default="scope">
-                        <span>{{scope.row.month }}</span>
-                        <el-tag class="ml" :type="scope.row.mpercent>0?'success':'danger'" >{{ scope.row.mpercent>0?"+"+scope.row.mpercent+"%":scope.row.percent+"%" }}</el-tag>
-                    </template>
-                </el-table-column>
-                <el-table-column prop="electricity" label="电费营收(元)"  />
-                <el-table-column prop="parkingFee" label="停车费营收(元)"  />
-                <el-table-column prop="serviceFee" label="服务费营收(元)"  />
-                <el-table-column prop="member" label="会员储值金(元)"  />
+ \<el-card class="mt"\>
+            \<el-input v-model="input" style="max-width: 400px" placeholder="输入站点名称筛选"\>
+                \<template #append\>
+                    \<el-button :icon="Search" @click="loadData"/\>
+                \</template\>
+            \</el-input\>
+            \<el-table :data="tableData" class="mt" v-loading="loading"\>
+                \<el-table-column type="index" width="60" label="序号" /\>
+                \<el-table-column prop="name" label="充电站名称"  /\>
+                \<el-table-column prop="id" label="充电站id"  /\>
+                \<el-table-column prop="city" label="所属城市"  /\>
+                \<el-table-column prop="count" label="充电桩总量(个)"  /\>
+                \<el-table-column prop="day" label="单日总收入(元)" sortable\>
+                    \<template #default="scope"\>
+                        \<span\>{{ scope.row.day}}\</span\>
+                        \<el-tag class="ml" :type="scope.row.percent\>0?'success':'danger'" \>{{ scope.row.percent\>0?"+"+scope.row.percent+"%":scope.row.percent+"%" }}\</el-tag\>
+                    \</template\>
+                \</el-table-column\>
+                \<el-table-column prop="month" label="月度总收入(元)" \>
+                    \<template #default="scope"\>
+                        \<span\>{{scope.row.month }}\</span\>
+                        \<el-tag class="ml" :type="scope.row.mpercent\>0?'success':'danger'" \>{{ scope.row.mpercent\>0?"+"+scope.row.mpercent+"%":scope.row.percent+"%" }}\</el-tag\>
+                    \</template\>
+                \</el-table-column\>
+                \<el-table-column prop="electricity" label="电费营收(元)"  /\>
+                \<el-table-column prop="parkingFee" label="停车费营收(元)"  /\>
+                \<el-table-column prop="serviceFee" label="服务费营收(元)"  /\>
+                \<el-table-column prop="member" label="会员储值金(元)"  /\>
                 
-            </el-table>
-        </el-card>
+            \</el-table\>
+        \</el-card\>
 ```
 
 ```ts
@@ -3851,13 +3851,13 @@ import {revenueApi} from "@/api/chargingstation"
 const input = ref("")
 const tableData=ref([]);
 const loading = ref(false);
-const loadData=async ()=>{
+const loadData=async ()=\>{
     loading.value = true
     const { data:{list,total} } = await revenueApi({  name:input.value});
  //   setTotals(total);
 
       // 计算day字段
-      tableData.value = list.map(item => ({
+      tableData.value = list.map(item =\> ({
         ...item,
         day: item.electricity + item.parkingFee + item.serviceFee + item.member
     }));
@@ -3865,7 +3865,7 @@ const loadData=async ()=>{
     //tableData.value=data
     loading.value = false
 }
-onMounted(()=>{
+onMounted(()=\>{
     loadData()
 })
 ```
@@ -3878,26 +3878,26 @@ onMounted(()=>{
 
 ```ts
 import { ref, reactive } from "vue"
-export function usePagaination(loadData:()=>Promise<any>,initialPageSize=10) {
+export function usePagaination(loadData:()=\>Promise\<any\>,initialPageSize=10) {
     const totals = ref(0)
     const pageInfo = reactive({
         page: 1,
         pageSize: initialPageSize
     })
-    const handleSizeChange = (size: number) => {
+    const handleSizeChange = (size: number) =\> {
         pageInfo.pageSize = size
         loadData()
     }
-    const handleCurrentChange = (page: number) => {
+    const handleCurrentChange = (page: number) =\> {
         pageInfo.page = page;
         console.log(666,pageInfo.page)
         loadData()
     }
-    const resetPagination = () => {
+    const resetPagination = () =\> {
         pageInfo.page = 1;
         pageInfo.pageSize = initialPageSize;
       };
-    const setTotals=(all:number)=>{
+    const setTotals=(all:number)=\>{
         totals.value=all
     }  
       return{
@@ -3909,9 +3909,9 @@ export function usePagaination(loadData:()=>Promise<any>,initialPageSize=10) {
 ==revenue.vue==
 
 ```vue
- <el-pagination class="fr mt mb" v-model:current-page="pageInfo.page" v-model:page-size="pageInfo.pageSize"
+ \<el-pagination class="fr mt mb" v-model:current-page="pageInfo.page" v-model:page-size="pageInfo.pageSize"
                 :page-sizes="[10, 20, 30, 40]" :background="true" layout="total, sizes, prev, pager, next, jumper"
-                :total="totals" @size-change="handleSizeChange" @current-change="handleCurrentChange" />
+                :total="totals" @size-change="handleSizeChange" @current-change="handleCurrentChange" /\>
 ```
 
 ```ts
@@ -3935,62 +3935,62 @@ const {
 ## 1.静态结构开发
 
 ```vue
-<template>
-   <el-card>
-     <el-select  style="width: 300px;" placeholder="选择站点名称"></el-select>
-   </el-card>
-   <el-card class="mt">
-    <el-radio-group  size="large">
-            <el-radio-button label="全部" :value="0" />
-            <el-radio-button label="空闲中" :value="1" />
-            <el-radio-button label="充电中" :value="2" />
-            <el-radio-button label="连接中" :value="3" />
-            <el-radio-button label="排队中" :value="4" />
-            <el-radio-button label="已预约" :value="5" />
-            <el-radio-button label="故障/离线" :value="6" />
-        </el-radio-group>
-   </el-card>
-   <el-card class="mt">
-        <el-row :gutter="20">
-            <el-col :span="6">
-                <div class="item">
-                    <div class="pic">
-                        <p>空闲中</p>
-                        <img :src="free" alt="" width="100px">
-                        <p> 80%</p>
-                    </div>
-                    <div class="info">
-                        <h3>
+\<template\>
+   \<el-card\>
+     \<el-select  style="width: 300px;" placeholder="选择站点名称"\>\</el-select\>
+   \</el-card\>
+   \<el-card class="mt"\>
+    \<el-radio-group  size="large"\>
+            \<el-radio-button label="全部" :value="0" /\>
+            \<el-radio-button label="空闲中" :value="1" /\>
+            \<el-radio-button label="充电中" :value="2" /\>
+            \<el-radio-button label="连接中" :value="3" /\>
+            \<el-radio-button label="排队中" :value="4" /\>
+            \<el-radio-button label="已预约" :value="5" /\>
+            \<el-radio-button label="故障/离线" :value="6" /\>
+        \</el-radio-group\>
+   \</el-card\>
+   \<el-card class="mt"\>
+        \<el-row :gutter="20"\>
+            \<el-col :span="6"\>
+                \<div class="item"\>
+                    \<div class="pic"\>
+                        \<p\>空闲中\</p\>
+                        \<img :src="free" alt="" width="100px"\>
+                        \<p\> 80%\</p\>
+                    \</div\>
+                    \<div class="info"\>
+                        \<h3\>
                             CD1001
-                        </h3>
-                        <hr class="mb">
-                        <p>电压：314v</p>
-                        <p>电流：212.2A</p>
-                        <p>功率：21KW</p>
-                        <p>温度：32°c</p>
-                    </div>
-                </div>
-                <div class="btn">
-                    <div class="divder"></div>
-                    <div>
-                        <p class="fl ml" style="font-size: 12px;color: #999;">暂无预警</p>
-                        <div style="text-align: right;" class="fr">
-                            <el-button size="small">维保记录</el-button>
-                            <el-button type="primary" size="small" class="mr">使用记录</el-button>
-                        </div>
-                    </div>
+                        \</h3\>
+                        \<hr class="mb"\>
+                        \<p\>电压：314v\</p\>
+                        \<p\>电流：212.2A\</p\>
+                        \<p\>功率：21KW\</p\>
+                        \<p\>温度：32°c\</p\>
+                    \</div\>
+                \</div\>
+                \<div class="btn"\>
+                    \<div class="divder"\>\</div\>
+                    \<div\>
+                        \<p class="fl ml" style="font-size: 12px;color: #999;"\>暂无预警\</p\>
+                        \<div style="text-align: right;" class="fr"\>
+                            \<el-button size="small"\>维保记录\</el-button\>
+                            \<el-button type="primary" size="small" class="mr"\>使用记录\</el-button\>
+                        \</div\>
+                    \</div\>
 
-                </div>
-            </el-col>
-        </el-row>
-   </el-card>
-</template>
+                \</div\>
+            \</el-col\>
+        \</el-row\>
+   \</el-card\>
+\</template\>
 
-<script setup lang="ts">
+\<script setup lang="ts"\>
 
 import free from "@/assets/free.png"
-</script>
-<style lang="less" scoped>
+\</script\>
+\<style lang="less" scoped\>
 .item {
     justify-content: center;
     background-color: rgb(247, 251, 254);
@@ -4041,7 +4041,7 @@ import free from "@/assets/free.png"
 
     box-sizing: border-box;
 }
-</style>
+\</style\>
 ```
 
 ## 2.对接接口
@@ -4052,35 +4052,35 @@ import free from "@/assets/free.png"
 
 ```ts
  CurrentList="currentList"
- function currentListApi(name:string):Promise<any>{
+ function currentListApi(name:string):Promise\<any\>{
     return post(Api.currentList,{name})
   }
 ```
 
 ## 3.组件中实现搜索框模糊查询
 
-> 为el-select添加filterable属性即可启用搜索功能
+\> 为el-select添加filterable属性即可启用搜索功能
 
 ```vue
-<el-select v-model="value" style="width: 300px;" placeholder="选择站点名称" filterable 
-            :remote-method="remoteMethod">
-            <el-option v-for="item in optionsCopy" :key="item.id" :value="item.name">{{ item.name }}</el-option>
-        </el-select>
+\<el-select v-model="value" style="width: 300px;" placeholder="选择站点名称" filterable 
+            :remote-method="remoteMethod"\>
+            \<el-option v-for="item in optionsCopy" :key="item.id" :value="item.name"\>{{ item.name }}\</el-option\>
+        \</el-select\>
 ```
 
 ```ts
-<script setup lang="ts">
+\<script setup lang="ts"\>
 import ing from "@/assets/ing.png"
 import free from "@/assets/free.png"
 import outline from "@/assets/outline.png"
 import { currentListApi } from '@/api/chargingstation';
 import {ref,onMounted} from "vue"
 const value = ref("")
-const options = ref<any>([])//存原始下拉框
-let optionsCopy = ref<any>([]);//复制下拉框
+const options = ref\<any\>([])//存原始下拉框
+let optionsCopy = ref\<any\>([]);//复制下拉框
 const dataList = ref([]);//原始数据
 let dataListCopy = ref([])//复制数据
-const loadData = async (query = "") => {
+const loadData = async (query = "") =\> {
     const { data } = await currentListApi(query);
     options.value = data
     dataList.value = data[0].list //默认加载第一个的数据
@@ -4089,46 +4089,46 @@ const loadData = async (query = "") => {
 
 }
 
-onMounted(() => {
+onMounted(() =\> {
     loadData()
 })
 const loading = ref(false)
-const remoteMethod = (query: string) => {
+const remoteMethod = (query: string) =\> {
     optionsCopy.value = options.value //初始化
-    optionsCopy.value = optionsCopy.value.filter(item => item.name.includes(query))
+    optionsCopy.value = optionsCopy.value.filter(item =\> item.name.includes(query))
 }
-</script>
+\</script\>
 ```
 
 ## 4.单选按钮组查询
 
 ```vue
-<el-card class="mt">
-        <el-radio-group v-model="radio" size="large" @change="handleChange">
-            <el-radio-button :label="`全部(${allCount})`" :value="0" />
-            <el-radio-button :label="`空闲中(${checkCount(1)})`" :value="1" />
-            <el-radio-button :label="`充电中(${checkCount(2)})`" :value="2" />
-            <el-radio-button :label="`连接中(${checkCount(3)})`" :value="3" />
-            <el-radio-button :label="`排队中(${checkCount(4)})`" :value="4" />
-            <el-radio-button :label="`已预约(${checkCount(5)})`" :value="5" />
-            <el-radio-button :label="`故障/离线(${checkCount(6)})`" :value="6" />
-        </el-radio-group>
-    </el-card>
+\<el-card class="mt"\>
+        \<el-radio-group v-model="radio" size="large" @change="handleChange"\>
+            \<el-radio-button :label="`全部(${allCount})`" :value="0" /\>
+            \<el-radio-button :label="`空闲中(${checkCount(1)})`" :value="1" /\>
+            \<el-radio-button :label="`充电中(${checkCount(2)})`" :value="2" /\>
+            \<el-radio-button :label="`连接中(${checkCount(3)})`" :value="3" /\>
+            \<el-radio-button :label="`排队中(${checkCount(4)})`" :value="4" /\>
+            \<el-radio-button :label="`已预约(${checkCount(5)})`" :value="5" /\>
+            \<el-radio-button :label="`故障/离线(${checkCount(6)})`" :value="6" /\>
+        \</el-radio-group\>
+    \</el-card\>
 ```
 
 
 
 ```ts
 const radio = ref(0)
-const allCount = computed(() => checkCount(1) + checkCount(2) + checkCount(3) + checkCount(4) + checkCount(5) + checkCount(6))
+const allCount = computed(() =\> checkCount(1) + checkCount(2) + checkCount(3) + checkCount(4) + checkCount(5) + checkCount(6))
 function checkCount(num:number) {
-    return dataList.value.filter((item:any) => item.status == num).length
+    return dataList.value.filter((item:any) =\> item.status == num).length
 
 }
-const handleChange = (val: number) => {
+const handleChange = (val: number) =\> {
     dataListCopy.value = dataList.value
     if (val != 0) {
-        dataListCopy.value = dataListCopy.value.filter((item:any) => item.status == val)
+        dataListCopy.value = dataListCopy.value.filter((item:any) =\> item.status == val)
     }
 }
 ```
@@ -4138,54 +4138,54 @@ const handleChange = (val: number) => {
 ## 5.充电桩列表
 
 ```vue
- <el-card class="mt">
-        <el-row :gutter="20">
-            <el-col :span="6" v-for="item in dataListCopy" :key="item.id">
-                <div class="item">
-                    <div class="pic">
-                        <p v-if="item.status == 1">空闲中</p>
-                        <p v-else-if="item.status == 2">充电中</p>
-                        <p v-else-if="item.status == 3">连接中</p>
-                        <p v-else-if="item.status == 4">排队中</p>
-                        <p v-else-if="item.status == 5">已预约</p>
-                        <p v-else-if="item.status == 6">故障/离线</p>
-                        <img :src="item.status == 1 ? free : (item.status == 6 ? outline : ing)" alt="" width="100px">
-                        <p v-if="item.status == 2">{{ item.percent }}</p>
-                        <p v-else>0%</p>
-                    </div>
-                    <div class="info">
-                        <h3>
+ \<el-card class="mt"\>
+        \<el-row :gutter="20"\>
+            \<el-col :span="6" v-for="item in dataListCopy" :key="item.id"\>
+                \<div class="item"\>
+                    \<div class="pic"\>
+                        \<p v-if="item.status == 1"\>空闲中\</p\>
+                        \<p v-else-if="item.status == 2"\>充电中\</p\>
+                        \<p v-else-if="item.status == 3"\>连接中\</p\>
+                        \<p v-else-if="item.status == 4"\>排队中\</p\>
+                        \<p v-else-if="item.status == 5"\>已预约\</p\>
+                        \<p v-else-if="item.status == 6"\>故障/离线\</p\>
+                        \<img :src="item.status == 1 ? free : (item.status == 6 ? outline : ing)" alt="" width="100px"\>
+                        \<p v-if="item.status == 2"\>{{ item.percent }}\</p\>
+                        \<p v-else\>0%\</p\>
+                    \</div\>
+                    \<div class="info"\>
+                        \<h3\>
                             {{ item.id }}
-                        </h3>
-                        <hr class="mb">
-                        <p>电压：{{ item.voltage }}</p>
-                        <p>电流：{{ item.current }}</p>
-                        <p>功率：{{ item.power }}</p>
-                        <p>温度：{{ item.tem }}</p>
-                    </div>
+                        \</h3\>
+                        \<hr class="mb"\>
+                        \<p\>电压：{{ item.voltage }}\</p\>
+                        \<p\>电流：{{ item.current }}\</p\>
+                        \<p\>功率：{{ item.power }}\</p\>
+                        \<p\>温度：{{ item.tem }}\</p\>
+                    \</div\>
 
-                </div>
+                \</div\>
 
-                <div class="btn">
-                    <div class="divder"></div>
-                    <div>
-                        <p class="fl ml" style="font-size: 12px;color: #999;">暂无预警</p>
-                        <div style="text-align: right;" class="fr">
-                            <el-button size="small">维保记录</el-button>
-                            <el-button type="primary" size="small" class="mr">使用记录</el-button>
-                        </div>
-                    </div>
+                \<div class="btn"\>
+                    \<div class="divder"\>\</div\>
+                    \<div\>
+                        \<p class="fl ml" style="font-size: 12px;color: #999;"\>暂无预警\</p\>
+                        \<div style="text-align: right;" class="fr"\>
+                            \<el-button size="small"\>维保记录\</el-button\>
+                            \<el-button type="primary" size="small" class="mr"\>使用记录\</el-button\>
+                        \</div\>
+                    \</div\>
 
-                </div>
+                \</div\>
 
-            </el-col>
-        </el-row>
-    </el-card>
+            \</el-col\>
+        \</el-row\>
+    \</el-card\>
 ```
 
 ```ts
-watch(value, () => {
-    const res = optionsCopy.value.filter(item => item.name == value.value);
+watch(value, () =\> {
+    const res = optionsCopy.value.filter(item =\> item.name == value.value);
     dataListCopy.value = res[0].list
     dataList.value = res[0].list
     radio.value = 0
@@ -4196,36 +4196,36 @@ watch(value, () => {
 添加浮框
 
 ```vue
-                    <div style="text-align: right;" class="fr">
-                            <el-button size="small">维保记录</el-button>
-                            <el-popover placement="top-start" title="使用记录" :width="200" trigger="hover"
-                                content="本日使用记录">
-                                <template #reference>
-                                    <el-button type="primary" size="small" class="mr">使用记录</el-button>
-                                </template>
-                                <el-timeline style="max-width: 600px">
-                                    <el-timeline-item timestamp="12:08:17">
+                    \<div style="text-align: right;" class="fr"\>
+                            \<el-button size="small"\>维保记录\</el-button\>
+                            \<el-popover placement="top-start" title="使用记录" :width="200" trigger="hover"
+                                content="本日使用记录"\>
+                                \<template #reference\>
+                                    \<el-button type="primary" size="small" class="mr"\>使用记录\</el-button\>
+                                \</template\>
+                                \<el-timeline style="max-width: 600px"\>
+                                    \<el-timeline-item timestamp="12:08:17"\>
                                         充电80度，消费80元
-                                    </el-timeline-item>
-                                    <el-timeline-item timestamp="13:12:09">
+                                    \</el-timeline-item\>
+                                    \<el-timeline-item timestamp="13:12:09"\>
                                        re
-                                    </el-timeline-item>
-                                    <el-timeline-item timestamp="13:15:22">
+                                    \</el-timeline-item\>
+                                    \<el-timeline-item timestamp="13:15:22"\>
                                         充电60度，消费60元
-                                    </el-timeline-item>
-                                    <el-timeline-item timestamp="16:22:33">
+                                    \</el-timeline-item\>
+                                    \<el-timeline-item timestamp="16:22:33"\>
                                         充电70度，消费70元
-                                    </el-timeline-item>
-                                    <el-timeline-item timestamp="17:27:17">
+                                    \</el-timeline-item\>
+                                    \<el-timeline-item timestamp="17:27:17"\>
                                         充电100度，消费100元
-                                    </el-timeline-item>
-                                    <el-timeline-item timestamp="18:08:33">
+                                    \</el-timeline-item\>
+                                    \<el-timeline-item timestamp="18:08:33"\>
                                         充电80度，消费80元
-                                    </el-timeline-item>
-                                </el-timeline>
-                            </el-popover>
+                                    \</el-timeline-item\>
+                                \</el-timeline\>
+                            \</el-popover\>
 
-                        </div>
+                        \</div\>
 ```
 
 
@@ -4234,11 +4234,11 @@ watch(value, () => {
 
 ## 1.高德地图api
 
-> 高德地图官网中，选择js api
+\> 高德地图官网中，选择js api
 
 ![image-20241028144021633](http://114.67.74.14/static/vue_project_assetsimage-20241028144021633.png)
 
-> 选择进阶教程，结合vue使用
+\> 选择进阶教程，结合vue使用
 
 ![image-20241028144138642](http://114.67.74.14/static/vue_project_assetsimage-20241028144138642.png)
 
@@ -4247,20 +4247,20 @@ watch(value, () => {
 创建基础容器
 
 ```vue
-<template>
-  <div id="container"></div>
-</template>
+\<template\>
+  \<div id="container"\>\</div\>
+\</template\>
 ```
 
 添加样式
 
 ```vue
-<style scoped>
+\<style scoped\>
 #container {
   width: 100%;
   height: 80vh;
 }
-</style>
+\</style\>
 ```
 
 安装地图api
@@ -4274,21 +4274,21 @@ npm i @amap/amap-jsapi-loader --save
 根据文档介绍创建基础模板
 
 ```vue
-<template>
-    <div id="container"></div>
-</template>
+\<template\>
+    \<div id="container"\>\</div\>
+\</template\>
 
-<script setup lang="ts">
+\<script setup lang="ts"\>
 import AMapLoader from "@amap/amap-jsapi-loader";
 import { onMounted, onUnmounted, ref } from "vue";
 let map = null;
-onMounted(() => {
+onMounted(() =\> {
   AMapLoader.load({
     key: "7066344199d5d8c8bd499c1d4bfc1984", // 申请好的Web端开发者Key，首次调用 load 时必填
     version: "1.4.15", // 指定要加载的 JSAPI 的版本，缺省时默认为 1.4.15
     plugins: [], //需要使用的的插件列表，如比例尺'AMap.Scale'，支持添加多个如：['...','...']
   })
-    .then((AMap) => {
+    .then((AMap) =\> {
       map = new AMap.Map("container", {
         // 设置地图容器id
         viewMode: "3D", // 是否为3D地图模式
@@ -4296,49 +4296,49 @@ onMounted(() => {
         center: [116.397428, 39.90923], // 初始化地图中心点位置
       });
     })
-    .catch((e) => {
+    .catch((e) =\> {
       console.log(e);
     });
 });
 
-</script>
+\</script\>
 
-<style lang="less" scoped>
+\<style lang="less" scoped\>
 #container {
     width: 100%;
     height: 80vh;
 }
-</style>
+\</style\>
 ```
 
 ==views-map-ElectronicMap.vue==
 
 ```vue
-<template>
-    <el-row :gutter="20">
+\<template\>
+    \<el-row :gutter="20"\>
 
-        <el-col :span="18">
-            <el-card>
-                <MapContainer />
-            </el-card>
-        </el-col>
-        <el-col :span="6">
-        </el-col>
-    </el-row>
-</template>
+        \<el-col :span="18"\>
+            \<el-card\>
+                \<MapContainer /\>
+            \</el-card\>
+        \</el-col\>
+        \<el-col :span="6"\>
+        \</el-col\>
+    \</el-row\>
+\</template\>
 
-<script setup lang="ts">
+\<script setup lang="ts"\>
 import MapContainer from "@/components/Map/MapContainer.vue";
-</script>
+\</script\>
 ```
 
 
 
 ## 2.地图添加点标记
 
-> 1.创建mock文件：详见源文件
+\> 1.创建mock文件：详见源文件
 
-> 2.创建api
+\> 2.创建api
 
 ==src-api-map.ts==
 
@@ -4349,7 +4349,7 @@ enum Api{
     MapList="/mapList" 
 }
 
-function mapListApi():Promise<any>{
+function mapListApi():Promise\<any\>{
     return post(Api.MapList)
 }
 
@@ -4359,33 +4359,33 @@ export{mapListApi}
 ==components-Map-MapContain.vue==
 
 ```vue
-<template>
-    <div id="container"></div>
-</template>
+\<template\>
+    \<div id="container"\>\</div\>
+\</template\>
 
-<script setup lang="ts">
+\<script setup lang="ts"\>
 import AMapLoader from "@amap/amap-jsapi-loader";
 import { onMounted, onUnmounted, ref } from "vue";
 import icon from "../../assets/flashIcon.png";
 import stationPic from "@/assets/station.jpg"
 import { mapListApi } from "@/api/map.ts"
 let map:any = null;
-const markersData = ref<any>([])
-onMounted(() => {
+const markersData = ref\<any\>([])
+onMounted(() =\> {
 
   AMapLoader.load({
     key: "7066344199d5d8c8bd499c1d4bfc1984", // 申请好的Web端开发者Key，首次调用 load 时必填
     version: "1.4.15", // 指定要加载的 JSAPI 的版本，缺省时默认为 1.4.15
     plugins: [], //需要使用的的插件列表，如比例尺'AMap.Scale'，支持添加多个如：['...','...']
   })
-    .then((AMap) => {
+    .then((AMap) =\> {
       map = new AMap.Map("container", {
         // 设置地图容器id
         viewMode: "3D", // 是否为3D地图模式
         zoom:5, // 初始化地图级别
         center: [116.397428, 39.90923], // 初始化地图中心点位置
       });
-      mapListApi().then(({ data })=> {
+      mapListApi().then(({ data })=\> {
         markersData.value = data;
         // 创建信息窗体实例
         const infoWindow = new AMap.InfoWindow({
@@ -4393,7 +4393,7 @@ onMounted(() => {
         });
 
         // 添加自定义标记
-        markersData.value.forEach((markerData:any) => {
+        markersData.value.forEach((markerData:any) =\> {
           const marker = new AMap.Marker({
             position: markerData.position,
             title: markerData.title,
@@ -4401,19 +4401,19 @@ onMounted(() => {
           });
 
           // 添加点击事件
-          marker.on('click', () => {
+          marker.on('click', () =\> {
             infoWindow.setContent(`
-              <div style="display:flex;padding:10px;align-items:center;">
-                  <div>
-                    <img src="${stationPic}" width="200px"/>  
-                  </div>
-                  <div style="width:180px;line-height:30px;margin-left:20px">
-                    <h3>${markerData.title}</h3> 
-                    <p>充电桩数量：${markerData.count}</p> 
-                    <p >充电站状态：<span style="color:blue">${markerData.status==1?"使用中":"维护中"}</span></p> 
-                  </div>
+              \<div style="display:flex;padding:10px;align-items:center;"\>
+                  \<div\>
+                    \<img src="${stationPic}" width="200px"/\>  
+                  \</div\>
+                  \<div style="width:180px;line-height:30px;margin-left:20px"\>
+                    \<h3\>${markerData.title}\</h3\> 
+                    \<p\>充电桩数量：${markerData.count}\</p\> 
+                    \<p \>充电站状态：\<span style="color:blue"\>${markerData.status==1?"使用中":"维护中"}\</span\>\</p\> 
+                  \</div\>
                  
-                </div>
+                \</div\>
             `); // 设置窗体内容
             infoWindow.open(map, marker.getPosition()); // 在地图上打开信息窗体
           });
@@ -4424,16 +4424,16 @@ onMounted(() => {
       
 
     })
-    .catch((e) => {
+    .catch((e) =\> {
       console.log(e);
     });
 });
-onUnmounted(() => {
+onUnmounted(() =\> {
   map?.destroy();
 });
-</script>
+\</script\>
 
-<style lang="less" scoped>
+\<style lang="less" scoped\>
 #container {
     width: 100%;
     height: 80vh;
@@ -4442,7 +4442,7 @@ onUnmounted(() => {
   display: flex;
   padding: 20px !important;
 }
-</style>
+\</style\>
 ```
 
 
@@ -4450,52 +4450,52 @@ onUnmounted(() => {
 ## 3.右侧表单开发
 
 ```vue
- <el-col :span="6">
-            <el-card class="des">
-                <div>1.累计充电站数量：<el-text type="primary">34个</el-text></div>
-                <div>2.单省份最多充电桩：<el-text type="primary">北京(4个)</el-text></div>
-                <div>3.充电站遍及省份：<el-text type="primary">14个</el-text></div>
-                <div>4.暂无充电站省份：<el-text type="primary">22个</el-text></div>
-                <div>5.累计充电站：<el-text type="primary">北京(4个)</el-text></div>
-                <div>6.单日营收最高：<el-text type="primary">北京西单充电站</el-text></div>
-                <div>7.单日营收最低：<el-text type="primary">南宁青秀山充电站</el-text></div>
-                <div>8.故障率最高：<el-text type="primary">兰州黄河桥充电站</el-text></div>
-            </el-card>
-            <el-card class="mt">
-                <template #header>
-                    <div class="card-header">
-                        <h3>新增站点地图</h3>
-                    </div>
-                </template>
-                <el-form :model="form" style="max-width: 600px" label-width="85px">
-                    <el-form-item label="站点名称：">
-                        <el-input v-model="form.name" />
-                    </el-form-item>
-                    <el-form-item label="站点地址：">
-                        <el-input v-model="form.name" />
-                    </el-form-item>
-                    <el-form-item label="经度：">
-                        <el-input v-model="form.name" />
-                    </el-form-item>
-                    <el-form-item label="纬度：">
-                        <el-input v-model="form.name" />
-                    </el-form-item>
-                    <el-form-item label="立即使用：">
-                        <el-switch v-model="form.delivery" />
-                    </el-form-item>
-                    <el-form-item label="备注：">
-                        <el-input v-model="form.desc" type="textarea" />
-                    </el-form-item>
-                    <el-form-item>
-                        <el-button type="primary" >创建</el-button>
-                        <el-button>清空</el-button>
-                    </el-form-item>
-                </el-form>
+ \<el-col :span="6"\>
+            \<el-card class="des"\>
+                \<div\>1.累计充电站数量：\<el-text type="primary"\>34个\</el-text\>\</div\>
+                \<div\>2.单省份最多充电桩：\<el-text type="primary"\>北京(4个)\</el-text\>\</div\>
+                \<div\>3.充电站遍及省份：\<el-text type="primary"\>14个\</el-text\>\</div\>
+                \<div\>4.暂无充电站省份：\<el-text type="primary"\>22个\</el-text\>\</div\>
+                \<div\>5.累计充电站：\<el-text type="primary"\>北京(4个)\</el-text\>\</div\>
+                \<div\>6.单日营收最高：\<el-text type="primary"\>北京西单充电站\</el-text\>\</div\>
+                \<div\>7.单日营收最低：\<el-text type="primary"\>南宁青秀山充电站\</el-text\>\</div\>
+                \<div\>8.故障率最高：\<el-text type="primary"\>兰州黄河桥充电站\</el-text\>\</div\>
+            \</el-card\>
+            \<el-card class="mt"\>
+                \<template #header\>
+                    \<div class="card-header"\>
+                        \<h3\>新增站点地图\</h3\>
+                    \</div\>
+                \</template\>
+                \<el-form :model="form" style="max-width: 600px" label-width="85px"\>
+                    \<el-form-item label="站点名称："\>
+                        \<el-input v-model="form.name" /\>
+                    \</el-form-item\>
+                    \<el-form-item label="站点地址："\>
+                        \<el-input v-model="form.name" /\>
+                    \</el-form-item\>
+                    \<el-form-item label="经度："\>
+                        \<el-input v-model="form.name" /\>
+                    \</el-form-item\>
+                    \<el-form-item label="纬度："\>
+                        \<el-input v-model="form.name" /\>
+                    \</el-form-item\>
+                    \<el-form-item label="立即使用："\>
+                        \<el-switch v-model="form.delivery" /\>
+                    \</el-form-item\>
+                    \<el-form-item label="备注："\>
+                        \<el-input v-model="form.desc" type="textarea" /\>
+                    \</el-form-item\>
+                    \<el-form-item\>
+                        \<el-button type="primary" \>创建\</el-button\>
+                        \<el-button\>清空\</el-button\>
+                    \</el-form-item\>
+                \</el-form\>
 
-            </el-card>
-        </el-col>
+            \</el-card\>
+        \</el-col\>
 
-<script setup lang="ts">
+\<script setup lang="ts"\>
 import MapContainer from "@/components/Map/MapContainer.vue";
 import { reactive } from 'vue'
 
@@ -4510,7 +4510,7 @@ const form = reactive({
     resource: '',
     desc: '',
 })
-</script>
+\</script\>
 ```
 
 
@@ -4520,79 +4520,79 @@ const form = reactive({
 ## 1.静态结构搭建
 
 ```vue
-<template>
-    <el-card>
-        <el-row :gutter="20">
-            <el-col :span="6">
-                <el-input v-model="searchParams.orderNo" placeholder="请输入订单号">
-                </el-input>
-            </el-col>
-            <el-col :span="6">
-                <el-select v-model="searchParams.status" placeholder="订单状态">
-                    <el-option :value="1" label="全部"></el-option>
-                    <el-option :value="2" label="进行中"></el-option>
-                    <el-option :value="3" label="已完成"></el-option>
-                    <el-option :value="4" label="异常"></el-option>
-                </el-select>
-            </el-col>
-            <el-col :span="6">
-                <el-input v-model="searchParams.no" placeholder="设备编号">
-                </el-input>
-            </el-col>
-            <el-col :span="6">
-                <el-button type="primary">查询</el-button>
-                <el-button >重置</el-button>
-            </el-col>
-            <el-col :span="6" class="mt">
-                <el-input v-model="searchParams.name" placeholder="请输入站点名称">
-                </el-input>
-            </el-col>
-            <el-col :span="6" class="mt">
-                <el-date-picker v-model="date" type="daterange" range-separator="/" value-format="YYYY-MM-DD"
-                    @change="handleChange" start-placeholder="开始日期" end-placeholder="结束日期" />
-            </el-col>
-        </el-row>
-    </el-card>
-    <el-card class="mt">
-        <el-button type="danger" >批量删除</el-button>
-        <el-button type="primary" icon="Download">导出订单数据到Excel</el-button>
-    </el-card>
-    <el-card class="mt">
-        <el-table >
-            <el-table-column type="selection" width="55"></el-table-column>
-            <el-table-column type="index" label="序号" width="80" />
-            <el-table-column prop="orderNo" label="订单号" />
-            <el-table-column prop="equipmentNo" label="设备编号" />
-            <el-table-column prop="date" label="订单日期" />
-            <el-table-column prop="startTime" label="开始时间" />
-            <el-table-column prop="endTime" label="结束时间" />
-            <el-table-column prop="money" label="金额" />
-            <el-table-column prop="pay" label="支付方式" />
-            <el-table-column>
-                <template #default="scope">
-                    <el-tag type="success" v-if="scope.row.status == 2">进行中</el-tag>
-                    <el-tag type="primary" v-else-if="scope.row.status == 3">已完成</el-tag>
-                    <el-tag type="warning" v-else-if="scope.row.status == 4">异常</el-tag>
-                </template>
-            </el-table-column>
-            <el-table-column prop="opera" label="操作">
-                <template #default="scope">
-                    <el-button type="primary" size="small">
+\<template\>
+    \<el-card\>
+        \<el-row :gutter="20"\>
+            \<el-col :span="6"\>
+                \<el-input v-model="searchParams.orderNo" placeholder="请输入订单号"\>
+                \</el-input\>
+            \</el-col\>
+            \<el-col :span="6"\>
+                \<el-select v-model="searchParams.status" placeholder="订单状态"\>
+                    \<el-option :value="1" label="全部"\>\</el-option\>
+                    \<el-option :value="2" label="进行中"\>\</el-option\>
+                    \<el-option :value="3" label="已完成"\>\</el-option\>
+                    \<el-option :value="4" label="异常"\>\</el-option\>
+                \</el-select\>
+            \</el-col\>
+            \<el-col :span="6"\>
+                \<el-input v-model="searchParams.no" placeholder="设备编号"\>
+                \</el-input\>
+            \</el-col\>
+            \<el-col :span="6"\>
+                \<el-button type="primary"\>查询\</el-button\>
+                \<el-button \>重置\</el-button\>
+            \</el-col\>
+            \<el-col :span="6" class="mt"\>
+                \<el-input v-model="searchParams.name" placeholder="请输入站点名称"\>
+                \</el-input\>
+            \</el-col\>
+            \<el-col :span="6" class="mt"\>
+                \<el-date-picker v-model="date" type="daterange" range-separator="/" value-format="YYYY-MM-DD"
+                    @change="handleChange" start-placeholder="开始日期" end-placeholder="结束日期" /\>
+            \</el-col\>
+        \</el-row\>
+    \</el-card\>
+    \<el-card class="mt"\>
+        \<el-button type="danger" \>批量删除\</el-button\>
+        \<el-button type="primary" icon="Download"\>导出订单数据到Excel\</el-button\>
+    \</el-card\>
+    \<el-card class="mt"\>
+        \<el-table \>
+            \<el-table-column type="selection" width="55"\>\</el-table-column\>
+            \<el-table-column type="index" label="序号" width="80" /\>
+            \<el-table-column prop="orderNo" label="订单号" /\>
+            \<el-table-column prop="equipmentNo" label="设备编号" /\>
+            \<el-table-column prop="date" label="订单日期" /\>
+            \<el-table-column prop="startTime" label="开始时间" /\>
+            \<el-table-column prop="endTime" label="结束时间" /\>
+            \<el-table-column prop="money" label="金额" /\>
+            \<el-table-column prop="pay" label="支付方式" /\>
+            \<el-table-column\>
+                \<template #default="scope"\>
+                    \<el-tag type="success" v-if="scope.row.status == 2"\>进行中\</el-tag\>
+                    \<el-tag type="primary" v-else-if="scope.row.status == 3"\>已完成\</el-tag\>
+                    \<el-tag type="warning" v-else-if="scope.row.status == 4"\>异常\</el-tag\>
+                \</template\>
+            \</el-table-column\>
+            \<el-table-column prop="opera" label="操作"\>
+                \<template #default="scope"\>
+                    \<el-button type="primary" size="small"\>
                         详情
-                    </el-button>
-                    <el-button type="danger" size="small">
+                    \</el-button\>
+                    \<el-button type="danger" size="small"\>
                         删除
-                    </el-button>
-                </template>
-            </el-table-column>
-        </el-table>
-        <!-- <el-pagination class="fr mt mb" v-model:current-page="pageInfo.page" v-model:page-size="pageInfo.pageSize"
+                    \</el-button\>
+                \</template\>
+            \</el-table-column\>
+        \</el-table\>
+        \<!-- \<el-pagination class="fr mt mb" v-model:current-page="pageInfo.page" v-model:page-size="pageInfo.pageSize"
             :page-sizes="[10, 20, 30, 40]" :background="true" layout="total, sizes, prev, pager, next, jumper"
-            :total="totals" @size-change="handleSizeChange" @current-change="handleCurrentChange" /> -->
-    </el-card>
-</template>
+            :total="totals" @size-change="handleSizeChange" @current-change="handleCurrentChange" /\> --\>
+    \</el-card\>
+\</template\>
 
-<script setup lang="ts">
+\<script setup lang="ts"\>
 import {  ref } from "vue"
 const date = ref(["", ""])
 interface SearchType{
@@ -4603,7 +4603,7 @@ interface SearchType{
     endDate: string,
     name: string
 }
-const searchParams = ref<SearchType>({
+const searchParams = ref\<SearchType\>({
     orderNo: "",
     status: 1,
     no: "",
@@ -4612,11 +4612,11 @@ const searchParams = ref<SearchType>({
     name: ""
 })
 
-const handleChange = (val:string[]) => {
+const handleChange = (val:string[]) =\> {
     searchParams.value.startDate = val[0]
     searchParams.value.endDate = val[1]
 }
-</script>
+\</script\>
 ```
 
 ## 2.创建mock
@@ -4638,16 +4638,16 @@ import { ref, reactive, onMounted,unref } from "vue";
 import { post } from "@/utils/http";
 
 // Http 组合式函数
-export function useHttp<T>(url: string, initialParams: any) {
-    const dataList = ref<T[]>([]);
-    const loading = ref<boolean>(false);
+export function useHttp\<T\>(url: string, initialParams: any) {
+    const dataList = ref\<T[]\>([]);
+    const loading = ref\<boolean\>(false);
     const totals = ref(0);
     const pageInfo = reactive({
         page: 1,
         pageSize: 10,
     });
     // 加载数据的函数
-    const loadData = async () => {
+    const loadData = async () =\> {
 
         loading.value = true;
 
@@ -4664,23 +4664,23 @@ export function useHttp<T>(url: string, initialParams: any) {
         }
     };
     // 在组件挂载时加载数据
-    onMounted(() => {
+    onMounted(() =\> {
         loadData();
     });
 
-    const handleSizeChange = (size: number) => {
+    const handleSizeChange = (size: number) =\> {
         console.log("handleSizeChange")
         pageInfo.pageSize = size;
         loadData();
     };
 
-    const handleCurrentChange = (page: number) => {
+    const handleCurrentChange = (page: number) =\> {
         console.log("handleCurrentChange")
        pageInfo.page = page;
         loadData();
     };
 
-    const resetPagination = () => {
+    const resetPagination = () =\> {
         pageInfo.page = 1;
         pageInfo.pageSize = 10; 
         loadData();
@@ -4704,79 +4704,79 @@ export function useHttp<T>(url: string, initialParams: any) {
 ==Orders.vue==
 
 ```vue
-<template>
-    <el-card>
-        <el-row :gutter="20">
-            <el-col :span="6">
-                <el-input v-model="searchParams.orderNo" placeholder="请输入订单号">
-                </el-input>
-            </el-col>
-            <el-col :span="6">
-                <el-select v-model="searchParams.status" placeholder="订单状态">
-                    <el-option :value="1" label="全部"></el-option>
-                    <el-option :value="2" label="进行中"></el-option>
-                    <el-option :value="3" label="已完成"></el-option>
-                    <el-option :value="4" label="异常"></el-option>
-                </el-select>
-            </el-col>
-            <el-col :span="6">
-                <el-input v-model="searchParams.no" placeholder="设备编号">
-                </el-input>
-            </el-col>
-            <el-col :span="6">
-                <el-button type="primary" @click="loadData">查询</el-button>
-                <el-button @click="handleReset">重置</el-button>
-            </el-col>
-            <el-col :span="6" class="mt">
-                <el-input v-model="searchParams.name" placeholder="请输入站点名称">
-                </el-input>
-            </el-col>
-            <el-col :span="6" class="mt">
-                <el-date-picker v-model="date" type="daterange" range-separator="/" value-format="YYYY-MM-DD"
-                    @change="handleChange" start-placeholder="开始日期" end-placeholder="结束日期" />
-            </el-col>
-        </el-row>
-    </el-card>
-    <el-card class="mt">
-        <el-button type="danger" :disabled="!selectionList.length" @click="handleBatchDelete">批量删除</el-button>
-        <el-button type="primary" :disabled="!selectionList.length" icon="Download">导出订单数据到Excel</el-button>
-    </el-card>
-    <el-card class="mt">
-        <el-table :data="dataList" v-loading="loading" @selection-change="handleSelectionChange">
-            <el-table-column type="selection" width="55"></el-table-column>
-            <el-table-column type="index" label="序号" width="80" />
-            <el-table-column prop="orderNo" label="订单号" />
-            <el-table-column prop="equipmentNo" label="设备编号" />
-            <el-table-column prop="date" label="订单日期" />
-            <el-table-column prop="startTime" label="开始时间" />
-            <el-table-column prop="endTime" label="结束时间" />
-            <el-table-column prop="money" label="金额" />
-            <el-table-column prop="pay" label="支付方式" />
-            <el-table-column prop="status" label="订单状态">
-                <template #default="scope">
-                    <el-tag type="success" v-if="scope.row.status == 2">进行中</el-tag>
-                    <el-tag type="primary" v-else-if="scope.row.status == 3">已完成</el-tag>
-                    <el-tag type="warning" v-else-if="scope.row.status == 4">异常</el-tag>
-                </template>
-            </el-table-column>
-            <el-table-column prop="opera" label="操作">
-                <template #default="scope">
-                    <el-button type="primary" size="small">
+\<template\>
+    \<el-card\>
+        \<el-row :gutter="20"\>
+            \<el-col :span="6"\>
+                \<el-input v-model="searchParams.orderNo" placeholder="请输入订单号"\>
+                \</el-input\>
+            \</el-col\>
+            \<el-col :span="6"\>
+                \<el-select v-model="searchParams.status" placeholder="订单状态"\>
+                    \<el-option :value="1" label="全部"\>\</el-option\>
+                    \<el-option :value="2" label="进行中"\>\</el-option\>
+                    \<el-option :value="3" label="已完成"\>\</el-option\>
+                    \<el-option :value="4" label="异常"\>\</el-option\>
+                \</el-select\>
+            \</el-col\>
+            \<el-col :span="6"\>
+                \<el-input v-model="searchParams.no" placeholder="设备编号"\>
+                \</el-input\>
+            \</el-col\>
+            \<el-col :span="6"\>
+                \<el-button type="primary" @click="loadData"\>查询\</el-button\>
+                \<el-button @click="handleReset"\>重置\</el-button\>
+            \</el-col\>
+            \<el-col :span="6" class="mt"\>
+                \<el-input v-model="searchParams.name" placeholder="请输入站点名称"\>
+                \</el-input\>
+            \</el-col\>
+            \<el-col :span="6" class="mt"\>
+                \<el-date-picker v-model="date" type="daterange" range-separator="/" value-format="YYYY-MM-DD"
+                    @change="handleChange" start-placeholder="开始日期" end-placeholder="结束日期" /\>
+            \</el-col\>
+        \</el-row\>
+    \</el-card\>
+    \<el-card class="mt"\>
+        \<el-button type="danger" :disabled="!selectionList.length" @click="handleBatchDelete"\>批量删除\</el-button\>
+        \<el-button type="primary" :disabled="!selectionList.length" icon="Download"\>导出订单数据到Excel\</el-button\>
+    \</el-card\>
+    \<el-card class="mt"\>
+        \<el-table :data="dataList" v-loading="loading" @selection-change="handleSelectionChange"\>
+            \<el-table-column type="selection" width="55"\>\</el-table-column\>
+            \<el-table-column type="index" label="序号" width="80" /\>
+            \<el-table-column prop="orderNo" label="订单号" /\>
+            \<el-table-column prop="equipmentNo" label="设备编号" /\>
+            \<el-table-column prop="date" label="订单日期" /\>
+            \<el-table-column prop="startTime" label="开始时间" /\>
+            \<el-table-column prop="endTime" label="结束时间" /\>
+            \<el-table-column prop="money" label="金额" /\>
+            \<el-table-column prop="pay" label="支付方式" /\>
+            \<el-table-column prop="status" label="订单状态"\>
+                \<template #default="scope"\>
+                    \<el-tag type="success" v-if="scope.row.status == 2"\>进行中\</el-tag\>
+                    \<el-tag type="primary" v-else-if="scope.row.status == 3"\>已完成\</el-tag\>
+                    \<el-tag type="warning" v-else-if="scope.row.status == 4"\>异常\</el-tag\>
+                \</template\>
+            \</el-table-column\>
+            \<el-table-column prop="opera" label="操作"\>
+                \<template #default="scope"\>
+                    \<el-button type="primary" size="small"\>
                         详情
-                    </el-button>
-                    <el-button type="danger" size="small">
+                    \</el-button\>
+                    \<el-button type="danger" size="small"\>
                         删除
-                    </el-button>
-                </template>
-            </el-table-column>
-        </el-table>
-        <el-pagination class="fr mt mb" v-model:current-page="pageInfo.page" v-model:page-size="pageInfo.pageSize"
+                    \</el-button\>
+                \</template\>
+            \</el-table-column\>
+        \</el-table\>
+        \<el-pagination class="fr mt mb" v-model:current-page="pageInfo.page" v-model:page-size="pageInfo.pageSize"
             :page-sizes="[10, 20, 30, 40]" :background="true" layout="total, sizes, prev, pager, next, jumper"
-            :total="totals" @size-change="handleSizeChange" @current-change="handleCurrentChange" />
-    </el-card>
-</template>
+            :total="totals" @size-change="handleSizeChange" @current-change="handleCurrentChange" /\>
+    \</el-card\>
+\</template\>
 
-<script setup lang="ts">
+\<script setup lang="ts"\>
 import {  ref } from "vue"
 import { useHttp } from "@/hooks/useHttp";
 import { batchDeleteApi } from "@/api/operations"
@@ -4800,7 +4800,7 @@ interface SelectionListType{
     status:number
 }
 const date = ref(["", ""])
-const searchParams = ref<SearchType>({
+const searchParams = ref\<SearchType\>({
     orderNo: "",
     status: 1,
     no: "",
@@ -4808,12 +4808,12 @@ const searchParams = ref<SearchType>({
     endDate: "", //不能写成date.value[0]
     name: ""
 })
-const { dataList, loading,  resetPagination, loadData, totals, pageInfo, handleSizeChange, handleCurrentChange } = useHttp<SelectionListType>("/orderList", searchParams);
-const handleChange = (val:string[]) => {
+const { dataList, loading,  resetPagination, loadData, totals, pageInfo, handleSizeChange, handleCurrentChange } = useHttp\<SelectionListType\>("/orderList", searchParams);
+const handleChange = (val:string[]) =\> {
     searchParams.value.startDate = val[0]
     searchParams.value.endDate = val[1]
 }
-const handleReset = () => {
+const handleReset = () =\> {
     date.value = ["", ""]
     searchParams.value = {
         orderNo: "",
@@ -4829,14 +4829,14 @@ const handleReset = () => {
 
 
 
-const selectionList = ref<SelectionListType[]>([])
-const handleSelectionChange = (selection:any) => {
+const selectionList = ref\<SelectionListType[]\>([])
+const handleSelectionChange = (selection:any) =\> {
     selectionList.value = selection
 
 }
 
-const handleBatchDelete = async () => {
-    const res = await batchDeleteApi(selectionList.value.map((item:SelectionListType) => item.orderNo))
+const handleBatchDelete = async () =\> {
+    const res = await batchDeleteApi(selectionList.value.map((item:SelectionListType) =\> item.orderNo))
     if (res.code == 200) {
         ElMessage({
             message: res.data,
@@ -4845,7 +4845,7 @@ const handleBatchDelete = async () => {
         loadData()
     }
 }
-</script>
+\</script\>
 ```
 
 ## 5.表格添加多选功能
@@ -4854,7 +4854,7 @@ const handleBatchDelete = async () => {
 
 ```ts
 const selectionList = ref([])
-const handleSelectionChange = (selection) => {
+const handleSelectionChange = (selection) =\> {
     selectionList.value = selection
 
 }
@@ -4863,11 +4863,11 @@ const handleSelectionChange = (selection) => {
 ## 6.设置两个按钮的禁用状态
 
 ```vue
-<el-card class="mt">
-        <el-button type="danger" :disabled="!selectionList.length" @click="handleBatchDelete">批量删除</el-button>
-        <el-button type="primary" :disabled="!selectionList.length" :icon="Download"
-            @click="exportToExcel">导出订单数据到Excel</el-button>
-    </el-card>
+\<el-card class="mt"\>
+        \<el-button type="danger" :disabled="!selectionList.length" @click="handleBatchDelete"\>批量删除\</el-button\>
+        \<el-button type="primary" :disabled="!selectionList.length" :icon="Download"
+            @click="exportToExcel"\>导出订单数据到Excel\</el-button\>
+    \</el-card\>
 ```
 
 ## 7.批量删除功能
@@ -4878,7 +4878,7 @@ const handleSelectionChange = (selection) => {
 
 ```ts
 //订单管理-批量删除接口
-Mock.mock('https://www.demo.com/batchDelete', "post", (options: any) => {
+Mock.mock('https://www.demo.com/batchDelete', "post", (options: any) =\> {
   const { order } = JSON.parse(options.body)
   console.log(JSON.stringify(order))
   return {
@@ -4896,7 +4896,7 @@ import { post } from "../utils/http"
 enum Api {
   BatchDelete='/batchDelete',
   }
-  function batchDeleteApi(order:[]):Promise<any>{
+  function batchDeleteApi(order:[]):Promise\<any\>{
     return post(Api.BatchDelete,{order})
   }
 export {batchDeleteApi}
@@ -4907,8 +4907,8 @@ export {batchDeleteApi}
 ```ts
 import { batchDeleteApi } from "@/api/operations"
 import { ElMessage } from 'element-plus'
-const handleBatchDelete = async () => {
-    const res = await batchDeleteApi(selectionList.value.map((item:SelectionListType) => item.orderNo))
+const handleBatchDelete = async () =\> {
+    const res = await batchDeleteApi(selectionList.value.map((item:SelectionListType) =\> item.orderNo))
     if (res.code == 200) {
         ElMessage({
             message: res.data,
@@ -4924,48 +4924,48 @@ const handleBatchDelete = async () => {
 ==Detail.vue==
 
 ```vue
-<template>
+\<template\>
 
-    <el-card class="mt">
-        <el-descriptions :title="`订单编号:${$route.query.orderNo}`">
-            <el-descriptions-item label="订单编号">{{$route.query.orderNo}}</el-descriptions-item>
-            <el-descriptions-item label="设备编号">C2274</el-descriptions-item>
-            <el-descriptions-item label="订单日期">2024-10-01</el-descriptions-item>
-            <el-descriptions-item label="站点名称">
-                <el-tag size="small">北京西单充电站</el-tag>
-            </el-descriptions-item>
-            <el-descriptions-item label="开始时间">
+    \<el-card class="mt"\>
+        \<el-descriptions :title="`订单编号:${$route.query.orderNo}`"\>
+            \<el-descriptions-item label="订单编号"\>{{$route.query.orderNo}}\</el-descriptions-item\>
+            \<el-descriptions-item label="设备编号"\>C2274\</el-descriptions-item\>
+            \<el-descriptions-item label="订单日期"\>2024-10-01\</el-descriptions-item\>
+            \<el-descriptions-item label="站点名称"\>
+                \<el-tag size="small"\>北京西单充电站\</el-tag\>
+            \</el-descriptions-item\>
+            \<el-descriptions-item label="开始时间"\>
                08:00:23
-            </el-descriptions-item>
-            <el-descriptions-item label="结束时间">09:10:11</el-descriptions-item>
-            <el-descriptions-item label="订单金额(元)">66.5</el-descriptions-item>
-            <el-descriptions-item label="支付方式">支付宝</el-descriptions-item>
-            <el-descriptions-item label="所属城市">北京</el-descriptions-item>
+            \</el-descriptions-item\>
+            \<el-descriptions-item label="结束时间"\>09:10:11\</el-descriptions-item\>
+            \<el-descriptions-item label="订单金额(元)"\>66.5\</el-descriptions-item\>
+            \<el-descriptions-item label="支付方式"\>支付宝\</el-descriptions-item\>
+            \<el-descriptions-item label="所属城市"\>北京\</el-descriptions-item\>
 
-            <el-descriptions-item label="充电量(度)">86</el-descriptions-item>
-            <el-descriptions-item label="充电设备">充电桩(快充)</el-descriptions-item>
-            <el-descriptions-item label="充电总时长(小时)">2</el-descriptions-item>
-            <el-descriptions-item label="负责人姓名">王科</el-descriptions-item>
-            <el-descriptions-item label="负责人电话">18888888888</el-descriptions-item>
-            <el-descriptions-item label="维保人员姓名">刘来</el-descriptions-item>
-            <el-descriptions-item label="维保人员电话">17777777777</el-descriptions-item>
-            <el-descriptions-item label="订单状态">已完成</el-descriptions-item>
-            <el-descriptions-item label="服务费(元)">8.0</el-descriptions-item>
-            <el-descriptions-item label="停车费(元)">4.0</el-descriptions-item>
-            <el-descriptions-item label="电费(元)">54.0</el-descriptions-item>
-            <el-descriptions-item label="收费信息">
+            \<el-descriptions-item label="充电量(度)"\>86\</el-descriptions-item\>
+            \<el-descriptions-item label="充电设备"\>充电桩(快充)\</el-descriptions-item\>
+            \<el-descriptions-item label="充电总时长(小时)"\>2\</el-descriptions-item\>
+            \<el-descriptions-item label="负责人姓名"\>王科\</el-descriptions-item\>
+            \<el-descriptions-item label="负责人电话"\>18888888888\</el-descriptions-item\>
+            \<el-descriptions-item label="维保人员姓名"\>刘来\</el-descriptions-item\>
+            \<el-descriptions-item label="维保人员电话"\>17777777777\</el-descriptions-item\>
+            \<el-descriptions-item label="订单状态"\>已完成\</el-descriptions-item\>
+            \<el-descriptions-item label="服务费(元)"\>8.0\</el-descriptions-item\>
+            \<el-descriptions-item label="停车费(元)"\>4.0\</el-descriptions-item\>
+            \<el-descriptions-item label="电费(元)"\>54.0\</el-descriptions-item\>
+            \<el-descriptions-item label="收费信息"\>
                 电费+服务费+停车费，高峰时段费用位2.3元1度，停车费2元/小时，服务费5元/次
-            </el-descriptions-item>
-            <el-descriptions-item label="备注">暂无</el-descriptions-item>
-        </el-descriptions>
-    </el-card>
+            \</el-descriptions-item\>
+            \<el-descriptions-item label="备注"\>暂无\</el-descriptions-item\>
+        \</el-descriptions\>
+    \</el-card\>
 
 
-</template>
-<script setup>
+\</template\>
+\<script setup\>
 
 
-</script>
+\</script\>
 ```
 
 ## 9.跳转至订单详情功能
@@ -4973,9 +4973,9 @@ const handleBatchDelete = async () => {
 ==Orders.vue==
 
 ```vue
- <el-button type="primary" size="small" @click="handleDetail(scope.row.orderNo)">
+ \<el-button type="primary" size="small" @click="handleDetail(scope.row.orderNo)"\>
                         详情
-                    </el-button>
+                    \</el-button\>
 ```
 
 ```ts
@@ -4984,7 +4984,7 @@ import { useRouter, useRoute } from "vue-router";
 const router = useRouter()
 const tabsStore = useTabsStore();
 const { addTab, setCurrentTab } = tabsStore;
-const handleDetail = (orderNo) => {
+const handleDetail = (orderNo) =\> {
     addTab("订单详情", "/operations/detail", "Share")
     setCurrentTab("订单详情", "/operations/detail",)
     router.push("/operations/detail?orderNo=" + orderNo)
@@ -4995,16 +4995,16 @@ const handleDetail = (orderNo) => {
 
 ==layouts-TabsLayout.vue==
 
-添加缓存，取代掉原本的<RouterView/>
+添加缓存，取代掉原本的\<RouterView/\>
 
 ```vue
- <!-- <RouterView /> -->
-    <RouterView v-slot="{ Component }">
-        <KeepAlive>
-            <component :is="Component" :key="$route.name" v-if="$route.meta.keepAlive" />
-        </KeepAlive>
-        <component :is="Component" :key="$route.name" v-if="!$route.meta.keepAlive" />
-    </RouterView>
+ \<!-- \<RouterView /\> --\>
+    \<RouterView v-slot="{ Component }"\>
+        \<KeepAlive\>
+            \<component :is="Component" :key="$route.name" v-if="$route.meta.keepAlive" /\>
+        \</KeepAlive\>
+        \<component :is="Component" :key="$route.name" v-if="!$route.meta.keepAlive" /\>
+    \</RouterView\>
 ```
 
 ==router-basicRouterMap.ts==
@@ -5015,7 +5015,7 @@ const handleDetail = (orderNo) => {
  {
                 path: "/operations/orders",
                 name: "orders",
-                component: () => import("@/views/operations/Orders.vue"),
+                component: () =\> import("@/views/operations/Orders.vue"),
                 meta: {
                     keepAlive: true
                 }
@@ -5023,11 +5023,11 @@ const handleDetail = (orderNo) => {
             },
 ```
 
-> 如果从别的页面返回而不是从详情页返回，那么应该重新加载数据
+\> 如果从别的页面返回而不是从详情页返回，那么应该重新加载数据
 
 ```ts
 const route = useRoute()
-watch(() => route.name, (to, from) => {
+watch(() =\> route.name, (to, from) =\> {
     console.log(to,from)
     if (to == "orders" && from != "detail") {
         console.log(222)
@@ -5049,8 +5049,8 @@ npm install xlsx file-saver
 
 ```vue
  
-<el-button type="primary" :disabled="!selectionList.length" :icon="Download"
-            @click="exportToExcel">导出订单数据到Excel</el-button>
+\<el-button type="primary" :disabled="!selectionList.length" :icon="Download"
+            @click="exportToExcel"\>导出订单数据到Excel\</el-button\>
 ```
 
 ```ts
@@ -5059,7 +5059,7 @@ import * as XLSX from 'xlsx'; // 导入 xlsx 库，用于处理 Excel 文件
 import { saveAs } from 'file-saver'; // 导入 file-saver 库，用于保存文件
 
 // 定义导出到 Excel 的函数
-const exportToExcel = () => {
+const exportToExcel = () =\> {
     // 将选择的数据（selectionList.value）转换为工作表格式
     const ws = XLSX.utils.json_to_sheet(selectionList.value);
 
@@ -5085,32 +5085,32 @@ const exportToExcel = () => {
 ## 1.基本搜索框开发
 
 ```vue
-<template>
-    <el-row :gutter="20">
-        <el-col :span="6">
-            <el-card>
-                <el-input style="width:80%" placeholder="请输入关键词" v-model="filterText">
-                    <template #append>
-                        <el-button icon="Search" />
-                    </template>
-                </el-input>
-            </el-card>
-        </el-col>
-        <el-col :span="18"></el-col>
-    </el-row>
-</template>
+\<template\>
+    \<el-row :gutter="20"\>
+        \<el-col :span="6"\>
+            \<el-card\>
+                \<el-input style="width:80%" placeholder="请输入关键词" v-model="filterText"\>
+                    \<template #append\>
+                        \<el-button icon="Search" /\>
+                    \</template\>
+                \</el-input\>
+            \</el-card\>
+        \</el-col\>
+        \<el-col :span="18"\>\</el-col\>
+    \</el-row\>
+\</template\>
 
-<script setup lang="ts">
+\<script setup lang="ts"\>
 import {ref} from "vue"
 const filterText = ref('')
-</script>
+\</script\>
 ```
 
 ## 2.设置接口数据
 
 mock接口：见源文件
 
-> api
+\> api
 
 ==api-operation.ts==
 
@@ -5119,7 +5119,7 @@ import { post,get } from "../utils/http"
 enum Api {
     CityList='/cityList'
   }
-  function cityListApi():Promise<any>{
+  function cityListApi():Promise\<any\>{
     return get(Api.CityList)
   }
 export {listApi,batchDeleteApi,cityListApi}
@@ -5128,24 +5128,24 @@ export {listApi,batchDeleteApi,cityListApi}
 ==views-operation-Total.vue==
 
 ```vue
-<template>
-    <el-row :gutter="20">
-        <el-col :span="6">
-            <el-card>
-                <el-input style="width:80%" placeholder="请输入关键词" v-model="filterText">
-                    <template #append>
-                        <el-button icon="Search" />
-                    </template>
-                </el-input>
-                <el-tree style="max-width: 600px" :data="treeData" :props="defaultProps"
-                    show-checkbox ref="treeRef" class="mt" />
-            </el-card>
-        </el-col>
-        <el-col :span="18"></el-col>
-    </el-row>
-</template>
+\<template\>
+    \<el-row :gutter="20"\>
+        \<el-col :span="6"\>
+            \<el-card\>
+                \<el-input style="width:80%" placeholder="请输入关键词" v-model="filterText"\>
+                    \<template #append\>
+                        \<el-button icon="Search" /\>
+                    \</template\>
+                \</el-input\>
+                \<el-tree style="max-width: 600px" :data="treeData" :props="defaultProps"
+                    show-checkbox ref="treeRef" class="mt" /\>
+            \</el-card\>
+        \</el-col\>
+        \<el-col :span="18"\>\</el-col\>
+    \</el-row\>
+\</template\>
 
-<script setup lang="ts">
+\<script setup lang="ts"\>
 import {ref,onMounted} from "vue"
 import { cityListApi } from '@/api/operations';
 interface Tree {
@@ -5157,17 +5157,17 @@ const defaultProps = {
     label: 'label',
 }
 const filterText = ref('')
-const treeData = ref<Tree[]>([])
-onMounted(async () => {
+const treeData = ref\<Tree[]\>([])
+onMounted(async () =\> {
     const { data } = await cityListApi()
     treeData.value = data
 })
-</script>
+\</script\>
 ```
 
 ## 3.tree组件过滤功能
 
-> `InstanceType` 是 TypeScript 的一个内置类型，它用来获取构造函数类型的实例类型。在你的代码 `const treeRef = ref<InstanceType<typeof ElTree>>()` 中，`ElTree` 是一个 Vue 组件（通常是一个类或函数），`typeof ElTree` 表达式返回这个组件的类型。
+\> `InstanceType` 是 TypeScript 的一个内置类型，它用来获取构造函数类型的实例类型。在你的代码 `const treeRef = ref\<InstanceType\<typeof ElTree\>\>()` 中，`ElTree` 是一个 Vue 组件（通常是一个类或函数），`typeof ElTree` 表达式返回这个组件的类型。
 
 ![image-20241029194335424](http://114.67.74.14/static/vue_project_assetsimage-20241029194335424.png)
 
@@ -5177,9 +5177,9 @@ data表示的是每一条数据，返回false则节点会隐藏
 
 ## 4.计费模板开发
 
-> 基础结构
+\> 基础结构
 
-> 关于:prop="'date.' + index + '.date1'" 拼接问题
+\> 关于:prop="'date.' + index + '.date1'" 拼接问题
 
 `'date.' + index + '.date1'` 的作用是动态生成表单项的 `prop` 属性，以便与 Element Plus 的表单校验机制相连。下面是详细解释：
 
@@ -5191,65 +5191,65 @@ data表示的是每一条数据，返回false则节点会隐藏
 2. **与校验规则关联**：Element Plus 会使用这个 `prop` 来查找对应的字段，并基于 `rules` 中的定义来进行校验。
 
 ```vue
-<el-col :span="18">
-            <el-card>
-                <template #header>
-                    <div class="card-header">
-                        <span>{{title}}</span>
-                    </div>
-                </template>
-                <el-form ref="ruleFormRef" :model="ruleForm" :rules="rules" label-width="auto" class="demo-ruleForm"
-                    status-icon>
-                    <el-form-item label="模版名称" prop="name">
-                        <el-input v-model="ruleForm.name" style="max-width: 200px" />
-                    </el-form-item>
-                    <div v-for="(timeSlot, index) in ruleForm.date" :key="index">
-                        <el-form-item :label="'时间区间' + (index + 1) + ':'" required>
-                            <el-col :span="8">
-                                <el-form-item :prop="'date.' + index + '.date1'">
-                                    <el-time-picker v-model="timeSlot.date1" type="date" aria-label="开始时间"
-                                        placeholder="开始时间" style="width: 100%" />
-                                </el-form-item>
-                            </el-col>
-                            <el-col class="text-center" :span="1">
-                                <span class="text-gray-500">-</span>
-                            </el-col>
-                            <el-col :span="8">
-                                <el-form-item :prop="'date.' + index + '.date2'">
-                                    <el-time-picker v-model="timeSlot.date2" aria-label="结束时间" placeholder="结束时间"
-                                        style="width: 100%" />
-                                </el-form-item>
-                            </el-col>
-                            <el-col :span="6">
-                                <el-form-item label="电费：" :prop="'electricity.' + index">
-                                    <el-input v-model="timeSlot.electricity" style="width: 100%" />
-                                </el-form-item>
-                            </el-col>
-                        </el-form-item>
-                    </div>
-                    <el-button type="primary" class="mb" @click="addTimeSlot">添加时间区间</el-button>
-                    <el-form-item label="服务费" prop="service">
-                        <el-input v-model="ruleForm.service" style="max-width: 200px" />
-                    </el-form-item>
-                    <el-form-item label="停车费" prop="parking">
-                        <el-input v-model="ruleForm.parking" style="max-width: 200px" />
-                    </el-form-item>
-                    <el-form-item label="特殊备注" prop="remarks">
-                        <el-input v-model="ruleForm.remarks" type="textarea" />
-                    </el-form-item>
-                    <el-form-item>
-                        <el-button type="primary" @click="submitForm(ruleFormRef)">
+\<el-col :span="18"\>
+            \<el-card\>
+                \<template #header\>
+                    \<div class="card-header"\>
+                        \<span\>{{title}}\</span\>
+                    \</div\>
+                \</template\>
+                \<el-form ref="ruleFormRef" :model="ruleForm" :rules="rules" label-width="auto" class="demo-ruleForm"
+                    status-icon\>
+                    \<el-form-item label="模版名称" prop="name"\>
+                        \<el-input v-model="ruleForm.name" style="max-width: 200px" /\>
+                    \</el-form-item\>
+                    \<div v-for="(timeSlot, index) in ruleForm.date" :key="index"\>
+                        \<el-form-item :label="'时间区间' + (index + 1) + ':'" required\>
+                            \<el-col :span="8"\>
+                                \<el-form-item :prop="'date.' + index + '.date1'"\>
+                                    \<el-time-picker v-model="timeSlot.date1" type="date" aria-label="开始时间"
+                                        placeholder="开始时间" style="width: 100%" /\>
+                                \</el-form-item\>
+                            \</el-col\>
+                            \<el-col class="text-center" :span="1"\>
+                                \<span class="text-gray-500"\>-\</span\>
+                            \</el-col\>
+                            \<el-col :span="8"\>
+                                \<el-form-item :prop="'date.' + index + '.date2'"\>
+                                    \<el-time-picker v-model="timeSlot.date2" aria-label="结束时间" placeholder="结束时间"
+                                        style="width: 100%" /\>
+                                \</el-form-item\>
+                            \</el-col\>
+                            \<el-col :span="6"\>
+                                \<el-form-item label="电费：" :prop="'electricity.' + index"\>
+                                    \<el-input v-model="timeSlot.electricity" style="width: 100%" /\>
+                                \</el-form-item\>
+                            \</el-col\>
+                        \</el-form-item\>
+                    \</div\>
+                    \<el-button type="primary" class="mb" @click="addTimeSlot"\>添加时间区间\</el-button\>
+                    \<el-form-item label="服务费" prop="service"\>
+                        \<el-input v-model="ruleForm.service" style="max-width: 200px" /\>
+                    \</el-form-item\>
+                    \<el-form-item label="停车费" prop="parking"\>
+                        \<el-input v-model="ruleForm.parking" style="max-width: 200px" /\>
+                    \</el-form-item\>
+                    \<el-form-item label="特殊备注" prop="remarks"\>
+                        \<el-input v-model="ruleForm.remarks" type="textarea" /\>
+                    \</el-form-item\>
+                    \<el-form-item\>
+                        \<el-button type="primary" @click="submitForm(ruleFormRef)"\>
                             创建
-                        </el-button>
-                        <el-button @click="resetForm">重置</el-button>
-                    </el-form-item>
-                </el-form>
-            </el-card>
-        </el-col>
+                        \</el-button\>
+                        \<el-button @click="resetForm"\>重置\</el-button\>
+                    \</el-form-item\>
+                \</el-form\>
+            \</el-card\>
+        \</el-col\>
 ```
 
 ```vue
-<script setup lang="ts">
+\<script setup lang="ts"\>
 import {ref,onMounted,watch,reactive} from "vue"
 import { cityListApi } from '@/api/operations';
 import { ElTree } from 'element-plus'
@@ -5257,21 +5257,21 @@ import type { FormInstance, FormRules } from 'element-plus'
 /*计费模板开发*/
 const title=ref("计费模板")
 interface RuleForm {
-    date:  Array<{ date1: string; date2: string; electricity: string }>,
+    date:  Array\<{ date1: string; date2: string; electricity: string }\>,
     name: string,
     service: string,
     parking: string,
     remarks: string
 }
-const ruleFormRef = ref<FormInstance>()
-const ruleForm = ref<RuleForm>({
+const ruleFormRef = ref\<FormInstance\>()
+const ruleForm = ref\<RuleForm\>({
     date: [{ date1: '', date2: '', electricity: '' }],
     name: '',
     service: "",
     parking: "",
     remarks: ""
 })
-const rules = reactive<FormRules<RuleForm>>({
+const rules = reactive\<FormRules\<RuleForm\>\>({
     name: [
         { required: true, message: '请输入模板名称', trigger: 'blur' },
     ],
@@ -5286,12 +5286,12 @@ const rules = reactive<FormRules<RuleForm>>({
     ],
 })
 
-const addTimeSlot = () => {
+const addTimeSlot = () =\> {
     ruleForm.value.date.push({ date1: '', date2: '', electricity: '' })
 }
-const submitForm = async (formEl: FormInstance | undefined) => {
+const submitForm = async (formEl: FormInstance | undefined) =\> {
     if (!formEl) return
-    await formEl.validate((valid, fields) => {
+    await formEl.validate((valid, fields) =\> {
         if (valid) {
             console.log(8787, ruleForm)
             console.log('submit!')
@@ -5301,7 +5301,7 @@ const submitForm = async (formEl: FormInstance | undefined) => {
     })
 }
 
-const resetForm = () => {
+const resetForm = () =\> {
     ruleForm.value = {
         date: [{ date1: '', date2: '', electricity: '' }],
         name: 'Hello',
@@ -5310,7 +5310,7 @@ const resetForm = () => {
         remarks: ""
     }
 }
-</script>
+\</script\>
 ```
 
 
@@ -5318,43 +5318,43 @@ const resetForm = () => {
 ## 5.实现动态规则验证
 
 ```vue
-<div v-for="(timeSlot, index) in ruleForm.date" :key="index">
-                        <el-form-item :label="'时间区间' + (index + 1) + ':'" required>
-                            <el-col :span="8">
-                                <el-form-item :prop="'date.' + index + '.date1'" :rules="{required: true,message: '时间不能为空',trigger: 'blur'}">
-                                    <el-time-picker v-model="timeSlot.date1" type="date" aria-label="开始时间"
-                                        placeholder="开始时间" style="width: 100%" />
-                                </el-form-item>
-                            </el-col>
-                            <el-col class="text-center" :span="1">
-                                <span class="text-gray-500">-</span>
-                            </el-col>
-                            <el-col :span="8">
-                                <el-form-item :prop="'date.' + index + '.date2'" :rules="{required: true,message: '时间不能为空',trigger: 'blur'}">
-                                    <el-time-picker v-model="timeSlot.date2" aria-label="结束时间" placeholder="结束时间"
-                                        style="width: 100%" />
-                                </el-form-item>
-                            </el-col>
-                            <el-col :span="6">
-                                <el-form-item label="电费：" :prop="'electricity.' + index" :rules="{required: true,message: '时间不能为空',trigger: 'blur'}">
-                                    <el-input v-model="timeSlot.electricity" style="width: 100%" />
-                                </el-form-item>
-                            </el-col>
-                        </el-form-item>
-                    </div>
+\<div v-for="(timeSlot, index) in ruleForm.date" :key="index"\>
+                        \<el-form-item :label="'时间区间' + (index + 1) + ':'" required\>
+                            \<el-col :span="8"\>
+                                \<el-form-item :prop="'date.' + index + '.date1'" :rules="{required: true,message: '时间不能为空',trigger: 'blur'}"\>
+                                    \<el-time-picker v-model="timeSlot.date1" type="date" aria-label="开始时间"
+                                        placeholder="开始时间" style="width: 100%" /\>
+                                \</el-form-item\>
+                            \</el-col\>
+                            \<el-col class="text-center" :span="1"\>
+                                \<span class="text-gray-500"\>-\</span\>
+                            \</el-col\>
+                            \<el-col :span="8"\>
+                                \<el-form-item :prop="'date.' + index + '.date2'" :rules="{required: true,message: '时间不能为空',trigger: 'blur'}"\>
+                                    \<el-time-picker v-model="timeSlot.date2" aria-label="结束时间" placeholder="结束时间"
+                                        style="width: 100%" /\>
+                                \</el-form-item\>
+                            \</el-col\>
+                            \<el-col :span="6"\>
+                                \<el-form-item label="电费：" :prop="'electricity.' + index" :rules="{required: true,message: '时间不能为空',trigger: 'blur'}"\>
+                                    \<el-input v-model="timeSlot.electricity" style="width: 100%" /\>
+                                \</el-form-item\>
+                            \</el-col\>
+                        \</el-form-item\>
+                    \</div\>
 ```
 
 ## 6.树状图和右边联动
 
 ```vue
- <el-tree style="max-width: 600px" :data="treeData" :props="defaultProps" @node-click="handleNodeClick"
-                    show-checkbox ref="treeRef" :filter-node-method="filterNode" class="mt" />
+ \<el-tree style="max-width: 600px" :data="treeData" :props="defaultProps" @node-click="handleNodeClick"
+                    show-checkbox ref="treeRef" :filter-node-method="filterNode" class="mt" /\>
 ```
 
 
 
 ```ts
-const handleNodeClick = (data: Tree) => {
+const handleNodeClick = (data: Tree) =\> {
     if(!data.children){
         title.value=data.label
         resetForm()
@@ -5367,21 +5367,21 @@ const handleNodeClick = (data: Tree) => {
 # 23.报警管理页面开发
 
 ```vue
-<template>
-     <el-card>
-        <el-radio-group v-model="radio1" size="large" class="mt">
-            <el-radio-button label="严重告警" :value="1" />
-            <el-radio-button label="紧急告警" :value="2" />
-            <el-radio-button label="重要告警" :value="3" />
-            <el-radio-button label="一般告警" :value="4" />
-        </el-radio-group>
-    </el-card>
-</template>
+\<template\>
+     \<el-card\>
+        \<el-radio-group v-model="radio1" size="large" class="mt"\>
+            \<el-radio-button label="严重告警" :value="1" /\>
+            \<el-radio-button label="紧急告警" :value="2" /\>
+            \<el-radio-button label="重要告警" :value="3" /\>
+            \<el-radio-button label="一般告警" :value="4" /\>
+        \</el-radio-group\>
+    \</el-card\>
+\</template\>
 
-<script setup lang="ts">
+\<script setup lang="ts"\>
 import { ref} from 'vue'
-const radio1 = ref<number>(1)
-</script>
+const radio1 = ref\<number\>(1)
+\</script\>
 ```
 
 ## 1.接口开发
@@ -5393,7 +5393,7 @@ import {get } from "../utils/http"
 enum Api {
     alarmList="/alarmList"
   }
-function alarmListApi():Promise<any>{
+function alarmListApi():Promise\<any\>{
     return get(Api.alarmList)
 }
 
@@ -5403,46 +5403,46 @@ export{ alarmListApi }
 ==views-alarm-Alarm.vue==
 
 ```vue
-<template>
-     <el-card>
-        <el-radio-group v-model="radio1" size="large" class="mt">
-            <el-radio-button label="严重告警" :value="1" />
-            <el-radio-button label="紧急告警" :value="2" />
-            <el-radio-button label="重要告警" :value="3" />
-            <el-radio-button label="一般告警" :value="4" />
-        </el-radio-group>
-    </el-card>
-    <el-card class="mt" v-for="item in alarmList" :key="item.equNo">
-        <el-alert :title="`${item.address}充电站充电异常！`" type="warning" show-icon class="mb">
-        </el-alert>
-        <el-descriptions direction="vertical" :column="4" border>
-            <el-descriptions-item v-for="(val, key) in item" :label="getLabel(key)">
-                <el-tag :type="val == 1 ? 'danger' : (val == 2 ? 'warning' : 'info')" v-if="key == 'level'">
+\<template\>
+     \<el-card\>
+        \<el-radio-group v-model="radio1" size="large" class="mt"\>
+            \<el-radio-button label="严重告警" :value="1" /\>
+            \<el-radio-button label="紧急告警" :value="2" /\>
+            \<el-radio-button label="重要告警" :value="3" /\>
+            \<el-radio-button label="一般告警" :value="4" /\>
+        \</el-radio-group\>
+    \</el-card\>
+    \<el-card class="mt" v-for="item in alarmList" :key="item.equNo"\>
+        \<el-alert :title="`${item.address}充电站充电异常！`" type="warning" show-icon class="mb"\>
+        \</el-alert\>
+        \<el-descriptions direction="vertical" :column="4" border\>
+            \<el-descriptions-item v-for="(val, key) in item" :label="getLabel(key)"\>
+                \<el-tag :type="val == 1 ? 'danger' : (val == 2 ? 'warning' : 'info')" v-if="key == 'level'"\>
                     {{ val == 1 ? '严重' : (val == 2 ? '紧急' : '一般') }}
-                </el-tag>
-                <el-link type="danger" v-else-if="key == 'status'">
+                \</el-tag\>
+                \<el-link type="danger" v-else-if="key == 'status'"\>
                     {{ val == 1 ? "待指派" : "处理中" }}
-                </el-link>
-                <span v-else>
+                \</el-link\>
+                \<span v-else\>
                     {{ val }}
-                </span>
+                \</span\>
 
-            </el-descriptions-item>
-            <el-descriptions-item label="操作" v-if="item.status == 1">
-                <el-button type="primary" @click="handleOpen">指派</el-button>
-            </el-descriptions-item>
-            <el-descriptions-item label="操作" v-else-if="item.status == 2">
-                <el-button type="warning" @click="handleOpen">催办</el-button>
-            </el-descriptions-item>
-            <el-descriptions-item label="操作" v-else>
-                <el-button type="primary" @click="handleOpen">查看</el-button>
-            </el-descriptions-item>
-        </el-descriptions>
+            \</el-descriptions-item\>
+            \<el-descriptions-item label="操作" v-if="item.status == 1"\>
+                \<el-button type="primary" @click="handleOpen"\>指派\</el-button\>
+            \</el-descriptions-item\>
+            \<el-descriptions-item label="操作" v-else-if="item.status == 2"\>
+                \<el-button type="warning" @click="handleOpen"\>催办\</el-button\>
+            \</el-descriptions-item\>
+            \<el-descriptions-item label="操作" v-else\>
+                \<el-button type="primary" @click="handleOpen"\>查看\</el-button\>
+            \</el-descriptions-item\>
+        \</el-descriptions\>
 
-    </el-card>
-</template>
+    \</el-card\>
+\</template\>
 
-<script setup lang="ts">
+\<script setup lang="ts"\>
 import { ref,onMounted} from 'vue'
 import { alarmListApi } from '@/api/alarm';
 import { getLabel } from './fieldLabelMap';
@@ -5455,25 +5455,25 @@ interface AlarmListType{
     code: number,
     status: number,
 }
-const alarmList = ref<AlarmListType[]>([]);
-onMounted(async () => {
+const alarmList = ref\<AlarmListType[]\>([]);
+onMounted(async () =\> {
     const { data } = await alarmListApi();
     alarmList.value = data
 })
-const radio1 = ref<number>(1)
-</script>
+const radio1 = ref\<number\>(1)
+\</script\>
 ```
 
 因为后端返回的字段都是英文名称，但是显示要显示为对应的中文，所以创建映射表
 
 ==views-alarm-fieldLabelMap.ts==
 
-> **Tips:**
->
-> `Record<string, string>` 是一个工具类型，用于定义一个对象类型，其中的键是字符串，值也是字符串
+\> **Tips:**
+\>
+\> `Record\<string, string\>` 是一个工具类型，用于定义一个对象类型，其中的键是字符串，值也是字符串
 
 ```ts
-const fieldLabelMap: Record<string, string> = {
+const fieldLabelMap: Record\<string, string\> = {
     description: '故障描述',
     address: '设备地址',
     equNo: '设备号',
@@ -5484,7 +5484,7 @@ const fieldLabelMap: Record<string, string> = {
     // 其他字段映射
   };
   
-  const getLabel = (key: string): string => {
+  const getLabel = (key: string): string =\> {
     return fieldLabelMap[key] || key; // 返回映射的中文标签或默认字段名
   };
   export {getLabel}
@@ -5492,7 +5492,7 @@ const fieldLabelMap: Record<string, string> = {
 
 ## 2.二次封装elementplus组件，实现分部组件
 
-> 核心逻辑
+\> 核心逻辑
 
 1.通过插槽让用户传入若干form,至少两个，至多三个
 
@@ -5505,39 +5505,39 @@ const fieldLabelMap: Record<string, string> = {
 ==components-StepForm.vue==
 
 ```vue
-<template>
-    <div style="max-width: 600px;">
-        <el-steps :active="currentStep" align-center finish-status="success">
-            <el-step v-for="(step, index) in steps" :key="index" :title="step.title"></el-step>
-        </el-steps>
-        <div v-if="currentStep === 0" class="mt">
-            <slot name="step-1"></slot>
-        </div>
-        <div v-if="currentStep === 1" class="mt">
-            <slot name="step-2"></slot>
-        </div>
-        <div v-if="currentStep === 2" class="mt">
-            <slot name="step-3"></slot>
-        </div>
-        <div class="step-buttons">
-            <el-button @click="prevStep" v-if="currentStep > 0">上一步</el-button>
-            <el-button type="primary" @click="nextStep">
+\<template\>
+    \<div style="max-width: 600px;"\>
+        \<el-steps :active="currentStep" align-center finish-status="success"\>
+            \<el-step v-for="(step, index) in steps" :key="index" :title="step.title"\>\</el-step\>
+        \</el-steps\>
+        \<div v-if="currentStep === 0" class="mt"\>
+            \<slot name="step-1"\>\</slot\>
+        \</div\>
+        \<div v-if="currentStep === 1" class="mt"\>
+            \<slot name="step-2"\>\</slot\>
+        \</div\>
+        \<div v-if="currentStep === 2" class="mt"\>
+            \<slot name="step-3"\>\</slot\>
+        \</div\>
+        \<div class="step-buttons"\>
+            \<el-button @click="prevStep" v-if="currentStep \> 0"\>上一步\</el-button\>
+            \<el-button type="primary" @click="nextStep"\>
                 {{ currentStep === steps.length - 1 ? '提交' : '下一步' }}
-            </el-button>
-        </div>
-    </div>
-</template>
+            \</el-button\>
+        \</div\>
+    \</div\>
+\</template\>
 
-<script lang="ts" setup>
+\<script lang="ts" setup\>
 import { ref } from 'vue';
 const props = defineProps(["steps", "form1", "form2", "form3"])
 const emit = defineEmits(["handleSubmit"])
 const currentStep = ref(0);
-const nextStep = async () => {
+const nextStep = async () =\> {
     if (currentStep.value == 0) {
-        props.form1.validate((valid: boolean) => {
+        props.form1.validate((valid: boolean) =\> {
             if (valid) {
-                if (currentStep.value < props.steps.length - 1) {
+                if (currentStep.value \< props.steps.length - 1) {
                     currentStep.value++;
                 } else {
                     // 提交逻辑
@@ -5546,9 +5546,9 @@ const nextStep = async () => {
             }
         })
     } else if (currentStep.value == 1) {
-        props.form2?.validate((valid: boolean) => {
+        props.form2?.validate((valid: boolean) =\> {
             if (valid) {
-                if (currentStep.value < props.steps.length - 1) {
+                if (currentStep.value \< props.steps.length - 1) {
                     currentStep.value++;
                 } else {
                     // 提交逻辑
@@ -5558,9 +5558,9 @@ const nextStep = async () => {
         })
     } else {
         if (props.form3) {
-            props.form3.validate((valid: boolean) => {
+            props.form3.validate((valid: boolean) =\> {
                 if (valid) {
-                    if (currentStep.value < props.steps.length - 1) {
+                    if (currentStep.value \< props.steps.length - 1) {
                         currentStep.value++;
                     } else {
                         // 提交逻辑
@@ -5575,143 +5575,143 @@ const nextStep = async () => {
     }
 
 };
-const prevStep = () => {
-    if (currentStep.value > 0) {
+const prevStep = () =\> {
+    if (currentStep.value \> 0) {
         currentStep.value--;
     }
 };
-</script>
+\</script\>
 
-<style scoped>
+\<style scoped\>
 .step-buttons {
     margin-top: 20px;
 }
-</style>
+\</style\>
 ```
 
 ==views-alarm-Alarm.vue==
 
 ```vue
-<template>
-    <el-card>
-        <el-radio-group v-model="radio1" size="large" class="mt">
-            <el-radio-button label="严重告警" :value="1" />
-            <el-radio-button label="紧急告警" :value="2" />
-            <el-radio-button label="重要告警" :value="3" />
-            <el-radio-button label="一般告警" :value="4" />
-        </el-radio-group>
-    </el-card>
-    <el-card class="mt" v-for="item in alarmList" :key="item.equNo">
-        <el-alert :title="`${item.address}充电站充电异常！`" type="warning" show-icon class="mb">
-        </el-alert>
-        <el-descriptions direction="vertical" :column="4" border>
-            <el-descriptions-item v-for="(val, key) in item" :label="getLabel(key)">
-                <el-tag :type="val == 1 ? 'danger' : (val == 2 ? 'warning' : 'info')" v-if="key == 'level'">
+\<template\>
+    \<el-card\>
+        \<el-radio-group v-model="radio1" size="large" class="mt"\>
+            \<el-radio-button label="严重告警" :value="1" /\>
+            \<el-radio-button label="紧急告警" :value="2" /\>
+            \<el-radio-button label="重要告警" :value="3" /\>
+            \<el-radio-button label="一般告警" :value="4" /\>
+        \</el-radio-group\>
+    \</el-card\>
+    \<el-card class="mt" v-for="item in alarmList" :key="item.equNo"\>
+        \<el-alert :title="`${item.address}充电站充电异常！`" type="warning" show-icon class="mb"\>
+        \</el-alert\>
+        \<el-descriptions direction="vertical" :column="4" border\>
+            \<el-descriptions-item v-for="(val, key) in item" :label="getLabel(key)"\>
+                \<el-tag :type="val == 1 ? 'danger' : (val == 2 ? 'warning' : 'info')" v-if="key == 'level'"\>
                     {{ val == 1 ? '严重' : (val == 2 ? '紧急' : '一般') }}
-                </el-tag>
-                <el-link type="danger" v-else-if="key == 'status'">
+                \</el-tag\>
+                \<el-link type="danger" v-else-if="key == 'status'"\>
                     {{ val == 1 ? "待指派" : "处理中" }}
-                </el-link>
-                <span v-else>
+                \</el-link\>
+                \<span v-else\>
                     {{ val }}
-                </span>
+                \</span\>
 
-            </el-descriptions-item>
-            <el-descriptions-item label="操作" v-if="item.status == 1">
-                <el-button type="primary" @click="drawer = true">指派</el-button>
-            </el-descriptions-item>
-            <el-descriptions-item label="操作" v-else-if="item.status == 2">
-                <el-button type="warning" @click="drawer = true">催办</el-button>
-            </el-descriptions-item>
-            <el-descriptions-item label="操作" v-else>
-                <el-button type="primary" @click="drawer = true">查看</el-button>
-            </el-descriptions-item>
-        </el-descriptions>
+            \</el-descriptions-item\>
+            \<el-descriptions-item label="操作" v-if="item.status == 1"\>
+                \<el-button type="primary" @click="drawer = true"\>指派\</el-button\>
+            \</el-descriptions-item\>
+            \<el-descriptions-item label="操作" v-else-if="item.status == 2"\>
+                \<el-button type="warning" @click="drawer = true"\>催办\</el-button\>
+            \</el-descriptions-item\>
+            \<el-descriptions-item label="操作" v-else\>
+                \<el-button type="primary" @click="drawer = true"\>查看\</el-button\>
+            \</el-descriptions-item\>
+        \</el-descriptions\>
 
-    </el-card>
-    <el-drawer v-model="drawer" title="报警任务指派">
+    \</el-card\>
+    \<el-drawer v-model="drawer" title="报警任务指派"\>
 
-        <StepForm :steps="steps" :form1="form1" :form2="form2" :form3="form3" @handle-submit="handleSubmit">
-            <template #step-1>
-                <el-form :model="formData.basicInfo" :rules="basicInfoRules" ref="form1">
-                    <el-form-item label="姓名" prop="name">
-                        <el-input v-model="formData.basicInfo.name"></el-input>
-                    </el-form-item>
-                    <el-form-item label="电话" prop="tel">
-                        <el-input v-model="formData.basicInfo.tel"></el-input>
-                    </el-form-item>
-                    <el-form-item label="邮箱" prop="email">
-                        <el-input v-model="formData.basicInfo.email"></el-input>
-                    </el-form-item>
-                    <el-form-item label="工号" prop="no">
-                        <el-input v-model="formData.basicInfo.no"></el-input>
-                    </el-form-item>
-                    <el-form-item label="是否加急：">
-                        <el-switch v-model="formData.basicInfo.urgent" />
-                    </el-form-item>
-                    <el-form-item label="其他选项：">
-                        <el-checkbox-group v-model="formData.basicInfo.other">
-                            <el-checkbox value="换设备" name="equ">
+        \<StepForm :steps="steps" :form1="form1" :form2="form2" :form3="form3" @handle-submit="handleSubmit"\>
+            \<template #step-1\>
+                \<el-form :model="formData.basicInfo" :rules="basicInfoRules" ref="form1"\>
+                    \<el-form-item label="姓名" prop="name"\>
+                        \<el-input v-model="formData.basicInfo.name"\>\</el-input\>
+                    \</el-form-item\>
+                    \<el-form-item label="电话" prop="tel"\>
+                        \<el-input v-model="formData.basicInfo.tel"\>\</el-input\>
+                    \</el-form-item\>
+                    \<el-form-item label="邮箱" prop="email"\>
+                        \<el-input v-model="formData.basicInfo.email"\>\</el-input\>
+                    \</el-form-item\>
+                    \<el-form-item label="工号" prop="no"\>
+                        \<el-input v-model="formData.basicInfo.no"\>\</el-input\>
+                    \</el-form-item\>
+                    \<el-form-item label="是否加急："\>
+                        \<el-switch v-model="formData.basicInfo.urgent" /\>
+                    \</el-form-item\>
+                    \<el-form-item label="其他选项："\>
+                        \<el-checkbox-group v-model="formData.basicInfo.other"\>
+                            \<el-checkbox value="换设备" name="equ"\>
                                 更换设备
-                            </el-checkbox>
-                            <el-checkbox value="仅维修" name="repiar">
+                            \</el-checkbox\>
+                            \<el-checkbox value="仅维修" name="repiar"\>
                                 仅维修
-                            </el-checkbox>
-                            <el-checkbox value="需拍照片" name="photo">
+                            \</el-checkbox\>
+                            \<el-checkbox value="需拍照片" name="photo"\>
                                 需拍照片
-                            </el-checkbox>
-                            <el-checkbox value="Simple brand exposure" name="doc">
+                            \</el-checkbox\>
+                            \<el-checkbox value="Simple brand exposure" name="doc"\>
                                 需报备
-                            </el-checkbox>
-                        </el-checkbox-group>
-                    </el-form-item>
-                    <el-form-item label="其他备注信息">
-                        <el-input type="textarea" />
-                    </el-form-item>
-                </el-form>
-            </template>
-            <template #step-2>
-                <el-form :model="formData.shenpi" :rules="addressRules" ref="form2">
-                    <el-form-item label="审批部门" prop="a">
-                        <el-select placeholder="请选择审批部门" v-model="formData.shenpi.a">
-                            <el-option label="总裁办" value="1"> </el-option>
-                            <el-option label="运营部" value="2"> </el-option>
-                            <el-option label="维修部" value="3"> </el-option>
-                            <el-option label="市场部" value="4"> </el-option>
-                            <el-option label="财务部" value="5"> </el-option>
-                        </el-select>
-                    </el-form-item>
-                    <el-form-item label="抄送部门" prop="b" >
-                        <el-select placeholder="请选择抄送部门"  v-model="formData.shenpi.b">
-                            <el-option label="总裁办" value="1"> </el-option>
-                            <el-option label="运营部" value="2"> </el-option>
-                            <el-option label="维修部" value="3"> </el-option>
-                            <el-option label="市场部" value="4"> </el-option>
-                            <el-option label="财务部" value="5"> </el-option>
-                        </el-select>
-                    </el-form-item>
-                </el-form>
-            </template>
-            <template #step-3>
-                <el-form :model="formData.address" :rules="addressRules2" ref="form3">
-                    <el-form-item label="负责人姓名" prop="person">
-                        <el-input v-model="formData.address.person"></el-input>
-                    </el-form-item>
-                    <el-form-item label="负责人电话" prop="tel">
-                        <el-input v-model="formData.address.tel"></el-input>
-                    </el-form-item>
-                </el-form>
-            </template>
-        </StepForm>
-        <el-result icon="warning" title="设备编号：CD1001" sub-title="该任务已催促2次，请抓紧处理">
-            <template #extra>
-                <el-button type="primary">我已知晓</el-button>
-            </template>
-        </el-result>
-    </el-drawer>
-</template>
+                            \</el-checkbox\>
+                        \</el-checkbox-group\>
+                    \</el-form-item\>
+                    \<el-form-item label="其他备注信息"\>
+                        \<el-input type="textarea" /\>
+                    \</el-form-item\>
+                \</el-form\>
+            \</template\>
+            \<template #step-2\>
+                \<el-form :model="formData.shenpi" :rules="addressRules" ref="form2"\>
+                    \<el-form-item label="审批部门" prop="a"\>
+                        \<el-select placeholder="请选择审批部门" v-model="formData.shenpi.a"\>
+                            \<el-option label="总裁办" value="1"\> \</el-option\>
+                            \<el-option label="运营部" value="2"\> \</el-option\>
+                            \<el-option label="维修部" value="3"\> \</el-option\>
+                            \<el-option label="市场部" value="4"\> \</el-option\>
+                            \<el-option label="财务部" value="5"\> \</el-option\>
+                        \</el-select\>
+                    \</el-form-item\>
+                    \<el-form-item label="抄送部门" prop="b" \>
+                        \<el-select placeholder="请选择抄送部门"  v-model="formData.shenpi.b"\>
+                            \<el-option label="总裁办" value="1"\> \</el-option\>
+                            \<el-option label="运营部" value="2"\> \</el-option\>
+                            \<el-option label="维修部" value="3"\> \</el-option\>
+                            \<el-option label="市场部" value="4"\> \</el-option\>
+                            \<el-option label="财务部" value="5"\> \</el-option\>
+                        \</el-select\>
+                    \</el-form-item\>
+                \</el-form\>
+            \</template\>
+            \<template #step-3\>
+                \<el-form :model="formData.address" :rules="addressRules2" ref="form3"\>
+                    \<el-form-item label="负责人姓名" prop="person"\>
+                        \<el-input v-model="formData.address.person"\>\</el-input\>
+                    \</el-form-item\>
+                    \<el-form-item label="负责人电话" prop="tel"\>
+                        \<el-input v-model="formData.address.tel"\>\</el-input\>
+                    \</el-form-item\>
+                \</el-form\>
+            \</template\>
+        \</StepForm\>
+        \<el-result icon="warning" title="设备编号：CD1001" sub-title="该任务已催促2次，请抓紧处理"\>
+            \<template #extra\>
+                \<el-button type="primary"\>我已知晓\</el-button\>
+            \</template\>
+        \</el-result\>
+    \</el-drawer\>
+\</template\>
 
-<script setup lang="ts">
+\<script setup lang="ts"\>
 import { ref, onMounted } from 'vue'
 import { alarmListApi } from '@/api/alarm';
 import { getLabel } from './fieldLabelMap';
@@ -5726,16 +5726,16 @@ interface AlarmListType {
     code: number,
     status: number,
 }
-const alarmList = ref<AlarmListType[]>([]);
-onMounted(async () => {
+const alarmList = ref\<AlarmListType[]\>([]);
+onMounted(async () =\> {
     const { data } = await alarmListApi();
     alarmList.value = data
 })
-const radio1 = ref<number>(1)
+const radio1 = ref\<number\>(1)
 const drawer = ref(false);
-const form1=ref<FormInstance>()
-const form2=ref<FormInstance>()
-const form3=ref<FormInstance>()
+const form1=ref\<FormInstance\>()
+const form2=ref\<FormInstance\>()
+const form3=ref\<FormInstance\>()
 const steps = [
     { title: '基本信息' },
     { title: '审批信息' },
@@ -5775,34 +5775,34 @@ const addressRules2 = {
     tel: [{ required: true, message: '不能为空', trigger: 'blur' }]
 };
 
-const handleSubmit=()=>{
+const handleSubmit=()=\>{
     console.log(formData.value)
 }
-</script>
+\</script\>
 ```
 
 优化写法
 
 ```ts
-<script lang="ts" setup>
+\<script lang="ts" setup\>
 import { ref } from "vue"
-const currentStep = ref<number>(0)
+const currentStep = ref\<number\>(0)
 const props = defineProps(["steps", "form1", "form2", "form3"])
 
 const forms = [props.form1, props.form2, props.form3];
 
-const prevStep = () => {
-    if (currentStep.value > 0) {
+const prevStep = () =\> {
+    if (currentStep.value \> 0) {
         currentStep.value--
     }
 }
 
-const nextStep = () => {
+const nextStep = () =\> {
     const currentForm = forms[currentStep.value];
 
-    currentForm.validate((valid: boolean) => {
+    currentForm.validate((valid: boolean) =\> {
         if (valid) {
-            if (currentStep.value < props.steps.length - 1) {
+            if (currentStep.value \< props.steps.length - 1) {
                 currentStep.value++
             } else {
                 console.log("提交表单")
@@ -5810,7 +5810,7 @@ const nextStep = () => {
         }
     })
 }
-</script>
+\</script\>
 ```
 
 
@@ -5818,62 +5818,62 @@ const nextStep = () => {
 # 24.会员卡管理
 
 ```vue
-<template>
-    <el-card  >
-        <el-row :gutter="20">
-            <el-col :span="6">
-                <el-input v-model="searchParams.no" placeholder="请输入会员卡号">
-                </el-input>
-            </el-col>
-            <el-col :span="6">
-                <el-input v-model="searchParams.tel" placeholder="请输入手机号">
-                </el-input>
-            </el-col>
-            <el-col :span="6">
-                <el-input v-model="searchParams.name" placeholder="请输入姓名">
-                </el-input>
-            </el-col>
-            <el-col :span="6">
-                <el-button type="primary" @click="loadData">查询</el-button>
-                <el-button @click="handleReset">重置</el-button>
-            </el-col>
-        </el-row>
-    </el-card>
-    <el-card class="mt" >
-        <el-table :data="dataList" v-loading="loading">
-            <el-table-column type="index" label="序号" width="80" />
-            <el-table-column prop="memberCardNumber" label="会员卡号"></el-table-column>
-            <el-table-column prop="cardType" label="卡类型"></el-table-column>
-            <el-table-column prop="issueDate" label="开卡日期"></el-table-column>
-            <el-table-column prop="holderName" label="持有人姓名"></el-table-column>
-            <el-table-column prop="holderPhone" label="持有人电话"></el-table-column>
-            <el-table-column prop="cardBalance" label="卡余额"></el-table-column>
-            <el-table-column prop="transactionRecords" label="消费记录">
-                <template #default="scope">
-                    <el-popover placement="top-start" title="消费记录" :width="260" trigger="hover"
-                        content="this is content, this is content, this is content">
-                        <template #reference>
-                            <el-button class="m-2">{{ scope.row.transactionDate }}日消费</el-button>
-                        </template>
-                        <el-timeline style="max-width: 600px">
-                            <el-timeline-item v-for="(item, index) in scope.row.transactionRecords" :key="index" color="#0bbd87"
-                                :timestamp="item.transactionDate">
-                              <p> 消费金额：{{item.transactionAmount }} </p>
-                              <p>消费类型：{{ item.transactionType }}</p>
-                            </el-timeline-item>
-                        </el-timeline>
-                    </el-popover>
-                </template>
-            </el-table-column>
-            <el-table-column prop="validUntil" label="有效期至"></el-table-column>
-        </el-table>
-        <el-pagination class="fr mt mb" v-model:current-page="pageInfo.page" v-model:page-size="pageInfo.pageSize"
+\<template\>
+    \<el-card  \>
+        \<el-row :gutter="20"\>
+            \<el-col :span="6"\>
+                \<el-input v-model="searchParams.no" placeholder="请输入会员卡号"\>
+                \</el-input\>
+            \</el-col\>
+            \<el-col :span="6"\>
+                \<el-input v-model="searchParams.tel" placeholder="请输入手机号"\>
+                \</el-input\>
+            \</el-col\>
+            \<el-col :span="6"\>
+                \<el-input v-model="searchParams.name" placeholder="请输入姓名"\>
+                \</el-input\>
+            \</el-col\>
+            \<el-col :span="6"\>
+                \<el-button type="primary" @click="loadData"\>查询\</el-button\>
+                \<el-button @click="handleReset"\>重置\</el-button\>
+            \</el-col\>
+        \</el-row\>
+    \</el-card\>
+    \<el-card class="mt" \>
+        \<el-table :data="dataList" v-loading="loading"\>
+            \<el-table-column type="index" label="序号" width="80" /\>
+            \<el-table-column prop="memberCardNumber" label="会员卡号"\>\</el-table-column\>
+            \<el-table-column prop="cardType" label="卡类型"\>\</el-table-column\>
+            \<el-table-column prop="issueDate" label="开卡日期"\>\</el-table-column\>
+            \<el-table-column prop="holderName" label="持有人姓名"\>\</el-table-column\>
+            \<el-table-column prop="holderPhone" label="持有人电话"\>\</el-table-column\>
+            \<el-table-column prop="cardBalance" label="卡余额"\>\</el-table-column\>
+            \<el-table-column prop="transactionRecords" label="消费记录"\>
+                \<template #default="scope"\>
+                    \<el-popover placement="top-start" title="消费记录" :width="260" trigger="hover"
+                        content="this is content, this is content, this is content"\>
+                        \<template #reference\>
+                            \<el-button class="m-2"\>{{ scope.row.transactionDate }}日消费\</el-button\>
+                        \</template\>
+                        \<el-timeline style="max-width: 600px"\>
+                            \<el-timeline-item v-for="(item, index) in scope.row.transactionRecords" :key="index" color="#0bbd87"
+                                :timestamp="item.transactionDate"\>
+                              \<p\> 消费金额：{{item.transactionAmount }} \</p\>
+                              \<p\>消费类型：{{ item.transactionType }}\</p\>
+                            \</el-timeline-item\>
+                        \</el-timeline\>
+                    \</el-popover\>
+                \</template\>
+            \</el-table-column\>
+            \<el-table-column prop="validUntil" label="有效期至"\>\</el-table-column\>
+        \</el-table\>
+        \<el-pagination class="fr mt mb" v-model:current-page="pageInfo.page" v-model:page-size="pageInfo.pageSize"
             :page-sizes="[10, 20, 30, 40]" :background="true" layout="total, sizes, prev, pager, next, jumper"
-            :total="totals" @size-change="handleSizeChange" @current-change="handleCurrentChange" />
-    </el-card>
-</template>
+            :total="totals" @size-change="handleSizeChange" @current-change="handleCurrentChange" /\>
+    \</el-card\>
+\</template\>
 
-<script setup>
+\<script setup\>
 import { ref } from 'vue';
 import { useHttp } from '@/hooks/useHttp';
 
@@ -5884,9 +5884,9 @@ const searchParams = ref({
 })
 const { dataList, loading, resetPagination, loadData, totals, pageInfo, handleSizeChange, handleCurrentChange } = useHttp("/member", searchParams);
 
-</script>
+\</script\>
 
-<style></style>
+\<style\>\</style\>
 ```
 
 # 25.招商管理
@@ -5895,7 +5895,7 @@ mock接口
 
 ```ts
 //招商管理分类列表接口
-Mock.mock('https://www.demo.com/document',"get",()=>{
+Mock.mock('https://www.demo.com/document',"get",()=\>{
   return {
     code:200,
     message:"操作成功",
@@ -5928,32 +5928,32 @@ export{typeListApi}
 ==document.vue==
 
 ```vue
-<template>
-    <el-card>
-        <div class="mt">
-            <span class="title">文章类型:</span>
-            <el-tag type="primary" class="mr">全部</el-tag>
-            <el-tag type="info" class="mr" v-for="item in typeList.type" :key="item">{{ item }}</el-tag>
-        </div>
-        <div class="mt">
-            <span class="title">重要程度:</span>
-            <el-tag type="primary" class="mr">全部</el-tag>
-            <el-tag type="info" class="mr" v-for="item in typeList.important" :key="item">{{ item }}</el-tag>
-        </div>
-        <div class="mt">
-            <span class="title">发布渠道:</span>
-            <el-tag type="primary" class="mr">全部</el-tag>
-            <el-tag type="info" class="mr" v-for="item in typeList.publish" :key="item">{{ item }}</el-tag>
-        </div>
-        <el-divider />
-        <div class="mt">
-            <span class="title">已选:</span>
-            <el-tag type="success" class="mr" closable>全部</el-tag>
-        </div>
-    </el-card>
-</template>
+\<template\>
+    \<el-card\>
+        \<div class="mt"\>
+            \<span class="title"\>文章类型:\</span\>
+            \<el-tag type="primary" class="mr"\>全部\</el-tag\>
+            \<el-tag type="info" class="mr" v-for="item in typeList.type" :key="item"\>{{ item }}\</el-tag\>
+        \</div\>
+        \<div class="mt"\>
+            \<span class="title"\>重要程度:\</span\>
+            \<el-tag type="primary" class="mr"\>全部\</el-tag\>
+            \<el-tag type="info" class="mr" v-for="item in typeList.important" :key="item"\>{{ item }}\</el-tag\>
+        \</div\>
+        \<div class="mt"\>
+            \<span class="title"\>发布渠道:\</span\>
+            \<el-tag type="primary" class="mr"\>全部\</el-tag\>
+            \<el-tag type="info" class="mr" v-for="item in typeList.publish" :key="item"\>{{ item }}\</el-tag\>
+        \</div\>
+        \<el-divider /\>
+        \<div class="mt"\>
+            \<span class="title"\>已选:\</span\>
+            \<el-tag type="success" class="mr" closable\>全部\</el-tag\>
+        \</div\>
+    \</el-card\>
+\</template\>
 
-<script setup lang="ts">
+\<script setup lang="ts"\>
 import { typeListApi } from "@/api/document";
 
 import { onMounted, ref } from "vue";
@@ -5962,70 +5962,70 @@ interface ListType {
     important: string[],
     publish: string[]
 }
-const typeList = ref<ListType>({ type: [], important: [], publish: [] })
+const typeList = ref\<ListType\>({ type: [], important: [], publish: [] })
 
-onMounted(async () => {
+onMounted(async () =\> {
     const { data } = await typeListApi();
     typeList.value = data
 })
-</script>
+\</script\>
 
-<style lang="less" scoped>
+\<style lang="less" scoped\>
 .title {
     font-size: 14px;
     display: inline-block;
     width: 80px;
 }
-</style>
+\</style\>
 ```
 
 ## 2.点击高亮功能实现
 
-> **高亮实现思路：**
->
-> 如果只是一个列表，要想实现高亮，我们会设置一个currentIndex值，每次点击的时候更新这个currentIndex值,
->
-> 然后在元素中只需要判断他们的index和currentIndex相等，那就说明是当前点击的元素，就让他高亮
->
-> 现在我们有三个类别，所以需要三个currentIndex，所以我们设置一个数组，直接存三个currentIndex
+\> **高亮实现思路：**
+\>
+\> 如果只是一个列表，要想实现高亮，我们会设置一个currentIndex值，每次点击的时候更新这个currentIndex值,
+\>
+\> 然后在元素中只需要判断他们的index和currentIndex相等，那就说明是当前点击的元素，就让他高亮
+\>
+\> 现在我们有三个类别，所以需要三个currentIndex，所以我们设置一个数组，直接存三个currentIndex
 
 
 
-> 点击的时候我们规定两个参数，第一个参数就是index，因为从0开始，但是我们默认要让 全部 这两个字高亮，所以可以设置-1就是全部两个字高亮，
->
-> 第二个参数是类别号，第一个类别就是0，第二个类别就是1，使用0 1 2当类别标记的好处是我们可以直接用他当作角标，能够在currentIndex数组中修改
->
-> 对应的标记
+\> 点击的时候我们规定两个参数，第一个参数就是index，因为从0开始，但是我们默认要让 全部 这两个字高亮，所以可以设置-1就是全部两个字高亮，
+\>
+\> 第二个参数是类别号，第一个类别就是0，第二个类别就是1，使用0 1 2当类别标记的好处是我们可以直接用他当作角标，能够在currentIndex数组中修改
+\>
+\> 对应的标记
 
 
 
 ```vue
-<template>
-    <el-card>
-        <div class="mt">
-            <span class="title">文章类型:</span>
-            <el-tag :type="currentIndex[0]==-1?'primary':'info'"  class="mr" @click="handleSelect(-1,0)">全部</el-tag>
-            <el-tag :type="currentIndex[0]==index?'primary':'info'" class="mr" v-for="(item,index) in typeList.type" :key="item" @click="handleSelect(index,0)">{{ item }}</el-tag>
-        </div>
-        <div class="mt">
-            <span class="title">重要程度:</span>
-            <el-tag :type="currentIndex[1]==-1?'primary':'info'"  class="mr" @click="handleSelect(-1,1)">全部</el-tag>
-            <el-tag :type="currentIndex[1]==index?'primary':'info'" class="mr" v-for="(item,index) in typeList.important" :key="item" @click="handleSelect(index,1)">{{ item }}</el-tag>
-        </div>
-        <div class="mt">
-            <span class="title">发布渠道:</span>
-            <el-tag :type="currentIndex[2]==-1?'primary':'info'"  class="mr" @click="handleSelect(-1,2)">全部</el-tag>
-            <el-tag :type="currentIndex[2]==index?'primary':'info'" class="mr" v-for="(item,index) in typeList.publish" :key="item" @click="handleSelect(index,2)">{{ item }}</el-tag>
-        </div>
-        <el-divider />
-        <div class="mt">
-            <span class="title">已选:</span>
-            <el-tag type="success" class="mr" closable>全部</el-tag>
-        </div>
-    </el-card>
-</template>
+\<template\>
+    \<el-card\>
+        \<div class="mt"\>
+            \<span class="title"\>文章类型:\</span\>
+            \<el-tag :type="currentIndex[0]==-1?'primary':'info'"  class="mr" @click="handleSelect(-1,0)"\>全部\</el-tag\>
+            \<el-tag :type="currentIndex[0]==index?'primary':'info'" class="mr" v-for="(item,index) in typeList.type" :key="item" @click="handleSelect(index,0)"\>{{ item }}\</el-tag\>
+        \</div\>
+        \<div class="mt"\>
+            \<span class="title"\>重要程度:\</span\>
+            \<el-tag :type="currentIndex[1]==-1?'primary':'info'"  class="mr" @click="handleSelect(-1,1)"\>全部\</el-tag\>
+            \<el-tag :type="currentIndex[1]==index?'primary':'info'" class="mr" v-for="(item,index) in typeList.important" :key="item" @click="handleSelect(index,1)"\>{{ item }}\</el-tag\>
+        \</div\>
+        \<div class="mt"\>
+            \<span class="title"\>发布渠道:\</span\>
+            \<el-tag :type="currentIndex[2]==-1?'primary':'info'"  class="mr" @click="handleSelect(-1,2)"\>全部\</el-tag\>
+            \<el-tag :type="currentIndex[2]==index?'primary':'info'" class="mr" v-for="(item,index) in typeList.publish" :key="item" @click="handleSelect(index,2)"\>{{ item }}\</el-tag\>
+        \</div\>
+        \<el-divider /\>
+        \<div class="mt"\>
+            \<span class="title"\>已选:\</span\>
+            \<el-tag type="success" class="mr" closable\>全部\</el-tag\>
+        \</div\>
+    \</el-card\>
+\</template\>
 
-<script setup lang="ts">
+\<script setup lang="ts"\>
 import { typeListApi } from "@/api/document";
 
 import { onMounted, ref } from "vue";
@@ -6034,22 +6034,22 @@ interface ListType {
     important: string[],
     publish: string[]
 }
-const typeList = ref<ListType>({ type: [], important: [], publish: [] })
+const typeList = ref\<ListType\>({ type: [], important: [], publish: [] })
 
-onMounted(async () => {
+onMounted(async () =\> {
     const { data } = await typeListApi();
     typeList.value = data
 })
 
 const currentIndex=ref([-1,-1,-1])
 
-const handleSelect=(index:number,num:number)=>{
+const handleSelect=(index:number,num:number)=\>{
     console.log(index)
     currentIndex.value[num]=index
 }
-</script>
+\</script\>
 
-<style lang="less" scoped>
+\<style lang="less" scoped\>
 .title {
     font-size: 14px;
     display: inline-block;
@@ -6058,54 +6058,54 @@ const handleSelect=(index:number,num:number)=>{
 .el-tag{
     cursor: pointer;
 }
-</style>
+\</style\>
 ```
 
 ## 3.完整功能实现
 
 ```vue
-<template>
-    <el-card>
-        <div class="mt">
-            <span class="title">文章类型:</span>
-            <el-tag :type="currentIndex[0] == -1 ? 'primary' : 'info'" class="mr"
-                @click="handleSelect(-1, 0, '')">全部</el-tag>
-            <el-tag :type="currentIndex[0] == index ? 'primary' : 'info'" class="mr"
-                v-for="(item, index) in typeList.type" :key="item" @click="handleSelect(index, 0, item)">{{ item
-                }}</el-tag>
-        </div>
-        <div class="mt">
-            <span class="title">重要程度:</span>
-            <el-tag :type="currentIndex[1] == -1 ? 'primary' : 'info'" class="mr"
-                @click="handleSelect(-1, 1, '')">全部</el-tag>
-            <el-tag :type="currentIndex[1] == index ? 'primary' : 'info'" class="mr"
-                v-for="(item, index) in typeList.important" :key="item" @click="handleSelect(index, 1, item)">{{ item
-                }}</el-tag>
-        </div>
-        <div class="mt">
-            <span class="title">发布渠道:</span>
-            <el-tag :type="currentIndex[2] == -1 ? 'primary' : 'info'" class="mr"
-                @click="handleSelect(-1, 2, '')">全部</el-tag>
-            <el-tag :type="currentIndex[2] == index ? 'primary' : 'info'" class="mr"
-                v-for="(item, index) in typeList.publish" :key="item" @click="handleSelect(index, 2, item)">{{ item
-                }}</el-tag>
-        </div>
-        <el-divider />
-        <div class="mt">
-            <span class="title">已选:</span>
-            <el-tag 
+\<template\>
+    \<el-card\>
+        \<div class="mt"\>
+            \<span class="title"\>文章类型:\</span\>
+            \<el-tag :type="currentIndex[0] == -1 ? 'primary' : 'info'" class="mr"
+                @click="handleSelect(-1, 0, '')"\>全部\</el-tag\>
+            \<el-tag :type="currentIndex[0] == index ? 'primary' : 'info'" class="mr"
+                v-for="(item, index) in typeList.type" :key="item" @click="handleSelect(index, 0, item)"\>{{ item
+                }}\</el-tag\>
+        \</div\>
+        \<div class="mt"\>
+            \<span class="title"\>重要程度:\</span\>
+            \<el-tag :type="currentIndex[1] == -1 ? 'primary' : 'info'" class="mr"
+                @click="handleSelect(-1, 1, '')"\>全部\</el-tag\>
+            \<el-tag :type="currentIndex[1] == index ? 'primary' : 'info'" class="mr"
+                v-for="(item, index) in typeList.important" :key="item" @click="handleSelect(index, 1, item)"\>{{ item
+                }}\</el-tag\>
+        \</div\>
+        \<div class="mt"\>
+            \<span class="title"\>发布渠道:\</span\>
+            \<el-tag :type="currentIndex[2] == -1 ? 'primary' : 'info'" class="mr"
+                @click="handleSelect(-1, 2, '')"\>全部\</el-tag\>
+            \<el-tag :type="currentIndex[2] == index ? 'primary' : 'info'" class="mr"
+                v-for="(item, index) in typeList.publish" :key="item" @click="handleSelect(index, 2, item)"\>{{ item
+                }}\</el-tag\>
+        \</div\>
+        \<el-divider /\>
+        \<div class="mt"\>
+            \<span class="title"\>已选:\</span\>
+            \<el-tag 
                 disable-transitions 
                 type="success" 
                 class="mr"
                  v-for="item in selectedList" 
                  :key="item.name"
                  @close="handleClose(item.num)"
-                closable>{{ item.name }}</el-tag>
-        </div>
-    </el-card>
-</template>
+                closable\>{{ item.name }}\</el-tag\>
+        \</div\>
+    \</el-card\>
+\</template\>
 
-<script setup lang="ts">
+\<script setup lang="ts"\>
 import { typeListApi } from "@/api/document";
 
 import { onMounted, ref } from "vue";
@@ -6114,22 +6114,22 @@ interface ListType {
     important: string[],
     publish: string[]
 }
-const typeList = ref<ListType>({ type: [], important: [], publish: [] })
-const selectedList = ref<any>([]);//要求格式为 {num:1,name:"招商类"}
-onMounted(async () => {
+const typeList = ref\<ListType\>({ type: [], important: [], publish: [] })
+const selectedList = ref\<any\>([]);//要求格式为 {num:1,name:"招商类"}
+onMounted(async () =\> {
     const { data } = await typeListApi();
     typeList.value = data
 })
 
 const currentIndex = ref([-1, -1, -1])
 //index表示点击的tag的序号 num表示第几个品类，name表示点击的tag的内容
-const handleSelect = (index: number, num: number, name: string) => {
+const handleSelect = (index: number, num: number, name: string) =\> {
     // 查找数组中与 newObj.num 相等的对象的索引
-    const ind: number = selectedList.value.findIndex((item: any) => item.num === num);
+    const ind: number = selectedList.value.findIndex((item: any) =\> item.num === num);
 
     if (!name) {
         //如果点的是全部,删掉对应的那项，也就是筛选出留下 除了点全部那一品类的数据
-        selectedList.value = selectedList.value.filter((item: any) => item.num != num)
+        selectedList.value = selectedList.value.filter((item: any) =\> item.num != num)
     } else {
         if (ind == -1) {//找不到相同num的，证明同品类没有，就添加
             selectedList.value.push({ num, name })
@@ -6139,13 +6139,13 @@ const handleSelect = (index: number, num: number, name: string) => {
     }
     currentIndex.value[num] = index;//应该让第几个高亮
 }
-const handleClose=(num:number)=>{
-    selectedList.value = selectedList.value.filter((item: any) => item.num != num);
+const handleClose=(num:number)=\>{
+    selectedList.value = selectedList.value.filter((item: any) =\> item.num != num);
     currentIndex.value[num]=-1 //让对应的品类回到全部 高亮
 }
-</script>
+\</script\>
 
-<style lang="less" scoped>
+\<style lang="less" scoped\>
 .title {
     font-size: 14px;
     display: inline-block;
@@ -6155,7 +6155,7 @@ const handleClose=(num:number)=>{
 .el-tag {
     cursor: pointer;
 }
-</style>
+\</style\>
 ```
 
 ## 4.富文本编辑器
@@ -6180,22 +6180,22 @@ npm install --save "@tinymce/tinymce-vue@^5"
 ## 2.详细配置
 
 ```vue
- <el-card class="mt">
-        <Editor   ref="editorRef" v-model="EditorContent" api-key="xvbamfm2vokka8qoim9r801qtdlldskjschd51yha7zhuusp" :init="{language:'zh_CN'}" />
-    </el-card>
+ \<el-card class="mt"\>
+        \<Editor   ref="editorRef" v-model="EditorContent" api-key="xvbamfm2vokka8qoim9r801qtdlldskjschd51yha7zhuusp" :init="{language:'zh_CN'}" /\>
+    \</el-card\>
 
-<script>
+\<script\>
 import Editor from '@tinymce/tinymce-vue'
 const editorRef = ref(null); // 定义一个 ref 来引用编辑器实例
 const EditorContent = ref('')
-const getEditorContent = () => {
+const getEditorContent = () =\> {
   console.log(897,EditorContent.value)
 
 };
-</script>
+\</script\>
 ```
 
-> 常见配置项
+\> 常见配置项
 
 1. **初始化设置**:
    - `language`：设置编辑器的语言，如 `zh_CN`。
@@ -6224,7 +6224,7 @@ const getEditorContent = () => {
 示例配置：
 
 ```vue
-<Editor
+\<Editor
   ref="editorRef"
   v-model="EditorContent"
   api-key="xvbamfm2vokka8qoim9r801qtdlldskjschd51yha7zhuusp"
@@ -6235,19 +6235,19 @@ const getEditorContent = () => {
     toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright | link image | code',
     plugins: 'lists link image code',
     content_css: '/path/to/custom.css',
-    setup: (editor) => {
-      editor.on('change', () => {
+    setup: (editor) =\> {
+      editor.on('change', () =\> {
         this.EditorContent = editor.getContent();
       });
     }
   }"
-/>
+/\>
 ```
 
 ## 3.导出html功能
 
 ```vue
- <el-button type="primary" class="mt" @click="getEditorContent">生成word文件</el-button>
+ \<el-button type="primary" class="mt" @click="getEditorContent"\>生成word文件\</el-button\>
 ```
 
 Blob 对象是前端 Web API 中的一种数据类型，用于表示二进制数据的大块内容。Blob 代表“Binary Large Object”，它可以存储各种格式的数据，比如图片、音频、视频等。
@@ -6257,7 +6257,7 @@ Blob 对象是前端 Web API 中的一种数据类型，用于表示二进制数
 将用户生成的数据包装成一个 Blob，然后通过创建一个临时的链接并触发下载操作，让用户可以下载该数据为一个文件
 
 ```ts
-const getEditorContent = () => {
+const getEditorContent = () =\> {
  // 获取编辑器内容
       // 创建一个 Blob 对象
       const blob = new Blob([EditorContent.value], { type: 'text/html' });
@@ -6281,76 +6281,76 @@ const getEditorContent = () => {
 基本结构开发
 
 ```vue
-<template>
-    <el-card>
-        <el-row :gutter="20">
-            <el-col :span="6">
-                <el-input v-model="searchParams.name" placeholder="请输入姓名">
-                </el-input>
-            </el-col>
-            <el-col :span="6">
-                <el-select placeholder="请选择部门" v-model="searchParams.department">
-                    <el-option label="全部" value=""></el-option>
-                    <el-option label="总裁办" value="总裁办"></el-option>
-                    <el-option label="技术部" value="技术部"></el-option>
-                    <el-option label="市场部" value="市场部"></el-option>
-                    <el-option label="维修部" value="维修部"></el-option>
-                    <el-option label="运营部" value="运营部"></el-option>
-                    <el-option label="客服部" value="客服部"></el-option>
-                </el-select>
-            </el-col>
-            <el-col :span="6">
-                <el-button type="primary" @click="loadData">查询</el-button>
-                <el-button>重置</el-button>
-            </el-col>
-        </el-row>
-    </el-card>
-    <el-card class="mt">
-        <el-table :data="dataList" v-loading="loading" class="mt">
-            <el-table-column type="index" label="序号" width="80" />
-            <el-table-column prop="account" label="账号"></el-table-column>
-            <el-table-column prop="name" label="姓名"></el-table-column>
-            <el-table-column prop="phone" label="电话"></el-table-column>
-            <el-table-column prop="idNo" label="身份证号"></el-table-column>
-            <el-table-column prop="position" label="职位">
-                <template #default="scope">
-                    <el-tag>{{ scope.row.position }}</el-tag>
-                </template>
-            </el-table-column>
-            <el-table-column prop="department" label="部门"></el-table-column>
-            <el-table-column prop="pageAuthority" label="页面权限">
-                <template #default="scope">
-                    <el-tag type="success">{{ scope.row.pageAuthority }}</el-tag>
-                </template>
-            </el-table-column>
-            <el-table-column prop="btnAuthority" label="按钮权限">
-                <template #default="scope">
-                    <el-tag type="info">{{ scope.row.btnAuthority }}</el-tag>
-                </template>
-            </el-table-column>
+\<template\>
+    \<el-card\>
+        \<el-row :gutter="20"\>
+            \<el-col :span="6"\>
+                \<el-input v-model="searchParams.name" placeholder="请输入姓名"\>
+                \</el-input\>
+            \</el-col\>
+            \<el-col :span="6"\>
+                \<el-select placeholder="请选择部门" v-model="searchParams.department"\>
+                    \<el-option label="全部" value=""\>\</el-option\>
+                    \<el-option label="总裁办" value="总裁办"\>\</el-option\>
+                    \<el-option label="技术部" value="技术部"\>\</el-option\>
+                    \<el-option label="市场部" value="市场部"\>\</el-option\>
+                    \<el-option label="维修部" value="维修部"\>\</el-option\>
+                    \<el-option label="运营部" value="运营部"\>\</el-option\>
+                    \<el-option label="客服部" value="客服部"\>\</el-option\>
+                \</el-select\>
+            \</el-col\>
+            \<el-col :span="6"\>
+                \<el-button type="primary" @click="loadData"\>查询\</el-button\>
+                \<el-button\>重置\</el-button\>
+            \</el-col\>
+        \</el-row\>
+    \</el-card\>
+    \<el-card class="mt"\>
+        \<el-table :data="dataList" v-loading="loading" class="mt"\>
+            \<el-table-column type="index" label="序号" width="80" /\>
+            \<el-table-column prop="account" label="账号"\>\</el-table-column\>
+            \<el-table-column prop="name" label="姓名"\>\</el-table-column\>
+            \<el-table-column prop="phone" label="电话"\>\</el-table-column\>
+            \<el-table-column prop="idNo" label="身份证号"\>\</el-table-column\>
+            \<el-table-column prop="position" label="职位"\>
+                \<template #default="scope"\>
+                    \<el-tag\>{{ scope.row.position }}\</el-tag\>
+                \</template\>
+            \</el-table-column\>
+            \<el-table-column prop="department" label="部门"\>\</el-table-column\>
+            \<el-table-column prop="pageAuthority" label="页面权限"\>
+                \<template #default="scope"\>
+                    \<el-tag type="success"\>{{ scope.row.pageAuthority }}\</el-tag\>
+                \</template\>
+            \</el-table-column\>
+            \<el-table-column prop="btnAuthority" label="按钮权限"\>
+                \<template #default="scope"\>
+                    \<el-tag type="info"\>{{ scope.row.btnAuthority }}\</el-tag\>
+                \</template\>
+            \</el-table-column\>
 
-            <el-table-column prop="opera" label="操作" width="280">
-                <template #default="scope">
-                    <el-button type="primary" size="small" >
+            \<el-table-column prop="opera" label="操作" width="280"\>
+                \<template #default="scope"\>
+                    \<el-button type="primary" size="small" \>
                         权限设置
-                    </el-button>
-                    <el-button type="danger" size="small">
+                    \</el-button\>
+                    \<el-button type="danger" size="small"\>
                         删除
-                    </el-button>
-                    <el-button type="danger" size="small">
+                    \</el-button\>
+                    \<el-button type="danger" size="small"\>
                         禁用
-                    </el-button>
-                </template>
-            </el-table-column>
-        </el-table>
-<el-pagination class="fr mt mb" v-model:current-page="pageInfo.page" v-model:page-size="pageInfo.pageSize"
+                    \</el-button\>
+                \</template\>
+            \</el-table-column\>
+        \</el-table\>
+\<el-pagination class="fr mt mb" v-model:current-page="pageInfo.page" v-model:page-size="pageInfo.pageSize"
         :page-sizes="[10, 20, 30, 40]" :background="true" layout="total, sizes, prev, pager, next, jumper"
-        :total="totals" @size-change="handleSizeChange" @current-change="handleCurrentChange" />
-    </el-card>
+        :total="totals" @size-change="handleSizeChange" @current-change="handleCurrentChange" /\>
+    \</el-card\>
     
-</template>
+\</template\>
 
-<script setup lang="ts">
+\<script setup lang="ts"\>
 import { ref } from 'vue';
 import { useHttp } from '@/hooks/useHttp';
 const searchParams = ref({
@@ -6358,7 +6358,7 @@ const searchParams = ref({
     department: ""
 })
 const { dataList, loading,  loadData, totals, pageInfo, handleSizeChange, handleCurrentChange } = useHttp("/permissionList", searchParams);
-</script>
+\</script\>
 ```
 
 ## 1.权限弹窗组件开发
@@ -6368,23 +6368,23 @@ const { dataList, loading,  loadData, totals, pageInfo, handleSizeChange, handle
 ==system-AuthModal.vue==
 
 ```vue
-<template>
-    <el-dialog :model-value="visible" title="权限设置" width="600px">
+\<template\>
+    \<el-dialog :model-value="visible" title="权限设置" width="600px"\>
         权限弹窗
-    </el-dialog>
-</template>
-<script setup lang="ts">
+    \</el-dialog\>
+\</template\>
+\<script setup lang="ts"\>
 const props = defineProps({
     visible: Boolean,
 
 })
-</script> 
+\</script\> 
 ```
 
 ==system-System.vue==
 
 ```vue
-  <AuthModal :visible="visible"/>
+  \<AuthModal :visible="visible"/\>
 ```
 
 ```ts
@@ -6445,7 +6445,7 @@ const userMenulist = [
   },
 ]
 //获取当前用户权限
-Mock.mock("https://www.demo.com/userAuth","post",(req:any)=>{
+Mock.mock("https://www.demo.com/userAuth","post",(req:any)=\>{
  //console.log(234,req.body)
  const {pageAuthority}=JSON.parse(req.body)
   console.log("后端收到当前权限",pageAuthority)
@@ -6471,7 +6471,7 @@ import { post } from "../utils/http"
 enum Api {
     auth = '/userAuth', 
 }
-function getAuthApi(pageAuthority:string):Promise<any> {
+function getAuthApi(pageAuthority:string):Promise\<any\> {
     return post(Api.auth, {pageAuthority})
 }
 
@@ -6483,13 +6483,13 @@ export {getAuthApi}
 ==System.vue==
 
 ```vue
-<el-button type="primary" size="small"   @click="settingAuth(scope.row.pageAuthority)">
+\<el-button type="primary" size="small"   @click="settingAuth(scope.row.pageAuthority)"\>
                         权限设置
-  </el-button>
+  \</el-button\>
 ```
 
 ```ts
-const settingAuth = async (pageAuthority:string) => {
+const settingAuth = async (pageAuthority:string) =\> {
     const { data: { list, btn } } = await getAuthApi(pageAuthority);
    console.log(list,btn)
 }
@@ -6500,20 +6500,20 @@ const settingAuth = async (pageAuthority:string) => {
 ==AuthModal.vue==
 
 ```vue
-<template>
-    <el-dialog :model-value="visible" title="权限设置" width="600px">
-        <el-card>
-            <template #header>
-                <div class="card-header">
-                    <span>页面权限</span>
-                </div>
-            </template>
-            <el-tree ref="treeRef" style="max-width: 600px" node-key="url" show-checkbox :data="treeData"
-                @check-change="handleCheckChange" :check-on-click-node="true" />
-        </el-card>
-    </el-dialog>
-</template>
-<script setup lang="ts">
+\<template\>
+    \<el-dialog :model-value="visible" title="权限设置" width="600px"\>
+        \<el-card\>
+            \<template #header\>
+                \<div class="card-header"\>
+                    \<span\>页面权限\</span\>
+                \</div\>
+            \</template\>
+            \<el-tree ref="treeRef" style="max-width: 600px" node-key="url" show-checkbox :data="treeData"
+                @check-change="handleCheckChange" :check-on-click-node="true" /\>
+        \</el-card\>
+    \</el-dialog\>
+\</template\>
+\<script setup lang="ts"\>
 import { storeToRefs } from "pinia"
 import { useUserStore } from "@/store/auth"
 import { transformData } from "@/utils/transformMenu"
@@ -6525,20 +6525,20 @@ const userStore=useUserStore()
 const { menu } = storeToRefs(userStore) ;
 const treeData = ref(transformData(menu.value));
 const treeRef = ref()
-const handleCheckChange = () => {
+const handleCheckChange = () =\> {
     console.log('checked keys:', treeRef.value.getCheckedKeys());
   
 };
-</script> 
+\</script\> 
 ```
 
-> 因为menu中的数据跟Tree组件要求的数组格式不一致，所以我们这里封装一个函数,处理menu数据，将其转为Tree组件需要的格式
+\> 因为menu中的数据跟Tree组件要求的数组格式不一致，所以我们这里封装一个函数,处理menu数据，将其转为Tree组件需要的格式
 
 ==utils-transformMenu.ts==
 
 ```ts
 function transformData(nodes:any) {
-    return nodes.map((node:any) => {
+    return nodes.map((node:any) =\> {
         const newNode:any = {
             label: node.name,
             url: node.url, //需要用到url是因为要作为tree组件的node-key来使用
@@ -6556,16 +6556,16 @@ export {transformData}
 
 ### 5.页面中获取当前权限的菜单数据
 
-> 同理，获取到的数据是一个嵌套的数组对象，我们要动态设置菜单的勾选，我们只需要一个一维的数组，这样就可以设置对应的节点勾选
->
-> 因此也需要用到一个工具函数，将嵌套的二维或多维数组转成一维，即数组扁平化
+\> 同理，获取到的数据是一个嵌套的数组对象，我们要动态设置菜单的勾选，我们只需要一个一维的数组，这样就可以设置对应的节点勾选
+\>
+\> 因此也需要用到一个工具函数，将嵌套的二维或多维数组转成一维，即数组扁平化
 
 ```ts
 import type { MenuItem } from '@/types/user';
 import { transformData } from "@/utils/transformMenu"
 
 
-const checkedKeys = ref<string[]>([])
+const checkedKeys = ref\<string[]\>([])
 
 function collectUrls(tree:MenuItem[]) {
   const urls:string[] = [];
@@ -6574,14 +6574,14 @@ function collectUrls(tree:MenuItem[]) {
         urls.push(node.url);
     }
     if (node.children) {
-      node.children.forEach((child:MenuItem) => traverse(child));
+      node.children.forEach((child:MenuItem) =\> traverse(child));
     }
   }
-  tree.forEach((node:MenuItem) => traverse(node));
+  tree.forEach((node:MenuItem) =\> traverse(node));
   return urls;
 }
 
-const settingAuth = async (pageAuthority:string) => {
+const settingAuth = async (pageAuthority:string) =\> {
     const { data: { list, btn } } = await getAuthApi(pageAuthority);
     checkedKeys.value = collectUrls(list)
     visible.value = true
@@ -6592,7 +6592,7 @@ const settingAuth = async (pageAuthority:string) => {
 ### 6.将动态获取的权限传递给子组件
 
 ```vue
-    <AuthModal :visible="visible" ref="authModal" :checked-keys="checkedKeys" />
+    \<AuthModal :visible="visible" ref="authModal" :checked-keys="checkedKeys" /\>
 ```
 
 子组件接收
@@ -6600,22 +6600,22 @@ const settingAuth = async (pageAuthority:string) => {
 ==AuthModal.vue==
 
 ```vue
- <el-dialog :model-value="visible" title="权限设置" width="600px" @open="handleOpen"  @close="handleClose">
+ \<el-dialog :model-value="visible" title="权限设置" width="600px" @open="handleOpen"  @close="handleClose"\>
 ```
 
 ```ts
 const treeRef = ref()
-const handleCheckChange = () => {
+const handleCheckChange = () =\> {
     console.log('checked keys:', treeRef.value.getCheckedKeys());
   
 };
 
-const handleOpen = () => { 
+const handleOpen = () =\> { 
     console.log(555,props.checkedKeys)
     treeRef.value.setCheckedKeys(props.checkedKeys)
 }
 
-const handleClose = () => {
+const handleClose = () =\> {
     emit("close")
 }
 ```
@@ -6625,14 +6625,14 @@ const handleClose = () => {
 ==System.vue==
 
 ```vue
-   <AuthModal :visible="visible" :checked-keys="checkedKeys"   @close="visible = false"  :btnAuth="btnAuth"/>
+   \<AuthModal :visible="visible" :checked-keys="checkedKeys"   @close="visible = false"  :btnAuth="btnAuth"/\>
 ```
 
 
 
 ```ts
-const btnAuth=ref<string[]>([])
-const settingAuth = async (pageAuthority:string) => {
+const btnAuth=ref\<string[]\>([])
+const settingAuth = async (pageAuthority:string) =\> {
     const { data: { list, btn } } = await getAuthApi(pageAuthority);
     checkedKeys.value = collectUrls(list)
     btnAuth.value=btn
@@ -6644,20 +6644,20 @@ const settingAuth = async (pageAuthority:string) => {
 ==AuthModal.vue==
 
 ```vue
- <el-card class="mt">
-            <template #header>
-                <div class="card-header">
-                    <span>按钮权限</span>
-                </div>
-            </template>
+ \<el-card class="mt"\>
+            \<template #header\>
+                \<div class="card-header"\>
+                    \<span\>按钮权限\</span\>
+                \</div\>
+            \</template\>
 
-            <el-checkbox-group v-model="initBtnAuth" class="mt">
-                <el-checkbox label="全部" value="all" />
-                <el-checkbox label="添加" value="add" />
-                <el-checkbox label="编辑" value="edit" />
-                <el-checkbox label="删除" value="delete" />
-            </el-checkbox-group>
-        </el-card>
+            \<el-checkbox-group v-model="initBtnAuth" class="mt"\>
+                \<el-checkbox label="全部" value="all" /\>
+                \<el-checkbox label="添加" value="add" /\>
+                \<el-checkbox label="编辑" value="edit" /\>
+                \<el-checkbox label="删除" value="delete" /\>
+            \</el-checkbox-group\>
+        \</el-card\>
 ```
 
 ```ts
@@ -6667,7 +6667,7 @@ const props = defineProps({
     btnAuth:Array
 })
 
-const handleOpen = () => { 
+const handleOpen = () =\> { 
     treeRef.value.setCheckedKeys(props.checkedKeys)
     initBtnAuth.value=props.btnAuth
 }
@@ -6685,7 +6685,7 @@ import { ElMessage } from 'element-plus'
 
 const emit = defineEmits(['close',"reload"])
 
-const handleConfirm=async ()=>{
+const handleConfirm=async ()=\>{
   console.log(88,treeRef.value.getCheckedKeys(),initBtnAuth.value)  
   const res=await setAuthApi(treeRef.value.getCheckedKeys(),initBtnAuth.value);
   if (res.code == 200) {
@@ -6703,7 +6703,7 @@ const handleConfirm=async ()=>{
 父组件
 
 ```vue
- <AuthModal :visible="visible" :checked-keys="checkedKeys"   @close="visible = false"  :btnAuth="btnAuth" @reload="loadData"/>
+ \<AuthModal :visible="visible" :checked-keys="checkedKeys"   @close="visible = false"  :btnAuth="btnAuth" @reload="loadData"/\>
 ```
 
 ### 9.传参的时候应该补充上账号名称
@@ -6711,15 +6711,15 @@ const handleConfirm=async ()=>{
 ==System.vue==
 
 ```vue
-<el-button type="primary" size="small"   @click="settingAuth(scope.row.pageAuthority,scope.row.account)">
+\<el-button type="primary" size="small"   @click="settingAuth(scope.row.pageAuthority,scope.row.account)"\>
                         权限设置
-</el-button>
+\</el-button\>
 
- <AuthModal :visible="visible" :checked-keys="checkedKeys"   @close="visible = false"  :btnAuth="btnAuth" @reload="loadData" :account="accoutNo"/>
+ \<AuthModal :visible="visible" :checked-keys="checkedKeys"   @close="visible = false"  :btnAuth="btnAuth" @reload="loadData" :account="accoutNo"/\>
 ```
 
 ```ts
-const settingAuth = async (pageAuthority:string,accout:string) => {
+const settingAuth = async (pageAuthority:string,accout:string) =\> {
     accoutNo.value=accout
     const { data: { list, btn } } = await getAuthApi(pageAuthority);
     checkedKeys.value = collectUrls(list)
@@ -6747,7 +6747,7 @@ const props = defineProps({
     }
 })
 
-const handleConfirm=async ()=>{
+const handleConfirm=async ()=\>{
   console.log(88,treeRef.value.getCheckedKeys(),initBtnAuth.value)  
   const res=await setAuthApi(props.account,treeRef.value.getCheckedKeys(),initBtnAuth.value);
   if (res.code == 200) {
@@ -6771,10 +6771,10 @@ enum Api {
     setAuth='setAuth'
 }
 
-function getAuthApi(pageAuthority:string):Promise<any> {
+function getAuthApi(pageAuthority:string):Promise\<any\> {
     return post(Api.auth, {pageAuthority})
 }
-function setAuthApi(account:string,btnList:string[],pageList:string[]):Promise<any>{
+function setAuthApi(account:string,btnList:string[],pageList:string[]):Promise\<any\>{
     return post(Api.setAuth,{account,btnList,pageList})
 }
 
@@ -6839,10 +6839,10 @@ export  default{
 
 我们需要拿到当前用户的角色和该按钮所需要的角色对比，判断当前用户拥有的角色中是否包含该按钮所需的角色，如果不包含，说明权限不够，则按钮隐藏
 
-> 使用
+\> 使用
 
 ```vue
-  <el-button type="primary" size="small" class="mr" v-permission="'user'">去处理</el-button>
+  \<el-button type="primary" size="small" class="mr" v-permission="'user'"\>去处理\</el-button\>
 ```
 
 # 28.环境变量的设置
