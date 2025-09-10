@@ -225,11 +225,11 @@ console.log(JSON.stringify(userSession, null, 2));
 
 在企业项目里，经常会在一些不需要等待成功的地方使用消息队列，例如发送邮件、发送短信、应用类通知、文件处理、数据分析与报告生成、订单处理、秒杀。
 
-见消息队列
+ <a href="./message_queues">消息队列</a>
 
 ## 日志
 
-见日志处理
+ <a href="./log">日志</a>
 
 ## 会员管理
 

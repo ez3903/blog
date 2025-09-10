@@ -1,6 +1,6 @@
 # 日志处理
 
-## 一、Pino 方案（pino + pino-http + AsyncLocalStorage）
+## Pino 方案（pino + pino-http + AsyncLocalStorage）
 
 ### 1 目录结构
 
@@ -330,7 +330,7 @@ app.listen(PORT, () => {
 });
 ```
 
-## 二、Winston 方案（winston + daily-rotate-file + AsyncLocalStorage）
+## Winston 方案（winston + daily-rotate-file + AsyncLocalStorage）
 
 ### 1 目录结构
 
@@ -564,7 +564,7 @@ function httpLogger(req, res, next) {
 module.exports = httpLogger;
 ```
 
-### 9) src/middlewares/errorHandler.js
+### 9 src/middlewares/errorHandler.js
 
 ```js
 const { logger } = require('../logging/winston');
@@ -635,7 +635,7 @@ app.listen(PORT, () => {
 });
 ```
 
-## 三、如何选择 & 环境区分策略
+## 如何选择 & 环境区分策略
 
 - **开发环境（dev）**
   - Pino：启用 `LOG_PRETTY=1`，`pino-pretty` 彩色单行输出，保留 `debug` 级别
@@ -650,7 +650,7 @@ app.listen(PORT, () => {
   - **Pino**：更快、原生 JSON、与 `pino-http` 无缝，适合高并发、容器化微服务
   - **Winston**：格式化能力强、文件轮转成熟，适合需要**本地文件归档**或复杂格式管道
 
-## 四、运行步骤
+## 运行步骤
 
 以 Pino 模板为例：
 
@@ -679,7 +679,7 @@ curl http://localhost:3000/api/health
 curl http://localhost:3000/api/demo-error
 ```
 
-## 五、扩展与企业集成建议
+## 扩展与企业集成建议
 
 - **链路追踪**：将 `requestId` 与 OpenTelemetry traceId 关联（如从 B3/traceparent 读取）
 - **慢请求告警**：在 httpLogger/pino-http 的 `onResFinished` 中若 `durationMs > 阈值`，以 `warn` 级别打日志+告警

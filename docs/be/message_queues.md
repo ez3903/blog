@@ -5,9 +5,9 @@
 - **Redis Streams（ioredis）**：轻量队列、消费组、低延迟 → 适合中小服务与简化运维
 - **AWS SQS（FIFO/Standard）**：全托管、成本低、与 AWS 生态深度整合 → 上云团队常用
 
-# 一、Kafka 模板（kafkajs）
+## Kafka 模板（kafkajs）
 
-## 1) 目录结构
+### 1 目录结构
 
 ```
 kafka-template/
@@ -30,7 +30,7 @@ kafka-template/
       └─ runDemo.js             # 演示：发送 + 消费
 ```
 
-## 2) package.json
+### 2 package.json
 
 ```json
 {
@@ -49,7 +49,7 @@ kafka-template/
 }
 ```
 
-## 3) .env.example
+### 3 .env.example
 
 ```
 # Kafka 基本配置
@@ -66,7 +66,7 @@ ENV=development
 LOG_LEVEL=debug
 ```
 
-## 4) src/config/env.js
+### 4 src/config/env.js
 
 ```js
 const dotenv = require('dotenv');
@@ -86,7 +86,7 @@ module.exports = {
 };
 ```
 
-## 5) src/lib/logger.js
+### 5 src/lib/logger.js
 
 ```js
 // 极简 logger（可替换为上文 Pino/Winston）
@@ -98,7 +98,7 @@ module.exports = {
 };
 ```
 
-## 6) src/lib/requestContext.js
+### 6 src/lib/requestContext.js
 
 ```js
 const { AsyncLocalStorage } = require('async_hooks');
@@ -114,7 +114,7 @@ function getCtx() { return als.getStore() || {}; }
 module.exports = { runWithContext, getCtx };
 ```
 
-## 7) src/lib/idempotencyStore.js
+### 7 src/lib/idempotencyStore.js
 
 ```js
 // 幂等存储示例：生产请替换为 Redis/DB（按 messageId 去重）
@@ -128,7 +128,7 @@ async function checkAndSet(id, ttlMs = 10 * 60 * 1000) {
 module.exports = { checkAndSet };
 ```
 
-## 8) src/mq/topics.js
+### 8 src/mq/topics.js
 
 ```js
 const { TOPIC_ORDER_CREATED, TOPIC_ORDER_DLX } = require('../config/env');
@@ -138,7 +138,7 @@ module.exports = {
 };
 ```
 
-## 9) src/mq/kafka.js
+### 9 src/mq/kafka.js
 
 ```js
 const { Kafka, logLevel } = require('kafkajs');
@@ -155,7 +155,7 @@ const kafka = new Kafka({
 module.exports = { kafka };
 ```
 
-## 10) src/mq/producer.js
+### 10 src/mq/producer.js
 
 ```js
 const { kafka } = require('./kafka');
@@ -184,7 +184,7 @@ async function send({ topic, key, value, headers = {} }) {
 module.exports = { send };
 ```
 
-## 11) src/mq/consumer.js
+### 11 src/mq/consumer.js
 
 ```js
 const { kafka } = require('./kafka');
@@ -248,7 +248,7 @@ function mapHeaders(h = {}) {
 module.exports = { startConsumer };
 ```
 
-## 12) src/demo/runDemo.js
+12 src/demo/runDemo.js
 
 ```js
 const TOPICS = require('../mq/topics');
@@ -277,17 +277,15 @@ async function main() {
 main().catch(console.error);
 ```
 
-## 13) src/index.js
+### 13 src/index.js
 
 ```js
 require('./demo/runDemo');
 ```
 
-------
+## RabbitMQ 模板（amqplib）
 
-# 二、RabbitMQ 模板（amqplib）
-
-## 1) 目录结构
+### 1 目录结构
 
 ```
 rabbitmq-template/
@@ -306,7 +304,7 @@ rabbitmq-template/
       └─ worker.js            # 消费者（prefetch、手动 ack/nack、重试/DLQ）
 ```
 
-## 2) package.json
+### 2 package.json
 
 ```json
 {
@@ -325,7 +323,7 @@ rabbitmq-template/
 }
 ```
 
-## 3) .env.example
+### 3 .env.example
 
 ```
 RABBITMQ_URL=amqp://guest:guest@localhost:5672
@@ -336,7 +334,7 @@ ROUTING_KEY=order.created
 PREFETCH=10
 ```
 
-## 4) src/config/env.js
+### 4 src/config/env.js
 
 ```js
 const dotenv = require('dotenv');
@@ -351,7 +349,7 @@ module.exports = {
 };
 ```
 
-## 5) src/lib/logger.js / idempotencyStore.js
+### 5 src/lib/logger.js / idempotencyStore.js
 
 ```js
 module.exports = {
@@ -369,7 +367,7 @@ async function checkAndSet(id, ttlMs = 10 * 60 * 1000) {
 module.exports = { checkAndSet };
 ```
 
-## 6) src/mq/connection.js
+### 6 src/mq/connection.js
 
 ```js
 const amqp = require('amqplib');
@@ -389,7 +387,7 @@ async function getChannel() {
 module.exports = { getChannel };
 ```
 
-## 7) src/mq/topology.js
+### 7 src/mq/topology.js
 
 ```js
 const { getChannel } = require('./connection');
@@ -415,7 +413,7 @@ async function assertTopology() {
 module.exports = { assertTopology };
 ```
 
-## 8) src/mq/publisher.js
+### 8 src/mq/publisher.js
 
 ```js
 const { getChannel } = require('./connection');
@@ -449,7 +447,7 @@ async function publishWithDelay(message, delayMs, options = {}) {
 module.exports = { publish, publishWithDelay };
 ```
 
-## 9) src/mq/worker.js
+### 9 src/mq/worker.js
 
 ```js
 const { getChannel } = require('./connection');
@@ -494,7 +492,7 @@ async function startWorker(handler) {
 module.exports = { startWorker };
 ```
 
-## 10) src/index.js
+### 10 src/index.js
 
 ```js
 const { assertTopology } = require('./mq/topology');
@@ -518,9 +516,9 @@ const { startWorker } = require('./mq/worker');
 
 ------
 
-# 三、Redis Streams 模板（ioredis）
+## Redis Streams 模板（ioredis）
 
-## 1) 目录结构
+### 1 目录结构
 
 ```
 redis-streams-template/
@@ -536,7 +534,7 @@ redis-streams-template/
       └─ consumer.js         # 消费组 XREADGROUP/ACK/CLAIM 幂等处理
 ```
 
-## 2) package.json
+### 2 package.json
 
 ```json
 {
@@ -555,7 +553,7 @@ redis-streams-template/
 }
 ```
 
-## 3) .env.example
+### 3 .env.example
 
 ```
 REDIS_URL=redis://localhost:6379
@@ -566,7 +564,7 @@ MAXLEN=100000
 BLOCK_MS=10000
 ```
 
-## 4) src/config/env.js
+### 4 src/config/env.js
 
 ```js
 const dotenv = require('dotenv');
@@ -581,7 +579,7 @@ module.exports = {
 };
 ```
 
-## 5) src/mq/redis.js
+### 5 src/mq/redis.js
 
 ```js
 const Redis = require('ioredis');
@@ -590,7 +588,7 @@ const redis = new Redis(REDIS_URL);
 module.exports = { redis };
 ```
 
-## 6) src/mq/producer.js
+### 6 src/mq/producer.js
 
 ```js
 const { redis } = require('./redis');
@@ -602,7 +600,7 @@ async function xadd(payload) {
 module.exports = { xadd };
 ```
 
-## 7) src/mq/consumer.js
+### 7 src/mq/consumer.js
 
 ```js
 const { redis } = require('./redis');
@@ -636,7 +634,7 @@ async function runWorker(handler) {
 module.exports = { runWorker };
 ```
 
-## 8) src/index.js
+### 8 src/index.js
 
 ```js
 const { xadd } = require('./mq/producer');
@@ -653,9 +651,9 @@ setTimeout(() => xadd({ orderId: 'bad', fail: true }), 5000);
 
 ------
 
-# 四、AWS SQS 模板（@aws-sdk/client-sqs）
+# AWS SQS 模板（@aws-sdk/client-sqs）
 
-## 1) 目录结构
+### 1 目录结构
 
 ```
 sqs-template/
@@ -671,7 +669,7 @@ sqs-template/
       └─ worker.js           # 长轮询、可扩展可见性、DLQ 策略
 ```
 
-## 2) package.json
+### 2 package.json
 
 ```json
 {
@@ -690,7 +688,7 @@ sqs-template/
 }
 ```
 
-## 3) .env.example
+### 3 .env.example
 
 ```
 AWS_REGION=ap-southeast-1
@@ -702,7 +700,7 @@ WAIT_TIME_SECONDS=20
 MAX_NUMBER_OF_MESSAGES=10
 ```
 
-## 4) src/config/env.js
+### 4 src/config/env.js
 
 ```js
 const dotenv = require('dotenv');
@@ -716,7 +714,7 @@ module.exports = {
 };
 ```
 
-## 5) src/mq/sqs.js
+### 5 src/mq/sqs.js
 
 ```js
 const { SQSClient } = require('@aws-sdk/client-sqs');
@@ -725,7 +723,7 @@ const sqs = new SQSClient({ region: REGION });
 module.exports = { sqs };
 ```
 
-## 6) src/mq/producer.js
+### 6 src/mq/producer.js
 
 ```js
 const { SendMessageCommand } = require('@aws-sdk/client-sqs');
@@ -749,7 +747,7 @@ async function send(payload, { groupId, dedupId } = {}) {
 module.exports = { send };
 ```
 
-## 7) src/mq/worker.js
+### 7 src/mq/worker.js
 
 ```js
 const { ReceiveMessageCommand, DeleteMessageCommand, ChangeMessageVisibilityCommand } = require('@aws-sdk/client-sqs');
@@ -786,7 +784,7 @@ function parseBody(b) { try { return JSON.parse(b); } catch { return b; } }
 module.exports = { poll };
 ```
 
-## 8) src/index.js
+### 8 src/index.js
 
 ```js
 const { send } = require('./mq/producer');
@@ -803,14 +801,14 @@ setTimeout(() => send({ orderId: 'bad', fail: true }, { groupId: 'orders' }), 50
 
 ------
 
-# 选型建议（简版）
+## 选型建议（简版）
 
 - **吞吐/规模/多语言生态**：首选 **Kafka**；支持分区顺序、压缩、批处理；但运维稍重
 - **复杂路由/业务语义**：**RabbitMQ**（交换机/路由键/队列/TTL/DLX/优先级）灵活
 - **轻运维/低延迟/中小队列**：**Redis Streams** 简洁好用，成本低
 - **上云/托管**：在 AWS → **SQS**；也可考虑 **MSK（托管 Kafka）**/**Amazon MQ（托管 RabbitMQ/ActiveMQ）**
 
-# 生产落地清单
+## 生产落地清单
 
 - **幂等键**（messageId/dedupId）+ 去重存储（Redis/DB）
 - **重试与退避**（指数退避、最大次数、DLQ/隔离队列）
