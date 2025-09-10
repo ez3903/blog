@@ -75,4 +75,5 @@ export default defineConfig({
       detailsLabel: "详细信息",
     },
   },
+
 });

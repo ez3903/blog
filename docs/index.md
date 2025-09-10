@@ -12,10 +12,13 @@ hero:
   actions:
     - theme: brand
       text: 前端
-      link: /fe/studyPlan
+      link: /fe/git
     - theme: alt
-      text: API Examples
-      link: /examples/api-examples
+      text: 后端
+      link: /be/sql
+    - theme: alt
+      text: 其他
+      link: /other/new_technology
 
 features:
   - title: 软件推荐
@@ -25,4 +28,3 @@ features:
   - title: 探索AI
     details: AI大模型，AI工具学习
 ---
-
