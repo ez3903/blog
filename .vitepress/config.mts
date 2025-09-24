@@ -10,7 +10,7 @@ export default defineConfig({
       {
         rel: "icon",
         type: "image/svg+xml",
-        href: "http://114.67.74.14/static/logo.svg",
+        href: "/doc/logo.svg",
       },
     ],
   ],
@@ -18,7 +18,7 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: createNav(),
     sidebar: createSideBar(),
-    logo: "http://114.67.74.14/static/logo.svg",
+    logo: "/logo.svg",
     socialLinks: [
       { icon: "github", link: "https://github.com/ez3903/blog.git" },
     ],
