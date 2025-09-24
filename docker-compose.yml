@@ -13,11 +13,11 @@ services:
     # 挂载卷配置
     volumes:
       # 挂载文档网站内容
-      - /project/yushudoc:/usr/share/nginx/html/yushudoc:ro
+      - /project/yushudoc/html:/usr/share/nginx/html/yushudoc:ro
       # 挂载静态资源
-      - /project/static:/usr/share/nginx/html/static:ro
+      - /project/yushudoc/static:/usr/share/nginx/html/static:ro
       # 挂载自定义Nginx配置
-      - /project/ngconf/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - /project/yushudoc/nginx.conf:/etc/nginx/conf.d/default.conf:ro
     # 环境变量配置
     environment:
       # 设置时区

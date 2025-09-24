@@ -54,7 +54,7 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SERVER_PRIVATE_KEY }}
           port: ${{ secrets.SERVER_PORT }}
-          target: "/project/yushudoc"
+          target: "/project/yushudoc/html"
           source: ".vitepress/dist/*"
           strip_components: 2
 
@@ -66,11 +66,22 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SERVER_PRIVATE_KEY }}
           port: ${{ secrets.SERVER_PORT }}
-          target: "/project/"
+          target: "/project/yushudoc"
           source: "docker-compose.yml"
+      
+      # 步骤8：部署Nginx配置文件
+      - name: Deploy Nginx Config
+        uses: appleboy/scp-action@v1
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          key: ${{ secrets.SERVER_PRIVATE_KEY }}
+          port: ${{ secrets.SERVER_PORT }}
+          target: "/project/yushudoc"
+          source: "nginx.conf"
 
-      # 步骤8：在服务器上启动/更新Docker容器
-      - name: Start/Restart Docker Containers
+      # 步骤9：在服务器上安装Docker Compose并启动/更新容器
+      - name: Install Docker Compose and Start/Restart Containers
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.SERVER_HOST }}
@@ -79,16 +90,16 @@ jobs:
           port: ${{ secrets.SERVER_PORT }}
           script: |
             # 确保目录存在
-            mkdir -p /project/yushudoc /project/static /project/ngconf
+            mkdir -p /project/yushudoc/html /project/yushudoc/static
             
-            # 使用docker-compose启动或更新服务
-            cd /project
-            docker-compose down || true
-            docker-compose pull
-            docker-compose up -d
+            # 使用docker compose启动或更新服务
+            cd /project/yushudoc
+            docker compose down || true
+            docker compose pull
+            docker compose up -d
             
             # 查看容器状态
-            docker-compose ps
+            docker compose ps
             
             # 显示日志摘要
-            docker-compose logs --tail=20
+            docker compose logs --tail=20
