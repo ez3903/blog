@@ -38,7 +38,7 @@ npm install -D less
 
 如果更改了@符号，提示找不到模块 ‘@/components/xxx.vue’ 或其相应的类型声明”
 
-![image-20240828140028681](http://114.67.74.14/static/vue_project_assetsimage-20240828140028681.png)
+![image-20240828140028681](/vuePro/image-20240828140028681.png)
 
 # 3.创建文件夹结构
 
@@ -121,7 +121,7 @@ export default defineConfig({
 
 此时可能会有报错，如下
 
-![image-20241014143019905](http://114.67.74.14/static/vue_project_assetsimage-20241014143019905.png)
+![image-20241014143019905](/vuePro/image-20241014143019905.png)
 
 只需要运行：
 
@@ -133,13 +133,13 @@ npm install @types/node --save-dev
 
 另外直接修改的话会看到有报错：
 
-![image-20241014142310973](http://114.67.74.14/static/vue_project_assetsimage-20241014142310973.png)
+![image-20241014142310973](/vuePro/image-20241014142310973.png)
 
 只需要去tsconfig.app.json文件增加一个配置：即可,如下
 
 
 
-![image-20241014142908128](http://114.67.74.14/static/vue_project_assetsimage-20241014142908128.png)
+![image-20241014142908128](/vuePro/image-20241014142908128.png)
 
 # 6.项目基础路由搭建
 
@@ -524,7 +524,7 @@ Mock.mock('https://www.demo.com/login', 'post', (options: any) =\> {
 
 这里可能会有个报错
 
-![image-20241016154349994](http://114.67.74.14/static/vue_project_assetsimage-20241016154349994.png)
+![image-20241016154349994](/vuePro/image-20241016154349994.png)
 
 我们要去全局类型声明文件配置一下
 
@@ -762,7 +762,7 @@ function handleLogin() {
 
 但是这样有个问题，如果用户用户名密码不正确，也可以跳转，所以有同学想，那你在pinia中写跳转不就行了吗,类似如下写法
 
-![image-20241017105930061](http://114.67.74.14/static/vue_project_assetsimage-20241017105930061.png)
+![image-20241017105930061](/vuePro/image-20241017105930061.png)
 
 但这是错误的， useRouter() 必须在组件上下文中使用。Pinia store 并不属于 Vue 组件的上下文，因此在 store 中调用 useRouter() 将导致错误
 
@@ -770,11 +770,11 @@ function handleLogin() {
 
 那如果我就是想在这里使用怎么办，有办法，可以将router传过来，如下更改
 
-![image-20241017110315151](http://114.67.74.14/static/vue_project_assetsimage-20241017110315151.png)
+![image-20241017110315151](/vuePro/image-20241017110315151.png)
 
 ==Login.vue==
 
-![image-20241017110354595](http://114.67.74.14/static/vue_project_assetsimage-20241017110354595.png)
+![image-20241017110354595](/vuePro/image-20241017110354595.png)
 
 这种方式可以，不过我们还有另一种方式，就是导航守卫，导航守卫也可以控制路由跳转呀
 
@@ -908,7 +908,7 @@ import Menu from '../components/NavMenu/Menu.vue';
 
 如果报错,因为TypeScript 并不知道如何理解 `.vue` 文件，因此需要这样一个声明
 
-![image-20241017145850520](http://114.67.74.14/static/vue_project_assetsimage-20241017145850520.png)
+![image-20241017145850520](/vuePro/image-20241017145850520.png)
 
 去全局类型声明文件中设置一下即可
 
@@ -1069,7 +1069,7 @@ const menuItems = userStore.menu
 
 ## 4.开启路由模式
 
-![image-20241018103847516](http://114.67.74.14/static/vue_project_assetsimage-20241018103847516.png)
+![image-20241018103847516](/vuePro/image-20241018103847516.png)
 
 # 12.创建路由页面
 
@@ -1125,7 +1125,7 @@ const menuItems = userStore.menu
 
 ==components-navMenu-MenuItem.vue==
 
-![image-20241018120914156](http://114.67.74.14/static/vue_project_assetsimage-20241018120914156.png)
+![image-20241018120914156](/vuePro/image-20241018120914156.png)
 
 # 13.页面权限控制
 
@@ -1166,7 +1166,7 @@ const menuItems = userStore.menu
 
 ==router-guard.ts==
 
-![image-20241018141623970](http://114.67.74.14/static/vue_project_assetsimage-20241018141623970.png)
+![image-20241018141623970](/vuePro/image-20241018141623970.png)
 
 # 14.Header组件开发
 
@@ -1486,7 +1486,7 @@ export default defineComponent({
 
 很多同学的想法肯定是像下面这样加
 
-![image-20241019133130266](http://114.67.74.14/static/vue_project_assetsimage-20241019133130266.png)
+![image-20241019133130266](/vuePro/image-20241019133130266.png)
 
 但是这样你想想，会渲染几个\<RouterView\>,很明显，循环执行了几次，就会有几个RouterView
 
@@ -1508,7 +1508,7 @@ import {onMounted} from "vue"
 
 所以我们把RouterView拿到tabs的外面去，如下
 
-![image-20241019133442049](http://114.67.74.14/static/vue_project_assetsimage-20241019133442049.png)
+![image-20241019133442049](/vuePro/image-20241019133442049.png)
 
 ## 3.左侧菜单和页签同步的问题
 
@@ -1579,7 +1579,7 @@ const remove = (panelName: string) =\> {
 
 之所以刷新后左侧菜单和tab对应不上，是因为我们给tab设置了一刷新默认都是dashboard，这个不太合理，所以去掉默认值如下
 
-![image-20241019141947305](http://114.67.74.14/static/vue_project_assetsimage-20241019141947305.png)
+![image-20241019141947305](/vuePro/image-20241019141947305.png)
 
 刷新的时候我们能通过路由对象拿到当前路径，但是我需要拿到当前菜单数据的name和icon，所以我们定义一个方法，根据path，去菜单数据里找出对应的那个数据对象
 
@@ -3926,7 +3926,7 @@ const {
     }=usePagaination(loadData)
 ```
 
-![image-20241025134256268](http://114.67.74.14/static/vue_project_assetsimage-20241025134256268.png)
+![image-20241025134256268](/vuePro/image-20241025134256268.png)
 
 
 
@@ -4236,11 +4236,11 @@ watch(value, () =\> {
 
 \> 高德地图官网中，选择js api
 
-![image-20241028144021633](http://114.67.74.14/static/vue_project_assetsimage-20241028144021633.png)
+![image-20241028144021633](/vuePro/image-20241028144021633.png)
 
 \> 选择进阶教程，结合vue使用
 
-![image-20241028144138642](http://114.67.74.14/static/vue_project_assetsimage-20241028144138642.png)
+![image-20241028144138642](/vuePro/image-20241028144138642.png)
 
 ==components-Map-MapContainer.vue==
 
@@ -4850,7 +4850,7 @@ const handleBatchDelete = async () =\> {
 
 ## 5.表格添加多选功能
 
-![image-20241028180750829](http://114.67.74.14/static/vue_project_assetsimage-20241028180750829.png)
+![image-20241028180750829](/vuePro/image-20241028180750829.png)
 
 ```ts
 const selectionList = ref([])
@@ -5169,9 +5169,9 @@ onMounted(async () =\> {
 
 \> `InstanceType` 是 TypeScript 的一个内置类型，它用来获取构造函数类型的实例类型。在你的代码 `const treeRef = ref\<InstanceType\<typeof ElTree\>\>()` 中，`ElTree` 是一个 Vue 组件（通常是一个类或函数），`typeof ElTree` 表达式返回这个组件的类型。
 
-![image-20241029194335424](http://114.67.74.14/static/vue_project_assetsimage-20241029194335424.png)
+![image-20241029194335424](/vuePro/image-20241029194335424.png)
 
-![image-20241029194356193](http://114.67.74.14/static/vue_project_assetsimage-20241029194356193.png)
+![image-20241029194356193](/vuePro/image-20241029194356193.png)
 
 data表示的是每一条数据，返回false则节点会隐藏
 
@@ -6911,7 +6911,7 @@ const service: AxiosInstance = axios.create({
 
 解决打包报错:
 
-![image-20241104142504503](http://114.67.74.14/static/vue_project_assetsimage-20241104142504503.png)
+![image-20241104142504503](/vuePro/image-20241104142504503.png)
 
 ```ts
 npm install --save-dev @types/file-saver

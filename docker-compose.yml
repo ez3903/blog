@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  # Nginx服务，用于提供文档网站和静态资源
+  nginx:
+    # 使用官方Nginx镜像
+    image: nginx:latest
+    # 容器名称
+    container_name: vitepress-blog
+    # 端口映射：主机80端口映射到容器80端口
+    ports:
+      - "80:80"
+    # 挂载卷配置
+    volumes:
+      # 挂载文档网站内容
+      - /project/yushudoc:/usr/share/nginx/html/yushudoc:ro
+      # 挂载静态资源
+      - /project/static:/usr/share/nginx/html/static:ro
+      # 挂载自定义Nginx配置
+      - /project/ngconf/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    # 环境变量配置
+    environment:
+      # 设置时区
+      - TZ=Asia/Shanghai
+    # 健康检查配置
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost/yushudoc/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    # 重启策略：总是重启，除非手动停止
+    restart: always
+    # 资源限制配置
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "512M"
+        reservations:
+          cpus: "0.1"
+          memory: "128M"
+    # 网络配置
+    networks:
+      - blog-network
+
+# 网络定义
+networks:
+  blog-network:
+    driver: bridge
+    name: blog-network
